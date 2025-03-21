@@ -25,14 +25,7 @@ export default function Projects() {
     const arr = [
         { name: 'xgym', img: xgymImg, link: 'https://xgym.website' },
         { name: 'cart', img: cartImg, link: 'https://fresh-cart-one.vercel.app/' },
-        { name: 'cart', img: cartImg, link: 'https://fresh-cart-one.vercel.app/' },
-        { name: 'cart', img: cartImg, link: 'https://fresh-cart-one.vercel.app/' },
-        { name: 'cart', img: cartImg, link: 'https://fresh-cart-one.vercel.app/' },
-        { name: 'cart', img: cartImg, link: 'https://fresh-cart-one.vercel.app/' },
-        { name: 'cart', img: cartImg, link: 'https://fresh-cart-one.vercel.app/' },
-        { name: 'cart', img: cartImg, link: 'https://fresh-cart-one.vercel.app/' },
-        { name: 'cart', img: cartImg, link: 'https://fresh-cart-one.vercel.app/' },
-        { name: 'cart', img: cartImg, link: 'https://fresh-cart-one.vercel.app/' },
+
       ]
 
       
