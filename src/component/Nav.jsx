@@ -28,7 +28,7 @@ export default function nav() {
       <FontAwesomeIcon icon={faWhatsapp} className='w-8' />
       <h2 className="items-center font-bold pt-1.5 pr-1">Contact us</h2>
       </a>
-  <h1 className="text-3xl font-bold">Tmyaz</h1>
+  <h1 className="text-3xl font-bold">Tamyaz</h1>
   </div>
 
 
@@ -47,4 +47,5 @@ export default function nav() {
 );
 }
   
+
 

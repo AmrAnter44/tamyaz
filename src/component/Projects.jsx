@@ -1,4 +1,4 @@
-"use client";
+
 import React from 'react'
 import Image from 'next/image'
 import xgymImg from '../../public/projects/xgym.png'
@@ -32,7 +32,7 @@ export default function Projects() {
             <a target='_blank' href={item.link} >
             <Image src={item.img} className='rounded-3xl' alt={item.name}></Image> 
             </a>
-            <span className='prochild'><FontAwesomeIcon className='' icon={faLink} /></span>
+            <span className='prochild'><FontAwesomeIcon className='w-4' icon={faLink} /></span>
         </div>
     })
   }

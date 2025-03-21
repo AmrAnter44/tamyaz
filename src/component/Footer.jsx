@@ -9,7 +9,7 @@ import {faInstagram} from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 export default function Footer() {
   return <>
-<div className='bg-black  text-center p-2 flex flex-col justify-center items-center gap-3 text-amber-300 border-t-4 '>
+<div className='bg-black  text-center p-2 flex flex-col justify-center items-center gap-3 text-amber-300 border-t-4 mt-5 '>
 
 
 
@@ -24,14 +24,14 @@ export default function Footer() {
   {/* <Image src={logo} alt="Tamyaz" className='w-20' ></Image> */}
 
 
-   <div className='flex flex-row justify-between w-full m-6 px-4  text-xl'>
+   <div className='flex flex-col lg:flex-row justify-center gap-3 lg:justify-between w-full m-6 px-4  text-xl'>
 
 
-<div className='flex flex-row gap-4'>
-<a className='hover:text-amber-100 hover:scale-110' href="mailto:tamyazcompany@gmail.com"><FontAwesomeIcon icon={faEnvelope} className='w-8 ' /></a>
-<a className='hover:text-amber-100 hover:scale-110' href=""><FontAwesomeIcon icon={faFacebook} className='w-8 ' /></a>
+<div className='flex flex-row gap-6 lg:gap-4 text-center justify-center'>
+<a className='hover:text-amber-100 hover:scale-110' href="mailto:tamyazcompany@gmail.com"><FontAwesomeIcon icon={faEnvelope} className='w-6' /></a>
+<a className='hover:text-amber-100 hover:scale-110' href=""><FontAwesomeIcon icon={faFacebook} className='w-6 ' /></a>
 
-<a className='hover:text-amber-100 hover:scale-110'  href="https://www.instagram.com/tamyazcompany/"><FontAwesomeIcon icon={faInstagram} className='w-8 ' /></a>
+<a className='hover:text-amber-100 hover:scale-110'  href="https://www.instagram.com/tamyazcompany/"><FontAwesomeIcon icon={faInstagram} className='w-6' /></a>
 </div>
 
 
