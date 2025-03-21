@@ -1,16 +1,7 @@
 "use client";
 import React from 'react'
 import Image from 'next/image'
-// core version + navigation, pagination modules:
-import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
-// import Swiper and modules styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
-
-import xgymImg from '../../public/projects/Xgym.png'
+import xgymImg from '../../public/projects/xgym.png'
 import cartImg from '../../public/projects/cart.png'
 import {faLink} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
