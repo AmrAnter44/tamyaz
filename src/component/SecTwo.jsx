@@ -24,7 +24,7 @@ export default function SecTwo() {
     </h3>
     <ol className='list-disc text-start lg:pr-4  m-2 '>
         <li className='p-1 m-1'><h4>العملاء تعرف عنك اكتر و عن اللي بتقدمة</h4></li>
-        <li  className='p-1 m-1' ><h4>موقع احترافي مبني بأحدث الادوات يزود ثقة عميلك</h4></li>
+        <li  className='p-1 m-1' ><h4>موقع احترافي مبني علي الهويه البصرية الخاصة بيك بأحدث الادوات </h4></li>
         <li className='p-1 m-1' ><h4>تصميم مميز مع كل التعديلات اللي هتطلبها</h4></li>
         <li  className='p-1 m-1' ><h4>هنقدر نحدث  اجهزة شركتك</h4></li>
     </ol>
