@@ -15,7 +15,7 @@ export default function Footer() {
 
       <h3 className='text-3xl text-white bold m-2'>قررت تاخد الخطوة ؟</h3>
 
-      <a href='https://wa.me/01055116491' className="flex flex-row gap-1 bg-amber-300 text-gray-900 rounded-3xl p-2 hover:bg-transparent border hover:border-amber-300 hover:text-amber-300 transition duration-300 m-2 hover:scale-110">
+      <a href='https://wa.me/201055119164' className="flex flex-row gap-1 bg-amber-300 text-gray-900 rounded-3xl p-2 hover:bg-transparent border hover:border-amber-300 hover:text-amber-300 transition duration-300 m-2 hover:scale-110">
       <FontAwesomeIcon icon={faWhatsapp} className='w-8' />
       <h2 className="items-center font-bold pt-1.5 pr-1">Contact us</h2>
       </a>
