@@ -9,6 +9,8 @@ import { icons } from "lucide-react";
 
 
 
+
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -30,11 +32,14 @@ const notoArabic = Noto_Sans_Arabic({
 })
 
 export default function RootLayout({ children }) {
+
+
   return (
     <html lang="en" >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${notoArabic.className} bg`}
       >
+        
         {children}
       </body>
     </html>
