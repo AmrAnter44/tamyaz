@@ -6,14 +6,11 @@ import SecThree from "@/component/SecThree";
 import Projects from "@/component/Projects";
 import Footer from "@/component/Footer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import dynamic from 'next/dynamic';
-import Loading from '@/app/Loading';
 
-async function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+
+
 export default async function Page() {
-  await delay(2000);
+
 
 
   return <>
