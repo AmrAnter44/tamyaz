@@ -3,6 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import xgymImg from '../../public/projects/xgym.png'
 import cartImg from '../../public/projects/cart.png'
+import saif from '../../public/projects/saif.png'
 import {faLink} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -15,6 +16,7 @@ export default function Projects() {
 
     const arr = [
         { name: 'xgym', img: xgymImg, link: 'https://xgym.website' },
+        { name: 'saif', img: saif, link: 'https://coachsaif.online' },
         { name: 'cart', img: cartImg, link: 'https://fresh-cart-one.vercel.app/' },
 
       ]
