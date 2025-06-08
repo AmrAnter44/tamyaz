@@ -7,6 +7,7 @@ import {faFacebook} from '@fortawesome/free-brands-svg-icons'
 import {faWhatsapp} from '@fortawesome/free-brands-svg-icons'
 import {faInstagram} from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 export default function Footer() {
   return <>
 <div className='bg-black  text-center p-2 flex flex-col justify-center items-center gap-3 text-amber-300 border-t-4 mt-5 '>
@@ -15,10 +16,8 @@ export default function Footer() {
 
       <h3 className='text-3xl text-white bold m-2'>قررت تاخد الخطوة ؟</h3>
 
-      <a href='https://wa.me/201055119164' className="flex flex-row gap-1 bg-amber-300 text-gray-900 rounded-3xl p-2 hover:bg-transparent border hover:border-amber-300 hover:text-amber-300 transition duration-300 m-2 hover:scale-110">
-      <FontAwesomeIcon icon={faWhatsapp} className='w-8' />
-      <h2 className="items-center font-bold pt-1.5 pr-1">Contact us</h2>
-      </a>
+ 
+      <Link href="/form" className='items-center font-bold pt-1.5 pr-1'>Apply Now</Link>
 
 
   {/* <Image src={logo} alt="Tamyaz" className='w-20' ></Image> */}
@@ -32,6 +31,7 @@ export default function Footer() {
 <a className='hover:text-amber-100 hover:scale-110' href=""><FontAwesomeIcon icon={faFacebook} className='w-6 ' /></a>
 
 <a className='hover:text-amber-100 hover:scale-110'  href="https://www.instagram.com/tamyazcompany/"><FontAwesomeIcon icon={faInstagram} className='w-6' /></a>
+<a className='hover:text-amber-100 hover:scale-110'  href="https://wa.me/201055119164"><FontAwesomeIcon icon={faWhatsapp} className='w-6' /></a>
 </div>
 
 

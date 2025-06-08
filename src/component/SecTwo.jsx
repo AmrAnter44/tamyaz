@@ -14,7 +14,7 @@ export default function SecTwo() {
 
   <div className='container flex flex-row p-3 m-3 items-center justify-center text-4xl lg:text-5xl'>
 
- <p>نبذة عن</p>
+
  <Image src={logo} alt="Tamyaz" className='w-20' />
   </div>
 

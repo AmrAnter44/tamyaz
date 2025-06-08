@@ -15,7 +15,7 @@ export default function SecThree() {
 
 
   return <>
-    <h2 className='text-center text-5xl font-bold p-4 m-4'>تيم تميز متخصص في</h2>
+    <h2 className='text-center text-5xl font-bold p-4 m-4'>Our Team</h2>
     <div className='flex flex-row flex-wrap justify-center items-center '>
   {
     arr.map((item)=>{

@@ -25,7 +25,7 @@ export default function Projects() {
 
 
   return <>
-  <h2 className='text-center text-5xl font-bold p-4 m-4 '>المشاريع</h2>
+  <h2 className='text-center text-5xl font-bold p-4 m-4 '>Projects</h2>
   <div className='flex flex-row flex-wrap justify-center items-center gap-4 m-3 '>
 
   {
