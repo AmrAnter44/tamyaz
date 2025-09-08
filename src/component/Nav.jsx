@@ -1,51 +1,62 @@
-import React from 'react'
-import Image from 'next/image';
-import logo from '../../public/logo.svg';
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-export default function nav() {
+"use client";
+import React, { useState, useEffect } from "react";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
+import Image from "next/image";
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  /* ✅ تغيير حالة الـ Navbar عند الـ Scroll */
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className=" w-full  min-w-full h-screen border-b-4 border-amber-300">
-
-    {/* خلفية الفيديو */}
-    {/* <video
-        className="absolute top-0 left-0 w-full h-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
+    <>
+      {/* ✅ Navbar */}
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 
+        ${scrolled ? "bg-black/90 text-white shadow-lg" : "bg-transparent"}`}
       >
-        <source src="/bg.webm" type="video/webm" />
-        <source src="/bg.mp4" type="video/mp4" />
-        متصفحك لا يدعم تشغيل الفيديو.
-      </video> */}
-         {/* <div className=" w-full h-full bg-black/50 text-amber-300"></div> */}
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center text-black">
+          {/* ✅ Logo */}
+          <Image src={"logo.svg"} alt="Logo" width={60} height={60} className="mr-6" />
+
+          {/* ✅ Links */}
+          <div className="flex gap-4 ">
+            {/* زرار واتساب */}
+            <a
+              href="https://wa.me/201028418754"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`font-bold py-2 px-4 rounded-full transition ${scrolled ? "text-white" : "text-yellow-300"}`}
+            >
+         ابدأ الأن
+
+            </a>
 
 
-<div className="w-full p-6 flex justify-between items-center text-amber-300 ">
-      <a href='https://wa.me/201055119164' className="flex flex-row gap-1 bg-amber-300 text-gray-900 rounded-3xl p-2 hover:bg-transparent border hover:border-amber-300 hover:text-amber-300 transition duration-300 m-2 hover:scale-110">
-      <FontAwesomeIcon icon={faWhatsapp} className='w-8' />
-      <h2 className="items-center font-bold pt-1.5 pr-1">Contact us</h2>
-      </a>
-  <h1 className="text-3xl font-bold">Tamyaz</h1>
-  </div>
+          </div>
+        </div>
+      </nav>
 
-
-
-
+      {/* ✅ Section الخلفية تغطي الشاشة */}
+      <section
+        className={`w-full min-h-svh  bg-[url('/imgBg.png')] bg-fixed bg-cover bg-center md:bg-top flex items-center md:item-start justify-center md:justify-bottom border-b-4 `}
+      >
+        <div className="w-full h-screen bg-black/60 flex flex-col items-center justify-center text-center p-4">
   <div className=" inset-0 flex flex-col items-center justify-center pt-9 mt-9 text-white text-center">
-      <Image src={logo} alt="Tamyaz" className='w-60 fade-slide ' />
+      <Image src={"logo.svg"} width={60} height={60}  alt="Tamyaz" className='w-60 fade-slide ' />
       <p className="mt-4 text-4xl  typing-effect ">التميز يبدأ بخطوة </p>
     </div>
-  </nav>
-
-
-    
-
-
-);
+        </div>
+      </section>
+    </>
+  );
 }
-  
-
-

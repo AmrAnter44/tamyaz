@@ -17,7 +17,7 @@ export default function Footer() {
       <h3 className='text-3xl text-white bold m-2'>قررت تاخد الخطوة ؟</h3>
 
  
-      <Link href="/form" className='items-center font-bold pt-1.5 pr-1'>Apply Now</Link>
+      <Link href="/form" className='items-center font-bold pt-1.5 pr-1'>سجل الأن</Link>
 
 
   {/* <Image src={logo} alt="Tamyaz" className='w-20' ></Image> */}

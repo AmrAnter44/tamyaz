@@ -12,17 +12,12 @@ export default function SecTwo() {
 
 
 
-  <div className='container flex flex-row p-3 m-3 items-center justify-center text-4xl lg:text-5xl'>
-
-
- <Image src={logo} alt="Tamyaz" className='w-20' />
-  </div>
 
   <div className='items-center justify-center'>
-    <h3 className='p-3 m-3 text-3xl lg:text-4xl'>في تميز هنساعدك انك تبقي مميز رقميا 
+    <h3 className='text-white p-3 m-3 mb-6  text-3xl lg:text-4xl font-extrabold'>في تميز هنساعدك انك تبقي مميز رقميا 
         هنقدر نقدملك حلول تقنيه تساعدك في:
     </h3>
-    <ol className='list-disc text-start lg:pr-4  m-2 '>
+    <ol className='list-disc font-bold text-start lg:pr-4  m-2 '>
         <li className='p-1 m-1'><h4>العملاء تعرف عنك اكتر و عن اللي بتقدمة</h4></li>
         <li  className='p-1 m-1' ><h4>موقع احترافي مبني علي الهوية البصرية الخاصة بيك بأحدث الادوات </h4></li>
         <li className='p-1 m-1' ><h4>تصميم مميز مع كل التعديلات اللي هتطلبها</h4></li>
