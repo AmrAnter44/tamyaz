@@ -46,7 +46,8 @@ export default function Navbar() {
 
       {/* ✅ الخلفية */}
       <section
-        className={`w-full min-h-svh bg-[url('/imgBg.png')] bg-fixed bg-cover bg-center md:bg-top flex items-center justify-center border-b-4`}
+className="w-full min-h-screen bg-[url('/imgBg.png')] bg-fixed bg-cover bg-center md:bg-top flex items-center justify-center border-b-4"
+
       >
         <div className="w-full h-screen bg-black/60 flex flex-col items-center justify-center text-center p-4 relative overflow-hidden">
           {/* ✅ Logo واحد متحرك بين النص والـ Navbar */}
