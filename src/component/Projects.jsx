@@ -58,7 +58,7 @@ export default function Projects() {
           {arr.map((item) => (
             <div key={item.name} className="px-2">
               <a href={item.link} target="_blank" rel="noopener noreferrer">
-<div className="relative w-full h-80 overflow-hidden   group rounded-3xl">
+<div className="relative w-full h-80 lg:h-96 overflow-hidden   group rounded-3xl">
   <Image
     src={item.img}
     alt={item.name}
