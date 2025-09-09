@@ -37,12 +37,13 @@ export default function SecOne() {
             <h3 className="font-bold text-2xl ">{card.head}</h3>
             <p className="font-bold text-2xl ">
               {inView && (
-                <CountUp
-                  start={1}
-                  end={card.mid}
-                  duration={3}
-                  suffix={card.id !== 1 ? "+" : ""} // تضيف + لو مش التاريخ
-                />
+<CountUp
+  start={1}
+  end={card.mid}
+  duration={3}
+  separator="" // يشيل الفواصل
+  suffix={card.id !== 1 ? "+" : ""}
+/>
               )}
             </p>
           </div>
