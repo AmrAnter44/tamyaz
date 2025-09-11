@@ -46,8 +46,8 @@ export default function Projects() {
   const arr = [
     { name: "Xgym", img: xgym, link: "https://xgym.website" },
     { name: "Saif", img: saif, link: "https://coachsaif.online" },
-    { name: "Wn", img: wnImg, link: "https://fresh-cart-one.vercel.app/" },
-    { name: "Xfit", img: xfit, link: "https://fresh-cart-one.vercel.app/" },
+    { name: "Wn", img: wnImg, link: "https://wn-store-master.vercel.app/" },
+    { name: "Xfit", img: xfit, link: "https://mustafa-three.vercel.app/" },
   ];
 
   return (
