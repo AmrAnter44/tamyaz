@@ -47,7 +47,7 @@ export default function Projects() {
     { name: "Xgym", img: xgym, link: "https://xgym.website" },
     { name: "Saif", img: saif, link: "https://coachsaif.online" },
     { name: "Wn", img: wnImg, link: "https://wn-store-master.vercel.app/" },
-    { name: "Xfit", img: xfit, link: "https://mustafa-three.vercel.app/" },
+    { name: "Xfit", img: xfit, link: "https://www.xfit.website/" },
   ];
 
   return (
