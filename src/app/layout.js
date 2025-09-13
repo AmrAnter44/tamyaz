@@ -1,10 +1,6 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
-import { Noto_Sans_Arabic } from 'next/font/google'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";  
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { icon } from "@fortawesome/fontawesome-svg-core";
-import { icons } from "lucide-react";
+import { Analytics } from "@vercel/analytics/react"
 import { Geist } from 'next/font/google'
  import { Cairo } from 'next/font/google'
 const geist = Geist({
@@ -34,7 +30,9 @@ export default function RootLayout({ children }) {
   return (
      <html lang="ar" className={geist.className}>
       
-       <body className={cairo.className}>{children}</body>
+       <body className={cairo.className}>{children}
+         <Analytics />
+       </body>
 
     </html>
   );
