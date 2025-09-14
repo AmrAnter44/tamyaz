@@ -1,0 +1,42 @@
+{
+  "footer": {
+    "cta": "Ready to take the step?",
+    "signup": "Sign Up Now",
+    "copyright": "Copyright © 2023 Tmyaz"
+  },
+    "navbar": {
+    "cta": "Start Now",
+    "headline": "Excellence starts with a step"
+  },
+    "projects": {
+    "title": "Latest Projects"
+  },
+    "secOne": {
+    "startedIn": "Tamyaz Started In",
+    "peopleDecided": "People Decided To Join",
+    "projectsInProgress": "Projects In Progress",
+    "servedCompanies": "Companies Served"
+  },
+    "secThree": {
+    "title": "Our Specialists",
+    "jobs": [
+      "UI/UX Designer",
+      "Frontend Developer",
+      "Backend Developer",
+      "Technical Support",
+      "QA Engineer",
+      "Cybersecurity Specialist"
+    ]
+  },
+    "secTwo": {
+    "headline": "At Tamyaz, we help you stand out digitally. We provide tech solutions that help you:",
+    "points": [
+      "Customers know more about you and what you offer",
+      "A professional website built on your visual identity with the latest tools",
+      "Unique design with all the modifications you request",
+      "We can update your company's devices"
+    ]
+  }
+
+
+}
