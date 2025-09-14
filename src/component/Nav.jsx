@@ -1,8 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 

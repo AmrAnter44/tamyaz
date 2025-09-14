@@ -6,7 +6,7 @@ import SecThree from "@/component/SecThree";
 import Projects from "@/component/Projects";
 import Footer from "@/component/Footer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import Faq from '@/component/Faq';
 
 
 export default async function Page() {
@@ -21,6 +21,7 @@ export default async function Page() {
  <SecTwo></SecTwo>
  <SecThree></SecThree>
  <Projects></Projects>
+ <Faq></Faq>
  <Footer></Footer>
 
 
