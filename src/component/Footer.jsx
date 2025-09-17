@@ -1,54 +1,175 @@
-import React from 'react'
-import Image from 'next/image'
-import logo from '../../public/logo.svg'
-import { MessageCircle } from "lucide-react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faFacebook} from '@fortawesome/free-brands-svg-icons'
-import {faWhatsapp} from '@fortawesome/free-brands-svg-icons'
-import {faInstagram} from '@fortawesome/free-brands-svg-icons'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import Link from 'next/link';
-export default function Footer() {
-  return <>
-<div className='bg-black  text-center p-2 flex flex-col justify-center items-center gap-3 text-amber-300 border-t-4 mt-5 '>
+"use client";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { Mail, MessageCircle, Facebook, Instagram } from 'lucide-react';
 
+// Hook للتحقق من ظهور العنصر
+const useInView = (options = {}) => {
+  const [isInView, setIsInView] = useState(false);
+  const targetRef = useRef(null);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsInView(entry.isIntersecting);
+    }, {
+      threshold: 0.1,
+      ...options
+    });
 
-      <h3 className='text-3xl text-white bold m-2'>قررت تاخد الخطوة ؟</h3>
+    if (targetRef.current) {
+      observer.observe(targetRef.current);
+    }
 
- 
-      <Link href="/form" className='items-center font-bold pt-1.5 pr-1'>سجل الأن</Link>
+    return () => {
+      if (targetRef.current) {
+        observer.unobserve(targetRef.current);
+      }
+    };
+  }, []);
 
+  return [targetRef, isInView];
+};
 
-  {/* <Image src={logo} alt="Tamyaz" className='w-20' ></Image> */}
+// محتوى الفوتر
+const footerContent = {
+  ar: {
+    decision: "قررت تاخد الخطوة ؟",
+    register: "سجل الأن",
+    copyright: "Copyright © 2023 Tmyaz"
+  },
+  en: {
+    decision: "Ready to Take the Step?",
+    register: "Register Now", 
+    copyright: "Copyright © 2023 Tamyaz"
+  }
+};
 
+export default function OriginalFooter({ language = 'ar' }) {
+  const [ref, isInView] = useInView();
+  const content = footerContent[language];
+  const isRTL = language === 'ar';
 
-   <div className='flex flex-col lg:flex-row justify-center gap-3 lg:justify-between w-full m-6 px-4  text-xl'>
+  return (
+    <div className={`bg-black text-white ${isRTL ? 'rtl font-arabic' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8 }}
+        className="text-center p-8 flex flex-col justify-center items-center gap-6 text-amber-300 border-t-4 border-amber-300 "
+      >
+        {/* العنوان الرئيسي */}
+        <motion.h3 
+          className="text-2xl lg:text-3xl text-white font-bold m-2"
+          whileInView={{ scale: [0.9, 1.1, 1] }}
+          transition={{ duration: 0.6 }}
+        >
+          {content.decision}
+        </motion.h3>
 
+        {/* زرار التسجيل */}
+<motion.a           
+  href="/form"           
+  whileHover={{              
+    scale: 1.05,             
+    backgroundColor: "#fcd34d",             
+    color: "#000",             
+    boxShadow: "0 10px 30px rgba(252, 211, 77, 0.3)"           
+  }}           
+  whileTap={{ scale: 0.95 }}           
+  className="flex items-center justify-center font-bold pt-1.5 pr-1 px-8 py-4 rounded-lg bg-transparent border-2 border-amber-300 text-amber-300 hover:bg-amber-300 hover:text-black transition-all duration-300 mx-auto "         
+>           
+  {content.register}         
+</motion.a>
+        {/* معلومات التواصل والروابط */}
+        <motion.div 
+          className="flex flex-col lg:flex-row justify-center gap-8 lg:justify-between w-full max-w-6xl m-6 px-4 text-xl"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+        >
+          {/* روابط التواصل الاجتماعي */}
+          <div className="flex flex-row gap-6 lg:gap-4 text-center justify-center">
+            {[
+              { 
+                icon: Mail, 
+                link: "mailto:tamyazcompany@gmail.com",
+                hoverColor: "hover:text-blue-400"
+              },
+              { 
+                icon: Facebook, 
+                link: "#",
+                hoverColor: "hover:text-blue-500"
+              },
+              { 
+                icon: Instagram, 
+                link: "https://www.instagram.com/tamyazcompany/",
+                hoverColor: "hover:text-pink-400"
+              },
+              { 
+                icon: MessageCircle, 
+                link: "https://wa.me/201055119164",
+                hoverColor: "hover:text-green-400"
+              }
+            ].map((social, index) => (
+              <motion.a
+                key={index}
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ 
+                  scale: 1.2, 
+                  y: -5,
+                  rotate: [0, -10, 10, 0]
+                }}
+                whileTap={{ scale: 0.9 }}
+                className={`${social.hoverColor} transition-all duration-300 p-3 rounded-full bg-gray-800 hover:bg-gray-700`}
+              >
+                <social.icon className="w-6 h-6" />
+              </motion.a>
+            ))}
+          </div>
 
-<div className='flex flex-row gap-6 lg:gap-4 text-center justify-center'>
-<a className='hover:text-amber-100 hover:scale-110' href="mailto:tamyazcompany@gmail.com"><FontAwesomeIcon icon={faEnvelope} className='w-6' /></a>
-<a className='hover:text-amber-100 hover:scale-110' href=""><FontAwesomeIcon icon={faFacebook} className='w-6 ' /></a>
+          {/* حقوق النشر */}
+          <motion.h3
+            className="text-sm lg:text-base self-center"
+            initial={{ opacity: 0, x: 20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+          >
+            {content.copyright}
+          </motion.h3>
+        </motion.div>
 
-<a className='hover:text-amber-100 hover:scale-110'  href="https://www.instagram.com/tamyazcompany/"><FontAwesomeIcon icon={faInstagram} className='w-6' /></a>
-<a className='hover:text-amber-100 hover:scale-110'  href="https://wa.me/201055119164"><FontAwesomeIcon icon={faWhatsapp} className='w-6' /></a>
-</div>
+        {/* خط الزخرفة */}
+        <motion.div
+          initial={{ width: 0 }}
+          animate={isInView ? { width: "80%" } : { width: 0 }}
+          transition={{ delay: 0.8, duration: 1 }}
+          className="h-px bg-gradient-to-r from-transparent via-amber-300 to-transparent rounded-full"
+        />
 
+        {/* نص إضافي */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 1, duration: 0.6 }}
+          className="text-gray-400 text-sm text-center max-w-md"
+        >
+          <p>
+            {isRTL 
+              ? "نشكركم لثقتكم بنا ونتطلع للعمل معكم قريباً"
+              : "Thank you for trusting us and we look forward to working with you soon"
+            }
+          </p>
+        </motion.div>
+      </motion.div>
 
-        <h3>Copyright &copy; 2023 Tmyaz</h3>
-
-
-        </div>
-
-
-
-
-
-
-
-
-
+      <style jsx>{`
+        .font-arabic {
+          font-family: 'Cairo', sans-serif;
+        }
+      `}</style>
     </div>
-    
-    </>
+  );
 }
