@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Star, ArrowRight, ArrowLeft } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Hook للتحقق من ظهور العنصر
 const useInView = (options = {}) => {
@@ -109,13 +110,14 @@ const pointVariants = {
 };
 
 // كومبوننت قسم "عن تميز"
-export default function AboutSection({ language = 'ar' }) {
+export default function AboutSection() {
+  const { language } = useLanguage();
   const [ref, isInView] = useInView();
   const t = content[language];
   const isRTL = language === 'ar';
 
   return (
-    <section className={`py-20 px-6  bg-yellow-300 to-black relative overflow-hidden text-black ${isRTL ? 'rtl' : 'ltr'}`}>
+    <section className={`py-20 px-6  bg-yellow-300 to-black relative overflow-hidden text-black ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       {/* خلفية متحركة */}
       <div className="absolute inset-0">
         {[...Array(10)].map((_, i) => (
@@ -149,15 +151,16 @@ export default function AboutSection({ language = 'ar' }) {
         animate={isInView ? "visible" : "hidden"}
         className="max-w-6xl mx-auto relative z-10"
       >
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className={`grid lg:grid-cols-2 gap-12 items-center ${isRTL ? 'lg:grid-cols-2' : 'lg:grid-cols-2'}`}>
           {/* الجانب الأيسر - النصوص */}
-          <div className={`space-y-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className={`space-y-8 ${isRTL ? 'text-right' : 'text-left'}`} style={{ direction: isRTL ? 'rtl' : 'ltr' }}>
             {/* العنوان الرئيسي */}
             <motion.div variants={itemVariants} className="space-y-6">
               <motion.h2 
                 className={`text-4xl lg:text-5xl font-bold  leading-tight ${isRTL ? 'font-arabic' : ''}`}
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
+                style={{ direction: isRTL ? 'rtl' : 'ltr' }}
               >
                 {t.title}
               </motion.h2>
@@ -165,13 +168,14 @@ export default function AboutSection({ language = 'ar' }) {
               <motion.p 
                 className="text-xl  font-medium"
                 variants={itemVariants}
+                style={{ direction: isRTL ? 'rtl' : 'ltr' }}
               >
                 {t.subtitle}
               </motion.p>
             </motion.div>
 
             {/* النقاط */}
-            <motion.div variants={itemVariants} className="space-y-4">
+            <motion.div variants={itemVariants} className="space-y-4" style={{ direction: isRTL ? 'rtl' : 'ltr' }}>
               {t.points.map((point, index) => (
                 <motion.div
                   key={index}
@@ -181,25 +185,42 @@ export default function AboutSection({ language = 'ar' }) {
                     scale: 1.02,
                     transition: { type: "spring", stiffness: 400 }
                   }}
-                  className="flex items-start gap-4 p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors cursor-default group"
+                  className="p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors cursor-default group"
                 >
-                  <motion.div
-                    whileHover={{ rotate: 360, scale: 1.2 }}
-                    transition={{ duration: 0.6 }}
-                    className="flex-shrink-0 mt-1"
-                  >
-                    <CheckCircle className="text-grey-700 group-hover:text-gray-700" size={24} />
-                  </motion.div>
-                  <p className=" group-hover:text-gray-700 transition-colors font-medium">
-                    {point}
-                  </p>
+                  <div className={`grid grid-cols-[auto_1fr] gap-4 items-start ${isRTL ? 'grid-cols-[1fr_auto]' : ''}`}>
+                    {isRTL && (
+                      <>
+                        <div className="text-right">
+                          <p className="group-hover:text-gray-700 transition-colors font-medium font-arabic">
+                            {point}
+                          </p>
+                        </div>
+                        <div className="flex-shrink-0 mt-1">
+                          <CheckCircle className="text-grey-700 group-hover:text-gray-700" size={24} />
+                        </div>
+                      </>
+                    )}
+                    {!isRTL && (
+                      <>
+                        <div className="flex-shrink-0 mt-1">
+                          <CheckCircle className="text-grey-700 group-hover:text-gray-700" size={24} />
+                        </div>
+                        <div className="text-left">
+                          <p className="group-hover:text-gray-700 transition-colors font-medium">
+                            {point}
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
 
             {/* زرار الإجراء */}
             <motion.div variants={itemVariants}>
-              <motion.button
+              <motion.a
+                href="/form"
                 whileHover={{ 
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(255, 208, 88, 0.3)"
@@ -214,7 +235,7 @@ export default function AboutSection({ language = 'ar' }) {
                 >
                   {isRTL ? <ArrowLeft size={20} /> : <ArrowRight size={20} />}
                 </motion.div>
-              </motion.button>
+              </motion.a>
             </motion.div>
           </div>
 
@@ -313,6 +334,22 @@ export default function AboutSection({ language = 'ar' }) {
           className="mt-20 h-1 bg-gradient-to-r from-transparent via-blackww to-transparent rounded-full"
         />
       </motion.div>
+
+      <style jsx>{`
+        .font-arabic {
+          font-family: 'Cairo', sans-serif;
+        }
+        .arabic-text {
+          direction: rtl;
+          text-align: right;
+          unicode-bidi: embed;
+        }
+        .english-text {
+          direction: ltr;
+          text-align: left;
+          unicode-bidi: embed;
+        }
+      `}</style>
     </section>
   );
 }

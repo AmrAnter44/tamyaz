@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Globe } from 'lucide-react';
 import Image from 'next/image';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // محتوى اللغات
 const content = {
@@ -17,7 +18,7 @@ const content = {
 };
 
 export default function EnhancedNavbar() {
-  const [language, setLanguage] = useState('ar');
+  const { language, toggleLanguage } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const t = content[language];
 
@@ -40,7 +41,7 @@ export default function EnhancedNavbar() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           {/* زرار تبديل اللغة */}
           <button
-            onClick={() => setLanguage(language === 'ar' ? 'en' : 'ar')}
+            onClick={toggleLanguage}
             className={`flex items-center gap-2 px-5 py-2 rounded-full border-2 font-bold transition-all hover:scale-105 active:scale-95 ${
               scrolled 
                 ? "border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-black" 
@@ -53,9 +54,7 @@ export default function EnhancedNavbar() {
 
           {/* زرار البدء */}
           <a
-            href="https://wa.me/201028418754"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/form"
             className={`font-bold py-2 px-5 rounded-full text-sm border-2 transition-all hover:scale-105 active:scale-95 ${
               scrolled 
                 ? "border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-black" 
@@ -103,13 +102,10 @@ export default function EnhancedNavbar() {
           overflow: hidden;
           white-space: nowrap;
           animation: typing 3s steps(20, end) forwards, blink 0.7s 4;
-
           padding-right: 10px;
           display: inline-block;
           animation-fill-mode: forwards;
         }
-
-
 
         @keyframes typing {
           from { width: 0; }

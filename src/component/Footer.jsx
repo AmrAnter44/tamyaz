@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MessageCircle, Facebook, Instagram } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Hook للتحقق من ظهور العنصر
 const useInView = (options = {}) => {
@@ -35,16 +36,19 @@ const footerContent = {
   ar: {
     decision: "قررت تاخد الخطوة ؟",
     register: "سجل الأن",
-    copyright: "Copyright © 2023 Tmyaz"
+    copyright: "Copyright © 2023 Tmyaz",
+    thankYou: "نشكركم لثقتكم بنا ونتطلع للعمل معكم قريباً"
   },
   en: {
     decision: "Ready to Take the Step?",
     register: "Register Now", 
-    copyright: "Copyright © 2023 Tamyaz"
+    copyright: "Copyright © 2023 Tamyaz",
+    thankYou: "Thank you for trusting us and we look forward to working with you soon"
   }
 };
 
-export default function OriginalFooter({ language = 'ar' }) {
+export default function OriginalFooter() {
+  const { language } = useLanguage();
   const [ref, isInView] = useInView();
   const content = footerContent[language];
   const isRTL = language === 'ar';
@@ -68,19 +72,20 @@ export default function OriginalFooter({ language = 'ar' }) {
         </motion.h3>
 
         {/* زرار التسجيل */}
-<motion.a           
-  href="/form"           
-  whileHover={{              
-    scale: 1.05,             
-    backgroundColor: "#fcd34d",             
-    color: "#000",             
-    boxShadow: "0 10px 30px rgba(252, 211, 77, 0.3)"           
-  }}           
-  whileTap={{ scale: 0.95 }}           
-  className="flex items-center justify-center font-bold pt-1.5 pr-1 px-8 py-4 rounded-lg bg-transparent border-2 border-amber-300 text-amber-300 hover:bg-amber-300 hover:text-black transition-all duration-300 mx-auto "         
->           
-  {content.register}         
-</motion.a>
+        <motion.a           
+          href="/form"           
+          whileHover={{              
+            scale: 1.05,             
+            backgroundColor: "#fcd34d",             
+            color: "#000",             
+            boxShadow: "0 10px 30px rgba(252, 211, 77, 0.3)"           
+          }}           
+          whileTap={{ scale: 0.95 }}           
+          className="flex items-center justify-center font-bold px-8 py-4 rounded-lg bg-transparent border-2 border-amber-300 text-amber-300 hover:bg-amber-300 hover:text-black transition-all duration-300 mx-auto"         
+        >           
+          {content.register}         
+        </motion.a>
+
         {/* معلومات التواصل والروابط */}
         <motion.div 
           className="flex flex-col lg:flex-row justify-center gap-8 lg:justify-between w-full max-w-6xl m-6 px-4 text-xl"
@@ -157,10 +162,7 @@ export default function OriginalFooter({ language = 'ar' }) {
           className="text-gray-400 text-sm text-center max-w-md"
         >
           <p>
-            {isRTL 
-              ? "نشكركم لثقتكم بنا ونتطلع للعمل معكم قريباً"
-              : "Thank you for trusting us and we look forward to working with you soon"
-            }
+            {content.thankYou}
           </p>
         </motion.div>
       </motion.div>

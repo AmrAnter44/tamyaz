@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Hook للتحقق من ظهور العنصر
 const useInView = (options = {}) => {
@@ -54,7 +55,8 @@ const projectsData = {
   }
 };
 
-export default function ProjectsWithRealImages({ language = 'ar' }) {
+export default function ProjectsWithRealImages() {
+  const { language } = useLanguage();
   const [ref, isInView] = useInView();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [imgErrors, setImgErrors] = useState({});

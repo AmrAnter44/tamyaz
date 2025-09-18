@@ -9,6 +9,7 @@ import {
   Bug, 
   Shield 
 } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Hook للتحقق من ظهور العنصر
 const useInView = (options = {}) => {
@@ -48,7 +49,8 @@ const specializationsData = {
       { jobTitle: "أخصائي دعم فني", index: 4, icon: Headphones },
       { jobTitle: "مهندس اختبارات", index: 5, icon: Bug },
       { jobTitle: "أخصائي أمن سيبراني", index: 6, icon: Shield }
-    ]
+    ],
+    teamText: "فريق متميز من الخبراء في خدمتك"
   },
   en: {
     title: "We Specialize In",
@@ -59,7 +61,8 @@ const specializationsData = {
       { jobTitle: "Technical Support Specialist", index: 4, icon: Headphones },
       { jobTitle: "QA Engineer", index: 5, icon: Bug },
       { jobTitle: "Cybersecurity Specialist", index: 6, icon: Shield }
-    ]
+    ],
+    teamText: "An outstanding team of experts at your service"
   }
 };
 
@@ -76,7 +79,8 @@ const scaleIn = {
   transition: { duration: 0.5, ease: "easeOut" }
 };
 
-export default function OriginalSpecializations({ language = 'ar' }) {
+export default function OriginalSpecializations() {
+  const { language } = useLanguage();
   const [ref, isInView] = useInView();
   const data = specializationsData[language];
   const isRTL = language === 'ar';
@@ -123,34 +127,32 @@ export default function OriginalSpecializations({ language = 'ar' }) {
                   y: -10
                 }}
                 className="relative flex flex-col justify-center items-center 
-                          h-60 w-60 m-5 border-amber-300 overflow-hidden 
+                          h-60 w-60 m-5 border-amber-300 overflow-visible 
                           bg-gradient-to-br from-gray-900 to-black 
                           rounded-2xl border-2 hover:border-amber-300 
                           transition-all duration-300 cursor-pointer group
                           shadow-lg hover:shadow-2xl"
               >
-                {/* خلفية العنوان */}
-                <h4
-                  className="absolute inset-0 flex items-center justify-center 
-                           text-white text-2xl lg:text-3xl font-extrabold opacity-60 
-                           pointer-events-none text-center px-2 z-10"
-                >
-                  {item.jobTitle}
-                </h4>
-
-                {/* الأيقونة */}
+                {/* الأيقونة خارج المربع في الأعلى */}
                 <motion.div
                   whileHover={{ 
-                     
-                    scale: 1.2 
+                    scale: 1.2,
+                    rotate: 360
                   }}
-                  transition={{ duration: 0.3 }}
-                  className="relative z-20 mb-4"
+                  transition={{ duration: 0.6 }}
+                  className="absolute -top-8 left-1/2 transform -translate-x-1/2 z-20"
                 >
-                  <div className="p-4  rounded-2xl">
-                    <item.icon className="w-16 h-16 text-white mb-18" />
+                  <div className="w-16 h-16 bg-amber-300 rounded-full flex items-center justify-center shadow-lg border-4 border-black group-hover:border-amber-300 transition-all duration-300">
+                    <item.icon className="w-8 h-8 text-black" />
                   </div>
                 </motion.div>
+
+                {/* النص داخل المربع */}
+                <div className="flex flex-col items-center justify-center h-full pt-8">
+                  <h4 className="text-white text-xl lg:text-2xl font-bold text-center px-4 leading-tight">
+                    {item.jobTitle}
+                  </h4>
+                </div>
 
                 {/* تأثير الهوفر */}
                 <div className="absolute inset-0 bg-amber-300/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-2xl" />
@@ -191,10 +193,7 @@ export default function OriginalSpecializations({ language = 'ar' }) {
             className="mt-8 text-center"
           >
             <p className="text-amber-300 text-xl font-bold">
-              {isRTL 
-                ? "فريق متميز من الخبراء في خدمتك"
-                : "An outstanding team of experts at your service"
-              }
+              {data.teamText}
             </p>
           </motion.div>
         </motion.div>
@@ -203,4 +202,3 @@ export default function OriginalSpecializations({ language = 'ar' }) {
     </div>
   );
 }
- 

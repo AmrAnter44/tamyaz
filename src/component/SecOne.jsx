@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, User, CheckSquare, Lightbulb } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Hook للتحقق من ظهور العنصر
 const useInView = (options = {}) => {
@@ -131,7 +132,8 @@ const statsData = {
   ]
 };
 
-export default function CircularStatsSection({ language = 'ar' }) {
+export default function CircularStatsSection() {
+  const { language } = useLanguage();
   const [ref, isInView] = useInView();
   const stats = statsData[language];
   const isRTL = language === 'ar';
@@ -146,10 +148,10 @@ export default function CircularStatsSection({ language = 'ar' }) {
         className="max-w-4xl mx-auto"
       >
         {/* التخطيط الدائري */}
-        <div className="relative w-full h-96 flex items-center justify-center">
+        <div className="relative w-full h-[500px] flex items-center justify-center">
           {stats.map((stat, index) => {
             const angle = (index * 360) / stats.length;
-            const radius = 140;
+            const radius = 160;
             const x = Math.cos((angle - 90) * (Math.PI / 180)) * radius;
             const y = Math.sin((angle - 90) * (Math.PI / 180)) * radius;
 
@@ -192,11 +194,11 @@ export default function CircularStatsSection({ language = 'ar' }) {
                     stiffness: 300
                   }
                 }}
-                className="absolute w-28 h-28 bg-amber-300 rounded-full flex flex-col items-center justify-center text-black cursor-pointer shadow-2xl hover:shadow-amber-300/50 transition-all duration-300 group"
+                className="absolute w-36 h-36 bg-amber-300 rounded-full flex flex-col items-center justify-center text-black cursor-pointer shadow-2xl hover:shadow-amber-300/50 transition-all duration-300 group overflow-visible"
               >
                 {/* الأيقونة خارج الدائرة */}
                 <motion.div
-                  className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-black rounded-full flex items-center justify-center z-10 shadow-lg"
+                  className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-black rounded-full flex items-center justify-center z-10 shadow-lg"
                   whileHover={{ 
                     scale: 1.3,
                     rotate: 360,
@@ -207,19 +209,23 @@ export default function CircularStatsSection({ language = 'ar' }) {
                     type: "spring"
                   }}
                 >
-                  <stat.icon className="w-4 h-4 text-amber-300" />
+                  <stat.icon className="w-6 h-6 text-amber-300" />
                 </motion.div>
-                <div className="text-2xl font-bold mt-2">
-                  {isInView && (
-                    <CountUp 
-                      end={stat.mid} 
-                      duration={2.5}
-                      suffix={stat.id !== 1 ? "+" : ""}
-                    />
-                  )}
-                </div>
-                <div className={`text-xs text-center font-bold px-1 ${isRTL ? 'font-arabic' : ''}`}>
-                  {stat.head.split(' ').slice(0, 2).join(' ')}
+
+                {/* المحتوى داخل الدائرة */}
+                <div className="flex flex-col items-center justify-center text-center px-2 pt-4">
+                  <div className="text-3xl font-bold mb-1">
+                    {isInView && (
+                      <CountUp 
+                        end={stat.mid} 
+                        duration={2.5}
+                        suffix={stat.id !== 1 ? "+" : ""}
+                      />
+                    )}
+                  </div>
+                  <div className={`text-xs font-bold leading-tight ${isRTL ? 'font-arabic' : ''}`}>
+                    {stat.head}
+                  </div>
                 </div>
 
                 {/* tooltip عند الهوفر */}
@@ -231,7 +237,7 @@ export default function CircularStatsSection({ language = 'ar' }) {
                     y: 0,
                     transition: { duration: 0.2 }
                   }}
-                  className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 bg-black text-white px-3 py-1 rounded-lg text-xs whitespace-nowrap border border-amber-300/30"
+                  className="absolute -bottom-24 left-1/2 transform -translate-x-1/2 bg-black text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap border border-amber-300/30 max-w-48 text-center"
                 >
                   {stat.description}
                 </motion.div>
@@ -242,8 +248,8 @@ export default function CircularStatsSection({ language = 'ar' }) {
           {/* خطوط الربط */}
           {stats.map((_, index) => {
             const angle = (index * 360) / stats.length;
-            const startRadius = 40;
-            const endRadius = 100;
+            const startRadius = 50;
+            const endRadius = 120;
             const x1 = Math.cos((angle - 90) * (Math.PI / 180)) * startRadius;
             const y1 = Math.sin((angle - 90) * (Math.PI / 180)) * startRadius;
             const x2 = Math.cos((angle - 90) * (Math.PI / 180)) * endRadius;
@@ -271,10 +277,10 @@ export default function CircularStatsSection({ language = 'ar' }) {
                 }}
               >
                 <motion.line
-                  x1={200 + x1}
-                  y1={192 + y1}
-                  x2={200 + x2}
-                  y2={192 + y2}
+                  x1={250 + x1}
+                  y1={250 + y1}
+                  x2={250 + x2}
+                  y2={250 + y2}
                   stroke="#fcd34d"
                   strokeWidth="2"
                   strokeDasharray="5,5"
@@ -292,53 +298,8 @@ export default function CircularStatsSection({ language = 'ar' }) {
         </div>
 
         {/* إحصائية إضافية */}
-        <motion.div
-          initial={{ opacity: 0, y: 80, scale: 0.8 }}
-          animate={isInView ? { 
-            opacity: 1, 
-            y: 0,
-            scale: 1
-          } : { 
-            opacity: 0, 
-            y: 80,
-            scale: 0.8
-          }}
-          transition={{ 
-            delay: 2.5, 
-            duration: 1,
-            type: "spring",
-            stiffness: 100
-          }}
-          whileHover={{
-            scale: 1.05,
-            transition: { duration: 0.2 }
-          }}
-          className="mt-16 text-center"
-        >
-          <div className="inline-flex items-center gap-4 bg-amber-300/10 backdrop-blur-sm px-8 py-4 rounded-full border border-amber-300/30">
-            <div className="text-center">
-              <motion.div 
-                className="text-2xl font-bold text-amber-300"
-                initial={{ scale: 0 }}
-                animate={isInView ? { scale: 1 } : { scale: 0 }}
-                transition={{ 
-                  delay: 3,
-                  duration: 0.6,
-                  type: "spring",
-                  stiffness: 200
-                }}
-              >
-                100%
-              </motion.div>
-              <div className="text-sm text-gray-300">
-                {isRTL ? 'رضا العملاء' : 'Client Satisfaction'}
-              </div>
-            </div>
-          </div>
-        </motion.div>
+ 
       </motion.div>
-
-      {/* الموجة في الأسفل */}
 
       <style jsx>{`
         .font-arabic {

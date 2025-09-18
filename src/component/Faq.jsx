@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, HelpCircle, ChevronDown } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Hook للتحقق من ظهور العنصر
 const useInView = (options = {}) => {
@@ -36,6 +37,9 @@ const faqData = {
     title: "الأسئلة الشائعة",
     subtitle: "إجابات على الأسئلة الأكثر شيوعاً حول خدماتنا",
     viewAll: "عرض جميع الأسئلة",
+    hideAdditional: "إخفاء الأسئلة الإضافية",
+    clientSatisfaction: "رضا العملاء",
+    technicalSupport: "دعم فني",
     items: [
       { 
         question: "ما الخدمات التي تقدمها تميز؟", 
@@ -89,7 +93,7 @@ const faqData = {
       },
       { 
         question: "ما تكلفة خدمات تميز؟", 
-        answer: "تختلف حسب نوع المشروع وحجمه، ونسعى دائمًا لتقديم حلول مناسبة للميزانية مع أعلى جودة.",
+        answer: "تختلف حسب نوع المشروع وحجمه، ونسعى دائماً لتقديم حلول مناسبة للميزانية مع أعلى جودة.",
         category: "التكلفة"
       },
       { 
@@ -103,6 +107,9 @@ const faqData = {
     title: "Frequently Asked Questions",
     subtitle: "Answers to the most common questions about our services",
     viewAll: "View All Questions",
+    hideAdditional: "Hide Additional Questions",
+    clientSatisfaction: "Client Satisfaction",
+    technicalSupport: "Technical Support",
     items: [
       { 
         question: "What services does Tamyaz provide?", 
@@ -198,7 +205,8 @@ const cardVariants = {
   }
 };
 
-export default function FAQSection({ language = 'ar' }) {
+export default function FAQSection() {
+  const { language } = useLanguage();
   const [ref, isInView] = useInView();
   const [openIndex, setOpenIndex] = useState(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -215,7 +223,7 @@ export default function FAQSection({ language = 'ar' }) {
   return (
     <section 
       id="faq-section"
-      className={` px-6 bg-black relative  ${isRTL ? 'rtl' : 'ltr'}`}
+      className={`px-6 bg-black relative ${isRTL ? 'rtl' : 'ltr'}`}
     >
       {/* خلفية متحركة */}
       <div className="absolute inset-0">
@@ -386,7 +394,6 @@ export default function FAQSection({ language = 'ar' }) {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
                   setShowAll(true);
-                  // إعادة تعيين الفهرس المفتوح عند عرض المزيد
                   setOpenIndex(null);
                 }}
                 className="group inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
@@ -418,7 +425,6 @@ export default function FAQSection({ language = 'ar' }) {
                 onClick={() => {
                   setShowAll(false);
                   setOpenIndex(null);
-                  // التمرير لأعلى السكشن
                   document.querySelector('#faq-section')?.scrollIntoView({ 
                     behavior: 'smooth',
                     block: 'start'
@@ -426,7 +432,7 @@ export default function FAQSection({ language = 'ar' }) {
                 }}
                 className="group inline-flex items-center gap-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:from-gray-500 hover:to-gray-600"
               >
-                <span>{language === 'ar' ? 'إخفاء الأسئلة الإضافية' : 'Hide Additional Questions'}</span>
+                <span>{data.hideAdditional}</span>
                 <motion.div
                   whileHover={{ y: -2 }}
                   transition={{ type: "spring", stiffness: 400 }}
@@ -445,15 +451,12 @@ export default function FAQSection({ language = 'ar' }) {
           className="text-center"
         >
           <div className="inline-flex items-center gap-6 bg-gray-800/50 backdrop-blur-sm px-8 py-4 rounded-full border border-gray-700/50 mb-12">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400">98%</div>
-              <div className="text-sm text-gray-400">{language === 'ar' ? 'رضا العملاء' : 'Client Satisfaction'}</div>
-            </div>
+
             <div className="w-px h-8 bg-gray-600" />
-            <div className="text-center">
+
               <div className="text-2xl font-bold text-yellow-400">24/7</div>
-              <div className="text-sm text-gray-400">{language === 'ar' ? 'دعم فني' : 'Technical Support'}</div>
-            </div>
+              <div className="text-sm text-gray-400">{data.technicalSupport}</div>
+
           </div>
         </motion.div>
       </motion.div>
