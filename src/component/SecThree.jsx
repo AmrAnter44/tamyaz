@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Palette, 
@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-// Hook للتحقق من ظهور العنصر
+// Hook محسن للIntersection Observer
 const useInView = (options = {}) => {
   const [isInView, setIsInView] = useState(false);
   const targetRef = useRef(null);
@@ -66,23 +66,52 @@ const specializationsData = {
   }
 };
 
-// متغيرات الأنيميشن
-const fadeInUp = {
-  initial: { opacity: 0, y: 50 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: "easeOut" }
-};
+// مكون التخصص محسن
+const SpecializationItem = React.memo(({ item, index, isRTL, isInView }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 50, scale: 0.9 }}
+    animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+    transition={{ 
+      delay: 0.1 + index * 0.1, 
+      duration: 0.5,
+      type: "spring",
+      stiffness: 100
+    }}
+    whileHover={{ scale: 1.03, y: -5 }}
+    className="relative flex flex-col justify-center items-center 
+              h-60 w-60 m-5 border-amber-300 overflow-visible 
+              bg-gradient-to-br from-gray-900 to-black 
+              rounded-2xl border-2 hover:border-amber-300 
+              transition-all duration-300 cursor-pointer group
+              shadow-lg hover:shadow-2xl"
+  >
+    {/* الأيقونة خارج المربع في الأعلى */}
+    <motion.div
+      whileHover={{ scale: 1.1, rotate: 5 }}
+      transition={{ duration: 0.3 }}
+      className="absolute -top-8 left-1/2 transform -translate-x-1/2 z-20"
+    >
+      <div className="w-16 h-16 bg-amber-300 rounded-full flex items-center justify-center shadow-lg border-4 border-black group-hover:border-amber-300 transition-all duration-300">
+        <item.icon className="w-8 h-8 text-black" />
+      </div>
+    </motion.div>
 
-const scaleIn = {
-  initial: { opacity: 0, scale: 0.8 },
-  animate: { opacity: 1, scale: 1 },
-  transition: { duration: 0.5, ease: "easeOut" }
-};
+    {/* النص داخل المربع */}
+    <div className="flex flex-col items-center justify-center h-full pt-8">
+      <h4 className={`text-white text-xl lg:text-2xl font-bold text-center px-4 leading-tight ${isRTL ? 'font-arabic' : ''}`}>
+        {item.jobTitle}
+      </h4>
+    </div>
 
-export default function OriginalSpecializations() {
+    {/* تأثير الهوفر */}
+    <div className="absolute inset-0 bg-amber-300/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-2xl" />
+  </motion.div>
+));
+
+export default function OptimizedSpecializations() {
   const { language } = useLanguage();
   const [ref, isInView] = useInView();
-  const data = specializationsData[language];
+  const data = useMemo(() => specializationsData[language], [language]);
   const isRTL = language === 'ar';
 
   return (
@@ -97,9 +126,9 @@ export default function OriginalSpecializations() {
           {/* العنوان */}
           <motion.h2 
             className={`text-center text-4xl lg:text-5xl font-bold p-4 m-4 text-white ${isRTL ? 'font-arabic' : ''}`}
-            variants={fadeInUp}
-            initial="initial"
-            animate={isInView ? "animate" : "initial"}
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
           >
             {data.title}
           </motion.h2>
@@ -107,73 +136,13 @@ export default function OriginalSpecializations() {
           {/* شبكة التخصصات */}
           <div className="flex flex-row flex-wrap justify-center items-center gap-6">
             {data.items.map((item, index) => (
-              <motion.div
+              <SpecializationItem
                 key={item.index}
-                initial={{ opacity: 0, y: 100, scale: 0.8 }}
-                animate={
-                  isInView 
-                    ? { opacity: 1, y: 0, scale: 1 }
-                    : { opacity: 0, y: 100, scale: 0.8 }
-                }
-                transition={{ 
-                  delay: 0.2 + index * 0.1, 
-                  duration: 0.7,
-                  type: "spring",
-                  stiffness: 100
-                }}
-                whileHover={{ 
-                  scale: 1.05, 
-                  rotateY: 0,
-                  y: -10
-                }}
-                className="relative flex flex-col justify-center items-center 
-                          h-60 w-60 m-5 border-amber-300 overflow-visible 
-                          bg-gradient-to-br from-gray-900 to-black 
-                          rounded-2xl border-2 hover:border-amber-300 
-                          transition-all duration-300 cursor-pointer group
-                          shadow-lg hover:shadow-2xl"
-              >
-                {/* الأيقونة خارج المربع في الأعلى */}
-                <motion.div
-                  whileHover={{ 
-                    scale: 1.2,
-                    rotate: 360
-                  }}
-                  transition={{ duration: 0.6 }}
-                  className="absolute -top-8 left-1/2 transform -translate-x-1/2 z-20"
-                >
-                  <div className="w-16 h-16 bg-amber-300 rounded-full flex items-center justify-center shadow-lg border-4 border-black group-hover:border-amber-300 transition-all duration-300">
-                    <item.icon className="w-8 h-8 text-black" />
-                  </div>
-                </motion.div>
-
-                {/* النص داخل المربع */}
-                <div className="flex flex-col items-center justify-center h-full pt-8">
-                  <h4 className="text-white text-xl lg:text-2xl font-bold text-center px-4 leading-tight">
-                    {item.jobTitle}
-                  </h4>
-                </div>
-
-                {/* تأثير الهوفر */}
-                <div className="absolute inset-0 bg-amber-300/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-2xl" />
-                
-                {/* تأثير الإضاءة */}
-                <motion.div
-                  className="absolute top-4 -right-4 w-8 h-8 bg-amber-300/30 rounded-full blur-lg opacity-0 group-hover:opacity-100 transition-opacity"
-                  animate={isInView ? {
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.7, 0.3]
-                  } : {}}
-                  transition={{ 
-                    duration: 3, 
-                    repeat: Infinity,
-                    delay: index * 0.5
-                  }}
-                />
-
-                {/* خط سفلي */}
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-amber-300 transform scale-x-0  transition-transform duration-300 origin-center" />
-              </motion.div>
+                item={item}
+                index={index}
+                isRTL={isRTL}
+                isInView={isInView}
+              />
             ))}
           </div>
 
@@ -181,15 +150,15 @@ export default function OriginalSpecializations() {
           <motion.div
             initial={{ width: 0 }}
             animate={isInView ? { width: "100%" } : { width: 0 }}
-            transition={{ delay: 1.5, duration: 1 }}
+            transition={{ delay: 1, duration: 0.8 }}
             className="mt-16 h-1 bg-gradient-to-r from-transparent via-amber-300 to-transparent mx-auto max-w-md rounded-full"
           />
 
           {/* نص تشجيعي */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ delay: 2, duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 1.5, duration: 0.6 }}
             className="mt-8 text-center"
           >
             <p className="text-amber-300 text-xl font-bold">
@@ -198,7 +167,6 @@ export default function OriginalSpecializations() {
           </motion.div>
         </motion.div>
       </div>
-
     </div>
   );
 }

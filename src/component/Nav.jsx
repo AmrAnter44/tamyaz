@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Globe } from 'lucide-react';
 import Image from 'next/image';
@@ -17,56 +17,78 @@ const content = {
   }
 };
 
-export default function EnhancedNavbar() {
-  const { language, toggleLanguage } = useLanguage();
+// Hook محسن للسكرول
+const useOptimizedScroll = () => {
   const [scrolled, setScrolled] = useState(false);
-  const t = content[language];
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 50);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  return scrolled;
+};
+
+export default function EnhancedNavbar() {
+  const { language, toggleLanguage } = useLanguage();
+  const scrolled = useOptimizedScroll();
+  const t = useMemo(() => content[language], [language]);
+
+  const navbarClasses = useMemo(() => 
+    `fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
+      scrolled ? "bg-black/90 text-white shadow-lg backdrop-blur-sm" : "bg-transparent"
+    }`, [scrolled]
+  );
+
+  const buttonClasses = useCallback((isScrolled) => 
+    `flex items-center gap-2 px-5 py-2 rounded-full border-2 font-bold transition-all hover:scale-105 active:scale-95 ${
+      isScrolled 
+        ? "border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black" 
+        : "border-white text-white hover:bg-yellow-400 hover:text-black"
+    }`, []
+  );
+
   return (
     <main className={`${language === 'ar' ? 'rtl font-arabic' : 'ltr'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-      {/* شريط التنقل */}
-      <nav
-        className={`fixed top-0 left-0 w-full z-40 transition-all duration-500 ${
-          scrolled ? "bg-black/90 text-white shadow-lg backdrop-blur-sm" : "bg-transparent"
-        }`}
-      >
+      {/* شريط التنقل محسن */}
+      <nav className={navbarClasses} style={{ willChange: scrolled ? 'auto' : 'background-color, backdrop-filter' }}>
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           {/* زرار تبديل اللغة */}
-          <button
+          <motion.button
             onClick={toggleLanguage}
-            className={`flex items-center gap-2 px-5 py-2 rounded-full border-2 font-bold transition-all hover:scale-105 active:scale-95 ${
-              scrolled 
-                ? "border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-black" 
-                : "border-white text-white hover:bg-yellow-300 hover:text-black"
-            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={buttonClasses(scrolled)}
           >
             <Globe size={18} />
             <span>{language === 'ar' ? 'EN' : 'AR'}</span>
-          </button>
+          </motion.button>
 
           {/* زرار البدء */}
-          <a
+          <motion.a
             href="/form"
-            className={`font-bold py-2 px-5 rounded-full text-sm border-2 transition-all hover:scale-105 active:scale-95 ${
-              scrolled 
-                ? "border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-black" 
-                : "border-white text-white hover:bg-yellow-300 hover:text-black"
-            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`font-bold py-2 px-5 rounded-full text-sm border-2 transition-all ${buttonClasses(scrolled)}`}
           >
             {t.startNow}
-          </a>
+          </motion.a>
         </div>
       </nav>
 
-      {/* قسم البطل */}
+      {/* قسم البطل محسن */}
       <section className="relative w-full h-screen bg-[url('/imgBg.png')] bg-cover bg-center md:bg-top flex items-center justify-center">
         {/* خلفية متدرجة */}
         <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/50 to-black/50" />
@@ -74,26 +96,36 @@ export default function EnhancedNavbar() {
         {/* المحتوى */}
         <div className="relative z-10 text-center px-4 w-full max-w-4xl">
           {/* اللوجو */}
-          <div className="mb-8">
+          <motion.div 
+            className="mb-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          >
             <div className="w-[120px] h-[120px] mx-auto mb-6">
-              <Image src="/logo.svg" alt="Logo" width={120} height={120} />
+              <Image src="/logo.svg" alt="Logo" width={120} height={120} priority />
             </div>
-          </div>
+          </motion.div>
           
           {/* النص */}
-          <div className="space-y-8">
-            <h1 
-              className={`text-2xl lg:text-3xl font-bold text-yellow-300 typing-effect ${
-                language === 'ar' ? 'font-arabic' : ''
-              }`}
-            >
+          <motion.div 
+            className="space-y-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
+            <h1 className={`text-2xl lg:text-3xl font-bold text-yellow-400 typing-effect ${language === 'ar' ? 'font-arabic' : ''}`}>
               {t.heroText}
             </h1>
             
-            <div className="text-yellow-300 text-2xl animate-bounce">
+            <motion.div 
+              className="text-yellow-400 text-2xl"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
               ↓
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -101,10 +133,10 @@ export default function EnhancedNavbar() {
         .typing-effect {
           overflow: hidden;
           white-space: nowrap;
-          animation: typing 3s steps(20, end) forwards, blink 0.7s 4;
+          animation: typing 3s steps(20, end) forwards;
+          border-right: 2px solid transparent;
           padding-right: 10px;
           display: inline-block;
-          animation-fill-mode: forwards;
         }
 
         @keyframes typing {
@@ -112,32 +144,16 @@ export default function EnhancedNavbar() {
           to { width: 100%; }
         }
 
-        @keyframes blink {
-
-        }
-
-        .typing-effect::after {
-          content: '';
-          animation: hide-cursor 0s 3s forwards;
-        }
-
-        @keyframes hide-cursor {
-          to {
-            border-color: transparent;
-          }
-        }
-
         .font-arabic {
           font-family: 'Cairo', sans-serif;
         }
 
-        /* منع السكرول الأفقي */
+        /* تحسين الأداء */
         html, body {
           overflow-x: hidden;
           scroll-behavior: smooth;
         }
 
-        /* تحسين الأداء */
         * {
           -webkit-overflow-scrolling: touch;
         }

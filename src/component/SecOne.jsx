@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Clock, User, CheckSquare, Lightbulb } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-// Hook للتحقق من ظهور العنصر
+// Hook للتحقق من ظهور العنصر - مبسط ومحسن
 const useInView = (options = {}) => {
   const [isInView, setIsInView] = useState(false);
   const targetRef = useRef(null);
@@ -31,7 +31,7 @@ const useInView = (options = {}) => {
   return [targetRef, isInView];
 };
 
-// كومبوننت العد التصاعدي
+// كومبوننت العد التصاعدي محسن
 const CountUp = ({ end, duration = 2, suffix = "", start = 1 }) => {
   const [count, setCount] = useState(start);
   const [hasStarted, setHasStarted] = useState(false);
@@ -144,7 +144,7 @@ export default function CircularStatsSection() {
         ref={ref}
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
+        transition={{ duration: 0.8 }}
         className="max-w-4xl mx-auto"
       >
         {/* التخطيط الدائري */}
@@ -180,16 +180,15 @@ export default function CircularStatsSection() {
                 }}
                 transition={{ 
                   delay: 0.3 + index * 0.15, 
-                  duration: 1,
+                  duration: 0.8,
                   type: "spring",
                   stiffness: 120,
                   damping: 12
                 }}
                 whileHover={{ 
-                  scale: 1.15,
-                  rotate: 5,
+                  scale: 1.05,
                   transition: { 
-                    duration: 0.3,
+                    duration: 0.2,
                     type: "spring",
                     stiffness: 300
                   }
@@ -197,20 +196,9 @@ export default function CircularStatsSection() {
                 className="absolute w-36 h-36 bg-amber-300 rounded-full flex flex-col items-center justify-center text-black cursor-pointer shadow-2xl hover:shadow-amber-300/50 transition-all duration-300 group overflow-visible"
               >
                 {/* الأيقونة خارج الدائرة */}
-                <motion.div
-                  className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-black rounded-full flex items-center justify-center z-10 shadow-lg"
-                  whileHover={{ 
-                    scale: 1.3,
-                    rotate: 360,
-                    y: -2
-                  }}
-                  transition={{ 
-                    duration: 0.6,
-                    type: "spring"
-                  }}
-                >
+                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-black rounded-full flex items-center justify-center z-10 shadow-lg">
                   <stat.icon className="w-6 h-6 text-amber-300" />
-                </motion.div>
+                </div>
 
                 {/* المحتوى داخل الدائرة */}
                 <div className="flex flex-col items-center justify-center text-center px-2 pt-4">
@@ -245,69 +233,48 @@ export default function CircularStatsSection() {
             );
           })}
 
-          {/* خطوط الربط */}
-          {stats.map((_, index) => {
-            const angle = (index * 360) / stats.length;
-            const startRadius = 50;
-            const endRadius = 120;
-            const x1 = Math.cos((angle - 90) * (Math.PI / 180)) * startRadius;
-            const y1 = Math.sin((angle - 90) * (Math.PI / 180)) * startRadius;
-            const x2 = Math.cos((angle - 90) * (Math.PI / 180)) * endRadius;
-            const y2 = Math.sin((angle - 90) * (Math.PI / 180)) * endRadius;
+          {/* خطوط الربط مبسطة */}
+          {isInView && (
+            <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30">
+              {stats.map((_, index) => {
+                const angle = (index * 360) / stats.length;
+                const startRadius = 50;
+                const endRadius = 120;
+                const x1 = Math.cos((angle - 90) * (Math.PI / 180)) * startRadius;
+                const y1 = Math.sin((angle - 90) * (Math.PI / 180)) * startRadius;
+                const x2 = Math.cos((angle - 90) * (Math.PI / 180)) * endRadius;
+                const y2 = Math.sin((angle - 90) * (Math.PI / 180)) * endRadius;
 
-            return (
-              <motion.svg
-                key={index}
-                className="absolute inset-0 w-full h-full pointer-events-none"
-                initial={{ 
-                  opacity: 0,
-                  pathLength: 0
-                }}
-                animate={isInView ? { 
-                  opacity: 0.3,
-                  pathLength: 1
-                } : { 
-                  opacity: 0,
-                  pathLength: 0
-                }}
-                transition={{ 
-                  delay: 1.8 + index * 0.08, 
-                  duration: 0.8,
-                  ease: "easeInOut"
-                }}
-              >
-                <motion.line
-                  x1={250 + x1}
-                  y1={250 + y1}
-                  x2={250 + x2}
-                  y2={250 + y2}
-                  stroke="#fcd34d"
-                  strokeWidth="2"
-                  strokeDasharray="5,5"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: isInView ? 1 : 0 }}
-                  transition={{ 
-                    delay: 1.8 + index * 0.08,
-                    duration: 1,
-                    ease: "easeInOut"
-                  }}
-                />
-              </motion.svg>
-            );
-          })}
+                return (
+                  <motion.line
+                    key={index}
+                    x1={250 + x1}
+                    y1={250 + y1}
+                    x2={250 + x2}
+                    y2={250 + y2}
+                    stroke="#fcd34d"
+                    strokeWidth="2"
+                    strokeDasharray="5,5"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 0.3 }}
+                    transition={{ 
+                      delay: 1.5 + index * 0.1,
+                      duration: 0.8
+                    }}
+                  />
+                );
+              })}
+            </svg>
+          )}
         </div>
 
         {/* إحصائية إضافية */}
- 
+
       </motion.div>
 
       <style jsx>{`
         .font-arabic {
           font-family: 'Cairo', sans-serif;
-        }
-        
-        .wave-container svg {
-          transform: rotate(180deg);
         }
       `}</style>
     </section>
