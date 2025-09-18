@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-// Hook محسن للIntersection Observer
+// ✅ Hook محسن للIntersection Observer
 const useInView = (options = {}) => {
   const [isInView, setIsInView] = useState(false);
   const targetRef = useRef(null);
@@ -24,16 +24,19 @@ const useInView = (options = {}) => {
       ...options
     });
 
-    if (targetRef.current) {
-      observer.observe(targetRef.current);
+    const currentTarget = targetRef.current;
+
+    if (currentTarget) {
+      observer.observe(currentTarget);
     }
 
     return () => {
-      if (targetRef.current) {
-        observer.unobserve(targetRef.current);
+      if (currentTarget) {
+        observer.unobserve(currentTarget);
       }
+      observer.disconnect();
     };
-  }, []);
+  }, [options]);
 
   return [targetRef, isInView];
 };

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Clock, User, CheckSquare, Lightbulb } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-// Hook للتحقق من ظهور العنصر - مبسط ومحسن
+// Hook للتحقق من ظهور العنصر - نسخة محكمة
 const useInView = (options = {}) => {
   const [isInView, setIsInView] = useState(false);
   const targetRef = useRef(null);
@@ -17,21 +17,24 @@ const useInView = (options = {}) => {
       ...options
     });
 
-    if (targetRef.current) {
-      observer.observe(targetRef.current);
+    const currentTarget = targetRef.current;
+
+    if (currentTarget) {
+      observer.observe(currentTarget);
     }
 
     return () => {
-      if (targetRef.current) {
-        observer.unobserve(targetRef.current);
+      if (currentTarget) {
+        observer.unobserve(currentTarget);
       }
+      observer.disconnect(); // ✅ يضمن إيقاف الـ observer
     };
-  }, []);
+  }, [options]);
 
   return [targetRef, isInView];
 };
 
-// كومبوننت العد التصاعدي محسن
+// كومبوننت العد التصاعدي
 const CountUp = ({ end, duration = 2, suffix = "", start = 1 }) => {
   const [count, setCount] = useState(start);
   const [hasStarted, setHasStarted] = useState(false);
@@ -233,7 +236,7 @@ export default function CircularStatsSection() {
             );
           })}
 
-          {/* خطوط الربط مبسطة */}
+          {/* خطوط الربط */}
           {isInView && (
             <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30">
               {stats.map((_, index) => {
@@ -267,9 +270,6 @@ export default function CircularStatsSection() {
             </svg>
           )}
         </div>
-
-        {/* إحصائية إضافية */}
-
       </motion.div>
 
       <style jsx>{`

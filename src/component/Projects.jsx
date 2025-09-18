@@ -1,37 +1,14 @@
 "use client";
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-// Hook محسن للIntersection Observer
-const useInView = (options = {}) => {
-  const [isInView, setIsInView] = useState(false);
-  const targetRef = useRef(null);
+import { ExternalLink } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      setIsInView(entry.isIntersecting);
-    }, {
-      threshold: 0.1,
-      ...options
-    });
-
-    if (targetRef.current) {
-      observer.observe(targetRef.current);
-    }
-
-    return () => {
-      if (targetRef.current) {
-        observer.unobserve(targetRef.current);
-      }
-    };
-  }, []);
-
-  return [targetRef, isInView];
-};
-
-// بيانات المشاريع
 const projectsData = {
   ar: {
     title: "أخر المشاريع",
@@ -41,7 +18,7 @@ const projectsData = {
       { name: "Saif", img: "/projects/saif.png", link: "https://coachsaif.online" },
       { name: "Wn", img: "/projects/wn.png", link: "https://wn-store-master.vercel.app/" },
       { name: "Xfit", img: "/projects/xfit.png", link: "https://www.xfit.website/" },
-    ]
+    ],
   },
   en: {
     title: "Latest Projects",
@@ -51,240 +28,97 @@ const projectsData = {
       { name: "Saif", img: "/projects/saif.png", link: "https://coachsaif.online" },
       { name: "Wn", img: "/projects/wn.png", link: "https://wn-store-master.vercel.app/" },
       { name: "Xfit", img: "/projects/xfit.png", link: "https://www.xfit.website/" },
-    ]
-  }
+    ],
+  },
 };
 
-// مكون المشروع محسن
-const ProjectSlide = React.memo(({ project, isActive, viewProject, isRTL, onImageError }) => (
-  <motion.a
-    href={project.link}
-    target="_blank"
-    rel="noopener noreferrer"
-    whileHover={{ scale: 1.02 }}
-    className="block group"
-  >
-    <div className="relative w-96 mx-auto overflow-hidden rounded-3xl 
-      transition-all duration-300 shadow-xl hover:shadow-2xl">
-      
-      {/* الصورة أو fallback */}
-      <img 
-        src={project.img}
-        alt={project.name}
-        className="w-96 mt-auto object-cover object-center group-hover:scale-110 transition-transform duration-500"
-        loading="lazy"
-        onError={() => onImageError(project.name)}
-      />
-
-      {/* Overlay مع معلومات المشروع */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent 
-        opacity-0 group-hover:opacity-100 transition-all duration-300 
-        flex items-end justify-center p-8">
-        
-        <motion.div
-          initial={{ y: 30, opacity: 0 }}
-          whileHover={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className="text-center space-y-4"
-        >
-          <h3 className={`text-white font-bold text-3xl ${isRTL ? 'font-arabic' : ''}`}>
-            {project.name}
-          </h3>
-          <div className="flex items-center justify-center gap-2 text-gray-300">
-            <span className={`text-lg ${isRTL ? 'font-arabic' : ''}`}>
-              {viewProject}
-            </span>
-            <ExternalLink size={20} />
-          </div>
-        </motion.div>
-      </div>
-
-      {/* أيقونة الرابط */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileHover={{ opacity: 1, scale: 1 }}
-        className="absolute top-6 right-6 bg-black/60 p-3 rounded-full text-gray-300 
-          backdrop-blur-sm"
-      >
-        <ExternalLink className="w-5 h-5" />
-      </motion.div>
-
-      {/* شريط التقدم */}
-      {isActive && (
-        <div className="absolute bottom-0 left-0 w-full h-2 bg-black/30">
-          <motion.div 
-            className="h-full bg-black"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 4, ease: "linear" }}
-          />
-        </div>
-      )}
-    </div>
-  </motion.a>
-));
-
-export default function OptimizedProjects() {
+export default function ProjectsSwiper() {
   const { language } = useLanguage();
-  const [ref, isInView] = useInView();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [imgErrors, setImgErrors] = useState(new Set());
-  const data = useMemo(() => projectsData[language], [language]);
-  const isRTL = language === 'ar';
-
-  // Auto-play محسن
-  useEffect(() => {
-    if (!isInView) return;
-    
-    const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % data.projects.length);
-    }, 4000);
-
-    return () => clearInterval(timer);
-  }, [data.projects.length, isInView]);
-
-  const next = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % data.projects.length);
-  }, [data.projects.length]);
-
-  const prev = useCallback(() => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? data.projects.length - 1 : prevIndex - 1
-    );
-  }, [data.projects.length]);
-
-  const handleImageError = useCallback((projectName) => {
-    setImgErrors(prev => new Set([...prev, projectName]));
-  }, []);
+  const data = projectsData[language];
+  const isRTL = language === "ar";
 
   return (
-    <div className={`min-h-screen bg-yellow-300 text-white ${isRTL ? 'font-arabic' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>
-      <div className="py-20 px-6">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* العنوان */}
-          <motion.h2 
-            className={`text-center text-4xl lg:text-5xl font-bold p-4 m-4 text-black mb-8 ${isRTL ? 'font-arabic' : ''}`}
-            initial={{ y: 30, opacity: 0 }}
-            animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            {data.title}
-          </motion.h2>
+    <div className=" bg-yellow-300 py-20 px-6" dir={isRTL ? "rtl" : "ltr"}>
+      <h2 className="text-center text-4xl lg:text-5xl font-bold text-black mb-12">
+        {data.title}
+      </h2>
 
-          {/* المشروع الرئيسي */}
-          <div className="relative max-w-4xl mx-auto mb-12">
-            {/* أزرار التنقل */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={prev}
-              className={`absolute top-1/2 ${isRTL ? 'right-4' : 'left-4'} transform -translate-y-1/2 z-10 
-                bg-black/50 hover:bg-black/70 text-gray-300 p-3 rounded-full 
-                transition-all duration-300 backdrop-blur-sm`}
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={30}
+        slidesPerView={1}
+        loop={true}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        pagination={{ clickable: true }}
+        navigation
+        dir={isRTL ? "rtl" : "ltr"}
+        className="max-w-5xl mx-auto"
+      >
+        {data.projects.map((project, index) => (
+          <SwiperSlide key={index}>
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl"
             >
-              {isRTL ? <ChevronRight size={24} /> : <ChevronLeft size={24} />}
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={next}
-              className={`absolute top-1/2 ${isRTL ? 'left-4' : 'right-4'} transform -translate-y-1/2 z-10 
-                bg-black/50 hover:bg-black/70 text-gray-300 p-3 rounded-full 
-                transition-all duration-300 backdrop-blur-sm`}
-            >
-              {isRTL ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
-            </motion.button>
-
-            {/* المشروع المعروض */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, x: 300 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -300 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="relative"
-              >
-                <ProjectSlide
-                  project={data.projects[currentIndex]}
-                  isActive={true}
-                  viewProject={data.viewProject}
-                  isRTL={isRTL}
-                  onImageError={handleImageError}
-                />
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* مؤشرات المشاريع */}
-          <div className="flex justify-center gap-4 mb-12">
-            {data.projects.map((_, index) => (
-              <motion.button
-                key={index}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.8 }}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                  index === currentIndex 
-                    ? 'bg-black scale-125 shadow-lg shadow-gray-300/50' 
-                    : 'bg-black/50 hover:bg-black/70'
-                }`}
+              <img
+                src={project.img}
+                alt={project.name}
+                className="lg:h-[450px] h-[280px] w-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-            ))}
-          </div>
 
-          {/* عرض مصغر للمشاريع الأخرى */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto"
-          >
-            {data.projects.map((project, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.05, y: -5 }}
-                onClick={() => setCurrentIndex(index)}
-                className="cursor-pointer rounded-xl overflow-hidden transition-all duration-300"
-              >
-                <div className="relative w-full h-24">
-                  {!imgErrors.has(project.name) ? (
-                    <img 
-                      src={project.img}
-                      alt={project.name}
-                      className="w-32 rounded-lg object-cover"
-                      loading="lazy"
-                      onError={() => handleImageError(project.name)}
-                    />
-                  ) : (
-                    <div className="w-32 h-24 bg-gray-800 flex items-center justify-center rounded-lg">
-                      <span className="text-amber-300 font-bold text-xl">
-                        {project.name.charAt(0)}
-                      </span>
-                    </div>
-                  )}
-                  
-                  {index === currentIndex && (
-                    <div className="absolute inset-0 border-2 border-black rounded-lg"></div>
-                  )}
+              {/* Overlay: يظهر دايمًا في الموبايل + hover على الديسكتوب */}
+              <div className={`
+  absolute inset-0 
+  bg-gradient-to-t from-black/80 via-transparent to-transparent 
+  flex items-end justify-center p-6 
+  opacity-100 sm:opacity-0 sm:group-hover:opacity-100
+`}
+>
+                <div className="text-center space-y-3">
+                  <h3 className="text-white font-bold text-2xl sm:text-3xl">{project.name}</h3>
+                  <div className="flex justify-center items-center gap-2 text-gray-300">
+                    <span>{data.viewProject}</span>
+                    <ExternalLink size={20} />
+                  </div>
                 </div>
-                
-                <div className="p-2 bg-black">
-                  <h4 className={`text-white text-sm font-bold text-center ${isRTL ? 'font-arabic' : ''}`}>
-                    {project.name}
-                  </h4>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </div>
+              </div>
+            </a>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* تخصيص الأزرار بالـ CSS */}
+      <style jsx global>{`
+        .swiper-button-next,
+        .swiper-button-prev {
+          color:#ffd058; /* لون الأسهم */
+ 
+
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+        }
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+          font-size: 18px !important; /* حجم الأيقونة */
+          font-weight: bold;
+        }
+          /* اللون العادي */
+.swiper-pagination-bullet {
+  background: #000 !important; /* غير اللون اللي يعجبك */
+  opacity: 0.4; /* عشان الباقي يبان انه مش Active */
+}
+
+/* اللون لما يكون Active */
+.swiper-pagination-bullet-active {
+  background: #facc15 !important; /* هنا حط لونك الأساسي مثلاً أصفر Tailwind (yellow-400) */
+  opacity: 1;
+}
+      `}</style>
     </div>
   );
 }
