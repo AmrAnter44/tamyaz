@@ -110,26 +110,32 @@ export default function OptimizedAboutSection() {
       className={`py-20 px-6 bg-yellow-300 relative overflow-hidden text-black ${isRTL ? 'rtl' : 'ltr'}`} 
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      {/* خلفية متحركة مبسطة */}
+      {/* خلفية متحركة مبسطة - ثابتة */}
       <div className="absolute inset-0 opacity-30">
-        {[...Array(5)].map((_, i) => (
+        {[
+          { width: 150, height: 180, left: '10%', top: '20%' },
+          { width: 200, height: 160, left: '80%', top: '15%' },
+          { width: 120, height: 220, left: '25%', top: '70%' },
+          { width: 180, height: 140, left: '70%', top: '60%' },
+          { width: 160, height: 190, left: '50%', top: '40%' }
+        ].map((item, i) => (
           <motion.div
             key={i}
             className="absolute bg-yellow-300/10 rounded-full"
             style={{
-              width: 150 + Math.random() * 100,
-              height: 150 + Math.random() * 100,
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
+              width: item.width,
+              height: item.height,
+              left: item.left,
+              top: item.top,
             }}
             animate={{
               scale: [1, 1.1, 1],
               opacity: [0.3, 0.5, 0.3],
             }}
             transition={{
-              duration: 6 + Math.random() * 2,
+              duration: 6 + i * 0.5,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: i * 0.5,
             }}
           />
         ))}

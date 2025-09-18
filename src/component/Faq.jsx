@@ -207,17 +207,22 @@ export default function OptimizedFAQSection() {
       id="faq-section"
       className={`px-6 bg-black relative ${isRTL ? 'rtl' : 'ltr'}`}
     >
-      {/* خلفية متحركة مبسطة */}
+      {/* خلفية متحركة مبسطة - ثابتة */}
       <div className="absolute inset-0 opacity-20">
-        {[...Array(4)].map((_, i) => (
+        {[
+          { width: 120, height: 130, left: '15%', top: '25%' },
+          { width: 140, height: 110, left: '75%', top: '20%' },
+          { width: 160, height: 150, left: '30%', top: '80%' },
+          { width: 130, height: 140, left: '85%', top: '70%' }
+        ].map((item, i) => (
           <motion.div
             key={i}
             className="absolute bg-yellow-300/10 rounded-full"
             style={{
-              width: Math.random() * 150 + 100,
-              height: Math.random() * 150 + 100,
-              left: Math.random() * 100 + '%',
-              top: Math.random() * 100 + '%',
+              width: item.width,
+              height: item.height,
+              left: item.left,
+              top: item.top,
             }}
             animate={{
               y: [0, -30, 0],
@@ -225,9 +230,9 @@ export default function OptimizedFAQSection() {
               scale: [1, 1.1, 1],
             }}
             transition={{
-              duration: 5 + Math.random() * 2,
+              duration: 5 + i * 0.5,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: i * 0.5,
             }}
           />
         ))}
