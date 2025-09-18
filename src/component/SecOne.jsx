@@ -4,14 +4,16 @@ import { motion } from 'framer-motion';
 import { Clock, User, CheckSquare, Lightbulb } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-// Hook للتحقق من ظهور العنصر - نسخة محكمة
+// Hook للتحقق من ظهور العنصر (مرة واحدة فقط)
 const useInView = (options = {}) => {
   const [isInView, setIsInView] = useState(false);
   const targetRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
-      setIsInView(entry.isIntersecting);
+      if (entry.isIntersecting && !isInView) { // ✅ يحصل مرة واحدة بس
+        setIsInView(true);
+      }
     }, {
       threshold: 0.2,
       ...options
@@ -27,9 +29,9 @@ const useInView = (options = {}) => {
       if (currentTarget) {
         observer.unobserve(currentTarget);
       }
-      observer.disconnect(); // ✅ يضمن إيقاف الـ observer
+      observer.disconnect();
     };
-  }, [options]);
+  }, [isInView]); // ✅ متابعة الـ state
 
   return [targetRef, isInView];
 };
@@ -135,7 +137,7 @@ const statsData = {
   ]
 };
 
-export default function CircularStatsSection() {
+export default function ResponsiveStatsSection() {
   const { language } = useLanguage();
   const [ref, isInView] = useInView();
   const stats = statsData[language];
@@ -150,125 +152,79 @@ export default function CircularStatsSection() {
         transition={{ duration: 0.8 }}
         className="max-w-4xl mx-auto"
       >
-        {/* التخطيط الدائري */}
-        <div className="relative w-full h-[500px] flex items-center justify-center">
-          {stats.map((stat, index) => {
-            const angle = (index * 360) / stats.length;
-            const radius = 160;
-            const x = Math.cos((angle - 90) * (Math.PI / 180)) * radius;
-            const y = Math.sin((angle - 90) * (Math.PI / 180)) * radius;
+        {/* عنوان القسم */}
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: -30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          <h2 className={`text-3xl md:text-4xl font-bold text-yellow-300 mb-4 ${isRTL ? 'font-arabic' : ''}`}>
+            {isRTL ? 'إحصائياتنا' : 'Our Statistics'}
+          </h2>
+          <p className={`text-gray-300 max-w-2xl mx-auto ${isRTL ? 'font-arabic' : ''}`}>
+            {isRTL 
+              ? 'أرقام تعكس رحلتنا في التميز والإبداع'
+              : 'Numbers that reflect our journey of excellence and innovation'
+            }
+          </p>
+        </motion.div>
 
-            return (
-              <motion.div
-                key={stat.id}
-                initial={{ 
-                  opacity: 0, 
-                  scale: 0,
-                  x: 0,
-                  y: 0,
-                  rotate: -180
-                }}
-                animate={isInView ? { 
-                  opacity: 1, 
-                  scale: 1,
-                  x: x,
-                  y: y,
-                  rotate: 0
-                } : { 
-                  opacity: 0, 
-                  scale: 0,
-                  x: 0,
-                  y: 0,
-                  rotate: -180
-                }}
-                transition={{ 
-                  delay: 0.3 + index * 0.15, 
-                  duration: 0.8,
-                  type: "spring",
-                  stiffness: 120,
-                  damping: 12
-                }}
-                whileHover={{ 
-                  scale: 1.05,
-                  transition: { 
-                    duration: 0.2,
-                    type: "spring",
-                    stiffness: 300
-                  }
-                }}
-                className="absolute w-36 h-36 bg-amber-300 rounded-full flex flex-col items-center justify-center text-black cursor-pointer shadow-2xl hover:shadow-amber-300/50 transition-all duration-300 group overflow-visible"
-              >
-                {/* الأيقونة خارج الدائرة */}
-                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-black rounded-full flex items-center justify-center z-10 shadow-lg">
-                  <stat.icon className="w-6 h-6 text-amber-300" />
+        {/* Grid Layout للكل */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.id}
+              initial={{ 
+                opacity: 0, 
+                scale: 0.8,
+                y: 50
+              }}
+              animate={isInView ? { 
+                opacity: 1, 
+                scale: 1,
+                y: 0
+              } : { 
+                opacity: 0, 
+                scale: 0.8,
+                y: 50
+              }}
+              transition={{ 
+                delay: 0.2 + index * 0.1, 
+                duration: 0.6,
+                ease: "easeOut"
+              }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative bg-yellow-300 rounded-2xl p-6 text-black shadow-xl hover:shadow-yellow-300/20 transition-all duration-300"
+            >
+              {/* الأيقونة */}
+              <div className="flex justify-center mb-4">
+                <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
+                  <stat.icon className="w-6 h-6 text-yellow-300" />
                 </div>
+              </div>
 
-                {/* المحتوى داخل الدائرة */}
-                <div className="flex flex-col items-center justify-center text-center px-2 pt-4">
-                  <div className="text-3xl font-bold mb-1">
-                    {isInView && (
-                      <CountUp 
-                        end={stat.mid} 
-                        duration={2.5}
-                        suffix={stat.id !== 1 ? "+" : ""}
-                      />
-                    )}
-                  </div>
-                  <div className={`text-xs font-bold leading-tight ${isRTL ? 'font-arabic' : ''}`}>
-                    {stat.head}
-                  </div>
+              {/* المحتوى */}
+              <div className="text-center">
+                <div className="text-2xl lg:text-3xl font-bold mb-2">
+                  {isInView && (
+                    <CountUp 
+                      end={stat.mid} 
+                      duration={2}
+                      suffix={stat.id !== 1 ? "+" : ""}
+                    />
+                  )}
                 </div>
-
-                {/* tooltip عند الهوفر */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                  whileHover={{ 
-                    opacity: 1, 
-                    scale: 1, 
-                    y: 0,
-                    transition: { duration: 0.2 }
-                  }}
-                  className="absolute -bottom-24 left-1/2 transform -translate-x-1/2 bg-black text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap border border-amber-300/30 max-w-48 text-center"
-                >
+                <div className={`text-sm lg:text-base font-bold leading-tight mb-2 ${isRTL ? 'font-arabic' : ''}`}>
+                  {stat.head}
+                </div>
+                <div className={`text-xs lg:text-sm opacity-70 ${isRTL ? 'font-arabic' : ''}`}>
                   {stat.description}
-                </motion.div>
-              </motion.div>
-            );
-          })}
-
-          {/* خطوط الربط */}
-          {isInView && (
-            <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30">
-              {stats.map((_, index) => {
-                const angle = (index * 360) / stats.length;
-                const startRadius = 50;
-                const endRadius = 120;
-                const x1 = Math.cos((angle - 90) * (Math.PI / 180)) * startRadius;
-                const y1 = Math.sin((angle - 90) * (Math.PI / 180)) * startRadius;
-                const x2 = Math.cos((angle - 90) * (Math.PI / 180)) * endRadius;
-                const y2 = Math.sin((angle - 90) * (Math.PI / 180)) * endRadius;
-
-                return (
-                  <motion.line
-                    key={index}
-                    x1={250 + x1}
-                    y1={250 + y1}
-                    x2={250 + x2}
-                    y2={250 + y2}
-                    stroke="#fcd34d"
-                    strokeWidth="2"
-                    strokeDasharray="5,5"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{ pathLength: 1, opacity: 0.3 }}
-                    transition={{ 
-                      delay: 1.5 + index * 0.1,
-                      duration: 0.8
-                    }}
-                  />
-                );
-              })}
-            </svg>
-          )}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </motion.div>
 

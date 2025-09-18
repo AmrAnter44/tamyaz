@@ -1,34 +1,29 @@
 "use client";
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, HelpCircle, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-// Hook محسن للIntersection Observer
-const useInView = (options = {}) => {
+// Hook بسيط للIntersection Observer (مرة واحدة فقط)
+const useInView = () => {
   const [isInView, setIsInView] = useState(false);
-  const targetRef = useRef(null);
+  const ref = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      setIsInView(entry.isIntersecting);
-    }, {
-      threshold: 0.1,
-      ...options
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isInView) { // ✅ مرة واحدة بس
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-    if (targetRef.current) {
-      observer.observe(targetRef.current);
-    }
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [isInView]);
 
-    return () => {
-      if (targetRef.current) {
-        observer.unobserve(targetRef.current);
-      }
-    };
-  }, []);
-
-  return [targetRef, isInView];
+  return [ref, isInView];
 };
 
 // البيانات الكاملة
@@ -37,8 +32,6 @@ const faqData = {
     title: "الأسئلة الشائعة",
     subtitle: "إجابات على الأسئلة الأكثر شيوعاً حول خدماتنا",
     viewAll: "عرض جميع الأسئلة",
-    hideAdditional: "إخفاء الأسئلة الإضافية",
-    clientSatisfaction: "رضا العملاء",
     technicalSupport: "دعم فني",
     items: [
       { 
@@ -77,8 +70,6 @@ const faqData = {
     title: "Frequently Asked Questions",
     subtitle: "Answers to the most common questions about our services",
     viewAll: "View All Questions",
-    hideAdditional: "Hide Additional Questions",
-    clientSatisfaction: "Client Satisfaction",
     technicalSupport: "Technical Support",
     items: [
       { 
@@ -115,138 +106,31 @@ const faqData = {
   }
 };
 
-// مكون السؤال محسن
-const FAQItem = React.memo(({ faq, index, isOpen, onToggle, isRTL }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ delay: index * 0.1, duration: 0.5 }}
-    viewport={{ once: true }}
-    whileHover={{ scale: 1.01, y: -3 }}
-    className="group h-full"
-  >
-    <div 
-      className={`bg-gradient-to-r ${
-        isOpen 
-          ? 'from-yellow-400 to-yellow-500' 
-          : 'from-gray-700 to-gray-800 hover:from-yellow-400/20 hover:to-orange-500/20'
-      } p-1 rounded-2xl transition-all duration-300 h-full`}
-    >
-      <div className="bg-gray-900 rounded-2xl p-6 h-full flex flex-col">
-        {/* السؤال */}
-        <button
-          onClick={onToggle}
-          className={`w-full flex items-start justify-between ${isRTL ? 'text-right' : 'text-left'} group flex-1`}
-        >
-          <div className="flex-1">
-            <span className="inline-block text-xs px-3 py-1 bg-gray-700 text-gray-300 rounded-full mb-3">
-              {faq.category}
-            </span>
-            <h3 className={`text-lg font-bold text-white group-hover:text-yellow-300 transition-colors leading-relaxed ${isRTL ? 'font-arabic' : ''}`}>
-              {faq.question}
-            </h3>
-          </div>
-          
-          <motion.div
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
-            className={`flex-shrink-0 ${isRTL ? 'mr-4' : 'ml-4'}`}
-          >
-            {isOpen ? (
-              <Minus className="w-6 h-6 text-yellow-400" />
-            ) : (
-              <Plus className="w-6 h-6 text-gray-400 group-hover:text-yellow-400 transition-colors" />
-            )}
-          </motion.div>
-        </button>
-
-        {/* الإجابة */}
-        <AnimatePresence initial={false}>
-          {isOpen && (
-            <motion.div
-              key="content"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="overflow-hidden"
-            >
-              <div className={`pt-6 ${isRTL ? 'text-right' : 'text-left'}`}>
-                <div className="h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent mb-4" />
-                <p className="text-gray-300 leading-relaxed text-sm">
-                  {faq.answer}
-                </p>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </div>
-  </motion.div>
-));
-
 export default function OptimizedFAQSection() {
   const { language } = useLanguage();
   const [ref, isInView] = useInView();
   const [openIndex, setOpenIndex] = useState(null);
   const [showAll, setShowAll] = useState(false);
-  const data = useMemo(() => faqData[language], [language]);
+  const data = faqData[language];
   const isRTL = language === 'ar';
 
-  const toggleFAQ = useCallback((index) => {
+  const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
-  }, [openIndex]);
+  };
 
-  const displayedItems = useMemo(() => 
-    showAll ? data.items : data.items.slice(0, 6), 
-    [showAll, data.items]
-  );
+  const displayedItems = showAll ? data.items : data.items.slice(0, 3);
 
   return (
-    <section 
-      id="faq-section"
-      className={`px-6 bg-black relative ${isRTL ? 'rtl' : 'ltr'}`}
-    >
-      {/* خلفية متحركة مبسطة - ثابتة */}
-      <div className="absolute inset-0 opacity-20">
-        {[
-          { width: 120, height: 130, left: '15%', top: '25%' },
-          { width: 140, height: 110, left: '75%', top: '20%' },
-          { width: 160, height: 150, left: '30%', top: '80%' },
-          { width: 130, height: 140, left: '85%', top: '70%' }
-        ].map((item, i) => (
-          <motion.div
-            key={i}
-            className="absolute bg-yellow-300/10 rounded-full"
-            style={{
-              width: item.width,
-              height: item.height,
-              left: item.left,
-              top: item.top,
-            }}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.1, 0.3, 0.1],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 5 + i * 0.5,
-              repeat: Infinity,
-              delay: i * 0.5,
-            }}
-          />
-        ))}
-      </div>
-
+    <section className={`py-20 px-6 bg-black relative ${isRTL ? 'rtl' : 'ltr'}`}>
       <motion.div
         ref={ref}
         initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        className="max-w-6xl mx-auto relative z-10"
+        animate={isInView ? { opacity: 1 } : {}}
+        className="max-w-4xl mx-auto relative z-10"
       >
         {/* العنوان */}
         <motion.div 
-          className="text-center mb-16 mt-12"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -268,50 +152,106 @@ export default function OptimizedFAQSection() {
           </p>
         </motion.div>
 
-        {/* الأسئلة في Grid Layout */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {/* الأسئلة */}
+        <div className="space-y-4 mb-12">
           {displayedItems.map((faq, index) => (
-            <FAQItem
-              key={`faq-${index}`}
-              faq={faq}
-              index={index}
-              isOpen={openIndex === index}
-              onToggle={() => toggleFAQ(index)}
-              isRTL={isRTL}
-            />
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              whileHover={{ scale: 1.01 }}
+              className="group"
+            >
+              <div 
+                className={`bg-gradient-to-r ${
+                  openIndex === index
+                    ? 'from-yellow-400 to-yellow-500' 
+                    : 'from-gray-700 to-gray-800 hover:from-yellow-400/20 hover:to-yellow-500/20'
+                } p-1 rounded-2xl transition-all duration-300`}
+              >
+                <div className="bg-gray-900 rounded-2xl p-6">
+                  {/* السؤال */}
+                  <button
+                    onClick={() => toggleFAQ(index)}
+                    className={`w-full flex items-start justify-between ${isRTL ? 'text-right' : 'text-left'} group`}
+                  >
+                    <div className="flex-1">
+                      <span className="inline-block text-xs px-3 py-1 bg-gray-700 text-gray-300 rounded-full mb-3">
+                        {faq.category}
+                      </span>
+                      <h3 className={`text-lg font-bold text-white group-hover:text-yellow-300 transition-colors leading-relaxed ${isRTL ? 'font-arabic' : ''}`}>
+                        {faq.question}
+                      </h3>
+                    </div>
+                    
+                    <motion.div
+                      animate={{ rotate: openIndex === index ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                      className={`flex-shrink-0 ${isRTL ? 'mr-4' : 'ml-4'}`}
+                    >
+                      {openIndex === index ? (
+                        <Minus className="w-6 h-6 text-yellow-400" />
+                      ) : (
+                        <Plus className="w-6 h-6 text-gray-400 group-hover:text-yellow-400 transition-colors" />
+                      )}
+                    </motion.div>
+                  </button>
+
+                  {/* الإجابة */}
+                  <AnimatePresence initial={false}>
+                    {openIndex === index && (
+                      <motion.div
+                        key="content"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="overflow-hidden"
+                      >
+                        <div className={`pt-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+                          <div className="h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent mb-4" />
+                          <p className="text-gray-300 leading-relaxed text-sm">
+                            {faq.answer}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
 
         {/* زرار عرض المزيد */}
-        <AnimatePresence>
-          {!showAll && data.items.length > 6 && (
-            <motion.div 
-              initial={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="text-center mb-12"
+        {!showAll && data.items.length > 3 && (
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.5 }}
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowAll(true)}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setShowAll(true)}
-                className="group inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
-              >
-                <span>{data.viewAll}</span>
-                <ChevronDown className="w-5 h-5" />
-              </motion.button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <span>{data.viewAll}</span>
+              <ChevronDown className="w-5 h-5" />
+            </motion.button>
+          </motion.div>
+        )}
 
-        {/* إحصائية - بدون رضا العملاء */}
+        {/* إحصائية الدعم الفني */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.6 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-6 bg-gray-800/50 backdrop-blur-sm px-8 py-4 rounded-full border border-gray-700/50 mb-12">
+          <div className="inline-flex items-center gap-6 bg-gray-800/50 backdrop-blur-sm px-8 py-4 rounded-full border border-gray-700/50">
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-400">24/7</div>
               <div className="text-sm text-gray-400">{data.technicalSupport}</div>

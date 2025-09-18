@@ -65,7 +65,7 @@ export default function ProjectsSwiper() {
               <img
                 src={project.img}
                 alt={project.name}
-                className="lg:h-[450px] h-[280px] w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="lg:h-[450px] h-[280px]  mx-auto object-cover group-hover:scale-105 transition-transform duration-500"
               />
 
               {/* Overlay: يظهر دايمًا في الموبايل + hover على الديسكتوب */}

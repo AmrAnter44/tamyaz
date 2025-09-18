@@ -1,22 +1,8 @@
 "use client";
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-
-// Throttle function مدمجة
-const throttle = (func, limit) => {
-  let inThrottle;
-  return function() {
-    const args = arguments;
-    const context = this;
-    if (!inThrottle) {
-      func.apply(context, args);
-      inThrottle = true;
-      setTimeout(() => inThrottle = false, limit);
-    }
-  }
-};
 
 const whatsappContent = {
   ar: {
@@ -31,59 +17,38 @@ const whatsappContent = {
   }
 };
 
-export default function FloatingWhatsAppCTA() {
+export default function OptimizedWhatsAppCTA() {
   const { language } = useLanguage();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [scrollDirection, setScrollDirection] = useState('up');
   
-  const content = useMemo(() => whatsappContent[language], [language]);
+  const content = whatsappContent[language];
   const isRTL = language === 'ar';
 
-  // Hook محسن للسكرول
+  // Hook بسيط للوقت - يظهر بعد 15 ثانية
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-    
-    const handleScroll = throttle(() => {
-      const currentScrollY = window.scrollY;
-      const direction = currentScrollY > lastScrollY ? 'down' : 'up';
-      
-      setScrollDirection(direction);
-      
-      // إظهار CTA بعد تمرير 100px وعندما يكون المستخدم يتمرر لأسفل
-      if (currentScrollY > 100 && direction === 'down') {
-        setIsVisible(true);
-      } else if (currentScrollY < 50 || direction === 'up') {
-        setIsVisible(false);
-        setIsExpanded(false);
-      }
-      
-      lastScrollY = currentScrollY;
-    }, 16); // 60fps
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 15000); // 15 ثانية
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => clearTimeout(timer);
   }, []);
 
-  // تحسين التوسع التلقائي
+  // توسع تلقائي مرة واحدة
   useEffect(() => {
     if (!isVisible) return;
     
-    const expandTimer = setTimeout(() => {
+    const timer = setTimeout(() => {
       setIsExpanded(true);
-      const collapseTimer = setTimeout(() => setIsExpanded(false), 4000);
-      return () => clearTimeout(collapseTimer);
-    }, 1500);
+      setTimeout(() => setIsExpanded(false), 3000);
+    }, 2000);
 
-    return () => clearTimeout(expandTimer);
+    return () => clearTimeout(timer);
   }, [isVisible]);
 
-  const handleWhatsAppClick = useCallback(() => {
+  const handleWhatsAppClick = () => {
     window.open('https://wa.me/201055119164', '_blank');
-  }, []);
-
-  const handleMouseEnter = useCallback(() => setIsExpanded(true), []);
-  const handleMouseLeave = useCallback(() => setIsExpanded(false), []);
+  };
 
   return (
     <AnimatePresence>
@@ -98,7 +63,8 @@ export default function FloatingWhatsAppCTA() {
             damping: 25,
             duration: 0.4 
           }}
-          className={`fixed bottom-6 z-50 ${isRTL ? 'left-6' : 'right-6'}`}
+          className={`fixed bottom-6 z-[9999] ${isRTL ? 'left-6' : 'right-6'} whatsapp-cta`}
+          style={{ direction: 'ltr' }} // override الـ RTL
         >
           <div className="relative">
             {/* الرسالة الموسعة */}
@@ -135,8 +101,8 @@ export default function FloatingWhatsAppCTA() {
             {/* الزرار الرئيسي */}
             <motion.button
               onClick={handleWhatsAppClick}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+              onMouseEnter={() => setIsExpanded(true)}
+              onMouseLeave={() => setIsExpanded(false)}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="group relative bg-white hover:bg-yellow-400 border-2 border-yellow-400 text-black rounded-full shadow-2xl transition-all duration-200"

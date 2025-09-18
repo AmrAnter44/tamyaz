@@ -15,7 +15,7 @@ const formContent = {
     title: "Registration Form",
     backToHome: "Back to Home",
     contactWhatsApp: "Contact via WhatsApp",
-    description: "fill out the form below and we'll contact you soon"
+    description: "Fill out the form below and we'll contact you soon"
   }
 };
 
@@ -74,15 +74,11 @@ export default function Form() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex justify-center"
         >
-          <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+          <div className="bg-white rounded-2xl shadow-2xl overflow-hidden w-full max-w-3xl">
             <iframe
               src="https://docs.google.com/forms/d/e/1FAIpQLScSZa4T1yLUIQs-PpJTiKWZ5XHeAzGO4wAEBm4wgbui-zecJQ/viewform?embedded=true"
-              width="500"
-              height="1400"
-              frameBorder="0"
-              marginHeight={0}
-              marginWidth={0}
-              className="block"
+              className="w-full h-[1400px] max-w-2xl mx-auto px-4 py-6"
+              title="Tamyaz Registration Form"
             >
               Loading…
             </iframe>
@@ -118,7 +114,7 @@ export default function Form() {
         >
           <div className="bg-black/50 backdrop-blur-sm rounded-xl p-6 border border-yellow-400/30">
             <h3 className="text-yellow-400 font-bold text-lg mb-2">
-              {isRTL ? 'لماذا تختار تمرير؟' : 'Why Choose Tamyaz?'}
+              {isRTL ? 'لماذا تختار تميز؟' : 'Why Choose Tamyaz?'}
             </h3>
             <p className="text-white text-sm">
               {isRTL 
@@ -137,4 +133,4 @@ export default function Form() {
       `}</style>
     </div>
   );
-} 
+}
