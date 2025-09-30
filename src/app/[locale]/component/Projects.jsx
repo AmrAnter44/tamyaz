@@ -11,10 +11,10 @@ import { useLocale, useTranslations } from 'next-intl';
 
 // بيانات المشاريع (ثابتة)
 const projectsList = [
-  { name: "Xgym", img: "/projects/xgym.png", link: "https://xgym.website" },
-  { name: "Saif", img: "/projects/saif.png", link: "https://coachsaif.online" },
-  { name: "Wn", img: "/projects/wn.png", link: "https://wn-store-master.vercel.app/" },
-  { name: "Xfit", img: "/projects/xfit.png", link: "https://www.xfit.website/" },
+  { name: "Xgym", img: "/projects/xgym.webp", link: "https://xgym.website" },
+  { name: "Saif", img: "/projects/saif.webp", link: "https://coachsaif.online" },
+  { name: "Wn", img: "/projects/wn.webp", link: "https://wn-store-master.vercel.app/" },
+  { name: "Xfit", img: "/projects/xfit.webp", link: "https://www.xfit.website/" },
 ];
 
 export default function ProjectsSwiper() {
