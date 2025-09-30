@@ -67,22 +67,26 @@ export default function OptimizedFooter() {
     { 
       icon: Mail, 
       link: "mailto:tamyazcompany@gmail.com",
-      hoverColor: "hover:text-blue-400"
+      hoverColor: "hover:text-blue-400",
+      area:"Register Now"
     },
     { 
       icon: Facebook, 
-      link: "#",
-      hoverColor: "hover:text-blue-500"
+      link: "https://www.facebook.com/profile.php?id=61573520164290",
+      hoverColor: "hover:text-blue-500",
+      area:"facebook"
     },
     { 
       icon: Instagram, 
       link: "https://www.instagram.com/tamyazcompany/",
-      hoverColor: "hover:text-pink-400"
+      hoverColor: "hover:text-pink-400",
+      area:"instagram"
     },
     { 
       icon: MessageCircle, 
       link: "https://wa.me/201055119164",
-      hoverColor: "hover:text-green-400"
+      hoverColor: "hover:text-green-400",
+      area:"whatsapp"
     }
   ], []);
 
@@ -107,7 +111,9 @@ export default function OptimizedFooter() {
 
         {/* زرار التسجيل */}
         <motion.a           
-          href={`/${locale}/form`}           
+          href={`/${locale}/form`}            
+
+          area-label='register'      
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.3, duration: 0.5 }}
@@ -137,6 +143,7 @@ export default function OptimizedFooter() {
                 key={index}
                 icon={social.icon}
                 link={social.link}
+                area={social.area}
                 hoverColor={social.hoverColor}
                 index={index}
               />
