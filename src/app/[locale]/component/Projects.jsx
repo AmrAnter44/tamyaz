@@ -45,16 +45,16 @@ export default function ProjectsSwiper() {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="block group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl"
+              className="block group  relative rounded-3xl overflow-hidden "
             >
               <Image
                 src={project.img}
                 alt={project.name}
-                width={1200}
+                width={700}
                 height={450}
-                className="lg:h-[450px] h-[280px] mx-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                className="lg:h-[550px]  h-[280px] mx-auto object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
-                quality={85}
+                quality={75}
               />
 
               {/* Overlay: يظهر دايمًا في الموبايل + hover على الديسكتوب */}
