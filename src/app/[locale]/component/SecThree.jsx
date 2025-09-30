@@ -107,9 +107,9 @@ export default function OptimizedSpecializations() {
 
                   {/* النص داخل المربع */}
                   <div className="flex flex-col items-center justify-center h-full pt-8">
-                    <h4 className={`text-white text-xl lg:text-2xl font-bold text-center px-4 leading-tight ${isRTL ? 'font-arabic' : ''}`}>
+                    <h3 className={`text-white text-xl lg:text-2xl font-bold text-center px-4 leading-tight ${isRTL ? 'font-arabic' : ''}`}>
                       {jobTitle}
-                    </h4>
+                    </h3>
                   </div>
 
                   {/* تأثير الهوفر */}
