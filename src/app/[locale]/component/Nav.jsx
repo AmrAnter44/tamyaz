@@ -92,7 +92,7 @@ export default function EnhancedNavbar() {
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
             <Image
-              src="/logo.svg"
+              src="/logo.webp"
               alt="Logo"
               width={40}
               height={40}
@@ -118,7 +118,7 @@ export default function EnhancedNavbar() {
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="relative w-full h-screen bg-[url('/imgBg.png')] bg-cover bg-center flex items-center justify-center"
+        className="relative w-full h-screen bg-[url('/imgBg.webp')] bg-cover bg-center flex items-center justify-center"
       >
         <div className="absolute inset-0 bg-black/30" />
         
@@ -132,7 +132,7 @@ export default function EnhancedNavbar() {
           >
             <div className="w-[120px] h-[120px] mx-auto mb-6">
               <Image
-                src="/logo.svg"
+                src="/logo.webp"
                 alt="Logo"
                 width={120}
                 height={120}
