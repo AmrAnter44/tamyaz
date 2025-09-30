@@ -7,13 +7,18 @@ import { Analytics } from "@vercel/analytics/react";
 import FloatingWhatsAppCTA from './component/Cta';
 import "../globals.css";
 
+// تحسين تحميل الخطوط
 const geist = Geist({
   subsets: ['latin'],
+  display: 'swap', // إضافة
+  preload: true, // إضافة
 });
 
 const cairo = Cairo({
   subsets: ['arabic'],
   weight: ['500', '800'],
+  display: 'swap', // إضافة
+  preload: true, // إضافة
 });
 
 export function generateStaticParams() {
@@ -27,13 +32,16 @@ export async function generateMetadata({ params }) {
   return {
     title: messages.metadata?.title || 'Tamyaz',
     description: messages.metadata?.description || 'Create Your Website With One Step',
+    // إضافة meta tags للأداء
+    alternates: {
+      canonical: `https://www.tamyaz.online/${locale}`,
+    },
   };
 }
 
 export default async function LocaleLayout({ children, params }) {
   const { locale } = await params;
 
-  // تحقق من صحة اللغة
   if (!routing.locales.includes(locale)) {
     notFound();
   }
@@ -42,6 +50,11 @@ export default async function LocaleLayout({ children, params }) {
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={geist.className}>
+      <head>
+        {/* Preconnect للخطوط */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className={cairo.className}>
         <NextIntlClientProvider messages={messages}>
           {children}
