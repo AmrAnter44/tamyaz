@@ -19,12 +19,6 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
 
-  // تحسين البناء
-  experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
-  },
-
   // تحسين الخطوط
   optimizeFonts: true,
 };
