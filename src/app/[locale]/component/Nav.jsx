@@ -118,7 +118,7 @@ export default function EnhancedNavbar() {
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="relative w-full h-screen bg-[url('/imgBg.webp')] bg-cover bg-center flex items-center justify-center"
+        className="relative w-full h-screen bg-[url('/imgBg.png')] bg-cover bg-center flex items-center justify-center"
       >
         <div className="absolute inset-0 bg-black/30" />
         
