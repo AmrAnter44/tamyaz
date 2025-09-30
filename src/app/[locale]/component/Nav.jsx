@@ -92,7 +92,7 @@ export default function EnhancedNavbar() {
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
             <Image
-              src="/logo.webp"
+              src="/logo.svg"
               alt="Logo"
               width={40}
               height={40}
@@ -132,7 +132,7 @@ export default function EnhancedNavbar() {
           >
             <div className="w-[120px] h-[120px] mx-auto mb-6">
               <Image
-                src="/logo.webp"
+                src="/logo.svg"
                 alt="Logo"
                 width={120}
                 height={120}
