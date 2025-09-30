@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, HelpCircle, ChevronDown } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLocale, useTranslations } from 'next-intl';
 
 // Hook بسيط للIntersection Observer (مرة واحدة فقط)
 const useInView = () => {
@@ -26,99 +26,21 @@ const useInView = () => {
   return [ref, isInView];
 };
 
-// البيانات الكاملة
-const faqData = {
-  ar: {
-    title: "الأسئلة الشائعة",
-    subtitle: "إجابات على الأسئلة الأكثر شيوعاً حول خدماتنا",
-    viewAll: "عرض جميع الأسئلة",
-    technicalSupport: "دعم فني",
-    items: [
-      { 
-        question: "ما الخدمات التي تقدمها تميز؟", 
-        answer: "نقدم حلول برمجية متكاملة تشمل تطوير المواقع، تطبيقات الهواتف، الأنظمة الداخلية للشركات، وأدوات الأتمتة لتسهيل إدارة الأعمال.",
-        category: "خدمات"
-      },
-      { 
-        question: "ما الصناعات التي تخدمها تميز؟", 
-        answer: "نخدم مجموعة واسعة من الصناعات، بما في ذلك التجارة الإلكترونية، التعليم، الصحة، الخدمات المالية، واللي بتحتاج حلول برمجية مخصصة.",
-        category: "الصناعات"
-      },
-      { 
-        question: "لماذا أختار تميز عن الشركات الأخرى؟", 
-        answer: "لأننا نركز على فهم احتياجات كل عميل ونقدم حلول مخصصة، مع التزامنا بالجودة، الأمان، والدعم المستمر.",
-        category: "التميز"
-      },
-      { 
-        question: "كيف تضمن تميز جودة البرمجيات؟", 
-        answer: "نعتمد على اختبارات دقيقة لكل مشروع، مراجعات كود، وتحليل الأداء لضمان تطبيق سلس ومستقر.",
-        category: "الجودة"
-      },
-      { 
-        question: "هل تقدمون حلولاً مخصصة لكل عميل؟", 
-        answer: "نعم، كل مشروع يتم تصميمه وتنفيذه بناءً على متطلبات العميل الخاصة لضمان ملاءمته لأعماله.",
-        category: "التخصص"
-      },
-      { 
-        question: "ما تقنيات التطوير التي تستخدمها تميز؟", 
-        answer: "نستخدم أحدث تقنيات تطوير الويب والتطبيقات مثل React، Next.js، Node.js، و Tailwind CSS، بالإضافة إلى أدوات أتمتة حديثة.",
-        category: "التقنيات"
-      }
-    ]
-  },
-  en: {
-    title: "Frequently Asked Questions",
-    subtitle: "Answers to the most common questions about our services",
-    viewAll: "View All Questions",
-    technicalSupport: "Technical Support",
-    items: [
-      { 
-        question: "What services does Tamyaz provide?", 
-        answer: "We provide integrated software solutions including website development, mobile applications, internal company systems, and automation tools to facilitate business management.",
-        category: "Services"
-      },
-      { 
-        question: "What industries does Tamyaz serve?", 
-        answer: "We serve a wide range of industries, including e-commerce, education, healthcare, financial services, and those that need custom software solutions.",
-        category: "Industries"
-      },
-      { 
-        question: "Why choose Tamyaz over other companies?", 
-        answer: "Because we focus on understanding each client's needs and provide customized solutions, with our commitment to quality, security, and ongoing support.",
-        category: "Excellence"
-      },
-      { 
-        question: "How does Tamyaz ensure software quality?", 
-        answer: "We rely on rigorous testing for each project, code reviews, and performance analysis to ensure a smooth and stable application.",
-        category: "Quality"
-      },
-      { 
-        question: "Do you provide customized solutions for each client?", 
-        answer: "Yes, each project is designed and implemented based on the client's specific requirements to ensure it fits their business.",
-        category: "Customization"
-      },
-      { 
-        question: "What development technologies does Tamyaz use?", 
-        answer: "We use the latest web and application development technologies such as React, Next.js, Node.js, and Tailwind CSS, in addition to modern automation tools.",
-        category: "Technology"
-      }
-    ]
-  }
-};
-
 export default function OptimizedFAQSection() {
-  const { language } = useLanguage();
+  const t = useTranslations('faq');
+  const locale = useLocale();
   const [ref, isInView] = useInView();
   const [openIndex, setOpenIndex] = useState(null);
   const [showAll, setShowAll] = useState(false);
-  const data = faqData[language];
-  const isRTL = language === 'ar';
+  const isRTL = locale === 'ar';
+
+  // الحصول على عدد الأسئلة من الترجمات
+  const faqItems = t.raw('items');
+  const displayedItems = showAll ? faqItems : faqItems.slice(0, 3);
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
-
-  const displayedItems = showAll ? data.items : data.items.slice(0, 3);
 
   return (
     <section className={`py-20 px-6 bg-black relative ${isRTL ? 'rtl' : 'ltr'}`}>
@@ -144,11 +66,11 @@ export default function OptimizedFAQSection() {
           </motion.div>
           
           <h2 className={`text-4xl lg:text-5xl font-bold text-white mb-6 ${isRTL ? 'font-arabic' : ''}`}>
-            {data.title}
+            {t('title')}
           </h2>
           
           <p className="text-xl text-gray-300">
-            {data.subtitle}
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -225,7 +147,7 @@ export default function OptimizedFAQSection() {
         </div>
 
         {/* زرار عرض المزيد */}
-        {!showAll && data.items.length > 3 && (
+        {!showAll && faqItems.length > 3 && (
           <motion.div 
             className="text-center mb-12"
             initial={{ opacity: 0 }}
@@ -238,7 +160,7 @@ export default function OptimizedFAQSection() {
               onClick={() => setShowAll(true)}
               className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
             >
-              <span>{data.viewAll}</span>
+              <span>{t('viewAll')}</span>
               <ChevronDown className="w-5 h-5" />
             </motion.button>
           </motion.div>
@@ -254,7 +176,7 @@ export default function OptimizedFAQSection() {
           <div className="inline-flex items-center gap-6 bg-gray-800/50 backdrop-blur-sm px-8 py-4 rounded-full border border-gray-700/50">
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-400">24/7</div>
-              <div className="text-sm text-gray-400">{data.technicalSupport}</div>
+              <div className="text-sm text-gray-400">{t('technicalSupport')}</div>
             </div>
           </div>
         </motion.div>

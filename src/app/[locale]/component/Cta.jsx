@@ -2,46 +2,31 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
-
-const whatsappContent = {
-  ar: {
-    mainText: "تحدث معنا",
-    subText: "احصل على استشارة مجانية",
-    expandedText: "هل تحتاج مساعدة؟ تواصل معنا الآن!"
-  },
-  en: {
-    mainText: "Chat with us",
-    subText: "Get free consultation",
-    expandedText: "Need help? Contact us now!"
-  }
-};
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function OptimizedWhatsAppCTA() {
-  const { language } = useLanguage();
+  const t = useTranslations('whatsapp');
+  const locale = useLocale();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   
-  const content = whatsappContent[language];
-  const isRTL = language === 'ar';
+  const isRTL = locale === 'ar';
 
-  // Hook بسيط للوقت - يظهر بعد 15 ثانية
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 15000); // 15 ثانية
+    }, 15000);
 
     return () => clearTimeout(timer);
   }, []);
 
-  // توسع تلقائي مرة واحدة
   useEffect(() => {
     if (!isVisible) return;
     
     const timer = setTimeout(() => {
       setIsExpanded(true);
-      setTimeout(() => setIsExpanded(false), 3000);
-    }, 2000);
+      setTimeout(() => setIsExpanded(false),800);
+    }, 400);
 
     return () => clearTimeout(timer);
   }, [isVisible]);
@@ -64,10 +49,9 @@ export default function OptimizedWhatsAppCTA() {
             duration: 0.4 
           }}
           className={`fixed bottom-6 z-[9999] ${isRTL ? 'left-6' : 'right-6'} whatsapp-cta`}
-          style={{ direction: 'ltr' }} // override الـ RTL
+          style={{ direction: 'ltr' }}
         >
           <div className="relative">
-            {/* الرسالة الموسعة */}
             <AnimatePresence>
               {isExpanded && (
                 <motion.div
@@ -86,10 +70,10 @@ export default function OptimizedWhatsAppCTA() {
                     </button>
                     
                     <p className={`text-sm font-bold text-yellow-400 mb-1 ${isRTL ? 'font-arabic' : ''}`}>
-                      {content.expandedText}
+                      {t('expandedText')}
                     </p>
                     <p className="text-xs text-gray-300">
-                      {content.subText}
+                      {t('subText')}
                     </p>
 
                     <div className={`absolute top-full ${isRTL ? 'left-8' : 'right-8'} w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-yellow-400`} />
@@ -98,7 +82,6 @@ export default function OptimizedWhatsAppCTA() {
               )}
             </AnimatePresence>
 
-            {/* الزرار الرئيسي */}
             <motion.button
               onClick={handleWhatsAppClick}
               onMouseEnter={() => setIsExpanded(true)}
@@ -116,13 +99,12 @@ export default function OptimizedWhatsAppCTA() {
                   className={`overflow-hidden whitespace-nowrap ${isRTL ? 'text-right font-arabic' : 'text-left'}`}
                 >
                   <span className="font-bold text-sm">
-                    {content.mainText}
+                    {t('mainText')}
                   </span>
                 </motion.div>
               </div>
             </motion.button>
 
-            {/* نقطة إشعار */}
             <div className={`absolute -top-2 ${isRTL ? '-left-2' : '-right-2'} w-4 h-4 bg-yellow-400 border-2 border-black rounded-full`} />
           </div>
         </motion.div>

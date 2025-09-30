@@ -2,7 +2,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, ArrowRight, ArrowLeft } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter, usePathname } from '@/i18n/routing';
 
 // Hook بسيط للIntersection Observer (مرة واحدة فقط)
 const useInView = () => {
@@ -26,41 +27,16 @@ const useInView = () => {
   return [ref, isInView];
 };
 
-// محتوى القسم
-const content = {
-  ar: {
-    title: "في تميز هنساعدك انك تبقي مميز رقميا",
-    subtitle: "هنقدر نقدملك حلول تقنيه تساعدك في:",
-    points: [
-      "العملاء تعرف عنك اكتر و عن اللي بتقدمة",
-      "موقع احترافي مبني علي الهوية البصرية الخاصة بيك بأحدث الادوات",
-      "تصميم مميز مع كل التعديلات اللي هتطلبها",
-      "هنقدر نحدث اجهزة شركتك"
-    ],
-    cta: "ابدأ رحلتك معنا",
-    experience: "+ سنوات خبرة",
-    experienceNumber: "4"
-  },
-  en: {
-    title: "At Tamyaz, We'll Help You Excel Digitally",
-    subtitle: "We can provide you with technical solutions that help you with:",
-    points: [
-      "Customers know more about you and what you offer",
-      "Professional website built on your visual identity with latest tools",
-      "Unique design with all the modifications you'll request",
-      "We can upgrade your company's devices"
-    ],
-    cta: "Start Your Journey With Us",
-    experience: "+ Years Experience",
-    experienceNumber: "4"
-  }
-};
-
 export default function LightAboutSection() {
-  const { language } = useLanguage();
+  const t = useTranslations('about');
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
   const [ref, isInView] = useInView();
-  const t = content[language];
-  const isRTL = language === 'ar';
+  const isRTL = locale === 'ar';
+
+  // الحصول على النقاط من الترجمات
+  const points = t.raw('points');
 
   return (
     <section
@@ -80,14 +56,14 @@ export default function LightAboutSection() {
               className="space-y-6"
             >
               <h2 className={`text-4xl lg:text-5xl font-bold leading-tight ${isRTL ? 'font-arabic' : ''}`}>
-                {t.title}
+                {t('title')}
               </h2>
-              <p className="text-xl font-medium">{t.subtitle}</p>
+              <p className="text-xl font-medium">{t('subtitle')}</p>
             </motion.div>
 
             {/* النقاط */}
             <div className="space-y-4">
-              {t.points.map((point, index) => (
+              {points.map((point, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: isRTL ? 50 : -50 }}
@@ -107,13 +83,13 @@ export default function LightAboutSection() {
 
             {/* زر البداية */}
             <motion.a
-              href="/form"
+              href={`/${locale}/form`}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.5, duration: 0.5 }}
               className="group flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 w-fit"
             >
-              <span>{t.cta}</span>
+              <span>{t('cta')}</span>
               <motion.div whileHover={{ x: isRTL ? -5 : 5 }}>
                 {isRTL ? <ArrowLeft size={20} /> : <ArrowRight size={20} />}
               </motion.div>
@@ -136,13 +112,19 @@ export default function LightAboutSection() {
                 transition={{ duration: 3, repeat: Infinity }}
                 className="text-6xl font-bold mb-4"
               >
-                {t.experienceNumber}
+                {t('experienceNumber')}
               </motion.div>
-              <div className="text-xl font-bold">{t.experience}</div>
+              <div className="text-xl font-bold">{t('experience')}</div>
             </motion.div>
           </motion.div>
         </div>
       </div>
+
+      <style jsx>{`
+        .font-arabic {
+          font-family: 'Cairo', sans-serif;
+        }
+      `}</style>
     </section>
   );
 }

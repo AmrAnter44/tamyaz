@@ -2,31 +2,24 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Home, MessageCircle, ArrowLeft, ArrowRight, Globe } from 'lucide-react';
-import { useLanguage } from '../../contexts/LanguageContext';
-
-const formContent = {
-  ar: {
-    title: "نموذج التسجيل",
-    backToHome: "العودة للرئيسية",
-    contactWhatsApp: "تواصل عبر واتساب",
-    description: "املأ النموذج أدناه وسنتواصل معك قريباً"
-  },
-  en: {
-    title: "Registration Form",
-    backToHome: "Back to Home",
-    contactWhatsApp: "Contact via WhatsApp",
-    description: "Fill out the form below and we'll contact you soon"
-  }
-};
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter, usePathname } from '@/i18n/routing';
 
 export default function Form() {
-  const { language, toggleLanguage } = useLanguage();
-  const content = formContent[language];
-  const isRTL = language === 'ar';
+  const t = useTranslations('form');
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const isRTL = locale === 'ar';
+
+  const toggleLanguage = () => {
+    const newLocale = locale === 'ar' ? 'en' : 'ar';
+    router.replace(pathname, { locale: newLocale });
+  };
 
   return (
     <div className={`min-h-screen bg-black text-white ${isRTL ? 'rtl font-arabic' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
-      {/* شريط علوي مثل الناف */}
+      {/* شريط علوي */}
       <nav className="fixed top-0 left-0 w-full z-40 bg-black/90 text-white shadow-lg backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           {/* زرار تبديل اللغة */}
@@ -35,17 +28,17 @@ export default function Form() {
             className="flex items-center gap-2 px-5 py-2 rounded-full border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black font-bold transition-all hover:scale-105 active:scale-95"
           >
             <Globe size={18} />
-            <span>{language === 'ar' ? 'EN' : 'AR'}</span>
+            <span>{locale === 'ar' ? 'EN' : 'AR'}</span>
           </button>
 
           {/* زرار العودة للرئيسية */}
           <a
-            href="/"
+            href={`/${locale}`}
             className="flex items-center gap-2 font-bold py-2 px-5 rounded-full text-sm border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black transition-all hover:scale-105 active:scale-95"
           >
             {isRTL ? <ArrowRight size={16} /> : <ArrowLeft size={16} />}
             <Home size={16} />
-            <span>{content.backToHome}</span>
+            <span>{t('backToHome')}</span>
           </a>
         </div>
       </nav>
@@ -60,10 +53,10 @@ export default function Form() {
           className="text-center mb-8"
         >
           <h1 className={`text-4xl lg:text-5xl font-bold mb-4 text-yellow-400 ${isRTL ? 'font-arabic' : ''}`}>
-            {content.title}
+            {t('title')}
           </h1>
           <p className="text-xl text-white max-w-2xl mx-auto">
-            {content.description}
+            {t('description')}
           </p>
         </motion.div>
 
@@ -85,7 +78,7 @@ export default function Form() {
           </div>
         </motion.div>
 
-        {/* زرار الواتساب في الأسفل */}
+        {/* زرار الواتساب */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -101,7 +94,7 @@ export default function Form() {
             className="flex items-center gap-3 bg-transparent border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black px-8 py-4 rounded-full font-bold transition-all duration-300"
           >
             <MessageCircle size={20} />
-            <span>{content.contactWhatsApp}</span>
+            <span>{t('contactWhatsApp')}</span>
           </motion.a>
         </motion.div>
 
@@ -114,13 +107,10 @@ export default function Form() {
         >
           <div className="bg-black/50 backdrop-blur-sm rounded-xl p-6 border border-yellow-400/30">
             <h3 className="text-yellow-400 font-bold text-lg mb-2">
-              {isRTL ? 'لماذا تختار تميز؟' : 'Why Choose Tamyaz?'}
+              {t('whyChoose')}
             </h3>
             <p className="text-white text-sm">
-              {isRTL 
-                ? 'نحن متخصصون في تطوير المواقع والتطبيقات بأحدث التقنيات لنساعدك في تحقيق أهدافك الرقمية'
-                : 'We specialize in developing websites and applications with the latest technologies to help you achieve your digital goals'
-              }
+              {t('whyChooseText')}
             </p>
           </div>
         </motion.div>

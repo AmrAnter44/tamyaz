@@ -2,16 +2,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Clock, User, CheckSquare, Lightbulb } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLocale, useTranslations } from 'next-intl';
 
-// Hook للتحقق من ظهور العنصر (مرة واحدة فقط)
 const useInView = (options = {}) => {
   const [isInView, setIsInView] = useState(false);
   const targetRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !isInView) { // ✅ يحصل مرة واحدة بس
+      if (entry.isIntersecting && !isInView) {
         setIsInView(true);
       }
     }, {
@@ -31,12 +30,11 @@ const useInView = (options = {}) => {
       }
       observer.disconnect();
     };
-  }, [isInView]); // ✅ متابعة الـ state
+  }, [isInView]);
 
   return [targetRef, isInView];
 };
 
-// كومبوننت العد التصاعدي
 const CountUp = ({ end, duration = 2, suffix = "", start = 1 }) => {
   const [count, setCount] = useState(start);
   const [hasStarted, setHasStarted] = useState(false);
@@ -73,75 +71,43 @@ const CountUp = ({ end, duration = 2, suffix = "", start = 1 }) => {
   return <span>{count}{suffix}</span>;
 };
 
-// بيانات الإحصائيات
-const statsData = {
-  ar: [
-    { 
-      icon: Clock, 
-      head: "تميز بدأت في", 
-      mid: 2023, 
-      id: 1, 
-      description: "بداية قوية في عالم التكنولوجيا"
-    },
-    { 
-      icon: User, 
-      head: "شخص قرر التميز", 
-      mid: 62, 
-      id: 2, 
-      description: "عملاء راضيين عن خدماتنا"
-    },
-    { 
-      icon: CheckSquare, 
-      head: "مشاريع قيد التطوير", 
-      mid: 8, 
-      id: 3, 
-      description: "مشاريع مبتكرة في طور الإنجاز"
-    },
-    { 
-      icon: Lightbulb, 
-      head: "شركات تم خدمتها", 
-      mid: 35, 
-      id: 4, 
-      description: "شراكات ناجحة وطويلة المدى"
-    }
-  ],
-  en: [
-    { 
-      icon: Clock, 
-      head: "Tamyaz Started In", 
-      mid: 2023, 
-      id: 1, 
-      description: "Strong start in the technology world"
-    },
-    { 
-      icon: User, 
-      head: "People Chose Excellence", 
-      mid: 62, 
-      id: 2, 
-      description: "Satisfied clients with our services"
-    },
-    { 
-      icon: CheckSquare, 
-      head: "Projects In Development", 
-      mid: 8, 
-      id: 3, 
-      description: "Innovative projects in progress"
-    },
-    { 
-      icon: Lightbulb, 
-      head: "Companies We Served", 
-      mid: 35, 
-      id: 4, 
-      description: "Successful long-term partnerships"
-    }
-  ]
-};
+// الأيقونات والأرقام الثابتة
+const statsConfig = [
+  { 
+    icon: Clock, 
+    value: 2023, 
+    id: 1,
+    key: 'startedIn',
+    descKey: 'start'
+  },
+  { 
+    icon: User, 
+    value: 62, 
+    id: 2,
+    key: 'peopleDecided',
+    descKey: 'clients'
+  },
+  { 
+    icon: CheckSquare, 
+    value: 8, 
+    id: 3,
+    key: 'projectsInProgress',
+    descKey: 'projects'
+  },
+  { 
+    icon: Lightbulb, 
+    value: 35, 
+    id: 4,
+    key: 'servedCompanies',
+    descKey: 'companies'
+  }
+];
 
 export default function ResponsiveStatsSection() {
-  const { language } = useLanguage();
+  const t = useTranslations('stats');
+  const locale = useLocale();
   const [ref, isInView] = useInView();
-  const stats = statsData[language];
-  const isRTL = language === 'ar';
+  const isRTL = locale === 'ar';
 
   return (
     <section className={`bg-black text-white py-16 px-6 ${isRTL ? 'rtl font-arabic' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
@@ -160,19 +126,16 @@ export default function ResponsiveStatsSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           <h2 className={`text-3xl md:text-4xl font-bold text-yellow-300 mb-4 ${isRTL ? 'font-arabic' : ''}`}>
-            {isRTL ? 'إحصائياتنا' : 'Our Statistics'}
+            {t('title')}
           </h2>
           <p className={`text-gray-300 max-w-2xl mx-auto ${isRTL ? 'font-arabic' : ''}`}>
-            {isRTL 
-              ? 'أرقام تعكس رحلتنا في التميز والإبداع'
-              : 'Numbers that reflect our journey of excellence and innovation'
-            }
+            {t('subtitle')}
           </p>
         </motion.div>
 
-        {/* Grid Layout للكل */}
+        {/* Grid Layout */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
+          {statsConfig.map((stat, index) => (
             <motion.div
               key={stat.id}
               initial={{ 
@@ -210,17 +173,17 @@ export default function ResponsiveStatsSection() {
                 <div className="text-2xl lg:text-3xl font-bold mb-2">
                   {isInView && (
                     <CountUp 
-                      end={stat.mid} 
+                      end={stat.value} 
                       duration={2}
                       suffix={stat.id !== 1 ? "+" : ""}
                     />
                   )}
                 </div>
                 <div className={`text-sm lg:text-base font-bold leading-tight mb-2 ${isRTL ? 'font-arabic' : ''}`}>
-                  {stat.head}
+                  {t(stat.key)}
                 </div>
                 <div className={`text-xs lg:text-sm opacity-70 ${isRTL ? 'font-arabic' : ''}`}>
-                  {stat.description}
+                  {t(`descriptions.${stat.descKey}`)}
                 </div>
               </div>
             </motion.div>

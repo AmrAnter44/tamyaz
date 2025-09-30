@@ -1,42 +1,115 @@
 {
-  "footer": {
-    "cta": "Ready to take the step?",
-    "signup": "Sign Up Now",
-    "copyright": "Copyright © 2023 Tmyaz"
+  "metadata": {
+    "title": "Tamyaz - Comprehensive Technical Solutions",
+    "description": "Create Your Website With One Step"
   },
-    "navbar": {
+  "navbar": {
     "cta": "Start Now",
-    "headline": "Excellence starts with a step"
+    "headline": "Excellence Starts With One Step",
+    "switchLanguage": "العربية"
   },
-    "projects": {
-    "title": "Latest Projects"
+  "hero": {
+    "title": "Excellence Starts With One Step",
+    "scrollDown": "Explore More"
   },
-    "secOne": {
+  "stats": {
+    "title": "Our Statistics",
+    "subtitle": "Numbers that reflect our journey of excellence and innovation",
     "startedIn": "Tamyaz Started In",
-    "peopleDecided": "People Decided To Join",
-    "projectsInProgress": "Projects In Progress",
-    "servedCompanies": "Companies Served"
+    "peopleDecided": "People Chose Excellence",
+    "projectsInProgress": "Projects In Development",
+    "servedCompanies": "Companies We Served",
+    "descriptions": {
+      "start": "Strong start in the technology world",
+      "clients": "Satisfied clients with our services",
+      "projects": "Innovative projects in progress",
+      "companies": "Successful long-term partnerships"
+    }
   },
-    "secThree": {
-    "title": "Our Specialists",
+  "about": {
+    "title": "At Tamyaz, We'll Help You Excel Digitally",
+    "subtitle": "We can provide you with technical solutions that help you with:",
+    "points": [
+      "Customers know more about you and what you offer",
+      "Professional website built on your visual identity with latest tools",
+      "Unique design with all the modifications you'll request",
+      "We can upgrade your company's devices"
+    ],
+    "cta": "Start Your Journey With Us",
+    "experienceNumber": "4",
+    "experience": "+ Years Experience"
+  },
+  "specializations": {
+    "title": "We Specialize In",
+    "teamText": "An outstanding team of experts at your service",
     "jobs": [
       "UI/UX Designer",
       "Frontend Developer",
       "Backend Developer",
-      "Technical Support",
+      "Technical Support Specialist",
       "QA Engineer",
       "Cybersecurity Specialist"
     ]
   },
-    "secTwo": {
-    "headline": "At Tamyaz, we help you stand out digitally. We provide tech solutions that help you:",
-    "points": [
-      "Customers know more about you and what you offer",
-      "A professional website built on your visual identity with the latest tools",
-      "Unique design with all the modifications you request",
-      "We can update your company's devices"
+  "projects": {
+    "title": "Latest Projects",
+    "viewProject": "View Project"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the most common questions about our services",
+    "viewAll": "View All Questions",
+    "technicalSupport": "Technical Support",
+    "items": [
+      {
+        "question": "What services does Tamyaz provide?",
+        "answer": "We provide integrated software solutions including website development, mobile applications, internal company systems, and automation tools to facilitate business management.",
+        "category": "Services"
+      },
+      {
+        "question": "What industries does Tamyaz serve?",
+        "answer": "We serve a wide range of industries, including e-commerce, education, healthcare, financial services, and companies that need custom software solutions.",
+        "category": "Industries"
+      },
+      {
+        "question": "Why choose Tamyaz over other companies?",
+        "answer": "Because we focus on understanding each client's needs and provide customized solutions, with our commitment to quality, security, and ongoing support.",
+        "category": "Excellence"
+      },
+      {
+        "question": "How does Tamyaz ensure software quality?",
+        "answer": "We rely on rigorous testing for each project, code reviews, and performance analysis to ensure a smooth and stable application.",
+        "category": "Quality"
+      },
+      {
+        "question": "Do you provide customized solutions for each client?",
+        "answer": "Yes, each project is designed and implemented based on the client's specific requirements to ensure it fits their business.",
+        "category": "Customization"
+      },
+      {
+        "question": "What development technologies does Tamyaz use?",
+        "answer": "We use the latest web and application development technologies such as React, Next.js, Node.js, and Tailwind CSS, in addition to modern automation tools.",
+        "category": "Technology"
+      }
     ]
+  },
+  "footer": {
+    "decision": "Ready to Take the Step?",
+    "register": "Register Now",
+    "copyright": "Copyright © 2023 Tamyaz",
+    "thankYou": "Thank you for trusting us and we look forward to working with you soon"
+  },
+  "form": {
+    "title": "Registration Form",
+    "backToHome": "Back to Home",
+    "contactWhatsApp": "Contact via WhatsApp",
+    "description": "Fill out the form below and we'll contact you soon",
+    "whyChoose": "Why Choose Tamyaz?",
+    "whyChooseText": "We specialize in developing websites and applications with the latest technologies to help you achieve your digital goals"
+  },
+  "whatsapp": {
+    "mainText": "Chat with us",
+    "subText": "Get free consultation",
+    "expandedText": "Need help? Contact us now!"
   }
-
-
 }

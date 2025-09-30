@@ -1,16 +1,11 @@
 "use client";
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Globe } from "lucide-react";
 import Image from "next/image";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter, usePathname } from '@/i18n/routing';
 
-const content = {
-  ar: { startNow: "ابدأ الأن", heroText: "التميز يبدأ بخطوة" },
-  en: { startNow: "Start Now", heroText: "Excellence Starts With One Step" },
-};
-
-// Animation variants for scroll animations
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
   animate: { opacity: 1, y: 0 },
@@ -23,11 +18,10 @@ const scaleIn = {
   transition: { duration: 0.7, ease: "easeOut" }
 };
 
-// Custom hook for scroll-triggered animations (once only)
 function useScrollAnimation() {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
-    once: true, // ✅ مرة واحدة بس - متختفيش تاني
+    once: true,
     amount: 0.1,
     margin: "-50px 0px -50px 0px"
   });
@@ -36,15 +30,16 @@ function useScrollAnimation() {
 }
 
 export default function EnhancedNavbar() {
-  const { language, toggleLanguage } = useLanguage();
+  const t = useTranslations('navbar');
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   
-  // Refs for scroll animations
   const [heroRef, heroInView] = useScrollAnimation();
   const [logoRef, logoInView] = useScrollAnimation();
   const [textRef, textInView] = useScrollAnimation();
 
-  // Simple scroll detection
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -54,12 +49,15 @@ export default function EnhancedNavbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const t = useMemo(() => content[language], [language]);
+  const toggleLanguage = () => {
+    const newLocale = locale === 'ar' ? 'en' : 'ar';
+    router.replace(pathname, { locale: newLocale });
+  };
 
   return (
     <main
-      className={`${language === "ar" ? "rtl font-arabic" : "ltr"}`}
-      dir={language === "ar" ? "rtl" : "ltr"}
+      className={`${locale === "ar" ? "rtl font-arabic" : "ltr"}`}
+      dir={locale === "ar" ? "rtl" : "ltr"}
     >
       {/* Fixed Black Navbar */}
       <motion.nav 
@@ -80,10 +78,10 @@ export default function EnhancedNavbar() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <Globe size={18} />
-            <span>{language === "ar" ? "EN" : "AR"}</span>
+            <span>{t('switchLanguage')}</span>
           </motion.button>
 
-          {/* Logo in Navbar (appears after scroll) */}
+          {/* Logo in Navbar */}
           <motion.div
             className="flex items-center"
             initial={{ opacity: 0, scale: 0 }}
@@ -112,7 +110,7 @@ export default function EnhancedNavbar() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {t.startNow}
+            {t('cta')}
           </motion.a>
         </div>
       </motion.nav>
@@ -125,7 +123,7 @@ export default function EnhancedNavbar() {
         <div className="absolute inset-0 bg-black/30" />
         
         <div className="relative z-10 text-center px-4 w-full max-w-4xl">
-          {/* Main Logo (hides on scroll) */}
+          {/* Main Logo */}
           <motion.div
             ref={logoRef}
             className="mb-8"
@@ -152,7 +150,7 @@ export default function EnhancedNavbar() {
             transition={{ ...fadeInUp.transition, delay: 0.3 }}
           >
             <h1 className="text-2xl lg:text-3xl font-bold text-yellow-400 typing-effect">
-              {t.heroText}
+              {t('headline')}
             </h1>
             
             {/* Animated Arrow */}

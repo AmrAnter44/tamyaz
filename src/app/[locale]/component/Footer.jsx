@@ -1,8 +1,9 @@
 "use client";
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MessageCircle, Facebook, Instagram } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter, usePathname } from '@/i18n/routing';
 
 // Hook محسن للIntersection Observer
 const useInView = (options = {}) => {
@@ -31,22 +32,6 @@ const useInView = (options = {}) => {
   return [targetRef, isInView];
 };
 
-// محتوى الفوتر
-const footerContent = {
-  ar: {
-    decision: "قررت تاخد الخطوة ؟",
-    register: "سجل الأن",
-    copyright: "Copyright © 2023 Tmyaz",
-    thankYou: "نشكركم لثقتكم بنا ونتطلع للعمل معكم قريباً"
-  },
-  en: {
-    decision: "Ready to Take the Step?",
-    register: "Register Now", 
-    copyright: "Copyright © 2023 Tamyaz",
-    thankYou: "Thank you for trusting us and we look forward to working with you soon"
-  }
-};
-
 // مكون الشبكة الاجتماعية محسن
 const SocialIcon = React.memo(({ icon: Icon, link, hoverColor, index }) => (
   <motion.a
@@ -70,10 +55,12 @@ const SocialIcon = React.memo(({ icon: Icon, link, hoverColor, index }) => (
 ));
 
 export default function OptimizedFooter() {
-  const { language } = useLanguage();
+  const t = useTranslations('footer');
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
   const [ref, isInView] = useInView();
-  const content = useMemo(() => footerContent[language], [language]);
-  const isRTL = language === 'ar';
+  const isRTL = locale === 'ar';
 
   // معلومات التواصل الاجتماعي
   const socialLinks = useMemo(() => [
@@ -115,12 +102,12 @@ export default function OptimizedFooter() {
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          {content.decision}
+          {t('decision')}
         </motion.h3>
 
         {/* زرار التسجيل */}
         <motion.a           
-          href="/form"           
+          href={`/${locale}/form`}           
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.3, duration: 0.5 }}
@@ -133,7 +120,7 @@ export default function OptimizedFooter() {
           whileTap={{ scale: 0.95 }}           
           className="flex items-center justify-center font-bold px-8 py-4 rounded-lg bg-transparent border-2 border-amber-300 text-amber-300 hover:bg-amber-300 hover:text-black transition-all duration-300 mx-auto"         
         >           
-          {content.register}         
+          {t('register')}         
         </motion.a>
 
         {/* معلومات التواصل والروابط */}
@@ -163,7 +150,7 @@ export default function OptimizedFooter() {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ delay: 0.6, duration: 0.5 }}
           >
-            {content.copyright}
+            {t('copyright')}
           </motion.h3>
         </motion.div>
 
@@ -183,7 +170,7 @@ export default function OptimizedFooter() {
           className="text-gray-400 text-sm text-center max-w-md"
         >
           <p>
-            {content.thankYou}
+            {t('thankYou')}
           </p>
         </motion.div>
       </motion.div>
