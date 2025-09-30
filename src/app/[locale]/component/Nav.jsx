@@ -101,17 +101,18 @@ export default function EnhancedNavbar() {
           </motion.div>
 
           {/* Start Now Button */}
-          <motion.a
-            href="/form"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2 px-5 py-2 rounded-full border-2 border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-black font-bold transition-all"
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            {t('cta')}
-          </motion.a>
+<motion.a
+  href="/form"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="flex items-center gap-2 px-5 py-2 rounded-full border-2 border-yellow-300 text-yellow-300 hover:bg-yellow-300 hover:text-black font-bold transition-all"
+  initial={{ opacity: 0, x: 30 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.6, delay: 0.2 }}
+  aria-label={t('cta')} // Add this
+>
+  {t('cta')}
+</motion.a>
         </div>
       </motion.nav>
 

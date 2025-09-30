@@ -35,92 +35,29 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-/* تحسين الأداء - منع Forced Reflow */
+/* Performance optimizations */
 section {
-  min-height: 100vh;
   contain: layout style paint;
   content-visibility: auto;
 }
 
-/* تحسين الأنيميشن */
+/* Simplified animations */
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
 .typing-effect {
   direction: rtl;
   overflow: hidden; 
   white-space: nowrap;
   width: 0;
   display: inline-block;
-  animation: typing 5s steps(20, end) forwards, blink 0.7s infinite;
+  animation: typing 5s steps(20, end) forwards;
   will-change: width;
-  contain: layout style;
 }
 
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-@keyframes fade-slide {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* تحسين العناصر المتحركة */
-.fade-slide,
-.pulse,
-.move {
-  will-change: transform, opacity;
-  contain: layout style paint;
-}
-
-.fade-slide { 
-  opacity: 0; 
-  animation: fade-slide 1.2s ease-out forwards; 
-}
-
-.pulse { 
-  animation: pulse 1.5s infinite; 
-}
-
-.gray { color: #2e2e2e; }
-.bt { 
-  background-color: #ffd058;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-.bt:hover { 
-  background-color: transparent; 
-  border: #ffd058 solid 2px; 
-  color: #ffd058; 
-}
-
-.move { 
-  animation: move 2s ease-in-out infinite; 
-  position: absolute; 
-  transform: rotate(280deg); 
-}
-
-.pro:hover .prochild { 
-  opacity: 1; 
-  position: absolute; 
-  color: yellow; 
-  transition: opacity 0.2s ease-in-out; 
-}
-
-/* تحسين الصور */
+/* Image optimization */
 img {
   content-visibility: auto;
   contain-intrinsic-size: 800px 450px;

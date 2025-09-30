@@ -5,7 +5,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
+import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -47,10 +47,14 @@ export default function ProjectsSwiper() {
               rel="noopener noreferrer"
               className="block group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl"
             >
-              <img
+              <Image
                 src={project.img}
                 alt={project.name}
+                width={1200}
+                height={450}
                 className="lg:h-[450px] h-[280px] mx-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+                quality={85}
               />
 
               {/* Overlay: يظهر دايمًا في الموبايل + hover على الديسكتوب */}

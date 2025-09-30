@@ -55,10 +55,10 @@ export default function LightAboutSection() {
               transition={{ duration: 0.6 }}
               className="space-y-6"
             >
-              <h2 className={`text-4xl lg:text-5xl font-bold leading-tight ${isRTL ? 'font-arabic' : ''}`}>
-                {t('title')}
-              </h2>
-              <p className="text-xl font-medium">{t('subtitle')}</p>
+<h2 className={`text-4xl lg:text-5xl font-bold leading-tight ${isRTL ? 'font-arabic' : ''}`}>
+  {t('title')}
+</h2>
+<h3 className="text-xl font-medium">{t('subtitle')}</h3> {/* Changed from p to h3 */}
             </motion.div>
 
             {/* النقاط */}
