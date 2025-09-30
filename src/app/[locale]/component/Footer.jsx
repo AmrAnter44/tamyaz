@@ -32,12 +32,13 @@ const useInView = (options = {}) => {
   return [targetRef, isInView];
 };
 
-// مكون الشبكة الاجتماعية محسن
-const SocialIcon = React.memo(({ icon: Icon, link, hoverColor, index }) => (
+// مكون الشبكة الاجتماعية محسن مع aria-label
+const SocialIcon = React.memo(({ icon: Icon, link, hoverColor, index, label }) => (
   <motion.a
     href={link}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={label}
     initial={{ opacity: 0, scale: 0.8 }}
     whileInView={{ opacity: 1, scale: 1 }}
     transition={{ delay: index * 0.1, duration: 0.4 }}
@@ -54,6 +55,8 @@ const SocialIcon = React.memo(({ icon: Icon, link, hoverColor, index }) => (
   </motion.a>
 ));
 
+SocialIcon.displayName = 'SocialIcon';
+
 export default function OptimizedFooter() {
   const t = useTranslations('footer');
   const locale = useLocale();
@@ -62,31 +65,31 @@ export default function OptimizedFooter() {
   const [ref, isInView] = useInView();
   const isRTL = locale === 'ar';
 
-  // معلومات التواصل الاجتماعي
+  // معلومات التواصل الاجتماعي مع الـ labels
   const socialLinks = useMemo(() => [
     { 
       icon: Mail, 
       link: "mailto:tamyazcompany@gmail.com",
       hoverColor: "hover:text-blue-400",
-      area:"Register Now"
+      label: "Email Tamyaz Company"
     },
     { 
       icon: Facebook, 
       link: "https://www.facebook.com/profile.php?id=61573520164290",
       hoverColor: "hover:text-blue-500",
-      area:"facebook"
+      label: "Visit Tamyaz on Facebook"
     },
     { 
       icon: Instagram, 
       link: "https://www.instagram.com/tamyazcompany/",
       hoverColor: "hover:text-pink-400",
-      area:"instagram"
+      label: "Follow Tamyaz on Instagram"
     },
     { 
       icon: MessageCircle, 
       link: "https://wa.me/201055119164",
       hoverColor: "hover:text-green-400",
-      area:"whatsapp"
+      label: "Contact Tamyaz on WhatsApp"
     }
   ], []);
 
@@ -111,9 +114,8 @@ export default function OptimizedFooter() {
 
         {/* زرار التسجيل */}
         <motion.a           
-          href={`/${locale}/form`}            
-
-          area-label='register'      
+          href={`/${locale}/form`}
+          aria-label={t('register')}
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.3, duration: 0.5 }}
@@ -143,9 +145,9 @@ export default function OptimizedFooter() {
                 key={index}
                 icon={social.icon}
                 link={social.link}
-                area={social.area}
                 hoverColor={social.hoverColor}
                 index={index}
+                label={social.label}
               />
             ))}
           </div>
