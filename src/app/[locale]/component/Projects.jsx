@@ -13,8 +13,9 @@ import { useLocale, useTranslations } from 'next-intl';
 const projectsList = [
   { name: "Xgym", img: "/projects/xgym.webp", link: "https://xgym.website" },
   { name: "Saif", img: "/projects/saif.webp", link: "https://coachsaif.online" },
-  { name: "Wn", img: "/projects/wn.webp", link: "https://wn-store-master.vercel.app/" },
-  { name: "Xfit", img: "/projects/xfit.webp", link: "https://www.xfit.website/" },
+  { name: "Wn", img: "/projects/wn.webp", link: "https://www.wnstore.website" },
+  { name: "Xfit", img: "/projects/xfit.webp", link: "https://www.xfit.website" },
+  { name: "Fit Boost", img: "/projects/fitboost.webp", link: "https://www.fitboost.website" },
 ];
 
 export default function ProjectsSwiper() {
