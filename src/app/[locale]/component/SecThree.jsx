@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Palette, 
-  Code, 
-  Server, 
-  Headphones, 
-  Bug, 
-  Shield 
+import {
+  Calculator,
+  Package,
+  Megaphone,
+  Users,
+  Video,
+  Brain
 } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -35,12 +35,12 @@ const useInView = () => {
 
 // الأيقونات الثابتة
 const iconMap = {
-  0: Palette,
-  1: Code,
-  2: Server,
-  3: Headphones,
-  4: Bug,
-  5: Shield
+  0: Calculator,
+  1: Package,
+  2: Megaphone,
+  3: Users,
+  4: Video,
+  5: Brain
 };
 
 export default function OptimizedSpecializations() {
@@ -49,11 +49,11 @@ export default function OptimizedSpecializations() {
   const [ref, isInView] = useInView();
   const isRTL = locale === 'ar';
 
-  // الحصول على قائمة الوظائف من الترجمات
-  const jobs = t.raw('jobs');
+  // الحصول على قائمة الخدمات من الترجمات
+  const services = t.raw('services');
 
   return (
-    <div className={`min-h-screen bg-black text-white ${isRTL ? 'rtl font-arabic' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className={`min-h-screen bg-black ${isRTL ? 'rtl font-arabic' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="py-20 px-6">
         <motion.div
           ref={ref}
@@ -62,79 +62,66 @@ export default function OptimizedSpecializations() {
           className="container mx-auto"
         >
           {/* العنوان */}
-          <motion.h2 
-            className={`text-center text-4xl lg:text-5xl font-bold p-4 m-4 text-white ${isRTL ? 'font-arabic' : ''}`}
+          <motion.h2
+            className={`text-center text-4xl lg:text-5xl font-bold p-4 m-4 text-yellow-300 ${isRTL ? 'font-arabic' : ''}`}
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
             {t('title')}
           </motion.h2>
-          
-          {/* شبكة التخصصات */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {jobs.map((jobTitle, index) => {
+
+          {/* شبكة الخدمات */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
+            {services.map((serviceTitle, index) => {
               const IconComponent = iconMap[index];
-              
+
               return (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 50, scale: 0.9 }}
                   animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
-                  transition={{ 
-                    delay: 0.1 + index * 0.1, 
+                  transition={{
+                    delay: 0.1 + index * 0.1,
                     duration: 0.5,
                     ease: "easeOut"
                   }}
-                  whileHover={{ scale: 1.03, y: -5 }}
-                  className="relative flex flex-col justify-center items-center 
-                            h-60 border-yellow-300 overflow-visible 
-                            bg-gradient-to-br from-gray-900 to-black 
-                            rounded-2xl border-2 hover:border-yellow-300 
+                  whileHover={{ scale: 1.05, y: -8 }}
+                  className="relative flex flex-col justify-center items-center
+                            h-56 overflow-hidden
+                            bg-gradient-to-br from-yellow-400 via-yellow-300 to-yellow-400
+                            rounded-3xl
                             transition-all duration-300 cursor-pointer group
-                            shadow-lg hover:shadow-2xl"
+                            shadow-xl hover:shadow-2xl"
                 >
-                  {/* الأيقونة خارج المربع في الأعلى */}
+                  {/* الأيقونة */}
                   <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute -top-8 left-1/2 transform -translate-x-1/2 z-20"
+                    className="mb-6"
                   >
-                    <div className="w-16 h-16 bg-yellow-300 rounded-full flex items-center justify-center shadow-lg border-4 border-black group-hover:border-yellow-300 transition-all duration-300">
-                      {IconComponent && <IconComponent className="w-8 h-8 text-black" />}
-                    </div>
+                    {IconComponent && <IconComponent className="w-20 h-20 text-black group-hover:text-gray-800" strokeWidth={1.5} />}
                   </motion.div>
 
-                  {/* النص داخل المربع */}
-                  <div className="flex flex-col items-center justify-center h-full pt-8">
-                    <h3 className={`text-white text-xl lg:text-2xl font-bold text-center px-4 leading-tight ${isRTL ? 'font-arabic' : ''}`}>
-                      {jobTitle}
+                  {/* النص */}
+                  <div className="flex flex-col items-center justify-center">
+                    <h3 className={`text-black text-xl lg:text-2xl font-bold text-center px-6 leading-tight ${isRTL ? 'font-arabic' : ''}`}>
+                      {serviceTitle}
                     </h3>
                   </div>
-
-                  {/* تأثير الهوفر */}
-                  <div className="absolute inset-0 bg-yellow-300/10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-2xl" />
                 </motion.div>
               );
             })}
           </div>
 
-          {/* خط فاصل في الأسفل */}
-          <motion.div
-            initial={{ width: 0 }}
-            animate={isInView ? { width: "100%" } : {}}
-            transition={{ delay: 1, duration: 0.8 }}
-            className="mt-16 h-1 bg-gradient-to-r from-transparent via-yellow-300 to-transparent mx-auto max-w-md rounded-full"
-          />
-
           {/* نص تشجيعي */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 1.5, duration: 0.6 }}
-            className="mt-8 text-center"
+            transition={{ delay: 1.2, duration: 0.6 }}
+            className="mt-16 text-center"
           >
-            <p className={`text-yellow-300 text-xl font-bold ${isRTL ? 'font-arabic' : ''}`}>
+            <p className={`text-yellow-300 text-xl lg:text-2xl font-bold ${isRTL ? 'font-arabic' : ''}`}>
               {t('teamText')}
             </p>
           </motion.div>

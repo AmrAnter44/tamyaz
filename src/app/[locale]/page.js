@@ -9,7 +9,7 @@ import Faq from './component/Faq';
 
 export default function Page() {
   return (
-    <>
+    <div className="relative z-10">
       <Nav />
       <SecOne />
       <SecTwo />
@@ -17,6 +17,6 @@ export default function Page() {
       <Projects />
       <Faq />
       <Footer />
-    </>
+    </div>
   );
 }

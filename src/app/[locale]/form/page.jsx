@@ -18,7 +18,7 @@ export default function Form() {
   };
 
   return (
-    <div className={`min-h-screen bg-black text-white ${isRTL ? 'rtl font-arabic' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
+    <div className={`relative z-10 min-h-screen bg-black text-white ${isRTL ? 'rtl font-arabic' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       {/* شريط علوي */}
       <nav className="fixed top-0 left-0 w-full z-40 bg-black/90 text-white shadow-lg backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">

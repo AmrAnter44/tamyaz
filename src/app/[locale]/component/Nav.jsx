@@ -31,11 +31,12 @@ function useScrollAnimation() {
 
 export default function EnhancedNavbar() {
   const t = useTranslations('navbar');
+  const tHero = useTranslations('hero');
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  
+
   const [heroRef, heroInView] = useScrollAnimation();
   const [logoRef, logoInView] = useScrollAnimation();
   const [textRef, textInView] = useScrollAnimation();
@@ -117,63 +118,76 @@ export default function EnhancedNavbar() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section 
+      <section
         ref={heroRef}
-        className="relative w-full h-screen bg-[url('/imgBg.png')] bg-cover bg-center flex items-center justify-center"
+        className="relative w-full min-h-screen bg-black flex items-center justify-center overflow-hidden pt-24"
       >
-        <div className="absolute inset-0 bg-black/30" />
-        
-        <div className="relative z-10 text-center px-4 w-full max-w-4xl">
-          {/* Main Logo */}
-          <motion.div
-            ref={logoRef}
-            className="mb-8"
-            {...scaleIn}
-            animate={logoInView ? scaleIn.animate : scaleIn.initial}
-          >
-            <div className="w-[120px] h-[120px] mx-auto mb-6">
-              <Image
-                src="/logo.svg"
-                alt="Logo"
-                width={120}
-                height={120}
-                priority
-              />
-            </div>
-          </motion.div>
-          
-          {/* Hero Text */}
-          <motion.div
-            ref={textRef}
-            className="space-y-8"
-            {...fadeInUp}
-            animate={textInView ? fadeInUp.animate : fadeInUp.initial}
-            transition={{ ...fadeInUp.transition, delay: 0.3 }}
-          >
-            <h1 className="text-2xl lg:text-3xl font-bold text-yellow-400 typing-effect">
-              {t('headline')}
-            </h1>
-            
-            {/* Animated Arrow */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Text Content */}
             <motion.div
-              className="text-yellow-400 text-2xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={textInView ? { 
-                opacity: 1, 
-                y: [0, -10, 0] 
-              } : { opacity: 0, y: 20 }}
-              transition={{
-                opacity: { duration: 0.6, delay: 0.8 },
-                y: { 
-                  duration: 2, 
-                  repeat: Infinity,
-                  delay: 1.2
-                }
-              }}
+              ref={textRef}
+              className={`space-y-6 ${locale === 'ar' ? 'text-right' : 'text-left'}`}
+              initial={{ opacity: 0, x: locale === 'ar' ? 50 : -50 }}
+              animate={textInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8 }}
             >
-              ↓
+              {/* Main Heading */}
+              <h1 className={`text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight ${locale === 'ar' ? 'font-arabic' : ''}`}>
+                <span className="text-white">{tHero('title')} </span>
+                <span className="text-yellow-300">{tHero('titleHighlight')}</span>
+                <span className="text-white"> {tHero('titleEnd')}</span>
+              </h1>
+
+              {/* Description */}
+              <p className={`text-lg lg:text-xl text-gray-300 leading-relaxed max-w-xl ${locale === 'ar' ? 'font-arabic' : ''}`}>
+                {tHero('description')}
+              </p>
+
+              {/* CTA Button */}
+              <motion.a
+                href={`/${locale}/form`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block px-8 py-4 bg-yellow-300 text-black font-bold text-lg rounded-full shadow-lg hover:bg-yellow-400 transition-all"
+                initial={{ opacity: 0, y: 20 }}
+                animate={textInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.4, duration: 0.6 }}
+              >
+                {tHero('cta')}
+              </motion.a>
             </motion.div>
-          </motion.div>
+
+            {/* Right Side - 3D Illustration */}
+            <motion.div
+              ref={logoRef}
+              className="relative flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={logoInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <motion.div
+                animate={{
+                  y: [0, -20, 0]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+                className="relative w-full max-w-md"
+              >
+                <Image
+                  src="/logo.svg"
+                  alt="Tamyaz Logo"
+                  width={500}
+                  height={500}
+                  priority
+                  className="w-full h-auto drop-shadow-2xl"
+                />
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
     </main>
