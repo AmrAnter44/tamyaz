@@ -122,5 +122,47 @@
     "mainText": "Chat with us",
     "subText": "Get free consultation",
     "expandedText": "Need help? Contact us now!"
+  },
+  "calculator": {
+    "title": "Calculate Your Custom Package",
+    "subtitle": "Choose the services you need and see the monthly cost instantly",
+    "marketing": {
+      "title": "Marketing Services",
+      "reels": "Reels per month",
+      "photos": "Photos per month",
+      "designs": "Static designs per month",
+      "videos": "Long videos per month",
+      "scheduling": "Content scheduling",
+      "messaging": "Message responses",
+      "mobile": "Mobile",
+      "camera": "Camera"
+    },
+    "website": {
+      "title": "Website Packages",
+      "none": "No website",
+      "standard": "Standard (15,000 EGP)",
+      "plus": "Plus (25,000 EGP)"
+    },
+    "management": {
+      "title": "Management Systems",
+      "none": "No system",
+      "basic": "Basic (8,000 EGP)",
+      "plus": "Plus (20,000 EGP)",
+      "pro": "Pro (45,000 EGP)"
+    },
+    "summary": {
+      "title": "Package Summary",
+      "paymentMethod": "Payment Method",
+      "cash": "Cash",
+      "3months": "3M",
+      "6months": "6M",
+      "marketingCashOnly": "Marketing services available in cash only",
+      "marketing": "Marketing Services",
+      "basePrice": "Base Price",
+      "cashDiscount": "Cash Discount",
+      "total": "Total",
+      "monthly": "Monthly Payment",
+      "egp": "EGP"
+    }
   }
 }
