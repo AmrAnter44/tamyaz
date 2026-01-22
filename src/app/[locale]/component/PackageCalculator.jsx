@@ -27,7 +27,7 @@ export default function PackageCalculator() {
   const [managementPayment, setManagementPayment] = useState('cash');
 
   // Pricing logic
-  const reelsPrice = reelsType === 'mobile' ? 1000 : 1500;
+  const reelsPrice = reelsType === 'mobile' ? 1000 : 2000;
   const photosPrice = photosType === 'mobile' ? 1000 : 1500;
   const designsPrice = 200;
   const videosPrice = videosType === 'mobile' ? 2000 : 3000;
