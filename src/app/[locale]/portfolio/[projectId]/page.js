@@ -75,9 +75,9 @@ export default function ProjectDetailPage() {
         {/* Project Images Gallery */}
         <div className="flex flex-wrap justify-center gap-3">
           {project.images.map((image, index) => (
-            <div key={index} className="relative w-full sm:w-80 h-[380px] shadow-xl">
+            <div key={index} className="relative w-full sm:w-80 h-[420px] shadow-xl">
               <Image
-                src={image}
+                src={ image}
                 alt={`${project.name} - ${index + 1}`}
                 fill
                 sizes="(max-width: 668px)"
