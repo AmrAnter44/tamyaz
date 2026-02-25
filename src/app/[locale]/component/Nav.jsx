@@ -118,10 +118,11 @@ export default function EnhancedNavbar() {
       </motion.nav>
 
       {/* Hero Section */}
-      <section
+      {!pathname.startsWith('/portfolio/') && <section
         ref={heroRef}
         className="relative w-full min-h-screen bg-black flex items-center justify-center overflow-hidden pt-24"
       >
+
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Text Content */}
@@ -189,7 +190,7 @@ export default function EnhancedNavbar() {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section>}
     </main>
   );
 }
