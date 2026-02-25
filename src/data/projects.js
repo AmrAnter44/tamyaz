@@ -35,7 +35,7 @@ export const projectsData = [
   // },
 {
     id: "dr",
-    name: "dr gamal",
+    name: "Dr.Gamal",
     thumbnail: "/projects/dr.png",
     thumbnailBg: "#000000",
     description: {
