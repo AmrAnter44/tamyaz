@@ -2,7 +2,8 @@ export const projectsData = [
   {
     id: "shaltot",
     name: "Shaltot Clinc",
-    thumbnail: "/projects/shaltot.jpeg",
+    thumbnail: "/projects/shaltot.png",
+    thumbnailBg: "#000000",
     description: {
       ar: "حل رقمي متكامل للعيادة يبدأ من الهوية البصرية وحتى إدارة الحجوزات، مع تصميمات احترافية، فيديوهات، سوشيال ميديا، وموقع إلكتروني جاهز لاستقبال المرضى.",
       en: "An end-to-end digital solution for the clinic, covering brand identity, professional designs, video content, social media management, and a fully functional website with an organized appointment system."
@@ -15,37 +16,54 @@ export const projectsData = [
     websiteLink: "https://www.shaltoutclinics.website/",
     instagramLink: "/"
   },
-    {
-    id: "savio",
-    name: "Savio Freagrances",
-    thumbnail: "/projects/savio.jpeg",
+  //   {
+  //   id: "savio",
+  //   name: "Savio Freagrances",
+  //   thumbnail: "/projects/savio.jpeg",
+  //   thumbnailBg: "linear-gradient(to bottom right, #451a03, #713f12)",
+  //   description: {
+  //     ar: "حل رقمي متكامل لمتجر العطور يبدأ من الهوية البصرية وحتى تجربة شراء سلسة، يشمل التصميمات، المحتوى المرئي، السوشيال ميديا، وموقع إلكتروني احترافي جاهز للبيع.",
+  //     en: "A complete digital solution for a perfume store, from brand identity to a smooth shopping experience, including professional designs, visual content, social media management, and a fully functional e-commerce website ready for sales."
+  //   },
+  //   images: [
+  //     "/projects/savio/1.jpeg",
+  //     "/projects/savio/2.jpeg",
+  //     "/projects/savio/3.jpeg"
+  //   ],
+  //   websiteLink: "https://saviofragrance.shop/",
+  //   instagramLink: "https://www.instagram.com/savio_fragrances/"
+  // },
+{
+    id: "dr",
+    name: "dr gamal",
+    thumbnail: "/projects/dr.png",
+    thumbnailBg: "#000000",
     description: {
-      ar: "حل رقمي متكامل لمتجر العطور يبدأ من الهوية البصرية وحتى تجربة شراء سلسة، يشمل التصميمات، المحتوى المرئي، السوشيال ميديا، وموقع إلكتروني احترافي جاهز للبيع.",
-      en: "A complete digital solution for a perfume store, from brand identity to a smooth shopping experience, including professional designs, visual content, social media management, and a fully functional e-commerce website ready for sales."
+      ar: "تجربة رقمية متكاملة للدكتور جمال، طبيب اللياقة البدنية، تشمل هوية بصرية احترافية، تصميمات جذابة، محتوى مرئي ملهم، وإدارة منصات التواصل الاجتماعي لتعزيز حضوره الرقمي وبناء مجتمع نشط حول رحلة اللياقة.",
+      en: "A complete digital experience for Dr. Gamal, fitness doctor, including a professional brand identity, eye-catching designs, inspiring visual content, and social media management to grow his online presence and build an active community around fitness."
     },
     images: [
-      "/projects/savio/1.jpeg",
-      "/projects/savio/2.jpeg",
-      "/projects/savio/3.jpeg"
+      "/projects/gamal/1.jpeg",
+      "/projects/gamal/2.jpeg",
+      "/projects/gamal/3.jpeg"
     ],
-    websiteLink: "https://saviofragrance.shop/",
+    websiteLink: "",
     instagramLink: "https://www.instagram.com/savio_fragrances/"
   },
     {
-    id: "seestart",
-    name: "See Star",
-    thumbnail: "/projects/see.jpeg",
+    id: "wn",
+    name: "WN cloth store",
+    thumbnail: "/projects/WN.png",
+    thumbnailBg: "#000000",
     description: {
-      ar: "بنينا تجربة رقمية متكاملة لعلامة عقارية فاخرة، تبدأ من هوية بصرية راقية وتصميمات أنيقة، مرورًا بمحتوى مرئي احترافي وسوشيال ميديا قوية، وصولًا إلى موقع إلكتروني متكامل لحجز وبيع العقارات بكل سلاسة."  ,
-
-      en: "We built a complete digital experience for a luxury real estate brand, starting with a refined visual identity and elegant designs, supported by professional visual content and strong social media presence, and culminating in a fully integrated website for booking and selling properties seamlessly."
+      ar: "بنينا تجربة رقمية متكاملة لمتجر WN للملابس، تبدأ من هوية بصرية عصرية وتصميمات أنيقة، مرورًا بمحتوى مرئي احترافي وإدارة سوشيال ميديا فعّالة، وصولًا إلى موقع إلكتروني متكامل لتصفح وشراء الملابس بكل سهولة.",
+      en: "We built a complete digital experience for WN clothing store, from a modern visual identity and elegant designs, to professional visual content and effective social media management, culminating in a fully integrated website for browsing and purchasing clothes effortlessly."
     },
     images: [
-      "/projects/see/1.jpeg",
-      "/projects/see/2.jpeg",
-      "/projects/see/3.jpeg"
+      "/projects/wn/1.jpeg",
+      "/projects/wn/2.jpeg"
     ],
-    websiteLink: "https://saviofragrance.shop/",
+    websiteLink: "https://www.wnstore.website",
     instagramLink: "/"
   },
 

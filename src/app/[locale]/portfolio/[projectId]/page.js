@@ -73,9 +73,9 @@ export default function ProjectDetailPage() {
         </div>
 
         {/* Project Images Gallery */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div className="flex flex-wrap justify-center gap-3">
           {project.images.map((image, index) => (
-            <div key={index} className="relative max-w-72 h-[380px] shadow-xl">
+            <div key={index} className="relative w-full sm:w-80 h-[380px] shadow-xl">
               <Image
                 src={image}
                 alt={`${project.name} - ${index + 1}`}

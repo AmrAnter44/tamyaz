@@ -25,7 +25,7 @@ export default function ProjectsGrid() {
             href={`/${locale}/portfolio/${project.id}`}
             className="block group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300"
           >
-            <div className="relative w-full h-92 md:h-80">
+            <div className="relative w-full h-92 md:h-80" style={{ background: project.thumbnailBg || '#000' }}>
               <Image
                 src={project.thumbnail}
                 alt={project.name}
