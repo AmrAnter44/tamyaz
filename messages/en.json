@@ -62,7 +62,9 @@
   },
   "portfolio": {
     "title": "Our Work",
+    "viewProject": "View Project",
     "backToPortfolio": "Back to Portfolio",
+    "relatedProjects": "Related Projects",
     "visitWebsite": "Visit Website",
     "followOnInstagram": "Follow on Instagram"
   },

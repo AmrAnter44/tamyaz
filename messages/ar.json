@@ -62,7 +62,9 @@
   },
   "portfolio": {
     "title": "أعمالنا",
+    "viewProject": "عرض المشروع",
     "backToPortfolio": "العودة للمشاريع",
+    "relatedProjects": "مشاريع ذات صلة",
     "visitWebsite": "زيارة الموقع",
     "followOnInstagram": "تابعنا على انستجرام"
   },
