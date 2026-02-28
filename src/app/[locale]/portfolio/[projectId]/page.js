@@ -90,6 +90,18 @@ export default function ProjectDetailPage() {
           ))}
         </div>
 
+        {/* Project Video */}
+        {project.video && (
+          <div className="mt-12">
+            <video
+              src={project.video}
+              controls
+              className="w-full rounded-2xl shadow-xl max-h-screen"
+              preload="metadata"
+            />
+          </div>
+        )}
+
         {/* Related Projects */}
         {relatedProjects.length > 0 && (
           <div className="mt-20">

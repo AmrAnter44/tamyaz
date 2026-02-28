@@ -13,6 +13,7 @@ export const projectsData = [
       "/projects/shaltot/2.jpeg",
       "/projects/shaltot/3.jpeg"
     ],
+    video: "/projects/shaltot/video.mp4",
     websiteLink: "https://www.shaltoutclinics.website/",
     instagramLink: "/"
   },
@@ -47,6 +48,7 @@ export const projectsData = [
       "/projects/gamal/2.jpeg",
       "/projects/gamal/3.jpeg"
     ],
+    video: "/projects/gamal/video.mp4",
     websiteLink: "",
     instagramLink: "https://www.instagram.com/savio_fragrances/"
   },
@@ -63,6 +65,7 @@ export const projectsData = [
       "/projects/wn/1.jpeg",
       "/projects/wn/2.jpeg"
     ],
+    video: "/projects/wn/video.mp4",
     websiteLink: "https://www.wnstore.website",
     instagramLink: "/"
   },
