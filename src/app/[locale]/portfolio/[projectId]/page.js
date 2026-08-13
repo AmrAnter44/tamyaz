@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from 'next-intl';
 import { projectsData } from "@/data/projects";
-import { Instagram, ExternalLink, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
+import { Instagram, ExternalLink, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X, Maximize2, Check } from "lucide-react";
 import { notFound } from "next/navigation";
 import Nav from "../../component/Nav";
 import Footer from "../../component/Footer";
@@ -188,29 +188,22 @@ export default function ProjectDetailPage() {
               )}
             </div>
 
-            {/* شريط المصغرات */}
+            {/* نقاط تنقّل بدل شريط المصغرات */}
             {count > 1 && (
-              <div className="flex gap-2 mt-4 overflow-x-auto pb-2 justify-center">
-                {images.map((image, index) => (
+              <div className="flex flex-wrap justify-center items-center gap-2.5 mt-6">
+                {images.map((_, index) => (
                   <button
                     key={index}
                     type="button"
                     onClick={() => setCurrent(index)}
                     aria-label={`${isRTL ? 'صورة' : 'Image'} ${index + 1}`}
                     aria-current={index === current}
-                    className={`relative shrink-0 w-24 h-16 rounded-lg overflow-hidden border-2 transition-colors ${
-                      index === current ? 'border-yellow-300' : 'border-white/10 hover:border-white/40'
+                    className={`rounded-full transition-all duration-200 ${
+                      index === current
+                        ? 'w-6 h-2 bg-yellow-300'
+                        : 'w-2 h-2 bg-white/25 hover:bg-white/60'
                     }`}
-                  >
-                    <Image
-                      src={image}
-                      alt=""
-                      fill
-                      sizes="96px"
-                      className={`object-cover ${index === current ? '' : 'opacity-60'}`}
-                      quality={75}
-                    />
-                  </button>
+                  />
                 ))}
               </div>
             )}
@@ -285,6 +278,49 @@ export default function ProjectDetailPage() {
               className="w-full rounded-2xl shadow-xl max-h-screen"
               preload="metadata"
             />
+          </div>
+        )}
+
+        {/* تفاصيل المشروع ومكاسبه — تظهر بس لو المشروع فيه المعلومات دي */}
+        {(project.features?.[locale]?.length || project.benefits?.[locale]?.length) && (
+          <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {project.features?.[locale]?.length > 0 && (
+              <section>
+                <h2 className={`text-2xl font-bold text-yellow-300 mb-6 ${isRTL ? 'font-arabic' : ''}`}>
+                  {t('features')}
+                </h2>
+                <ul className="space-y-3">
+                  {project.features[locale].map((item, i) => (
+                    <li
+                      key={i}
+                      className={`flex gap-3 text-gray-300 leading-relaxed ${isRTL ? 'font-arabic' : ''}`}
+                    >
+                      <span aria-hidden="true" className="shrink-0 mt-2 w-1.5 h-1.5 rounded-full bg-yellow-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {project.benefits?.[locale]?.length > 0 && (
+              <section>
+                <h2 className={`text-2xl font-bold text-yellow-300 mb-6 ${isRTL ? 'font-arabic' : ''}`}>
+                  {t('benefits')}
+                </h2>
+                <ul className="space-y-3">
+                  {project.benefits[locale].map((item, i) => (
+                    <li
+                      key={i}
+                      className={`flex gap-3 rounded-xl border border-white/10 bg-white/5 p-4 text-gray-200 leading-relaxed ${isRTL ? 'font-arabic' : ''}`}
+                    >
+                      <Check size={18} className="shrink-0 mt-1 text-yellow-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
           </div>
         )}
 
