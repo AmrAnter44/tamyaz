@@ -75,13 +75,15 @@ export const projectsData = [
     thumbnail: "/projects/empowerex/logo-lockup.webp",
     thumbnailBg: "#000000",
     description: {
-      ar: "موقع إلكتروني متكامل لعيادة EmpowerEx للعلاج الطبيعي بالقاهرة، بنسختين عربية وإنجليزية بتخطيط كامل من اليمين لليسار، وصفحة مستقلة لكل خدمة، وربط مباشر بلوحة تحكم العيادة يخليها تعدّل المحتوى بنفسها، مع تجهيزات كاملة للظهور في جوجل وتحويل الزائر لمريض عبر واتساب ونموذج التواصل.",
-      en: "A complete bilingual website for EmpowerEx Physiotherapy Clinic in Cairo, featuring a full Arabic RTL layout, a dedicated page for every service, and content managed directly from the clinic's own dashboard, built for search visibility and WhatsApp-first patient conversion."
+      ar: "نظام متكامل لإدارة عيادة EmpowerEx للعلاج الطبيعي بالقاهرة، بيدير دورة العيادة كاملة: حجز المواعيد، ملفات المرضى والحالات والتقييمات، الفواتير والباقات، المصاريف ومرتبات الدكاترة، وسبعة تقارير قابلة للتصدير. ثلاثة أدوار بصلاحيات مفصولة على مستوى قاعدة البيانات تحمي الأرقام المالية والبيانات الطبية، وقواعد تشغيلية بتشتغل لوحدها من خصم جلسات الباقة وتحديث الفواتير لحد رسائل الواتساب التلقائية.",
+      en: "A complete management system for EmpowerEx Physiotherapy Clinic in Cairo, covering the full clinic cycle: appointment scheduling, patient records, cases and assessments, invoicing and packages, expenses and doctor payroll, plus seven exportable reports. Three staff roles are separated at the database level to protect financial and clinical data, while operational rules run on their own — from package session deductions and invoice status to automated WhatsApp messages."
     },
     images: [
-      "/projects/empowerex/11.png",
-      "/projects/empowerex/12.png",
-      "/projects/empowerex/13.png"
+      "/projects/empowerex/1.jpeg",
+      "/projects/empowerex/2.jpeg",
+      "/projects/empowerex/3.jpeg",
+      "/projects/empowerex/4.jpeg",
+      "/projects/empowerex/5.jpeg"
     ],
     websiteLink: "",
     instagramLink: "/"
