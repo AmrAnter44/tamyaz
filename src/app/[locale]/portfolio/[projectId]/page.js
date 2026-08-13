@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -15,6 +15,9 @@ export default function ProjectDetailPage() {
   const locale = useLocale();
   const t = useTranslations('portfolio');
   const isRTL = locale === "ar";
+
+  // نسبة أبعاد كل صورة تتقرأ من الصورة نفسها عشان الطولي والعرضي يظهروا كاملين من غير قص
+  const [ratios, setRatios] = useState({});
 
   const project = projectsData.find(p => p.id === params.projectId);
 
@@ -77,14 +80,24 @@ export default function ProjectDetailPage() {
         {/* Project Images Gallery */}
         <div className="flex flex-wrap justify-center gap-3">
           {project.images.map((image, index) => (
-            <div key={index} className="relative w-full sm:w-80 h-[420px] shadow-xl">
+            <div
+              key={index}
+              className="relative w-full sm:w-auto sm:h-[420px] shadow-xl"
+              style={{ aspectRatio: ratios[index] ?? "4 / 5" }}
+            >
               <Image
                 src={image}
                 alt={`${project.name} - ${index + 1}`}
                 fill
-                sizes="(max-width: 668px)"
-                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 900px"
+                className="object-contain"
                 quality={85}
+                onLoad={(e) =>
+                  setRatios((prev) => ({
+                    ...prev,
+                    [index]: `${e.currentTarget.naturalWidth} / ${e.currentTarget.naturalHeight}`,
+                  }))
+                }
               />
             </div>
           ))}
