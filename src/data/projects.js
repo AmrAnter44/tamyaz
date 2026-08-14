@@ -186,7 +186,11 @@ export const projectsData = [
         "موظفين وكباتن بمرتبات وعمولات وخصومات وحضور بالباركود.",
         "تقارير مالية: أرباح وخسائر، إيراد حسب طريقة الدفع، وعمولات المدربين.",
         "حالة «حجز» للطالب اللي دفع مقدّم من غير مجموعة — أول ما تتحدد له مجموعة بيتفعّل تلقائيًا وياخد سعرها وحصصها.",
-        "تحذير فوري لو رقم الموبايل مكرر أو موجود قبل كده في قائمة المهتمين، فمفيش طالب مسجّل مرتين."
+        "تحذير فوري لو رقم الموبايل مكرر أو موجود قبل كده في قائمة المهتمين، فمفيش طالب مسجّل مرتين.",
+        "تطبيق موبايل للطالب فيه كورساته المصوّرة: بيدخل بحسابه، بيفتح الكورس بكود من الأدمن بيتقفل على حسابه بعد أول استخدام، وبيكمّل من حيث وقف.",
+        "كل كورس متقسّم حلقات وامتحانات، بشريط تقدّم بيوري الطالب أنجز كام من كام، وتعليم للحلقة كـ«مكتملة».",
+        "امتحان بعد كل حلقة بنسبة نجاح محددة (٦٠٪)، والطالب لازم ينجح فيه قبل ما يكمّل.",
+        "الشهادة بتتصدر في التطبيق نفسه بكود تحقق فريد أول ما الطالب يخلّص الكورس."
       ],
       en: [
         "Nineteen modules and 34 screens covering the full student journey: from a lead, to an enrolled student in a group, to a graduate with a verified certificate.",
@@ -204,7 +208,11 @@ export const projectsData = [
         "Staff and captains with salaries, commissions, deductions, and barcode attendance.",
         "Financial reports: profit and loss, revenue by payment method, and trainer commissions.",
         "A \"reserved\" state for a student who paid a deposit without a group — assigned to a group, they activate automatically and inherit its price and session count.",
-        "An instant warning when a phone number is duplicated or already exists in the leads list, so no student is registered twice."
+        "An instant warning when a phone number is duplicated or already exists in the leads list, so no student is registered twice.",
+        "A student mobile app carrying their recorded courses: they sign in, unlock a course with a code issued by the admin that locks to their account after first use, and resume from where they stopped.",
+        "Each course is split into lessons and exams, with a progress bar showing how much is done and lessons marked complete.",
+        "An exam after each lesson with a required pass mark (60%), which the student must clear before moving on.",
+        "The certificate is issued inside the app with a unique verification code the moment the course is completed."
       ]
     },
     benefits: {
@@ -225,7 +233,11 @@ export const projectsData = [
         "مفيش طالب مكرر: النظام بيحذّرك فورًا لو الرقم متسجل قبل كده أو موجود في قائمة المهتمين.",
         "الليدز مابتضيعش: المهتم بيتسجل بحالته ومتابعاته، وبيتحوّل لطالب بضغطة لما يقرر.",
         "شغّال على الموبايل كتطبيق يتثبّت على الشاشة الرئيسية — الرسبشن يسجّل حضور من التليفون من غير أجهزة إضافية.",
-        "عربي بالكامل بتخطيط من اليمين لليسار، فالفريق بيتدرب عليه في يوم مش في أسبوع."
+        "عربي بالكامل بتخطيط من اليمين لليسار، فالفريق بيتدرب عليه في يوم مش في أسبوع.",
+        "مصدر دخل تاني من غير قاعة ولا كابتن: الكورسات المصوّرة بتتباع بكود، فبتوصل لطلاب برة فروعك ومن غير سقف لعدد المقاعد.",
+        "محتواك محمي: الكود بيتقفل على حساب الطالب بعد أول استخدام، فمينفعش كود واحد يتداول بين عشرة.",
+        "الامتحان قبل ما الطالب يكمّل بيضمن إنه فاهم فعلًا — فالخريج بتاعك بيطلع بمستوى، وده اللي بيحافظ على سمعة الأكاديمية.",
+        "الطالب بيكمّل من حيث وقف في أي وقت، وشريط التقدّم بيحفّزه يخلّص — يعني نسبة إكمال أعلى وشكاوى أقل."
       ],
       en: [
         "The whole academy and its three branches in one system — instead of notebooks, spreadsheets, and scattered WhatsApp groups — with branch data separated while the owner still sees the full picture.",
@@ -244,11 +256,117 @@ export const projectsData = [
         "No duplicate students: the system warns immediately if the phone number already exists or sits in the leads list.",
         "Leads do not slip away: an inquiry is recorded with its status and follow-ups, and converts to a student in one click.",
         "Runs on mobile as an installable app — reception can take attendance from a phone with no extra hardware.",
-        "Fully Arabic with a right-to-left layout, so the team learns it in a day rather than a week."
+        "Fully Arabic with a right-to-left layout, so the team learns it in a day rather than a week.",
+        "A second revenue stream with no room and no trainer: recorded courses sell by code, reaching students beyond your branches with no cap on seats.",
+        "Your content stays protected: the code locks to the student's account after first use, so one code cannot circulate among ten people.",
+        "The exam gate before progressing ensures the student actually understood — your graduates leave with a real standard, which is what protects the academy's reputation.",
+        "Students resume from where they stopped at any time, and the progress bar pushes them to finish — higher completion rates and fewer complaints."
       ]
     },
-    // الترتيب زي ترتيب القائمة الجانبية في النظام
-    images: Array.from({ length: 21 }, (_, i) => `/projects/memo-academy/${i + 1}.png`),
+    // شاشات لوحة الإدارة بترتيب القائمة الجانبية، وبعدها تطبيق الطالب برحلة التعلّم
+    images: [
+      ...Array.from({ length: 21 }, (_, i) => `/projects/memo-academy/${i + 1}.png`),
+      ...Array.from({ length: 7 }, (_, i) => `/projects/memo-academy/app-${i + 1}.jpeg`),
+    ],
+    websiteLink: "",
+    instagramLink: "/"
+  },
+  {
+    id: "barbershop-system",
+    name: "Barber Shop System",
+    thumbnail: "/projects/memo-barbershop/logo-mark.png",
+    thumbnailBg: "#000000",
+    description: {
+      ar: "نظام تشغيل كامل لسلسلة محلات حلاقة على قاعدة بيانات واحدة: لوحة تحكم بسبعتاشر قسم، وموقع، وتطبيق للعميل. كل جنيه بيدخل له فاتورة، وكل فاتورة مربوطة بدرج مفتوح باسم صاحبه، والتقفيل بيطلع مقسّم على طرق الدفع الأربعة. خمس أدوار بصلاحيات مفروضة جوّه قاعدة البيانات نفسها، وستاشر صلاحية بتتعدّل من الشاشة من غير مبرمج، والفروع بتتفتح بإضافة صف في جدول من غير إعداد تقني.",
+      en: "A complete operating system for a barber shop chain on a single database: a seventeen-section dashboard, a website, and a customer app. Every pound collected has an invoice, every invoice is bound to a drawer opened under a named person, and the closing breaks down across all four payment methods. Five roles with permissions enforced inside the database itself, sixteen permissions editable from the screen without a developer, and new branches opened by adding a row with no technical setup."
+    },
+    features: {
+      ar: [
+        "ثلاث واجهات على قاعدة بيانات واحدة: لوحة تحكم بسبعتاشر قسم، وموقع، وتطبيق موبايل للعميل.",
+        "سلسلة الفلوس مقفولة من الفتح للتقفيل: الريسبشن بيفتح الدرج باسمه، وكل فاتورة بتترّبط بالدرج المفتوح تلقائيًا — والدرج مقفول؟ النظام بيرفض إصدار الفاتورة من أصله.",
+        "فرع واحد = درج مفتوح واحد بس، مستحيل يتكرر.",
+        "التقفيل بيطلع باسم اللي قفل وبمدة الشيفت وبإجمالي صافي مقسوم على كاش وفيزا وإنستاباي وفودافون كاش.",
+        "المرتجع بيتسجّل باسم طالبه وبيقف «قيد المراجعة» لحد ما الأدمن يعتمده، وبيتخصم من الصافي — مفيش مرتجع شفهي.",
+        "صافي الربح محسوب بمعادلة مطبّقة في النظام: الإيراد ناقص عمولات الكباتن ناقص مصاريف الفرع ناقص المرتجعات المعتمدة.",
+        "عمولة كل كابتن بتتجمّع تلقائيًا من فواتيره الفعلية بنسبته المسجّلة، والكابتن بيشوف عمولته هو بس.",
+        "اليوم المحاسبي بيمتد مع الشيفت — من ٨ مساءً لـ٤ فجرًا يتحسب يوم واحد مش يومين.",
+        "جدولة شيفتات شهر كامل دفعة واحدة، والحضور الفعلي بيتقارن بالمجدول: حاضر، متأخر وكام دقيقة، غايب — مجمّع شهريًا لكل كابتن.",
+        "إدارة الطابور لحظيًا: بدء الخدمة، إنهاء، إلغاء، تسجيل عدم حضور، وحجز فوري لعميل داخل من غير موعد.",
+        "خمس أدوار — صاحب السلسلة، المدير، الريسبشن، الكابتن، العميل — كل واحد بيشوف حتته بس.",
+        "الصلاحيات مفروضة على مستوى الصف في قاعدة البيانات مش في الواجهة، فالبيانات اللي مش من حقك مابتوصلكش حتى لو فتحت الرابط المباشر.",
+        "ستاشر صلاحية مخزّنة في جدول وبتتعدّل من شاشة الصلاحيات — من غير كود ولا نشر جديد.",
+        "كل الشاشات شغالة على مستوى الفرع من الأساس، ففتح فرع جديد بيتم في نفس اليوم من غير نسخة تانية من النظام.",
+        "تطبيق العميل: حجز في دقيقة، اختيار كابتن معيّن أو «أي كابتن» والنظام يرشّح الأقل انشغالًا، حالة الكباتن ظاهرة لحظيًا، وشاشة دور بتتحدّث لوحدها.",
+        "نقاط ولاء بتتحسب تلقائيًا — نقطة على كل عشرة جنيه في الفاتورة، والدخول بكود لمرة واحدة من غير باسوردات مخزّنة.",
+        "تقييم بالنجوم وتعليق بعد الخدمة، وتقييم كل كابتن بيتحدّث تلقائيًا من تقييمات العملاء.",
+        "جاهز لمتاجر التطبيقات: صفحات سياسة الخصوصية والشروط منشورة، وحذف الحساب متاح للعميل من التطبيق والموقع.",
+        "كل سلسلة محلات = نسخة مستقلة تمامًا ببياناتها ومخزنها الخاص، وعربي بالكامل بدعم RTL في الأجزاء الثلاثة."
+      ],
+      en: [
+        "Three interfaces on one database: a seventeen-section dashboard, a website, and a customer mobile app.",
+        "The money chain is sealed from opening to closing: reception opens the drawer under their name, every invoice binds to the open drawer automatically — and if the drawer is closed, the system refuses to issue the invoice at all.",
+        "One branch means exactly one open drawer; duplication is impossible.",
+        "The closing is stamped with who closed it, the shift duration, and a net total split across cash, card, InstaPay, and Vodafone Cash.",
+        "Refunds are logged under the requester and held \"pending review\" until an admin approves, then deducted from net — no verbal refunds.",
+        "Net profit is computed by a formula enforced in the system: revenue minus barber commissions minus branch expenses minus approved refunds.",
+        "Each barber's commission accrues automatically from their actual invoices at their recorded rate, and each barber sees only their own.",
+        "The accounting day follows the shift — 8pm to 4am counts as one day, not two.",
+        "Schedule a full month of shifts at once, with actual attendance compared to the schedule: present, late by the minute, absent — aggregated monthly per barber.",
+        "Live queue management: start service, finish, cancel, mark no-show, and instant booking for a walk-in.",
+        "Five roles — chain owner, manager, reception, barber, customer — each seeing only their own slice.",
+        "Permissions are enforced at row level in the database rather than the interface, so data outside your scope never reaches you even via a direct link.",
+        "Sixteen permissions stored in a table and edited from the permissions screen — no code, no redeployment.",
+        "Every screen is branch-aware by design, so a new branch goes live the same day without a second copy of the system.",
+        "Customer app: book in a minute, choose a specific barber or let \"any barber\" pick the least busy, see barber availability live, and watch a self-updating queue screen.",
+        "Loyalty points accrue automatically — one point per ten pounds invoiced — with one-time code sign-in and no stored passwords.",
+        "Star ratings and comments after service, with each barber's rating updating automatically from customer reviews.",
+        "App-store ready: privacy policy and terms pages published, and account deletion available to the customer from both app and site.",
+        "Each chain is a fully independent instance with its own data and storage, fully Arabic with RTL across all three parts."
+      ]
+    },
+    benefits: {
+      ar: [
+        "إيرادك بيتقفل بالجنيه: مفيش فاتورة تتصدر والدرج مقفول، ومفيش مبلغ بيتحرك من غير اسم عليه — فالفرق بين الدرج والدفتر بيبقى ليه مصدر معروف بدل «محدش يعرف راحت فين».",
+        "بتعرف صافيك مش إيرادك: الإيراد رقم بيخدع، والنظام بيخصم العمولات والمصاريف والمرتجعات المعتمدة ويوصّلك للرقم الحقيقي يومي وشهري وسنوي.",
+        "خلاف آخر الشهر على العمولات بينتهي: نسبة كل كابتن متسجلة والعمولة بتتجمّع من فواتيره لحظة بلحظة، والكابتن شايف رقمه بنفسه.",
+        "المرتب بيتحسب على واقع مش على كلام: الشيفت المجدول بيتقارن بالحضور الفعلي بالدقيقة، فالتأخير والغياب موثّقين.",
+        "الشيفت اللي بيمتد لبعد نص الليل مابيتقسمش على يومين في الحسابات — اليوم المحاسبي بيمتد معاه، وده بيمنع أرقام غلط في التقارير.",
+        "المرتجع مابيبقاش ثغرة: لازم يعتمد من الأدمن، ومتسجّل مين طلبه ومين قرر، وبيتخصم من الصافي.",
+        "فرع جديد = صف في جدول: تفتحه وتشغّله بنفس اليوم من غير نسخة تانية من النظام ولا إعداد من الصفر — فالتوسّع مش بيوقف على مبرمج.",
+        "الصلاحيات بتتعدّل من الشاشة: تدّي أو تسحب صلاحية من أي دور من غير ما تستنى تعديل كود ولا نشر.",
+        "موظفك مايشوفش غير حتته: الحماية في قاعدة البيانات نفسها، فحتى لو حد فتح الرابط المباشر مش هيوصل لبيانات مش من حقه.",
+        "الريسبشن بيتفضّى من الرد على التليفون: العميل بيحجز من التطبيق بنفسه، فالموظف يرجع للكاشير وللعملاء اللي قدامه.",
+        "كل حجز بيدخل النظام مظبوط من أول ثانية — مفيش نقل يدوي من الواتساب ولا حجز بينسى ولا يتكرر ومحدش مسؤول عنه.",
+        "قاعدة عملاء حقيقية ملكك: أرقام وسجل زيارات وتقييمات، مش محادثات واتساب ضايعة.",
+        "العميل مابيمشيش من الزحمة: شايف دوره لحظيًا من بيته فبييجي في وقته، والزحمة بتتوزّع لما يشوف الفرع الفاضي قبل ما يتحرك.",
+        "التقييمات بتوصلك مباشرة فتعرف أنهي كابتن بيكرّر العملاء وأنهي واحد محتاج تدخّل — بدل ما تكتشف المشكلة لما العميل يختفي.",
+        "نقاط الولاء بترجّع العميل من غير خصومات بتاكل من هامشك.",
+        "التطبيق أرخص موظف ريسبشن عندك: شغال ٢٤ ساعة وبيدخّل البيانات صح من المصدر."
+      ],
+      en: [
+        "Revenue closes to the pound: no invoice is issued while the drawer is shut, and no amount moves without a name on it — so any gap between drawer and book has a traceable source instead of vanishing.",
+        "You see net, not gross: revenue is a deceptive number, and the system subtracts commissions, expenses, and approved refunds to give you the real figure daily, monthly, and yearly.",
+        "Month-end commission arguments end: each barber's rate is recorded, commission accrues from their invoices in real time, and the barber sees their own number.",
+        "Pay is computed on reality, not claims: scheduled shifts are compared against actual attendance to the minute, so lateness and absence are documented.",
+        "A shift running past midnight is not split across two days in the books — the accounting day extends with it, preventing wrong numbers in reports.",
+        "Refunds stop being a loophole: they require admin approval, record who asked and who decided, and are deducted from net.",
+        "A new branch is a row in a table: open it and run it the same day with no second copy of the system and no setup from scratch — expansion no longer waits on a developer.",
+        "Permissions are edited on screen: grant or revoke for any role without waiting for a code change or a deployment.",
+        "Staff see only their slice: protection lives in the database, so even a direct link will not surface data outside their scope.",
+        "Reception is freed from answering the phone: customers book themselves in the app, so staff return to the register and the people in front of them.",
+        "Every booking enters the system correctly from the first second — no manual transfer from WhatsApp, no forgotten or duplicated booking with nobody accountable.",
+        "A real customer base that belongs to you: numbers, visit history, and ratings — not scattered WhatsApp threads.",
+        "Customers stop walking out over crowding: they watch their place in the queue from home and arrive on time, and crowds spread out once they can see which branch is free.",
+        "Ratings reach you directly, so you know which barber brings customers back and which needs attention — instead of discovering the problem when the customer disappears.",
+        "Loyalty points bring customers back without discounts eating into your margin.",
+        "The app is the cheapest receptionist you have: it works 24 hours and enters the data correctly at the source."
+      ]
+    },
+    // شاشات لوحة التحكم، وبعدها تطبيق العميل برحلة الحجز
+    images: [
+      ...Array.from({ length: 18 }, (_, i) => `/projects/memo-barbershop/${i + 1}.png`),
+      ...Array.from({ length: 6 }, (_, i) => `/projects/memo-barbershop/mobile-${i + 1}.jpeg`),
+    ],
     websiteLink: "",
     instagramLink: "/"
   },
