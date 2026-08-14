@@ -263,10 +263,15 @@ export const projectsData = [
         "Students resume from where they stopped at any time, and the progress bar pushes them to finish — higher completion rates and fewer complaints."
       ]
     },
-    // شاشات لوحة الإدارة بترتيب القائمة الجانبية، وبعدها تطبيق الطالب برحلة التعلّم
-    images: [
-      ...Array.from({ length: 21 }, (_, i) => `/projects/memo-academy/${i + 1}.png`),
-      ...Array.from({ length: 7 }, (_, i) => `/projects/memo-academy/app-${i + 1}.jpeg`),
+    imageGroups: [
+      {
+        label: { ar: "لوحة الإدارة", en: "Admin dashboard" },
+        images: Array.from({ length: 21 }, (_, i) => `/projects/memo-academy/${i + 1}.png`),
+      },
+      {
+        label: { ar: "تطبيق الطالب", en: "Student app" },
+        images: Array.from({ length: 7 }, (_, i) => `/projects/memo-academy/app-${i + 1}.jpeg`),
+      },
     ],
     websiteLink: "",
     instagramLink: "/"
@@ -362,10 +367,15 @@ export const projectsData = [
         "The app is the cheapest receptionist you have: it works 24 hours and enters the data correctly at the source."
       ]
     },
-    // شاشات لوحة التحكم، وبعدها تطبيق العميل برحلة الحجز
-    images: [
-      ...Array.from({ length: 18 }, (_, i) => `/projects/memo-barbershop/${i + 1}.png`),
-      ...Array.from({ length: 6 }, (_, i) => `/projects/memo-barbershop/mobile-${i + 1}.jpeg`),
+    imageGroups: [
+      {
+        label: { ar: "لوحة التحكم", en: "Dashboard" },
+        images: Array.from({ length: 18 }, (_, i) => `/projects/memo-barbershop/${i + 1}.png`),
+      },
+      {
+        label: { ar: "تطبيق العميل", en: "Customer app" },
+        images: Array.from({ length: 6 }, (_, i) => `/projects/memo-barbershop/mobile-${i + 1}.jpeg`),
+      },
     ],
     websiteLink: "",
     instagramLink: "/"

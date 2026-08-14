@@ -23,7 +23,11 @@ export default function ProjectDetailPage() {
   const [touchStartX, setTouchStartX] = useState(null);
 
   const project = projectsData.find(p => p.id === params.projectId);
-  const images = project?.images ?? [];
+
+  // المشروع ممكن يقسّم صوره لمجموعات (نظام / تطبيق) بدل معرض واحد مخلوط
+  const groups = project?.imageGroups;
+  const [group, setGroup] = useState(0);
+  const images = groups ? (groups[group]?.images ?? []) : (project?.images ?? []);
   const count = images.length;
 
   const go = useCallback((step) => {
@@ -33,8 +37,14 @@ export default function ProjectDetailPage() {
   // الرجوع لأول صورة عند الانتقال لمشروع تاني من "مشاريع ذات صلة"
   useEffect(() => {
     setCurrent(0);
+    setGroup(0);
     setZoomed(false);
   }, [params.projectId]);
+
+  // تبديل المجموعة يرجّع المعرض لأول صورة فيها
+  useEffect(() => {
+    setCurrent(0);
+  }, [group]);
 
   // أسهم الكيبورد و Esc — تشتغل في وضع التكبير وفي السلايدر العادي
   useEffect(() => {
@@ -47,6 +57,7 @@ export default function ProjectDetailPage() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [count, zoomed, isRTL, go]);
+
 
   // منع تمرير الصفحة خلف طبقة التكبير
   useEffect(() => {
@@ -63,7 +74,8 @@ export default function ProjectDetailPage() {
   // نسبة الصورة الحالية، وإلا آخر نسبة معروفة، وإلا 16/9 لحد ما تحمّل
   const ratio = ratios[current] ?? Object.values(ratios)[0] ?? 16 / 9;
   // العرض محكوم بالاتنين: عرض الحاوية وارتفاع الشاشة — عشان الطولي مايطولش والعريض ياخد راحته
-  const slideStyle = { aspectRatio: String(ratio), width: `min(100%, ${(72 * ratio).toFixed(2)}vh)` };
+  // --cap بيتغيّر حسب حجم الشاشة من الـCSS تحت: أوسع على الموبايل عشان الصور الطولية ماتطلعش ضيقة
+  const slideStyle = { aspectRatio: String(ratio), "--r": ratio };
 
   const onTouchStart = (e) => setTouchStartX(e.changedTouches[0].clientX);
   const onTouchEnd = (e) => {
@@ -132,9 +144,31 @@ export default function ProjectDetailPage() {
         {/* Project Images Gallery — سلايدر بصورة واحدة كبيرة + مصغرات + تكبير */}
         {count > 0 && (
           <div className="max-w-4xl mx-auto">
+            {/* تبويبات فصل المجموعات — عرض كامل ومتقسّمة بالتساوي عشان تتدوس بسهولة على الموبايل */}
+            {groups?.length > 1 && (
+              <div className="flex gap-2 p-1 mb-5 rounded-full border border-white/10 bg-white/5">
+                {groups.map((g, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setGroup(i)}
+                    aria-current={i === group}
+                    className={`flex-1 min-w-0 px-3 py-2.5 rounded-full font-bold text-xs sm:text-sm transition-colors ${isRTL ? 'font-arabic' : ''} ${
+                      i === group
+                        ? 'bg-yellow-300 text-black'
+                        : 'text-yellow-300/80 hover:text-yellow-300 hover:bg-white/5'
+                    }`}
+                  >
+                    <span className="block truncate">{g.label[locale]}</span>
+                    <span className="block text-[10px] font-normal opacity-70" dir="ltr">{g.images.length}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+
             {/* الصورة الحالية */}
             <div
-              className="relative mx-auto rounded-2xl overflow-hidden border border-white/10 bg-white/5 shadow-xl group"
+              className="slide relative mx-auto rounded-2xl overflow-hidden border border-white/10 bg-white/5 shadow-xl group"
               style={slideStyle}
               onTouchStart={onTouchStart}
               onTouchEnd={onTouchEnd}
@@ -158,7 +192,7 @@ export default function ProjectDetailPage() {
                 type="button"
                 onClick={() => setZoomed(true)}
                 aria-label={isRTL ? "تكبير الصورة" : "Zoom image"}
-                className="absolute top-3 start-3 z-10 p-2 rounded-full bg-black/60 text-yellow-300 border border-white/10 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity"
+                className="absolute top-3 start-3 z-10 p-2 rounded-full bg-black/60 text-yellow-300 border border-white/10 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 transition-opacity"
               >
                 <Maximize2 size={16} />
               </button>
@@ -188,25 +222,6 @@ export default function ProjectDetailPage() {
               )}
             </div>
 
-            {/* نقاط تنقّل بدل شريط المصغرات */}
-            {count > 1 && (
-              <div className="flex flex-wrap justify-center items-center gap-2.5 mt-6">
-                {images.map((_, index) => (
-                  <button
-                    key={index}
-                    type="button"
-                    onClick={() => setCurrent(index)}
-                    aria-label={`${isRTL ? 'صورة' : 'Image'} ${index + 1}`}
-                    aria-current={index === current}
-                    className={`rounded-full transition-all duration-200 ${
-                      index === current
-                        ? 'w-6 h-2 bg-yellow-300'
-                        : 'w-2 h-2 bg-white/25 hover:bg-white/60'
-                    }`}
-                  />
-                ))}
-              </div>
-            )}
           </div>
         )}
 
@@ -369,6 +384,18 @@ export default function ProjectDetailPage() {
       <style jsx>{`
         .font-arabic {
           font-family: 'Cairo', sans-serif;
+        }
+        /* عرض الصورة محكوم بعرض الحاوية وارتفاع الشاشة مع بعض.
+           على الموبايل بنسمح بارتفاع أكبر عشان لقطات الموبايل الطولية تاخد عرض الشاشة */
+        .slide {
+          /* لازم يفضل مكان تحت الصورة للنقط، فالسقف أقل من ارتفاع الشاشة */
+          --cap: 62vh;
+          width: min(100%, calc(var(--cap) * var(--r)));
+        }
+        @media (min-width: 640px) {
+          .slide {
+            --cap: 70vh;
+          }
         }
       `}</style>
     </div>
