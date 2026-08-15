@@ -5,7 +5,6 @@
   },
   "navbar": {
     "cta": "Start Now",
-    "headline": "Excellence Starts With One Step",
     "switchLanguage": "العربية"
   },
   "hero": {
@@ -13,8 +12,7 @@
     "titleHighlight": "Excellence",
     "titleEnd": "You're Looking For?",
     "description": "Whether you need to create a brand identity, website, mobile app, marketing campaign, or even accounting and inventory systems - the key to making your project a success starts with having a well-thought-out creative brief.",
-    "cta": "Contact Us!",
-    "scrollDown": "Explore More"
+    "cta": "Contact Us!"
   },
   "stats": {
     "title": "Our Statistics",
@@ -56,7 +54,7 @@
     ]
   },
   "projects": {
-    "title": "Latest Projects",
+    "title": "Categories",
     "viewProject": "View Project",
     "visitWebsite": "Visit Website",
     "viewAllProjects": "View All Projects"

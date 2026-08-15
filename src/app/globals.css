@@ -36,11 +36,10 @@ html, body {
   user-select: none;
 }
 
-/* Performance optimizations */
-section {
-  contain: layout style paint;
-  content-visibility: auto;
-}
+/* ملحوظة: كان هنا content-visibility: auto على كل section و img.
+   اتشال لأنه بيأجل رسم المحتوى وبيخلي المتصفح يعيد حساب الارتفاعات أثناء السكرول
+   (السكرول بيهتز والصور بتفضل فاضية لحظة)، والمكسب منه هنا كان صفر
+   لأن الصور أصلاً lazy وأبعادها معروفة. */
 
 /* Simplified animations */
 @keyframes typing {
@@ -122,8 +121,3 @@ section {
   }
 }
 
-/* Image optimization */
-img {
-  content-visibility: auto;
-  contain-intrinsic-size: 800px 450px;
-}

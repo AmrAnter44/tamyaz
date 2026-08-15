@@ -25,6 +25,30 @@ export const getCategory = (id) => categoriesData.find((c) => c.id === id);
 export const getCategoryProjects = (id) =>
   projectsData.filter((p) => p.categoryId === id);
 
+// كروت المستوى الأول: التصنيف المعلّم grouped بيبقى كارد واحد، والباقي مشاريع منفردة.
+// بتستخدم في الصفحة الرئيسية عشان تعرض نفس كروت صفحة الأعمال.
+export const getPortfolioEntries = () => {
+  const entries = [];
+
+  for (const category of categoriesData) {
+    const projects = projectsData.filter((p) => p.categoryId === category.id);
+    if (projects.length === 0) continue;
+
+    if (category.grouped) {
+      entries.push({ type: "category", id: category.id, category, count: projects.length });
+    } else {
+      projects.forEach((project) => entries.push({ type: "project", id: project.id, project }));
+    }
+  }
+
+  // مشاريع من غير تصنيف بتتحط في الآخر
+  projectsData
+    .filter((p) => !getCategory(p.categoryId))
+    .forEach((project) => entries.push({ type: "project", id: project.id, project }));
+
+  return entries;
+};
+
 // المشروع اللي عليه cardOpensWebsite كارده بيفتح الموقع نفسه بدل صفحة المشروع
 export const getProjectLink = (project, locale) =>
   project.cardOpensWebsite && project.websiteLink
@@ -43,7 +67,6 @@ export const projectsData = [
       en: ["5 pages", "3 doctors", "3 specialties", "Arabic RTL", "Works on any screen"],
     },
     thumbnail: "/projects/shaltot.png",
-    thumbnailBg: "#000000",
     description: {
       ar: "موقع إلكتروني كامل لعيادات شلتوت التخصصية: صفحة لكل دكتور بخبرته وتخصصه، الخدمات، معرض صور العيادة، ومواعيد العمل — مع حجز وتواصل بضغطة على الاتصال أو الواتساب، ولينك مباشر لموقع العيادة على الخرايط. عربي بالكامل بتخطيط من اليمين لليسار وشغال على أي شاشة، على دومين باسم العيادة.",
       en: "A complete website for Shaltout Specialized Clinics: a page per doctor with their experience and specialty, the services, a clinic photo gallery, and opening hours — with booking and contact one tap away by phone or WhatsApp, plus a direct map link to the clinic. Fully Arabic with a right-to-left layout, working on any screen, on a domain in the clinic's own name."
@@ -107,23 +130,6 @@ export const projectsData = [
     websiteLink: "https://www.shaltoutclinics.website/",
     instagramLink: "/"
   },
-  //   {
-  //   id: "savio",
-  //   name: "Savio Freagrances",
-  //   thumbnail: "/projects/savio.jpeg",
-  //   thumbnailBg: "linear-gradient(to bottom right, #451a03, #713f12)",
-  //   description: {
-  //     ar: "حل رقمي متكامل لمتجر العطور يبدأ من الهوية البصرية وحتى تجربة شراء سلسة، يشمل التصميمات، المحتوى المرئي، السوشيال ميديا، وموقع إلكتروني احترافي جاهز للبيع.",
-  //     en: "A complete digital solution for a perfume store, from brand identity to a smooth shopping experience, including professional designs, visual content, social media management, and a fully functional e-commerce website ready for sales."
-  //   },
-  //   images: [
-  //     "/projects/savio/1.jpeg",
-  //     "/projects/savio/2.jpeg",
-  //     "/projects/savio/3.jpeg"
-  //   ],
-  //   websiteLink: "https://saviofragrance.shop/",
-  //   instagramLink: "https://www.instagram.com/savio_fragrances/"
-  // },
 {
     id: "dr",
     name: "Clinic Media",
@@ -134,7 +140,6 @@ export const projectsData = [
       en: ["2 clinics", "A style per clinic", "6 designs", "A video per clinic"],
     },
     thumbnail: "/projects/dr.png",
-    thumbnailBg: "#000000",
     description: {
       ar: "شغل الميديا للعيادات: هوية بصرية، تصميمات سوشيال ميديا، وفيديوهات — من عيادات شلتوت التخصصية لعيادة د. جمال بركات لجراحة التجميل. كل عيادة بستايل بصري خاص بيها، وكل بوست برسالة واحدة واضحة وعليه لوجو العيادة وبيانات التواصل، فالمحتوى بيبني حضور رقمي وبيجيب حجوزات مش بس لايكات.",
       en: "Media work for clinics: brand identity, social media designs, and video — from Shaltout Specialized Clinics to Dr. Jamal Barakat's plastic surgery practice. Each clinic gets its own visual style, and every post carries a single clear message along with the clinic's logo and contact details, so the content builds a digital presence and brings bookings, not just likes."
@@ -223,7 +228,6 @@ export const projectsData = [
       en: ["9 screens", "3 roles", "7 reports", "3 automated WhatsApp messages"],
     },
     thumbnail: "/projects/empowerex/logo-full.webp",
-    thumbnailBg: "#000000",
     description: {
       ar: "نظام متكامل لإدارة عيادات العلاج الطبيعي، بيدير دورة العيادة كاملة: حجز المواعيد، ملفات المرضى والحالات والتقييمات، الفواتير والباقات، المصاريف ومرتبات الدكاترة، وسبعة تقارير قابلة للتصدير. ثلاثة أدوار بصلاحيات مفصولة على مستوى قاعدة البيانات تحمي الأرقام المالية والبيانات الطبية، وقواعد تشغيلية بتشتغل لوحدها من خصم جلسات الباقة وتحديث الفواتير لحد رسائل الواتساب التلقائية.",
       en: "A complete management system for physiotherapy clinics, covering the full clinic cycle: appointment scheduling, patient records, cases and assessments, invoicing and packages, expenses and doctor payroll, plus seven exportable reports. Three staff roles are separated at the database level to protect financial and clinical data, while operational rules run on their own — from package session deductions and invoice status to automated WhatsApp messages."
@@ -332,7 +336,6 @@ export const projectsData = [
     name: "Barber Academy System",
     categoryId: "barbershops",
     thumbnail: "/projects/memo-academy/logo-white.png",
-    thumbnailBg: "#000000",
     description: {
       ar: "نظام إدارة متكامل لأكاديمية حلاقة بثلاثة فروع، بيغطي دورة الطالب كاملة من أول ما يبقى مهتم لحد ما يتخرّج وياخد شهادة موثّقة. تسعتاشر موديول بيدير الطلاب والمجموعات والحضور بالباركود والإيصالات والمصروفات والمرتبات والشهادات والتقارير المالية. عربي بالكامل بتخطيط من اليمين لليسار، وبيتثبّت على الموبايل كتطبيق، وبحماية على طبقتين مستقلتين تخلّي الأرقام المالية محجوبة عن الموظفين على مستوى قاعدة البيانات مش الشاشة.",
       en: "A complete management system for a three-branch barber academy, covering the student journey from first inquiry to graduation with a verified certificate. Nineteen modules handle students, groups, barcode attendance, receipts, expenses, payroll, certificates, and financial reports. Fully Arabic with a right-to-left layout, installable on mobile as an app, and protected by two independent security layers that hide financial figures from staff at the database level rather than the screen."
@@ -449,7 +452,6 @@ export const projectsData = [
     name: "Barber Shop System",
     categoryId: "barbershops",
     thumbnail: "/projects/memo-barbershop/logo-mark.png",
-    thumbnailBg: "#000000",
     description: {
       ar: "نظام تشغيل كامل لسلسلة محلات حلاقة على قاعدة بيانات واحدة: لوحة تحكم بسبعتاشر قسم، وموقع، وتطبيق للعميل. كل جنيه بيدخل له فاتورة، وكل فاتورة مربوطة بدرج مفتوح باسم صاحبه، والتقفيل بيطلع مقسّم على طرق الدفع الأربعة. خمس أدوار بصلاحيات مفروضة جوّه قاعدة البيانات نفسها، وستاشر صلاحية بتتعدّل من الشاشة من غير مبرمج، والفروع بتتفتح بإضافة صف في جدول من غير إعداد تقني.",
       en: "A complete operating system for a barber shop chain on a single database: a seventeen-section dashboard, a website, and a customer app. Every pound collected has an invoice, every invoice is bound to a drawer opened under a named person, and the closing breaks down across all four payment methods. Five roles with permissions enforced inside the database itself, sixteen permissions editable from the screen without a developer, and new branches opened by adding a row with no technical setup."

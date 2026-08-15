@@ -37,6 +37,15 @@ export default function ProjectDetailPage() {
     setCurrent((i) => (i + step + count) % count);
   }, [count]);
 
+  // نافذة العرض: الصورة الحالية وجارتيها بس اللي بتتحمّل، عشان معرض فيه ٢٦ صورة
+  // مايجيبش ٢٦ ملف مرة واحدة أول ما الصفحة تفتح
+  const isNear = useCallback((index) => {
+    if (count <= 3) return true;
+    const raw = Math.abs(index - current);
+    const distance = Math.min(raw, count - raw);
+    return distance <= 1;
+  }, [current, count]);
+
   // الرجوع لأول صورة عند الانتقال لمشروع تاني من "مشاريع ذات صلة"
   useEffect(() => {
     setCurrent(0);
@@ -176,19 +185,22 @@ export default function ProjectDetailPage() {
               onTouchStart={onTouchStart}
               onTouchEnd={onTouchEnd}
             >
-              {images.map((image, index) => (
-                <Image
-                  key={index}
-                  src={image}
-                  alt={`${project.name} - ${index + 1}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 900px"
-                  className={`object-contain transition-opacity duration-300 ${index === current ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-                  quality={85}
-                  priority={index === 0}
-                  onLoad={rememberRatio(index)}
-                />
-              ))}
+              {/* الصورة الحالية واللي قبلها واللي بعدها بس — الباقي مابيتحمّلش غير لما توصله */}
+              {images.map((image, index) =>
+                isNear(index) ? (
+                  <Image
+                    key={image}
+                    src={image}
+                    alt={`${project.name} - ${index + 1}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 900px"
+                    className={`object-contain transition-opacity duration-300 ${index === current ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                    quality={85}
+                    priority={index === 0}
+                    onLoad={rememberRatio(index)}
+                  />
+                ) : null
+              )}
 
               {/* زرار التكبير */}
               <button

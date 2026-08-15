@@ -3,13 +3,17 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useLocale, useTranslations } from 'next-intl';
-import { projectsData, getProjectLink } from "@/data/projects";
+import { getPortfolioEntries, getProjectLink } from "@/data/projects";
 import PortfolioCard from "./PortfolioCard";
 
 export default function ProjectsGrid() {
   const t = useTranslations('projects');
+  const tPortfolio = useTranslations('portfolio');
   const locale = useLocale();
   const isRTL = locale === "ar";
+
+  // نفس كروت صفحة الأعمال: تصنيف العيادات كارد واحد، وأول ٣ كروت بس هنا
+  const entries = getPortfolioEntries().slice(0, 3);
 
   return (
     <div className="bg-yellow-300 py-20 px-6" dir={isRTL ? "rtl" : "ltr"}>
@@ -17,17 +21,30 @@ export default function ProjectsGrid() {
         {t('title')}
       </h2>
 
-      {/* Grid Layout - Only first 3 projects */}
+      {/* Grid Layout - أول ٣ كروت */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-        {projectsData.slice(0, 3).map((project) => {
-          const link = getProjectLink(project, locale);
+        {entries.map((entry) => {
+          if (entry.type === "category") {
+            return (
+              <PortfolioCard
+                key={entry.id}
+                href={`/${locale}/portfolio/category/${entry.category.id}`}
+                title={entry.category.name[locale]}
+                thumbnail={entry.category.thumbnail}
+                badge={tPortfolio('viewWorks')}
+                subtitle={tPortfolio('worksCount', { count: entry.count })}
+              />
+            );
+          }
+
+          const link = getProjectLink(entry.project, locale);
           return (
             <PortfolioCard
-              key={project.id}
+              key={entry.id}
               href={link.href}
               external={link.external}
-              title={project.name}
-              thumbnail={project.thumbnail}
+              title={entry.project.name}
+              thumbnail={entry.project.thumbnail}
               badge={link.external ? t('visitWebsite') : t('viewProject')}
             />
           );
