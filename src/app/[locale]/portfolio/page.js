@@ -1,65 +1,92 @@
 "use client";
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { projectsData } from "@/data/projects";
+import { projectsData, categoriesData, getCategory, getProjectLink } from "@/data/projects";
 import Nav from "../component/Nav";
 import Footer from "../component/Footer";
+import PortfolioCard from "../component/PortfolioCard";
+import Reveal from "../component/Reveal";
 
 export default function PortfolioPage() {
   const locale = useLocale();
   const t = useTranslations('portfolio');
   const isRTL = locale === "ar";
 
+  // تجميع المشاريع بالتصنيف على ترتيب التصنيفات، واللي مالوش تصنيف بيتعرض في آخر مجموعة
+  const sections = categoriesData
+    .map((category) => ({
+      key: category.id,
+      category,
+      projects: projectsData.filter((p) => p.categoryId === category.id),
+    }))
+    .filter((section) => section.projects.length > 0);
+
+  const uncategorized = projectsData.filter((p) => !getCategory(p.categoryId));
+  if (uncategorized.length > 0) {
+    sections.push({ key: "__uncategorized", category: null, projects: uncategorized });
+  }
+
   return (
     <>
       <Nav />
       <div className="min-h-screen bg-black py-24 px-6" dir={isRTL ? "rtl" : "ltr"}>
       <div className="max-w-7xl mx-auto">
-        <h1 className={`text-center text-4xl lg:text-5xl font-bold text-yellow-300 mb-12 ${isRTL ? 'font-arabic' : ''}`}>
+        <Reveal as="h1" className={`text-center text-4xl lg:text-5xl font-bold text-yellow-300 mb-12 ${isRTL ? 'font-arabic' : ''}`}>
           {t('title')}
-        </h1>
+        </Reveal>
 
-        {/* Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.map((project) => (
-            <Link
-              key={project.id}
-              href={`/${locale}/portfolio/${project.id}`}
-              className="block group rounded-2xl overflow-hidden border border-white/10 hover:border-yellow-300/50 transition-all duration-300 shadow-xl"
-            >
-              <div className="h-64 bg-black flex flex-col p-4 relative">
-                {/* Clickable indicator */}
-                <div className="absolute top-3 right-3 bg-yellow-300 text-black px-3 py-1.5 rounded-full text-xs font-bold z-10 flex items-center gap-1.5">
-                  <span className={isRTL ? 'font-arabic' : ''}>{t('viewProject')}</span>
-                  <ArrowRight size={11} />
-                </div>
+        {sections.map((section) => {
+          // التصنيف المجمّع بيتعرض ككارد واحد باسمه، فمالوش لازمة عنوان قسم فوقه
+          const grouped = section.category?.grouped;
 
-                {/* Thumbnail */}
-                <div className="flex-1 flex items-center justify-center">
-                  <Image
-                    src={project.thumbnail}
-                    alt={project.name}
-                    width={144}
-                    height={144}
-                    className="object-contain w-36 h-36 group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                    quality={75}
+          return (
+            <section key={section.key} className="mb-16 last:mb-0">
+              {section.category && !grouped && (
+                <Reveal as="div" className="flex items-center gap-4 mb-8">
+                  <h2 className={`text-2xl lg:text-3xl font-bold text-yellow-300 whitespace-nowrap ${isRTL ? 'font-arabic' : ''}`}>
+                    {section.category.name[locale]}
+                  </h2>
+                  <span
+                    className="sweep h-px flex-1 bg-yellow-300/25"
+                    style={{ "--sweep-origin": isRTL ? "right" : "left" }}
                   />
-                </div>
+                  <span className="text-sm font-bold text-white/50" dir="ltr">
+                    {section.projects.length}
+                  </span>
+                </Reveal>
+              )}
 
-                {/* Project name bar */}
-                <div className="w-full bg-white/5 p-3 rounded-lg text-center mt-2">
-                  <h3 className={`text-base font-bold text-white ${isRTL ? 'font-arabic' : ''}`}>
-                    {project.name}
-                  </h3>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {grouped ? (
+                  <Reveal>
+                    <PortfolioCard
+                      href={`/${locale}/portfolio/category/${section.category.id}`}
+                      title={section.category.name[locale]}
+                      thumbnail={section.category.thumbnail ?? section.projects[0].thumbnail}
+                      badge={t('viewWorks')}
+                      subtitle={t('worksCount', { count: section.projects.length })}
+                    />
+                  </Reveal>
+                ) : (
+                  section.projects.map((project, i) => {
+                    const link = getProjectLink(project, locale);
+                    return (
+                      <Reveal key={project.id} delay={i * 90}>
+                        <PortfolioCard
+                          href={link.href}
+                          external={link.external}
+                          title={project.name}
+                          thumbnail={project.thumbnail}
+                          badge={link.external ? t('visitWebsite') : t('viewProject')}
+                        />
+                      </Reveal>
+                    );
+                  })
+                )}
               </div>
-            </Link>
-          ))}
-        </div>
+            </section>
+          );
+        })}
       </div>
 
       <style jsx>{`

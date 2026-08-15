@@ -1,19 +1,109 @@
+// التصنيفات — التصنيف اللي عليه grouped بيظهر في صفحة الأعمال ككارد واحد بيفتح صفحة التصنيف
+export const categoriesData = [
+  {
+    id: "clinics",
+    // الاسم إنجليزي في اللغتين زي أسماء المشاريع نفسها (Clinic Website / Clinic Media / Clinic System)
+    name: { ar: "Clinic Services", en: "Clinic Services" },
+    grouped: true,
+    // أيقونة مرسومة بهوية الموقع — المصدر جنبها clinics.svg لو حبيت تعدّلها
+    thumbnail: "/projects/categories/clinics.png",
+    intro: {
+      ar: "كل اللي العيادة محتاجاه رقميًا في مكان واحد: ميديا بتخلي الناس تعرفك، وموقع بيحوّل اللي شافك لحجز، ونظام بيدير العيادة من جوه. تحت الخدمات هتلاقي شغل حقيقي مع عيادات شغالة دلوقتي.",
+      en: "Everything a clinic needs digitally in one place: media that makes people notice you, a website that turns attention into bookings, and a system that runs the clinic from the inside. Below the services you'll find real work with clinics running today.",
+    },
+    // ترتيب عرض الخدمات فوق في صفحة التصنيف
+    services: ["dr", "shaltot", "empowerex"],
+  },
+  {
+    id: "barbershops",
+    name: { ar: "صالونات وأكاديميات", en: "Barbershops & Academies" },
+  },
+];
+
+export const getCategory = (id) => categoriesData.find((c) => c.id === id);
+
+export const getCategoryProjects = (id) =>
+  projectsData.filter((p) => p.categoryId === id);
+
+// المشروع اللي عليه cardOpensWebsite كارده بيفتح الموقع نفسه بدل صفحة المشروع
+export const getProjectLink = (project, locale) =>
+  project.cardOpensWebsite && project.websiteLink
+    ? { href: project.websiteLink, external: true }
+    : { href: `/${locale}/portfolio/${project.id}`, external: false };
+
 export const projectsData = [
   {
     id: "shaltot",
-    name: "Shaltot Clinc",
+    name: "Clinic Website",
+    categoryId: "clinics",
+    // الأيقونة بتتحوّل لأيقونة lucide في صفحة التصنيف
+    icon: "website",
+    highlights: {
+      ar: ["٥ صفحات", "٣ دكاترة", "٣ تخصصات", "عربي RTL", "شغال على أي شاشة"],
+      en: ["5 pages", "3 doctors", "3 specialties", "Arabic RTL", "Works on any screen"],
+    },
     thumbnail: "/projects/shaltot.png",
     thumbnailBg: "#000000",
     description: {
-      ar: "حل رقمي متكامل للعيادة يبدأ من الهوية البصرية وحتى إدارة الحجوزات، مع تصميمات احترافية، فيديوهات، سوشيال ميديا، وموقع إلكتروني جاهز لاستقبال المرضى.",
-      en: "An end-to-end digital solution for the clinic, covering brand identity, professional designs, video content, social media management, and a fully functional website with an organized appointment system."
+      ar: "موقع إلكتروني كامل لعيادات شلتوت التخصصية: صفحة لكل دكتور بخبرته وتخصصه، الخدمات، معرض صور العيادة، ومواعيد العمل — مع حجز وتواصل بضغطة على الاتصال أو الواتساب، ولينك مباشر لموقع العيادة على الخرايط. عربي بالكامل بتخطيط من اليمين لليسار وشغال على أي شاشة، على دومين باسم العيادة.",
+      en: "A complete website for Shaltout Specialized Clinics: a page per doctor with their experience and specialty, the services, a clinic photo gallery, and opening hours — with booking and contact one tap away by phone or WhatsApp, plus a direct map link to the clinic. Fully Arabic with a right-to-left layout, working on any screen, on a domain in the clinic's own name."
     },
-    images: [
-      "/projects/shaltot/1.jpeg",
-      "/projects/shaltot/2.jpeg",
-      "/projects/shaltot/3.jpeg"
-    ],
-    video: "/projects/shaltot/video.mp4",
+    features: {
+      ar: [
+        "صفحة رئيسية بتعرّف بالعيادة، ودليل دكاترة، وصفحة مستقلة لكل دكتور، ومعرض صور، وصفحة تواصل.",
+        "تخصصات العيادة التلاتة معروضة بوضوح: علاج أمراض العيون بأحدث التقنيات، عيون وحول الأطفال، وأسنان الأطفال.",
+        "لكل دكتور صفحته بصورته وتخصصه وسنين خبرته ونبذة عنه — د. سوسن شلتوت بخبرة أكتر من ٤٠ سنة، د. زينب أحمد سعد بأكتر من ٢٠ سنة، ود. أسماء أحمد سعد بأكتر من ١٥ سنة.",
+        "زرار «احجز موعدك الآن» ظاهر في الصفحات وبيوصّل المريض لدليل الدكاترة عشان يختار ويتواصل.",
+        "اتصال بضغطة على رقم العيادة، وزرار واتساب بيفتح المحادثة على طول من الموبايل.",
+        "لينك مباشر لموقع العيادة على خرايط جوجل (الجيزة – فيصل).",
+        "مواعيد العمل مكتوبة قدام المريض: من الأحد للخميس، ٥ لـ٩ مساءً.",
+        "معرض صور بيوري العيادة من جوه قبل ما المريض ييجي.",
+        "حسابات الفيسبوك والإنستجرام موصولة بالموقع.",
+        "الموقع عربي بالكامل بتخطيط من اليمين لليسار، وبيتفتح بنفس الشكل على الموبايل والتابلت والكمبيوتر.",
+        "دومين باسم العيادة نفسها: shaltoutclinics.website"
+      ],
+      en: [
+        "A homepage introducing the clinic, a doctors directory, a dedicated page per doctor, a photo gallery, and a contact page.",
+        "The clinic's three specialties presented clearly: comprehensive eye treatment with the latest technology, pediatric eye care and strabismus, and pediatric dentistry.",
+        "Each doctor has their own page with a photo, specialty, years of experience, and a short bio — Dr. Sousan Shaltout with 40+ years, Dr. Zainab Ahmed Saad with 20+, and Dr. Asmaa Ahmed Saad with 15+.",
+        "A \"Book your appointment now\" button across the pages, taking the patient to the doctors directory to choose and get in touch.",
+        "One-tap calling to the clinic's number, and a WhatsApp button that opens the chat directly from a phone.",
+        "A direct Google Maps link to the clinic's location (Giza – Faisal).",
+        "Opening hours stated up front: Sunday to Thursday, 5pm to 9pm.",
+        "A photo gallery showing the clinic from the inside before the patient arrives.",
+        "Facebook and Instagram accounts linked from the site.",
+        "Fully Arabic with a right-to-left layout, rendering the same on phone, tablet, and desktop.",
+        "A domain in the clinic's own name: shaltoutclinics.website"
+      ]
+    },
+    benefits: {
+      ar: [
+        "العيادة بقى ليها وجود على جوجل: اللي بيدوّر على دكتور عيون في فيصل يلاقي موقع باسم العيادة، مش بوست ضايع جوه فيسبوك.",
+        "الانطباع الأول بيتظبط قبل ما المريض يتحرك من بيته — موقع نضيف ومرتب بيقول إن العيادة منظمة.",
+        "خبرة دكاترتك بتشتغل لصالحك: ٤٠ سنة و٢٠ سنة و١٥ سنة مكتوبة قدام المريض وهو بيقرر، وده اللي بيحسم الاختيار بين عيادتين.",
+        "مكالمات مابتضيعش: التليفون والواتساب على بعد ضغطة، فاللي مستعجل بيتواصل في ثانية بدل ما يقفل ويروح لغيرك.",
+        "المريض بيوصل من غير ما حد يشرح له الطريق — لينك الخرايط بيوديه لباب العيادة.",
+        "زيارات في غير المواعيد بتقل: ساعات العمل مكتوبة، فمحدش بييجي يوم إجازة ويلاقي قفل ويزعل.",
+        "الرسبشن بيرتاح من الأسئلة المتكررة: العنوان والمواعيد والتخصصات والدكاترة كلها مكتوبة، والمكالمة بتبقى للحجز بس.",
+        "بتوصل لناس مش موجودة على السوشيال ميديا أصلاً وبتدوّر بجوجل.",
+        "المريض بيشوف العيادة من جوه في المعرض، فبييجي وهو مطمّن — وده مهم مع أهالي الأطفال.",
+        "الموقع أصل ملكك بدومين باسمك، مش صفحة على منصة ممكن تتقفل أو تتغير قواعدها في أي وقت.",
+        "أساس تقدر تبني عليه: نظام حجز أونلاين كامل أو صفحات خدمات أكتر بيتضافوا على نفس الموقع لما تحب."
+      ],
+      en: [
+        "The clinic now exists on Google: someone searching for an eye doctor in Faisal finds a site in the clinic's name, not a post buried in Facebook.",
+        "The first impression is set before the patient leaves home — a clean, organized site says the clinic is organized too.",
+        "Your doctors' experience works for you: 40, 20, and 15 years stated in front of the patient while they decide — often what settles the choice between two clinics.",
+        "Calls stop slipping away: phone and WhatsApp are one tap away, so someone in a hurry reaches you in seconds instead of moving on.",
+        "Patients arrive without anyone explaining the route — the map link takes them to the clinic's door.",
+        "Fewer off-hours visits: opening hours are stated, so nobody turns up on a closed day and leaves unhappy.",
+        "Reception is freed from repeat questions: address, hours, specialties, and doctors are all written down, so calls are for booking.",
+        "You reach people who are not on social media at all and search on Google instead.",
+        "Patients see the clinic from the inside in the gallery and arrive reassured — which matters with parents of young children.",
+        "The site is an asset you own on your own domain, not a page on a platform that can be locked or change its rules.",
+        "A base to build on: a full online booking system or more service pages can be added to the same site whenever you want."
+      ]
+    },
     websiteLink: "https://www.shaltoutclinics.website/",
     instagramLink: "/"
   },
@@ -36,25 +126,102 @@ export const projectsData = [
   // },
 {
     id: "dr",
-    name: "Dr.Gamal",
+    name: "Clinic Media",
+    categoryId: "clinics",
+    icon: "media",
+    highlights: {
+      ar: ["عيادتين", "ستايل خاص لكل عيادة", "٦ تصميمات", "فيديو لكل عيادة"],
+      en: ["2 clinics", "A style per clinic", "6 designs", "A video per clinic"],
+    },
     thumbnail: "/projects/dr.png",
     thumbnailBg: "#000000",
     description: {
-      ar: "تجربة رقمية متكاملة للدكتور جمال، طبيب اللياقة البدنية، تشمل هوية بصرية احترافية، تصميمات جذابة، محتوى مرئي ملهم، وإدارة منصات التواصل الاجتماعي لتعزيز حضوره الرقمي وبناء مجتمع نشط حول رحلة اللياقة.",
-      en: "A complete digital experience for Dr. Gamal, fitness doctor, including a professional brand identity, eye-catching designs, inspiring visual content, and social media management to grow his online presence and build an active community around fitness."
+      ar: "شغل الميديا للعيادات: هوية بصرية، تصميمات سوشيال ميديا، وفيديوهات — من عيادات شلتوت التخصصية لعيادة د. جمال بركات لجراحة التجميل. كل عيادة بستايل بصري خاص بيها، وكل بوست برسالة واحدة واضحة وعليه لوجو العيادة وبيانات التواصل، فالمحتوى بيبني حضور رقمي وبيجيب حجوزات مش بس لايكات.",
+      en: "Media work for clinics: brand identity, social media designs, and video — from Shaltout Specialized Clinics to Dr. Jamal Barakat's plastic surgery practice. Each clinic gets its own visual style, and every post carries a single clear message along with the clinic's logo and contact details, so the content builds a digital presence and brings bookings, not just likes."
     },
-    images: [
-      "/projects/gamal/1.jpeg",
-      "/projects/gamal/2.jpeg",
-      "/projects/gamal/3.jpeg"
+    features: {
+      ar: [
+        "ستايل بصري مستقل لكل عيادة: شلتوت بألوان دافية هادية بتناسب أهالي الأطفال، وجمال بركات بأسود وذهبي وعناصر فرعونية بتدي إحساس فخامة.",
+        "بوستات خدمات: كل تصميم بيبيع خدمة واحدة برسالة واحدة — «بنضمنلك أسنان أقوى لأولادك»، «أسنان سليمة بدون تسوس»، وهكذا.",
+        "بوستات حالات Before / After بتصميم موحّد بيعرض النتيجة جنب بعضها، وتقييم بالنجوم لعوامل نجاح الحالة.",
+        "كل تصميم عليه هوية العميل كاملة: اللوجو، ورقم التليفون أو الدومين، والعنوان — فالبوست بيشتغل إعلان كامل لوحده حتى لو اتنقل بره الصفحة.",
+        "فيديو لكل عيادة بنفس الستايل البصري بتاع تصميماتها.",
+        "نصوص عربية قصيرة بخطوط واضحة بتتقري وانت ماسك الموبايل من غير ما تقرّب.",
+        "مقاسات طولية مظبوطة للفيد والاستوري وريلز.",
+        "معالجة صور احترافية: عزل الشخصية عن الخلفية، وتوحيد الإضاءة والألوان في كل البوستات."
+      ],
+      en: [
+        "A separate visual style per clinic: Shaltout in warm, calm tones that suit parents of young children, and Jamal Barakat in black and gold with pharaonic motifs for a premium feel.",
+        "Service posts: each design sells one service with one message — \"stronger teeth for your kids\", \"healthy teeth without decay\", and so on.",
+        "Before / After case posts in a consistent layout showing the result side by side, with star ratings for the factors behind it.",
+        "Every design carries the client's full identity: logo, phone number or domain, and address — so the post works as a complete ad on its own, even when shared outside the page.",
+        "A video per clinic in the same visual style as its designs.",
+        "Short Arabic copy in clear typefaces, readable on a phone without zooming.",
+        "Portrait sizes tuned for feed, stories, and reels.",
+        "Professional image work: subject cut out from the background, with lighting and color unified across every post."
+      ]
+    },
+    benefits: {
+      ar: [
+        "صفحتك بتبان عيادة محترمة مش صفحة شخصية: ستايل ثابت وتصميم نضيف بيدّي إحساس إن العيادة نفسها منظمة، والمريض بيقيس المكان من صفحته.",
+        "البوست بيشتغل لوحده لما يتنقل: اللوجو والرقم والعنوان على كل تصميم، فأي حد وصلته الصورة من صاحبه يعرف يوصلك في ثانية بدل ما يدوّر.",
+        "الـ Before / After بيبيع أكتر من أي كلام — المريض بيشوف نتيجة حقيقية لحالة شبهه، وده بيقصّر المسافة بين إنه يتفرج وإنه يتصل.",
+        "الناس بتعرف بوستك قبل ما تقرا الاسم: الستايل الثابت هو اللي بيحوّل صفحة بوستات لعلامة محفورة في دماغ المتابع.",
+        "الرسالة الواحدة في كل تصميم بتخلي المريض يفهم في ثانيتين وهو بيسكرول — والبوست اللي محتاج تفكير بيتعدّى.",
+        "كل عيادة بتكلم جمهورها الصح: ألوان وصور الأطفال بتوصل للأمهات، والستايل الجريء بيوصل لجمهور التجميل — نفس المجهود بنتيجة مختلفة تمامًا.",
+        "التصميم بيمنع السؤال المتكرر: الخدمة والعنوان والرقم مكتوبين، فالرسايل اللي بتوصلك بتبقى حجز مش استفسار.",
+        "الفيديو بيوصل لناس مكنتش هتوصلهم بالصورة — المنصات نفسها بتدفع الفيديو لجمهور أوسع.",
+        "المحتوى ده جاهز يتحوّل لإعلان ممول في أي وقت من غير شغل جديد، فلو قررت تصرف فلوس على إعلانات بتصرفها على مادة شغالة.",
+        "أرشيف بصري بيتراكم: كل حالة وكل خدمة متوثّقة بتصميم، فبعد شهور يبقى عندك مكتبة إثبات نتائج تفرجها لأي مريض متردد.",
+        "الدكتور بيركّز في شغله: مفيش وقت بيضيع في تصميم بوست بالموبايل أو تدوير على صور — المحتوى بيوصل جاهز."
+      ],
+      en: [
+        "Your page looks like a serious clinic, not a personal profile: a consistent style and clean design signal that the clinic itself is organized — patients judge the place by its page.",
+        "The post keeps working when it travels: logo, number, and address on every design mean anyone who receives the image from a friend can reach you in seconds instead of searching.",
+        "Before / After sells harder than any copy — the patient sees a real result on a case like their own, which shortens the distance between watching and calling.",
+        "People recognize your post before reading the name: a consistent style is what turns a page of posts into a brand that sticks.",
+        "One message per design means the patient gets it in two seconds while scrolling — a post that needs thinking gets scrolled past.",
+        "Each clinic speaks to the right audience: warm colors and children reach mothers, while the bold style reaches the cosmetic-surgery audience — same effort, entirely different outcome.",
+        "The design answers the repeat questions up front: service, address, and number are on it, so the messages you get are bookings rather than enquiries.",
+        "Video reaches people the image never would — the platforms themselves push video to a wider audience.",
+        "This content converts into paid ads at any time with no new work, so if you decide to spend on ads you spend it on material that already performs.",
+        "A visual archive builds up: every case and service documented as a design, so within months you have a library of proof to show any hesitant patient.",
+        "The doctor stays focused on the work: no time lost designing a post on a phone or hunting for images — the content arrives ready."
+      ]
+    },
+    // معرض مقسّم بالعميل، وكل مجموعة ليها الفيديو بتاعها
+    imageGroups: [
+      {
+        label: { ar: "عيادات شلتوت", en: "Shaltout Clinics" },
+        images: [
+          "/projects/shaltot/1.jpeg",
+          "/projects/shaltot/2.jpeg",
+          "/projects/shaltot/3.jpeg"
+        ],
+        video: "/projects/shaltot/video.mp4",
+      },
+      {
+        label: { ar: "د. جمال بركات", en: "Dr. Jamal Barakat" },
+        images: [
+          "/projects/gamal/1.jpeg",
+          "/projects/gamal/2.jpeg",
+          "/projects/gamal/3.jpeg"
+        ],
+        video: "/projects/gamal/video.mp4",
+      },
     ],
-    video: "/projects/gamal/video.mp4",
     websiteLink: "",
     instagramLink: "https://www.instagram.com/savio_fragrances/"
   },
   {
     id: "empowerex",
     name: "Clinic System",
+    categoryId: "clinics",
+    icon: "system",
+    highlights: {
+      ar: ["٩ شاشات", "٣ أدوار", "٧ تقارير", "٣ رسايل واتساب تلقائية"],
+      en: ["9 screens", "3 roles", "7 reports", "3 automated WhatsApp messages"],
+    },
     thumbnail: "/projects/empowerex/logo-full.webp",
     thumbnailBg: "#000000",
     description: {
@@ -163,6 +330,7 @@ export const projectsData = [
   {
     id: "barber-academy",
     name: "Barber Academy System",
+    categoryId: "barbershops",
     thumbnail: "/projects/memo-academy/logo-white.png",
     thumbnailBg: "#000000",
     description: {
@@ -279,6 +447,7 @@ export const projectsData = [
   {
     id: "barbershop-system",
     name: "Barber Shop System",
+    categoryId: "barbershops",
     thumbnail: "/projects/memo-barbershop/logo-mark.png",
     thumbnailBg: "#000000",
     description: {
@@ -382,3 +551,4 @@ export const projectsData = [
   },
 
 ];
+

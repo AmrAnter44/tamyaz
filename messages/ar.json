@@ -58,17 +58,23 @@
   "projects": {
     "title": "أحدث المشاريع",
     "viewProject": "عرض المشروع",
+    "visitWebsite": "زيارة الموقع",
     "viewAllProjects": "عرض جميع المشاريع"
   },
   "portfolio": {
     "title": "أعمالنا",
     "viewProject": "عرض المشروع",
+    "viewWorks": "عرض الأعمال",
+    "worksCount": "{count, plural, =1 {عمل واحد} =2 {عملين} other {# أعمال}}",
     "backToPortfolio": "العودة للمشاريع",
     "relatedProjects": "مشاريع ذات صلة",
     "visitWebsite": "زيارة الموقع",
     "followOnInstagram": "تابعنا على انستجرام",
     "features": "إيه اللي في النظام",
-    "benefits": "إيه اللي هتكسبه"
+    "benefits": "إيه اللي هتكسبه",
+    "services": "الخدمات",
+    "fullDetails": "التفاصيل الكاملة",
+    "morePoints": "{count, plural, =1 {+ نقطة كمان في صفحة الخدمة} =2 {+ نقطتين كمان في صفحة الخدمة} other {+ # نقط كمان في صفحة الخدمة}}"
   },
   "faq": {
     "title": "الأسئلة الشائعة",

@@ -58,17 +58,23 @@
   "projects": {
     "title": "Latest Projects",
     "viewProject": "View Project",
+    "visitWebsite": "Visit Website",
     "viewAllProjects": "View All Projects"
   },
   "portfolio": {
     "title": "Our Work",
     "viewProject": "View Project",
+    "viewWorks": "View Work",
+    "worksCount": "{count, plural, one {# project} other {# projects}}",
     "backToPortfolio": "Back to Portfolio",
     "relatedProjects": "Related Projects",
     "visitWebsite": "Visit Website",
     "followOnInstagram": "Follow on Instagram",
     "features": "What's inside the system",
-    "benefits": "What you gain"
+    "benefits": "What you gain",
+    "services": "Services",
+    "fullDetails": "Full details",
+    "morePoints": "{count, plural, one {+ # more point on the service page} other {+ # more points on the service page}}"
   },
   "faq": {
     "title": "Frequently Asked Questions",

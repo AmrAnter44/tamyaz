@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
+  <!-- أيقونة تصنيف العيادات والمستشفيات — بهوية الموقع: أصفر fde047 على خلفية شفافة -->
+  <g stroke="#fde047" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <!-- مبنى العيادة -->
+    <rect x="96" y="176" width="320" height="254" rx="26" />
+    <!-- لافتة الصليب الطبي فوق المبنى -->
+    <rect x="206" y="70" width="100" height="100" rx="24" />
+    <path d="M256 96v48M232 120h48" />
+    <!-- باب الدخول -->
+    <path d="M224 430v-78a32 32 0 0 1 64 0v78" />
+  </g>
+  <!-- الشبابيك -->
+  <g stroke="#fde047" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
+    <rect x="132" y="228" width="36" height="36" rx="9" />
+    <rect x="180" y="228" width="36" height="36" rx="9" />
+    <rect x="296" y="228" width="36" height="36" rx="9" />
+    <rect x="344" y="228" width="36" height="36" rx="9" />
+    <rect x="132" y="292" width="36" height="36" rx="9" />
+    <rect x="180" y="292" width="36" height="36" rx="9" />
+    <rect x="296" y="292" width="36" height="36" rx="9" />
+    <rect x="344" y="292" width="36" height="36" rx="9" />
+  </g>
+</svg>

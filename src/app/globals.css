@@ -58,6 +58,70 @@ section {
   will-change: width;
 }
 
+/* ظهور تدريجي عند التمرير — opacity و transform بس (على الـGPU) عشان مايأثرش على الأداء */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* عناصر جوه بلوك ظاهر بتيجي ورا بعض — بتتحرك مع كلاس الأب من غير مراقب إضافي */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(10px);
+  /* الهوفر متضاف هنا كمان عشان الكلاس ده بيغلب على utilities الترانزيشن */
+  transition: opacity 0.45s ease-out, transform 0.45s ease-out,
+    background-color 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out;
+}
+
+.reveal.is-visible .stagger-item {
+  opacity: 1;
+  transform: none;
+}
+
+/* طفو خفيف لأيقونة عنوان الصفحة */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.floaty {
+  animation: floaty 4s ease-in-out infinite;
+}
+
+/* خط بيتمد تحت العنوان أول ما يظهر */
+@keyframes sweep {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.reveal.is-visible .sweep {
+  transform-origin: var(--sweep-origin, left);
+  animation: sweep 0.7s ease-out both;
+}
+
+/* احترام إعداد تقليل الحركة في نظام المستخدم */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible,
+  .stagger-item,
+  .reveal.is-visible .stagger-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .floaty,
+  .reveal.is-visible .sweep {
+    animation: none;
+  }
+}
+
 /* Image optimization */
 img {
   content-visibility: auto;

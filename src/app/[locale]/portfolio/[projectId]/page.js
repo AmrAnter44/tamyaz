@@ -4,11 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from 'next-intl';
-import { projectsData } from "@/data/projects";
+import { projectsData, getProjectLink } from "@/data/projects";
 import { Instagram, ExternalLink, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X, Maximize2, Check } from "lucide-react";
 import { notFound } from "next/navigation";
 import Nav from "../../component/Nav";
 import Footer from "../../component/Footer";
+import PortfolioCard from "../../component/PortfolioCard";
 
 export default function ProjectDetailPage() {
   const params = useParams();
@@ -29,6 +30,8 @@ export default function ProjectDetailPage() {
   const [group, setGroup] = useState(0);
   const images = groups ? (groups[group]?.images ?? []) : (project?.images ?? []);
   const count = images.length;
+  // الفيديو بيتبع المجموعة المختارة، وإلا فيديو المشروع الواحد
+  const video = (groups ? groups[group]?.video : null) ?? project?.video;
 
   const go = useCallback((step) => {
     setCurrent((i) => (i + step + count) % count);
@@ -285,10 +288,11 @@ export default function ProjectDetailPage() {
         )}
 
         {/* Project Video */}
-        {project.video && (
+        {video && (
           <div className="mt-12">
             <video
-              src={project.video}
+              key={video}
+              src={video}
               controls
               className="w-full rounded-2xl shadow-xl max-h-screen"
               preload="metadata"
@@ -346,36 +350,20 @@ export default function ProjectDetailPage() {
               {t('relatedProjects')}
             </h2>
             <div className="flex flex-col sm:flex-row gap-6">
-              {relatedProjects.map((related) => (
-                <Link
-                  key={related.id}
-                  href={`/${locale}/portfolio/${related.id}`}
-                  className="flex-1 block group rounded-2xl overflow-hidden border border-white/10 hover:border-yellow-300/50 transition-all duration-300 shadow-xl"
-                >
-                  <div className="h-52 bg-black flex flex-col p-4 relative">
-                    <div className="absolute top-3 right-3 bg-yellow-300 text-black px-3 py-1.5 rounded-full text-xs font-bold z-10 flex items-center gap-1.5">
-                      <span className={isRTL ? 'font-arabic' : ''}>{t('viewProject')}</span>
-                      <ArrowRight size={11} />
-                    </div>
-                    <div className="flex-1 flex items-center justify-center">
-                      <Image
-                        src={related.thumbnail}
-                        alt={related.name}
-                        width={120}
-                        height={120}
-                        className="object-contain w-28 h-28 group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                        quality={75}
-                      />
-                    </div>
-                    <div className="w-full bg-white/5 rounded-lg text-center mt-2" style={{ padding: '10px' }}>
-                      <h3 className={`text-sm font-bold text-white ${isRTL ? 'font-arabic' : ''}`}>
-                        {related.name}
-                      </h3>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+              {relatedProjects.map((related) => {
+                const link = getProjectLink(related, locale);
+                return (
+                  <PortfolioCard
+                    key={related.id}
+                    href={link.href}
+                    external={link.external}
+                    title={related.name}
+                    thumbnail={related.thumbnail}
+                    badge={link.external ? t('visitWebsite') : t('viewProject')}
+                    compact
+                  />
+                );
+              })}
             </div>
           </div>
         )}
