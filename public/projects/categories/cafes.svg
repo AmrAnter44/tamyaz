@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" fill="none">
+  <!-- أيقونة تصنيف الكافيهات — بهوية الموقع: أصفر fde047 على خلفية شفافة -->
+  <g stroke="#fde047" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <!-- الكوباية -->
+    <path d="M104 206h248v96a104 104 0 0 1-104 104h-40a104 104 0 0 1-104-104z" />
+    <!-- الودن -->
+    <path d="M352 232h24a48 48 0 0 1 0 96h-30" />
+    <!-- الطبق -->
+    <path d="M76 448h328" />
+  </g>
+  <!-- البخار -->
+  <g stroke="#fde047" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
+    <path d="M168 156c-18-20 18-36 0-58s18-36 0-56" />
+    <path d="M228 156c-18-20 18-36 0-58s18-36 0-56" />
+    <path d="M288 156c-18-20 18-36 0-58s18-36 0-56" />
+  </g>
+</svg>

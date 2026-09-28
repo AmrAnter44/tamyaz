@@ -13,6 +13,8 @@ const nextConfig = {
 
   // Caching headers for better performance
   async headers() {
+    // في الـ dev أسماء الملفات مابتتغيرش مع التعديل، فالـ immutable بيخلي المتصفح يمسك كود قديم
+    if (process.env.NODE_ENV !== 'production') return [];
     return [
       {
         source: '/_next/static/:path*',

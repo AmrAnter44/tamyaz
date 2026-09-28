@@ -18,6 +18,11 @@ export const categoriesData = [
     id: "barbershops",
     name: { ar: "صالونات وأكاديميات", en: "Barbershops & Academies" },
   },
+  {
+    id: "cafes",
+    name: { ar: "كافيهات", en: "Cafes" },
+    thumbnail: "/projects/categories/cafes.png",
+  },
 ];
 
 export const getCategory = (id) => categoriesData.find((c) => c.id === id);
@@ -546,6 +551,103 @@ export const projectsData = [
       {
         label: { ar: "تطبيق العميل", en: "Customer app" },
         images: Array.from({ length: 6 }, (_, i) => `/projects/memo-barbershop/mobile-${i + 1}.jpeg`),
+      },
+    ],
+    websiteLink: "",
+    instagramLink: "/"
+  },
+  {
+    id: "cafe-system",
+    name: "Cafe System",
+    categoryId: "cafes",
+    thumbnail: "/projects/keyif/logo.png",
+    description: {
+      ar: "نظام تشغيل كامل لكافيه «كيف»: كاشير سريع، وشاشة للباريستا، ولوحة إدارة بتلم المنيو والمخزون والمصاريف والتقارير في مكان واحد. مفيش بيع من غير شيفت مفتوح باسم صاحبه، وكل شيفت بيتقفل بمبيعاته ومصاريفه وصافيه، والمخزون بيتخصم من الأصناف اللي بتتباع فتعرف إيه اللي قرب يخلص قبل ما يخلص.",
+      en: "A complete operating system for Keyif café: a fast point of sale, a barista screen, and an admin dashboard that brings the menu, inventory, expenses, and reports into one place. Nothing is sold without a shift opened under a named person, every shift closes with its own sales, expenses, and net, and inventory is drawn down by what is actually sold — so you know what is running low before it runs out."
+    },
+    features: {
+      ar: [
+        "كاشير مصمم للسرعة: الأقسام تابات فوق، الأصناف بضغطة، والأوردر بيتأكد ويتطبع من نفس الشاشة.",
+        "مفيش بيع من غير شيفت: الكاشير مقفول لحد ما حد يفتح شيفت باسمه.",
+        "نوع الأوردر «تيك أواي» أو «في المحل»، والدفع كاش أو إنستاباي أو محفظة أو فيزا.",
+        "بحث عن أي أوردر قديم وتسجيل مصروف من الكاشير نفسه من غير ما تخرج للوحة الإدارة.",
+        "شاشة خاصة للباريستا وتذكرة تحضير بتتطبع تلقائيًا مع كل أوردر.",
+        "إدارة المنيو بالكامل: اسم عربي وإنجليزي، سعر، ترتيب، أيقونة، وحجم سنجل ودبل للصنف الواحد.",
+        "كل صنف تتحكم فيه: يظهر في الكاشير، يظهر في الموقع، أو الاتنين.",
+        "إضافات بأسعارها (شوت إسبرسو زيادة مثلًا)، وكل إضافة مربوطة بالمخزون اللي بتستهلكه.",
+        "مخزون بالكيلو والجرام والقطعة، متقسم على تصنيفات، ومربوط بأصناف المنيو.",
+        "حد تنبيه لكل خامة: النظام بيعلّم اللي «قرب يخلص» واللي «خلص»، وبيعرض أكتر ٣ خامات اتصرفت في الشهر.",
+        "سجل حركة المخزون: كل كمية دخلت أو اتصرفت متسجلة.",
+        "مصاريف متقسمة على أنواع — طلبيات تشغيل، سلف، فواتير، إيجار، صيانة — ومصاريف اليوم والشهر قدامك، وتدخل على أي نوع تشوف اتصرف في إيه.",
+        "تقارير يومية وشهرية: عدد الأوردرات، المبيعات، المصاريف، والصافي بعد المصاريف — واضغط على أي يوم تشوف تفاصيله.",
+        "تراك المبيعات: اختار مدة (النهارده، آخر ٧ أيام، الشهر ده…) وشوف كل صنف اتباع منه كام وجاب كام ونسبته من الإيراد.",
+        "الأصناف اللي ما اتباعتش في المدة دي بتظهر لوحدها، فتعرف إيه اللي واخد مكان في المنيو من غير فايدة.",
+        "مراجعة الشيفتات: كل شيفت لوحده بمين فتحه وإمتى ومدته ومبيعاته ومصاريفه وصافيه ومتوسط الأوردر والأوردرات الملغية.",
+        "تقفيل الدرج: نقدية البداية + مبيعات الكاش − مصاريف الدرج، فتعرف الدرج المفروض يكون فيه كام.",
+        "خدمة الدايين إن بتتحسب على أوردرات «في المحل» بس، بمبلغ ثابت أو بطريقة الحساب اللي تختارها.",
+        "طباعة من المتصفح أو طابعة حرارية بلوتوث، بعرض ورق 58mm، وطباعة الفاتورة تلقائيًا.",
+        "مستخدمين بصلاحيات، والنظام عربي وإنجليزي بالكامل."
+      ],
+      en: [
+        "A point of sale built for speed: categories as tabs on top, items in one tap, and the order confirmed and printed from the same screen.",
+        "No selling without a shift: the register stays locked until someone opens a shift under their name.",
+        "Orders are takeaway or dine-in, paid by cash, InstaPay, mobile wallet, or card.",
+        "Search any past order and log an expense right from the register, without leaving for the dashboard.",
+        "A dedicated barista screen, with a preparation ticket printed automatically for every order.",
+        "Full menu management: Arabic and English names, price, sort order, icon, and single/double sizes for the same item.",
+        "Control each item: shown on the register, shown on the website, or both.",
+        "Add-ons with their own prices (an extra espresso shot, for example), each linked to the inventory it consumes.",
+        "Inventory tracked by kilo, gram, and piece, grouped into categories and linked to menu items.",
+        "An alert threshold for every ingredient: the system flags what is running low and what is out, and shows the top three consumed this month.",
+        "An inventory movement log: every quantity added or used is recorded.",
+        "Expenses split by type — operating supplies, staff advances, bills, rent, maintenance — with today's and this month's totals in view, and a drill-down into any type.",
+        "Daily and monthly reports: orders, sales, expenses, and net after expenses — tap any day to see its details.",
+        "Sales tracking: pick a period (today, last 7 days, this month…) and see how many of each item sold, what it brought in, and its share of revenue.",
+        "Items that did not sell in the period surface on their own, so you see what is taking space on the menu for nothing.",
+        "Shift review: each shift on its own — who opened it, when, how long, its sales, expenses, net, average order, and cancelled orders.",
+        "Drawer closing: opening cash plus cash sales minus drawer expenses, so you know exactly what the drawer should hold.",
+        "A dine-in service charge applied to dine-in orders only, as a fixed amount or the calculation method you choose.",
+        "Printing from the browser or a Bluetooth thermal printer, 58mm paper, with automatic receipt printing.",
+        "Users with permissions, and the system is fully Arabic and English."
+      ]
+    },
+    benefits: {
+      ar: [
+        "كل جنيه ليه صاحب: البيع مقفول من غير شيفت مفتوح باسم حد، فأي فرق في الدرج بيبقى معروف حصل في شيفت مين.",
+        "تقفيل الدرج بقى حساب مش تخمين: النظام بيقولك الدرج المفروض فيه كام، فتعدّ وتقارن في دقيقة.",
+        "بتعرف صافيك مش مبيعاتك بس: المصاريف بتتخصم يومي وشهري، فتشوف الكافيه كسبان فعلًا ولا لأ.",
+        "البن مايخلصش فجأة في نص الشيفت: التنبيه بيوصلك قبلها، فتطلب في وقتك بدل ما تقفل صنف أو تشتري بالغالي.",
+        "الهالك والسرقة بيبانوا: المخزون بيتخصم من المبيعات الفعلية، فلو الخامة خلصت أسرع من المبيعات تعرف إن فيه حاجة غلط.",
+        "المنيو بيتظبط بالأرقام: تعرف الصنف اللي شايل الكافيه والصنف اللي محدش بيطلبه، فتشيل وتضيف وتسعّر على بيانات.",
+        "المصاريف مابتضيعش في الورق: كل مصروف متسجل بنوعه، فتعرف فلوسك بتروح فين وتقلل اللي ينفع يتقلل.",
+        "الكاشير أسرع والطابور أقصر: أوردر بضغطات قليلة وفاتورة بتطلع لوحدها، وتذكرة التحضير بتوصل للباريستا من غير زعيق.",
+        "خدمة الدايين إن بتتحسب صح كل مرة، على اللي قاعد بس، من غير ما الكاشير يفتكر يضيفها.",
+        "تغيّر سعر أو تضيف صنف من الشاشة ويتطبق في الكاشير فورًا — من غير مبرمج."
+      ],
+      en: [
+        "Every pound has an owner: selling is locked without a shift opened under a name, so any drawer gap is traced to a specific shift.",
+        "Closing the drawer becomes arithmetic, not guesswork: the system tells you what the drawer should hold, so you count and compare in a minute.",
+        "You see net, not just sales: expenses are subtracted daily and monthly, so you know whether the café is actually profitable.",
+        "Coffee never runs out mid-shift: the alert reaches you first, so you reorder on time instead of dropping an item or buying at a premium.",
+        "Waste and theft show up: inventory is drawn down by actual sales, so if an ingredient depletes faster than sales explain, you know something is off.",
+        "The menu is tuned by numbers: you see which items carry the café and which nobody orders, so you cut, add, and price on data.",
+        "Expenses stop getting lost on paper: each one is logged by type, so you know where your money goes and what can be trimmed.",
+        "A faster register and a shorter line: orders in a few taps, the receipt prints itself, and the prep ticket reaches the barista without shouting.",
+        "The dine-in service charge is applied correctly every time, only to seated customers, without the cashier having to remember it.",
+        "Change a price or add an item on screen and it applies at the register instantly — no developer needed."
+      ]
+    },
+    imageGroups: [
+      {
+        label: { ar: "الكاشير", en: "Point of sale" },
+        images: ["/projects/keyif/1.jpg"],
+      },
+      {
+        label: { ar: "لوحة الإدارة", en: "Dashboard" },
+        // 8 و 9 png (نسخ الأرقام فيها متشوّشة)
+        images: Array.from({ length: 11 }, (_, i) =>
+          `/projects/keyif/${i + 2}.${i + 2 === 8 || i + 2 === 9 ? "png" : "jpg"}`
+        ),
       },
     ],
     websiteLink: "",
