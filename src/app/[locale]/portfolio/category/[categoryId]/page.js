@@ -9,10 +9,12 @@ import {
   ArrowRight,
   Check,
   Clapperboard,
+  Coffee,
   Globe,
   LayoutDashboard,
+  Scissors,
+  Smartphone,
   Sparkles,
-  Stethoscope,
   TrendingUp,
 } from "lucide-react";
 import { getCategory, getCategoryProjects, getProjectLink } from "@/data/projects";
@@ -28,6 +30,13 @@ const SERVICE_ICONS = {
   media: Clapperboard,
   website: Globe,
   system: LayoutDashboard,
+  app: Smartphone,
+};
+
+// أيقونة رأس صفحة التصنيف — بتتقرا من category.icon في الداتا
+const CATEGORY_ICONS = {
+  scissors: Scissors,
+  coffee: Coffee,
 };
 
 export default function CategoryPage() {
@@ -41,6 +50,7 @@ export default function CategoryPage() {
     notFound();
   }
 
+  const CategoryIcon = CATEGORY_ICONS[category.icon] ?? Sparkles;
   const all = getCategoryProjects(category.id);
   // الخدمات بترتيب التصنيف، وأي مشروع مش مذكور في الترتيب بيتحط في الآخر
   const services = (category.services ?? [])
@@ -65,7 +75,7 @@ export default function CategoryPage() {
           <Reveal as="header">
             <div className="flex items-center gap-4 mb-4">
               <span className="floaty shrink-0 grid place-items-center w-14 h-14 rounded-2xl t-icon !w-14 !h-14 !rounded-2xl">
-                <Stethoscope size={26} className="text-accent" />
+                <CategoryIcon size={26} className="text-accent" />
               </span>
               <h1 className={`text-[32px] sm:text-4xl lg:text-5xl font-extrabold text-ink`}>
                 {category.name[locale]}
@@ -118,7 +128,8 @@ export default function CategoryPage() {
                     </span>
 
                     <div className="min-w-0">
-                      <h3 className={`text-xl lg:text-2xl font-bold text-ink truncate`}>
+                      {/* من غير truncate: أسماء زي "Memo Barber Academy System" بتتقص على الموبايل */}
+                      <h3 className={`text-xl lg:text-2xl font-bold text-ink leading-snug break-words`}>
                         {project.name}
                       </h3>
                     </div>

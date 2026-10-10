@@ -1,22 +1,27 @@
 // التصنيفات — التصنيف اللي عليه grouped بيظهر في صفحة الأعمال ككارد واحد بيفتح صفحة التصنيف
 export const categoriesData = [
   {
-    id: "clinics",
-    // الاسم إنجليزي في اللغتين زي أسماء المشاريع نفسها (Clinic Website / Clinic Media / Clinic System)
-    name: { ar: "Clinic Services", en: "Clinic Services" },
+    id: "memo-group",
+    // الاسم إنجليزي في اللغتين زي أسماء المشاريع نفسها
+    name: { ar: "Memo Group", en: "Memo Group" },
     grouped: true,
-    // أيقونة مرسومة بهوية الموقع — المصدر جنبها clinics.svg لو حبيت تعدّلها
-    thumbnail: "/projects/categories/clinics.png",
+    // أيقونة رأس صفحة التصنيف (بتتحوّل لأيقونة lucide في الصفحة)
+    icon: "scissors",
+    thumbnail: "/projects/categories/memo-group.png",
     intro: {
-      ar: "كل اللي العيادة محتاجاه رقميًا في مكان واحد: ميديا بتخلي الناس تعرفك، وموقع بيحوّل اللي شافك لحجز، ونظام بيدير العيادة من جوه. تحت الخدمات هتلاقي شغل حقيقي مع عيادات شغالة دلوقتي.",
-      en: "Everything a clinic needs digitally in one place: media that makes people notice you, a website that turns attention into bookings, and a system that runs the clinic from the inside. Below the services you'll find real work with clinics running today.",
+      ar: "MEMO Group منظومة مصرية للعناية والجمال الرجالي: محلات حلاقة، وأكاديمية لتعليم الحلاقة، ومحل كوزمتكس. اشتغلنا على المنظومة الرقمية بتاعتها كلها — أنظمة إدارة للأكاديمية والمحلات ومحل الكوزمتكس، وتطبيقات للطلبة والعملاء، ومواقع للمجموعة والمتجر — كلها بنفس هوية ميمو. تحت هتلاقي كل جزء بتفاصيله.",
+      en: "MEMO Group is an Egyptian men's grooming and beauty group: barbershops, a barbering academy, and a cosmetics shop. We built its entire digital ecosystem — management systems for the academy, the shops, and the cosmetics store, apps for students and customers, and websites for the group and the store — all under the same Memo identity. Below you'll find each part in detail.",
     },
-    // ترتيب عرض الخدمات فوق في صفحة التصنيف
-    services: ["dr", "shaltot", "empowerex"],
-  },
-  {
-    id: "barbershops",
-    name: { ar: "صالونات وأكاديميات", en: "Barbershops & Academies" },
+    // ترتيب عرض الخدمات في صفحة التصنيف
+    services: [
+      "barber-academy",
+      "barbershop-system",
+      "memo-cosmetics-system",
+      "memo-academy-app",
+      "memo-customer-app",
+      "memo-group-website",
+      "memo-cosmetics-website",
+    ],
   },
   {
     id: "cafes",
@@ -62,284 +67,14 @@ export const getProjectLink = (project, locale) =>
 
 export const projectsData = [
   {
-    id: "shaltot",
-    name: "Clinic Website",
-    categoryId: "clinics",
-    // الأيقونة بتتحوّل لأيقونة lucide في صفحة التصنيف
-    icon: "website",
-    highlights: {
-      ar: ["5 صفحات", "3 دكاترة", "3 تخصصات", "عربي RTL", "شغال على أي شاشة"],
-      en: ["5 pages", "3 doctors", "3 specialties", "Arabic RTL", "Works on any screen"],
-    },
-    thumbnail: "/projects/shaltot.png",
-    description: {
-      ar: "موقع إلكتروني كامل لعيادات شلتوت التخصصية: صفحة لكل دكتور بخبرته وتخصصه، الخدمات، معرض صور العيادة، ومواعيد العمل — مع حجز وتواصل بضغطة على الاتصال أو الواتساب، ولينك مباشر لموقع العيادة على الخرايط. عربي بالكامل بتخطيط من اليمين لليسار وشغال على أي شاشة، على دومين باسم العيادة.",
-      en: "A complete website for Shaltout Specialized Clinics: a page per doctor with their experience and specialty, the services, a clinic photo gallery, and opening hours — with booking and contact one tap away by phone or WhatsApp, plus a direct map link to the clinic. Fully Arabic with a right-to-left layout, working on any screen, on a domain in the clinic's own name."
-    },
-    features: {
-      ar: [
-        "صفحة رئيسية بتعرّف بالعيادة، ودليل دكاترة، وصفحة مستقلة لكل دكتور، ومعرض صور، وصفحة تواصل.",
-        "تخصصات العيادة التلاتة معروضة بوضوح: علاج أمراض العيون بأحدث التقنيات، عيون وحول الأطفال، وأسنان الأطفال.",
-        "لكل دكتور صفحته بصورته وتخصصه وسنين خبرته ونبذة عنه — د. سوسن شلتوت بخبرة أكتر من 40 سنة، د. زينب أحمد سعد بأكتر من 20 سنة، ود. أسماء أحمد سعد بأكتر من 15 سنة.",
-        "زرار «احجز موعدك الآن» ظاهر في الصفحات وبيوصّل المريض لدليل الدكاترة عشان يختار ويتواصل.",
-        "اتصال بضغطة على رقم العيادة، وزرار واتساب بيفتح المحادثة على طول من الموبايل.",
-        "لينك مباشر لموقع العيادة على خرايط جوجل (الجيزة – فيصل).",
-        "مواعيد العمل مكتوبة قدام المريض: من الأحد للخميس، 5 لـ9 مساءً.",
-        "معرض صور بيوري العيادة من جوه قبل ما المريض ييجي.",
-        "حسابات الفيسبوك والإنستجرام موصولة بالموقع.",
-        "الموقع عربي بالكامل بتخطيط من اليمين لليسار، وبيتفتح بنفس الشكل على الموبايل والتابلت والكمبيوتر.",
-        "دومين باسم العيادة نفسها: shaltoutclinics.website"
-      ],
-      en: [
-        "A homepage introducing the clinic, a doctors directory, a dedicated page per doctor, a photo gallery, and a contact page.",
-        "The clinic's three specialties presented clearly: comprehensive eye treatment with the latest technology, pediatric eye care and strabismus, and pediatric dentistry.",
-        "Each doctor has their own page with a photo, specialty, years of experience, and a short bio — Dr. Sousan Shaltout with 40+ years, Dr. Zainab Ahmed Saad with 20+, and Dr. Asmaa Ahmed Saad with 15+.",
-        "A \"Book your appointment now\" button across the pages, taking the patient to the doctors directory to choose and get in touch.",
-        "One-tap calling to the clinic's number, and a WhatsApp button that opens the chat directly from a phone.",
-        "A direct Google Maps link to the clinic's location (Giza – Faisal).",
-        "Opening hours stated up front: Sunday to Thursday, 5pm to 9pm.",
-        "A photo gallery showing the clinic from the inside before the patient arrives.",
-        "Facebook and Instagram accounts linked from the site.",
-        "Fully Arabic with a right-to-left layout, rendering the same on phone, tablet, and desktop.",
-        "A domain in the clinic's own name: shaltoutclinics.website"
-      ]
-    },
-    benefits: {
-      ar: [
-        "العيادة بقى ليها وجود على جوجل: اللي بيدوّر على دكتور عيون في فيصل يلاقي موقع باسم العيادة، مش بوست ضايع جوه فيسبوك.",
-        "الانطباع الأول بيتظبط قبل ما المريض يتحرك من بيته — موقع نضيف ومرتب بيقول إن العيادة منظمة.",
-        "خبرة دكاترتك بتشتغل لصالحك: 40 سنة و20 سنة و15 سنة مكتوبة قدام المريض وهو بيقرر، وده اللي بيحسم الاختيار بين عيادتين.",
-        "مكالمات مابتضيعش: التليفون والواتساب على بعد ضغطة، فاللي مستعجل بيتواصل في ثانية بدل ما يقفل ويروح لغيرك.",
-        "المريض بيوصل من غير ما حد يشرح له الطريق — لينك الخرايط بيوديه لباب العيادة.",
-        "زيارات في غير المواعيد بتقل: ساعات العمل مكتوبة، فمحدش بييجي يوم إجازة ويلاقي قفل ويزعل.",
-        "الرسبشن بيرتاح من الأسئلة المتكررة: العنوان والمواعيد والتخصصات والدكاترة كلها مكتوبة، والمكالمة بتبقى للحجز بس.",
-        "بتوصل لناس مش موجودة على السوشيال ميديا أصلاً وبتدوّر بجوجل.",
-        "المريض بيشوف العيادة من جوه في المعرض، فبييجي وهو مطمّن — وده مهم مع أهالي الأطفال.",
-        "الموقع أصل ملكك بدومين باسمك، مش صفحة على منصة ممكن تتقفل أو تتغير قواعدها في أي وقت.",
-        "أساس تقدر تبني عليه: نظام حجز أونلاين كامل أو صفحات خدمات أكتر بيتضافوا على نفس الموقع لما تحب."
-      ],
-      en: [
-        "The clinic now exists on Google: someone searching for an eye doctor in Faisal finds a site in the clinic's name, not a post buried in Facebook.",
-        "The first impression is set before the patient leaves home — a clean, organized site says the clinic is organized too.",
-        "Your doctors' experience works for you: 40, 20, and 15 years stated in front of the patient while they decide — often what settles the choice between two clinics.",
-        "Calls stop slipping away: phone and WhatsApp are one tap away, so someone in a hurry reaches you in seconds instead of moving on.",
-        "Patients arrive without anyone explaining the route — the map link takes them to the clinic's door.",
-        "Fewer off-hours visits: opening hours are stated, so nobody turns up on a closed day and leaves unhappy.",
-        "Reception is freed from repeat questions: address, hours, specialties, and doctors are all written down, so calls are for booking.",
-        "You reach people who are not on social media at all and search on Google instead.",
-        "Patients see the clinic from the inside in the gallery and arrive reassured — which matters with parents of young children.",
-        "The site is an asset you own on your own domain, not a page on a platform that can be locked or change its rules.",
-        "A base to build on: a full online booking system or more service pages can be added to the same site whenever you want."
-      ]
-    },
-    websiteLink: "https://www.shaltoutclinics.website/",
-    instagramLink: "/"
-  },
-{
-    id: "dr",
-    name: "Clinic Media",
-    categoryId: "clinics",
-    icon: "media",
-    highlights: {
-      ar: ["عيادتين", "ستايل خاص لكل عيادة", "6 تصميمات", "فيديو لكل عيادة"],
-      en: ["2 clinics", "A style per clinic", "6 designs", "A video per clinic"],
-    },
-    thumbnail: "/projects/dr.png",
-    description: {
-      ar: "شغل الميديا للعيادات: هوية بصرية، تصميمات سوشيال ميديا، وفيديوهات — من عيادات شلتوت التخصصية لعيادة د. جمال بركات لجراحة التجميل. كل عيادة بستايل بصري خاص بيها، وكل بوست برسالة واحدة واضحة وعليه لوجو العيادة وبيانات التواصل، فالمحتوى بيبني حضور رقمي وبيجيب حجوزات مش بس لايكات.",
-      en: "Media work for clinics: brand identity, social media designs, and video — from Shaltout Specialized Clinics to Dr. Jamal Barakat's plastic surgery practice. Each clinic gets its own visual style, and every post carries a single clear message along with the clinic's logo and contact details, so the content builds a digital presence and brings bookings, not just likes."
-    },
-    features: {
-      ar: [
-        "ستايل بصري مستقل لكل عيادة: شلتوت بألوان دافية هادية بتناسب أهالي الأطفال، وجمال بركات بأسود وذهبي وعناصر فرعونية بتدي إحساس فخامة.",
-        "بوستات خدمات: كل تصميم بيبيع خدمة واحدة برسالة واحدة — «بنضمنلك أسنان أقوى لأولادك»، «أسنان سليمة بدون تسوس»، وهكذا.",
-        "بوستات حالات Before / After بتصميم موحّد بيعرض النتيجة جنب بعضها، وتقييم بالنجوم لعوامل نجاح الحالة.",
-        "كل تصميم عليه هوية العميل كاملة: اللوجو، ورقم التليفون أو الدومين، والعنوان — فالبوست بيشتغل إعلان كامل لوحده حتى لو اتنقل بره الصفحة.",
-        "فيديو لكل عيادة بنفس الستايل البصري بتاع تصميماتها.",
-        "نصوص عربية قصيرة بخطوط واضحة بتتقري وانت ماسك الموبايل من غير ما تقرّب.",
-        "مقاسات طولية مظبوطة للفيد والاستوري وريلز.",
-        "معالجة صور احترافية: عزل الشخصية عن الخلفية، وتوحيد الإضاءة والألوان في كل البوستات."
-      ],
-      en: [
-        "A separate visual style per clinic: Shaltout in warm, calm tones that suit parents of young children, and Jamal Barakat in black and gold with pharaonic motifs for a premium feel.",
-        "Service posts: each design sells one service with one message — \"stronger teeth for your kids\", \"healthy teeth without decay\", and so on.",
-        "Before / After case posts in a consistent layout showing the result side by side, with star ratings for the factors behind it.",
-        "Every design carries the client's full identity: logo, phone number or domain, and address — so the post works as a complete ad on its own, even when shared outside the page.",
-        "A video per clinic in the same visual style as its designs.",
-        "Short Arabic copy in clear typefaces, readable on a phone without zooming.",
-        "Portrait sizes tuned for feed, stories, and reels.",
-        "Professional image work: subject cut out from the background, with lighting and color unified across every post."
-      ]
-    },
-    benefits: {
-      ar: [
-        "صفحتك بتبان عيادة محترمة مش صفحة شخصية: ستايل ثابت وتصميم نضيف بيدّي إحساس إن العيادة نفسها منظمة، والمريض بيقيس المكان من صفحته.",
-        "البوست بيشتغل لوحده لما يتنقل: اللوجو والرقم والعنوان على كل تصميم، فأي حد وصلته الصورة من صاحبه يعرف يوصلك في ثانية بدل ما يدوّر.",
-        "الـ Before / After بيبيع أكتر من أي كلام — المريض بيشوف نتيجة حقيقية لحالة شبهه، وده بيقصّر المسافة بين إنه يتفرج وإنه يتصل.",
-        "الناس بتعرف بوستك قبل ما تقرا الاسم: الستايل الثابت هو اللي بيحوّل صفحة بوستات لعلامة محفورة في دماغ المتابع.",
-        "الرسالة الواحدة في كل تصميم بتخلي المريض يفهم في ثانيتين وهو بيسكرول — والبوست اللي محتاج تفكير بيتعدّى.",
-        "كل عيادة بتكلم جمهورها الصح: ألوان وصور الأطفال بتوصل للأمهات، والستايل الجريء بيوصل لجمهور التجميل — نفس المجهود بنتيجة مختلفة تمامًا.",
-        "التصميم بيمنع السؤال المتكرر: الخدمة والعنوان والرقم مكتوبين، فالرسايل اللي بتوصلك بتبقى حجز مش استفسار.",
-        "الفيديو بيوصل لناس مكنتش هتوصلهم بالصورة — المنصات نفسها بتدفع الفيديو لجمهور أوسع.",
-        "المحتوى ده جاهز يتحوّل لإعلان ممول في أي وقت من غير شغل جديد، فلو قررت تصرف فلوس على إعلانات بتصرفها على مادة شغالة.",
-        "أرشيف بصري بيتراكم: كل حالة وكل خدمة متوثّقة بتصميم، فبعد شهور يبقى عندك مكتبة إثبات نتائج تفرجها لأي مريض متردد.",
-        "الدكتور بيركّز في شغله: مفيش وقت بيضيع في تصميم بوست بالموبايل أو تدوير على صور — المحتوى بيوصل جاهز."
-      ],
-      en: [
-        "Your page looks like a serious clinic, not a personal profile: a consistent style and clean design signal that the clinic itself is organized — patients judge the place by its page.",
-        "The post keeps working when it travels: logo, number, and address on every design mean anyone who receives the image from a friend can reach you in seconds instead of searching.",
-        "Before / After sells harder than any copy — the patient sees a real result on a case like their own, which shortens the distance between watching and calling.",
-        "People recognize your post before reading the name: a consistent style is what turns a page of posts into a brand that sticks.",
-        "One message per design means the patient gets it in two seconds while scrolling — a post that needs thinking gets scrolled past.",
-        "Each clinic speaks to the right audience: warm colors and children reach mothers, while the bold style reaches the cosmetic-surgery audience — same effort, entirely different outcome.",
-        "The design answers the repeat questions up front: service, address, and number are on it, so the messages you get are bookings rather than enquiries.",
-        "Video reaches people the image never would — the platforms themselves push video to a wider audience.",
-        "This content converts into paid ads at any time with no new work, so if you decide to spend on ads you spend it on material that already performs.",
-        "A visual archive builds up: every case and service documented as a design, so within months you have a library of proof to show any hesitant patient.",
-        "The doctor stays focused on the work: no time lost designing a post on a phone or hunting for images — the content arrives ready."
-      ]
-    },
-    // معرض مقسّم بالعميل، وكل مجموعة ليها الفيديو بتاعها
-    imageGroups: [
-      {
-        label: { ar: "عيادات شلتوت", en: "Shaltout Clinics" },
-        images: [
-          "/projects/shaltot/1.jpeg",
-          "/projects/shaltot/2.jpeg",
-          "/projects/shaltot/3.jpeg"
-        ],
-        video: "/projects/shaltot/video.mp4",
-      },
-      {
-        label: { ar: "د. جمال بركات", en: "Dr. Jamal Barakat" },
-        images: [
-          "/projects/gamal/1.jpeg",
-          "/projects/gamal/2.jpeg",
-          "/projects/gamal/3.jpeg"
-        ],
-        video: "/projects/gamal/video.mp4",
-      },
-    ],
-    websiteLink: "",
-    instagramLink: "https://www.instagram.com/savio_fragrances/"
-  },
-  {
-    id: "empowerex",
-    name: "Clinic System",
-    categoryId: "clinics",
+    id: "barber-academy",
+    name: "Memo Barber Academy System",
+    categoryId: "memo-group",
     icon: "system",
     highlights: {
-      ar: ["9 شاشات", "3 أدوار", "7 تقارير", "3 رسايل واتساب تلقائية"],
-      en: ["9 screens", "3 roles", "7 reports", "3 automated WhatsApp messages"],
+      ar: ["3 فروع", "19 موديول", "4 أدوار", "عربي RTL"],
+      en: ["3 branches", "19 modules", "4 roles", "Arabic RTL"],
     },
-    thumbnail: "/projects/empowerex/logo-full.webp",
-    description: {
-      ar: "نظام متكامل لإدارة عيادات العلاج الطبيعي، بيدير دورة العيادة كاملة: حجز المواعيد، ملفات المرضى والحالات والتقييمات، الفواتير والباقات، المصاريف ومرتبات الدكاترة، وسبعة تقارير قابلة للتصدير. ثلاثة أدوار بصلاحيات مفصولة على مستوى قاعدة البيانات تحمي الأرقام المالية والبيانات الطبية، وقواعد تشغيلية بتشتغل لوحدها من خصم جلسات الباقة وتحديث الفواتير لحد رسائل الواتساب التلقائية.",
-      en: "A complete management system for physiotherapy clinics, covering the full clinic cycle: appointment scheduling, patient records, cases and assessments, invoicing and packages, expenses and doctor payroll, plus seven exportable reports. Three staff roles are separated at the database level to protect financial and clinical data, while operational rules run on their own — from package session deductions and invoice status to automated WhatsApp messages."
-    },
-    features: {
-      ar: [
-        "تسع شاشات بتغطي دورة العيادة كاملة: لوحة تحكم، مكتب استقبال، جدول مواعيد، ملفات مرضى، فواتير، مالية، تقارير، مكتبة تمارين، وإعدادات.",
-        "ثلاثة أدوار — مدير وسكرتارية ودكتور — والفصل بينهم متطبّق في قاعدة البيانات نفسها مش في الواجهة، فالدكتور مايشوفش أي رقم مالي إطلاقًا.",
-        "ملف مريض كامل: التاريخ المرضي، أكتر من حالة لكل مريض، تقييمات وخطط علاج، المواعيد، الفواتير، وملفات الأشعة والتحاليل.",
-        "جدول يمنع الحجز المزدوج منعًا فعليًا، ويحترم ساعات عمل كل دكتور وإجازاته، وبيميّز الزيارات المنزلية.",
-        "فواتير للجلسة أو الباقة، بدفع كاش أو إنستاباي أو كارت، مع دفع جزئي وخصومات ومرتجعات وإيصال للطباعة.",
-        "سبعة تقارير بأي فترة زمنية: الإيرادات، المصاريف والأرباح، الجلسات لكل دكتور، الحضور والغياب، المرضى الجدد، مبيعات الباقات، والمستحقات — بطباعة وتصدير Excel.",
-        "قواعد بتشتغل لوحدها: خصم جلسة الباقة عند تسجيل الحضور، تحديث حالة الفاتورة بعد كل دفعة، تسجيل الغياب تلقائيًا، ونظام إنذارات على الإلغاء المتأخر.",
-        "ثلاث رسائل واتساب تلقائية: تأكيد الحجز، تذكير قبل الموعد بثماني ساعات، وتنبيه عند آخر جلسة في الباقة.",
-        "مرتبات وبونص الدكاترة بتتحسب تلقائيًا من عدد الجلسات المنفّذة.",
-        "سجل مراجعة لكل خصم أو مرتجع أو تغيير سعر أو صلاحية، باسم الموظف والوقت.",
-        "ملفات المرضى في تخزين سحابي مقفول — الفتح بيوّلد رابط مؤقت صلاحيته عشر دقائق، ومفيش حذف نهائي للبيانات.",
-        "الموقع الإلكتروني للعيادة بالعربي والإنجليزي جزء من النظام، وبيتغذى من نفس قاعدة البيانات."
-      ],
-      en: [
-        "Nine screens covering the full clinic cycle: dashboard, front desk, schedule, patient records, billing, finance, reports, exercise library, and settings.",
-        "Three roles — admin, secretary, and doctor — separated at the database level rather than in the interface, so a doctor never sees a single financial figure.",
-        "Complete patient file: medical history, multiple cases per patient, assessments and treatment plans, appointments, invoices, and imaging or lab files.",
-        "A schedule that genuinely blocks double booking, respects each doctor's working hours and leave, and flags home visits.",
-        "Invoices per session or package, paid by cash, InstaPay, or card, with partial payments, discounts, refunds, and a printable receipt.",
-        "Seven reports over any date range: revenue, expenses and P&L, sessions per doctor, attendance, new patients, package sales, and outstanding balances — printable and exportable to Excel.",
-        "Rules that run on their own: package sessions deducted on check-in, invoice status updated after every payment, automatic no-show marking, and a strike system for late cancellations.",
-        "Three automated WhatsApp messages: booking confirmation, a reminder eight hours before the appointment, and a last-session alert for package renewal.",
-        "Doctor payroll and bonuses calculated automatically from completed sessions.",
-        "An audit trail for every discount, refund, price change, or permission change — stamped with the staff member and time.",
-        "Patient files kept in locked cloud storage, opened through a temporary link valid for ten minutes, with no permanent deletion of data.",
-        "The clinic's bilingual website is part of the system and reads from the same database."
-      ]
-    },
-    benefits: {
-      ar: [
-        "بتعرف إيراد اليوم والشهر وصافي الربح من شاشة واحدة، من غير ما تسأل حد ولا تستنى تقرير آخر الشهر.",
-        "فلوسك محمية: الدكتور مايوصلش لأي رقم مالي، وأي خصم أو مرتجع أو تغيير سعر متسجل باسم صاحبه ووقته.",
-        "مافيش جلسات بتضيع — الباقة بتتخصم لوحدها عند الحضور، والغياب بيتسجل لوحده، والإلغاء المتأخر له إنذار.",
-        "غياب أقل: تذكير الواتساب التلقائي قبل الموعد بثماني ساعات بيقلل المقاعد الفاضية.",
-        "باقات بتتجدد: رسالة تلقائية عند آخر جلسة بتفتح باب التجديد في وقته.",
-        "تحصيل أسرع: شاشة المستحقات بتوريك مين عليه فلوس وبقاله قد إيه، بدل ما الفواتير تنسى.",
-        "المرتبات والبونص بتتحسب لوحدها، فمفيش خلاف ولا وقت ضايع في الحسابات آخر الشهر.",
-        "قرارات مبنية على أرقام: مصادر المرضى الجدد وأداء كل دكتور ونسبة الحضور قدامك بالتفصيل.",
-        "استقلال كامل عن المبرمج: الأسعار وأنواع الجلسات والسياسات والفريق ومحتوى الموقع كلها بتتغير من الإعدادات.",
-        "مافيش تعارض مواعيد ولا حجز مزدوج، ومكتب الاستقبال بيشتغل من شاشة واحدة.",
-        "بياناتك مؤمّنة: ملفات المرضى مقفولة، والحذف مابيمسحش حاجة نهائيًا."
-      ],
-      en: [
-        "See today's and this month's revenue and net profit from one screen, without asking anyone or waiting for a month-end report.",
-        "Your money is protected: doctors cannot reach any financial figure, and every discount, refund, or price change is logged with its author and timestamp.",
-        "No lost sessions — packages are deducted on check-in, no-shows are recorded automatically, and late cancellations trigger a strike.",
-        "Fewer no-shows: the automatic WhatsApp reminder eight hours ahead cuts empty slots.",
-        "Packages get renewed: an automatic last-session message opens the renewal conversation at the right moment.",
-        "Faster collection: the outstanding balances screen shows who owes what and for how long, so invoices are not forgotten.",
-        "Payroll and bonuses calculate themselves — no disputes and no time lost on month-end arithmetic.",
-        "Decisions backed by numbers: referral sources, per-doctor performance, and attendance rates laid out in detail.",
-        "Full independence from a developer: pricing, session types, policies, team, and website content are all edited from settings.",
-        "No scheduling conflicts or double bookings, and the front desk runs from a single screen.",
-        "Your data is secure: patient files are locked down, and deletion never wipes anything permanently."
-      ]
-    },
-    // الترتيب بيمشي على ترتيب القائمة الجانبية في النظام نفسه
-    images: [
-      // لوحة التحكم
-      "/projects/empowerex/1.jpeg",
-      "/projects/empowerex/2.jpeg",
-      // مكتب الاستقبال
-      "/projects/empowerex/3.jpeg",
-      "/projects/empowerex/booking.png",
-      // جدول المواعيد
-      "/projects/empowerex/4.jpeg",
-      // المرضى
-      "/projects/empowerex/patients.png",
-      "/projects/empowerex/new-patient.png",
-      // الفواتير
-      "/projects/empowerex/billing.png",
-      "/projects/empowerex/new-invoice.png",
-      // المالية
-      "/projects/empowerex/finance.png",
-      "/projects/empowerex/add-expense.png",
-      // التقارير
-      "/projects/empowerex/5.jpeg",
-      "/projects/empowerex/expense-in-report.png",
-      "/projects/empowerex/sessions-per-doctor.png",
-      "/projects/empowerex/attend.png",
-      "/projects/empowerex/report-new-patients.png",
-      "/projects/empowerex/package-sales.png",
-      "/projects/empowerex/outstanding.png",
-      // مكتبة التمارين
-      "/projects/empowerex/exercise.png",
-      "/projects/empowerex/new-exercise.png",
-      // الإعدادات
-      "/projects/empowerex/setting.png",
-      "/projects/empowerex/team.png",
-      "/projects/empowerex/pricing.png",
-      "/projects/empowerex/session-types.png",
-      "/projects/empowerex/policy.png",
-      "/projects/empowerex/page-content.png"
-    ],
-    websiteLink: "",
-    instagramLink: "/"
-  },
-  {
-    id: "barber-academy",
-    name: "Barber Academy System",
-    categoryId: "barbershops",
     thumbnail: "/projects/memo-academy/logo-white.png",
     description: {
       ar: "نظام إدارة متكامل لأكاديمية حلاقة بثلاثة فروع، بيغطي دورة الطالب كاملة من أول ما يبقى مهتم لحد ما يتخرّج وياخد شهادة موثّقة. تسعتاشر موديول بيدير الطلاب والمجموعات والحضور بالباركود والإيصالات والمصروفات والمرتبات والشهادات والتقارير المالية. عربي بالكامل بتخطيط من اليمين لليسار، وبيتثبّت على الموبايل كتطبيق، وبحماية على طبقتين مستقلتين تخلّي الأرقام المالية محجوبة عن الموظفين على مستوى قاعدة البيانات مش الشاشة.",
@@ -363,10 +98,6 @@ export const projectsData = [
         "تقارير مالية: أرباح وخسائر، إيراد حسب طريقة الدفع، وعمولات المدربين.",
         "حالة «حجز» للطالب اللي دفع مقدّم من غير مجموعة — أول ما تتحدد له مجموعة بيتفعّل تلقائيًا وياخد سعرها وحصصها.",
         "تحذير فوري لو رقم الموبايل مكرر أو موجود قبل كده في قائمة المهتمين، فمفيش طالب مسجّل مرتين.",
-        "تطبيق موبايل للطالب فيه كورساته المصوّرة: بيدخل بحسابه، بيفتح الكورس بكود من الأدمن بيتقفل على حسابه بعد أول استخدام، وبيكمّل من حيث وقف.",
-        "كل كورس متقسّم حلقات وامتحانات، بشريط تقدّم بيوري الطالب أنجز كام من كام، وتعليم للحلقة كـ«مكتملة».",
-        "امتحان بعد كل حلقة بنسبة نجاح محددة (60%)، والطالب لازم ينجح فيه قبل ما يكمّل.",
-        "الشهادة بتتصدر في التطبيق نفسه بكود تحقق فريد أول ما الطالب يخلّص الكورس."
       ],
       en: [
         "Nineteen modules and 34 screens covering the full student journey: from a lead, to an enrolled student in a group, to a graduate with a verified certificate.",
@@ -385,10 +116,6 @@ export const projectsData = [
         "Financial reports: profit and loss, revenue by payment method, and trainer commissions.",
         "A \"reserved\" state for a student who paid a deposit without a group — assigned to a group, they activate automatically and inherit its price and session count.",
         "An instant warning when a phone number is duplicated or already exists in the leads list, so no student is registered twice.",
-        "A student mobile app carrying their recorded courses: they sign in, unlock a course with a code issued by the admin that locks to their account after first use, and resume from where they stopped.",
-        "Each course is split into lessons and exams, with a progress bar showing how much is done and lessons marked complete.",
-        "An exam after each lesson with a required pass mark (60%), which the student must clear before moving on.",
-        "The certificate is issued inside the app with a unique verification code the moment the course is completed."
       ]
     },
     benefits: {
@@ -410,10 +137,6 @@ export const projectsData = [
         "الليدز مابتضيعش: المهتم بيتسجل بحالته ومتابعاته، وبيتحوّل لطالب بضغطة لما يقرر.",
         "شغّال على الموبايل كتطبيق يتثبّت على الشاشة الرئيسية — الرسبشن يسجّل حضور من التليفون من غير أجهزة إضافية.",
         "عربي بالكامل بتخطيط من اليمين لليسار، فالفريق بيتدرب عليه في يوم مش في أسبوع.",
-        "مصدر دخل تاني من غير قاعة ولا كابتن: الكورسات المصوّرة بتتباع بكود، فبتوصل لطلاب برة فروعك ومن غير سقف لعدد المقاعد.",
-        "محتواك محمي: الكود بيتقفل على حساب الطالب بعد أول استخدام، فمينفعش كود واحد يتداول بين عشرة.",
-        "الامتحان قبل ما الطالب يكمّل بيضمن إنه فاهم فعلًا — فالخريج بتاعك بيطلع بمستوى، وده اللي بيحافظ على سمعة الأكاديمية.",
-        "الطالب بيكمّل من حيث وقف في أي وقت، وشريط التقدّم بيحفّزه يخلّص — يعني نسبة إكمال أعلى وشكاوى أقل."
       ],
       en: [
         "The whole academy and its three branches in one system — instead of notebooks, spreadsheets, and scattered WhatsApp groups — with branch data separated while the owner still sees the full picture.",
@@ -433,10 +156,6 @@ export const projectsData = [
         "Leads do not slip away: an inquiry is recorded with its status and follow-ups, and converts to a student in one click.",
         "Runs on mobile as an installable app — reception can take attendance from a phone with no extra hardware.",
         "Fully Arabic with a right-to-left layout, so the team learns it in a day rather than a week.",
-        "A second revenue stream with no room and no trainer: recorded courses sell by code, reaching students beyond your branches with no cap on seats.",
-        "Your content stays protected: the code locks to the student's account after first use, so one code cannot circulate among ten people.",
-        "The exam gate before progressing ensures the student actually understood — your graduates leave with a real standard, which is what protects the academy's reputation.",
-        "Students resume from where they stopped at any time, and the progress bar pushes them to finish — higher completion rates and fewer complaints."
       ]
     },
     imageGroups: [
@@ -444,18 +163,19 @@ export const projectsData = [
         label: { ar: "لوحة الإدارة", en: "Admin dashboard" },
         images: Array.from({ length: 21 }, (_, i) => `/projects/memo-academy/${i + 1}.png`),
       },
-      {
-        label: { ar: "تطبيق الطالب", en: "Student app" },
-        images: Array.from({ length: 7 }, (_, i) => `/projects/memo-academy/app-${i + 1}.jpeg`),
-      },
     ],
     websiteLink: "",
     instagramLink: "/"
   },
   {
     id: "barbershop-system",
-    name: "Barber Shop System",
-    categoryId: "barbershops",
+    name: "Memo Barbershop System",
+    categoryId: "memo-group",
+    icon: "system",
+    highlights: {
+      ar: ["17 قسم", "5 أدوار", "16 صلاحية", "4 طرق دفع"],
+      en: ["17 sections", "5 roles", "16 permissions", "4 payment methods"],
+    },
     thumbnail: "/projects/memo-barbershop/logo-mark.png",
     description: {
       ar: "نظام تشغيل كامل لسلسلة محلات حلاقة على قاعدة بيانات واحدة: لوحة تحكم بسبعتاشر قسم، وموقع، وتطبيق للعميل. كل جنيه بيدخل له فاتورة، وكل فاتورة مربوطة بدرج مفتوح باسم صاحبه، والتقفيل بيطلع مقسّم على طرق الدفع الأربعة. خمس أدوار بصلاحيات مفروضة جوّه قاعدة البيانات نفسها، وستاشر صلاحية بتتعدّل من الشاشة من غير مبرمج، والفروع بتتفتح بإضافة صف في جدول من غير إعداد تقني.",
@@ -477,10 +197,7 @@ export const projectsData = [
         "الصلاحيات مفروضة على مستوى الصف في قاعدة البيانات مش في الواجهة، فالبيانات اللي مش من حقك مابتوصلكش حتى لو فتحت الرابط المباشر.",
         "ستاشر صلاحية مخزّنة في جدول وبتتعدّل من شاشة الصلاحيات — من غير كود ولا نشر جديد.",
         "كل الشاشات شغالة على مستوى الفرع من الأساس، ففتح فرع جديد بيتم في نفس اليوم من غير نسخة تانية من النظام.",
-        "تطبيق العميل: حجز في دقيقة، اختيار كابتن معيّن أو «أي كابتن» والنظام يرشّح الأقل انشغالًا، حالة الكباتن ظاهرة لحظيًا، وشاشة دور بتتحدّث لوحدها.",
-        "نقاط ولاء بتتحسب تلقائيًا — نقطة على كل عشرة جنيه في الفاتورة، والدخول بكود لمرة واحدة من غير باسوردات مخزّنة.",
         "تقييم بالنجوم وتعليق بعد الخدمة، وتقييم كل كابتن بيتحدّث تلقائيًا من تقييمات العملاء.",
-        "جاهز لمتاجر التطبيقات: صفحات سياسة الخصوصية والشروط منشورة، وحذف الحساب متاح للعميل من التطبيق والموقع.",
         "كل سلسلة محلات = نسخة مستقلة تمامًا ببياناتها ومخزنها الخاص، وعربي بالكامل بدعم RTL في الأجزاء الثلاثة."
       ],
       en: [
@@ -498,10 +215,7 @@ export const projectsData = [
         "Permissions are enforced at row level in the database rather than the interface, so data outside your scope never reaches you even via a direct link.",
         "Sixteen permissions stored in a table and edited from the permissions screen — no code, no redeployment.",
         "Every screen is branch-aware by design, so a new branch goes live the same day without a second copy of the system.",
-        "Customer app: book in a minute, choose a specific barber or let \"any barber\" pick the least busy, see barber availability live, and watch a self-updating queue screen.",
-        "Loyalty points accrue automatically — one point per ten pounds invoiced — with one-time code sign-in and no stored passwords.",
         "Star ratings and comments after service, with each barber's rating updating automatically from customer reviews.",
-        "App-store ready: privacy policy and terms pages published, and account deletion available to the customer from both app and site.",
         "Each chain is a fully independent instance with its own data and storage, fully Arabic with RTL across all three parts."
       ]
     },
@@ -516,13 +230,8 @@ export const projectsData = [
         "فرع جديد = صف في جدول: تفتحه وتشغّله بنفس اليوم من غير نسخة تانية من النظام ولا إعداد من الصفر — فالتوسّع مش بيوقف على مبرمج.",
         "الصلاحيات بتتعدّل من الشاشة: تدّي أو تسحب صلاحية من أي دور من غير ما تستنى تعديل كود ولا نشر.",
         "موظفك مايشوفش غير حتته: الحماية في قاعدة البيانات نفسها، فحتى لو حد فتح الرابط المباشر مش هيوصل لبيانات مش من حقه.",
-        "الريسبشن بيتفضّى من الرد على التليفون: العميل بيحجز من التطبيق بنفسه، فالموظف يرجع للكاشير وللعملاء اللي قدامه.",
-        "كل حجز بيدخل النظام مظبوط من أول ثانية — مفيش نقل يدوي من الواتساب ولا حجز بينسى ولا يتكرر ومحدش مسؤول عنه.",
         "قاعدة عملاء حقيقية ملكك: أرقام وسجل زيارات وتقييمات، مش محادثات واتساب ضايعة.",
-        "العميل مابيمشيش من الزحمة: شايف دوره لحظيًا من بيته فبييجي في وقته، والزحمة بتتوزّع لما يشوف الفرع الفاضي قبل ما يتحرك.",
         "التقييمات بتوصلك مباشرة فتعرف أنهي كابتن بيكرّر العملاء وأنهي واحد محتاج تدخّل — بدل ما تكتشف المشكلة لما العميل يختفي.",
-        "نقاط الولاء بترجّع العميل من غير خصومات بتاكل من هامشك.",
-        "التطبيق أرخص موظف ريسبشن عندك: شغال 24 ساعة وبيدخّل البيانات صح من المصدر."
       ],
       en: [
         "Revenue closes to the pound: no invoice is issued while the drawer is shut, and no amount moves without a name on it — so any gap between drawer and book has a traceable source instead of vanishing.",
@@ -534,23 +243,14 @@ export const projectsData = [
         "A new branch is a row in a table: open it and run it the same day with no second copy of the system and no setup from scratch — expansion no longer waits on a developer.",
         "Permissions are edited on screen: grant or revoke for any role without waiting for a code change or a deployment.",
         "Staff see only their slice: protection lives in the database, so even a direct link will not surface data outside their scope.",
-        "Reception is freed from answering the phone: customers book themselves in the app, so staff return to the register and the people in front of them.",
-        "Every booking enters the system correctly from the first second — no manual transfer from WhatsApp, no forgotten or duplicated booking with nobody accountable.",
         "A real customer base that belongs to you: numbers, visit history, and ratings — not scattered WhatsApp threads.",
-        "Customers stop walking out over crowding: they watch their place in the queue from home and arrive on time, and crowds spread out once they can see which branch is free.",
         "Ratings reach you directly, so you know which barber brings customers back and which needs attention — instead of discovering the problem when the customer disappears.",
-        "Loyalty points bring customers back without discounts eating into your margin.",
-        "The app is the cheapest receptionist you have: it works 24 hours and enters the data correctly at the source."
       ]
     },
     imageGroups: [
       {
         label: { ar: "لوحة التحكم", en: "Dashboard" },
         images: Array.from({ length: 18 }, (_, i) => `/projects/memo-barbershop/${i + 1}.png`),
-      },
-      {
-        label: { ar: "تطبيق العميل", en: "Customer app" },
-        images: Array.from({ length: 6 }, (_, i) => `/projects/memo-barbershop/mobile-${i + 1}.jpeg`),
       },
     ],
     websiteLink: "",

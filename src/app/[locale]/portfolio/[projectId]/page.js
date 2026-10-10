@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from 'next-intl';
-import { projectsData, getProjectLink } from "@/data/projects";
+import { projectsData, getCategory, getProjectLink } from "@/data/projects";
 import { Instagram, ExternalLink, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X, Maximize2, Check } from "lucide-react";
 import { notFound } from "next/navigation";
 import Nav from "../../component/Nav";
@@ -81,7 +81,21 @@ export default function ProjectDetailPage() {
     notFound();
   }
 
-  const relatedProjects = projectsData.filter(p => p.id !== project.id);
+  // مشاريع ذات صلة: من نفس التصنيف بترتيب خدماته، تبدأ من اللي بعد المشروع الحالي — ٣ بس
+  const order = getCategory(project.categoryId)?.services ?? [];
+  const rank = (p) => (order.includes(p.id) ? order.indexOf(p.id) : order.length);
+  const siblings = projectsData
+    .filter(p => p.categoryId === project.categoryId)
+    .sort((a, b) => rank(a) - rank(b));
+  const at = siblings.findIndex(p => p.id === project.id);
+  const relatedProjects = siblings
+    .slice(at + 1)
+    .concat(siblings.slice(0, at))
+    .slice(0, 3);
+  // مشروع لوحده في تصنيفه: نعرض أول ٣ مشاريع تانية بدل ما القسم يختفي
+  if (relatedProjects.length === 0) {
+    relatedProjects.push(...projectsData.filter(p => p.id !== project.id).slice(0, 3));
+  }
 
   // نسبة الصورة الحالية، وإلا آخر نسبة معروفة، وإلا 16/9 لحد ما تحمّل
   const ratio = ratios[current] ?? Object.values(ratios)[0] ?? 16 / 9;

@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useLocale, useTranslations } from 'next-intl';
-import { getPortfolioEntries, getProjectLink } from "@/data/projects";
+import { getPortfolioEntries, getCategoryProjects, getProjectLink } from "@/data/projects";
 import PortfolioCard from "./PortfolioCard";
 
 export default function ProjectsGrid() {
@@ -12,7 +12,7 @@ export default function ProjectsGrid() {
   const locale = useLocale();
   const isRTL = locale === "ar";
 
-  // نفس كروت صفحة الأعمال: تصنيف العيادات كارد واحد، وأول ٣ كروت بس هنا
+  // نفس كروت صفحة الأعمال: التصنيف المجمّع (Memo Group) كارد واحد، وأول ٣ كروت بس هنا
   const entries = getPortfolioEntries().slice(0, 3);
 
   return (
@@ -30,7 +30,7 @@ export default function ProjectsGrid() {
                 key={entry.id}
                 href={`/${locale}/portfolio/category/${entry.category.id}`}
                 title={entry.category.name[locale]}
-                thumbnail={entry.category.thumbnail}
+                thumbnail={entry.category.thumbnail ?? getCategoryProjects(entry.category.id)[0]?.thumbnail}
                 badge={tPortfolio('viewWorks')}
                 subtitle={tPortfolio('worksCount', { count: entry.count })}
               />

@@ -44,7 +44,12 @@ function projectMarkdown(project, locale, t) {
 }
 
 function categoryMarkdown(category, locale, t) {
-  const projects = projectsData.filter((p) => p.categoryId === category.id);
+  // نفس ترتيب صفحة التصنيف: الخدمات بترتيب services، والباقي في الآخر
+  const order = category.services ?? [];
+  const rank = (p) => (order.includes(p.id) ? order.indexOf(p.id) : order.length);
+  const projects = projectsData
+    .filter((p) => p.categoryId === category.id)
+    .sort((a, b) => rank(a) - rank(b));
   const out = [];
 
   out.push(`# ${category.name[locale]}`);
