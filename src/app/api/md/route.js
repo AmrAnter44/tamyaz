@@ -117,6 +117,49 @@ function homeMarkdown(locale, messages) {
     out.push("");
   }
 
+  // تفاصيل كل سيستم + رابط الديمو (قسم systemsDetails في الرئيسية)
+  const details = messages.systemsDetails;
+  const detailItems = Object.values(details?.items ?? {});
+  if (detailItems.length) {
+    out.push(`## ${details.title}`);
+    out.push("");
+    if (details.subtitle) {
+      out.push(details.subtitle);
+      out.push("");
+    }
+    detailItems.forEach((s) => {
+      out.push(`### ${s.name}${s.hint ? ` (${s.hint})` : ""}`);
+      out.push("");
+      if (s.desc) {
+        out.push(s.desc);
+        out.push("");
+      }
+      if (s.points?.length) {
+        out.push(details.demoLabel);
+        out.push("");
+        s.points.forEach((p) => out.push(`- ${p}`));
+        out.push("");
+      }
+      if (s.url) {
+        out.push(`- ${details.mdDemo ?? "Demo"}: ${s.url}`);
+        out.push("");
+      }
+    });
+    if (details.note) {
+      out.push(details.note);
+      out.push("");
+    }
+    if (details.custom?.title) {
+      out.push(`## ${details.custom.title}`);
+      out.push("");
+      out.push(details.custom.text ?? "");
+      out.push("");
+      out.push(`- WhatsApp: https://wa.me/201055119164`);
+      out.push(`- ${details.custom.form}: ${SITE_URL}/${locale}/form`);
+      out.push("");
+    }
+  }
+
   if (messages.about?.points?.length) {
     out.push(`## ${messages.about.title}`);
     out.push("");

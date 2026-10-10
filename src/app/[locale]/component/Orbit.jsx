@@ -26,6 +26,18 @@ const ICONS = {
   store: ShoppingBag,
 };
 
+// كل بلاطة بتلينك على الكارت بتاعها في قسم التفاصيل (SystemsDetails → #sys-<key>)
+const DETAIL_IDS = {
+  cafe: "cafe",
+  restaurant: "resto",
+  barber: "barber",
+  clinic: "clinic",
+  dental: "dental",
+  pharmacy: "pharma",
+  gym: "bar",
+  store: "shop",
+};
+
 const ORDER = ["cafe", "restaurant", "barber", "clinic", "dental", "pharmacy", "gym", "store"];
 
 // كل كام ثانية العنصر المميز بيتنقل للي بعده
@@ -101,8 +113,9 @@ export default function Orbit() {
                     className="orbit-item"
                     style={{ "--a": `${(360 / ORDER.length) * index}deg` }}
                   >
-                    <div
-                      className={`orbit-tile ${isActive ? "is-active" : ""}`}
+                    <a
+                      href={`#sys-${DETAIL_IDS[key]}`}
+                      className={`orbit-tile no-underline ${isActive ? "is-active" : ""}`}
                       title={item.hint ? `${item.name} (${item.hint})` : item.name}
                     >
                       <Icon aria-hidden="true" strokeWidth={1.8} />
@@ -113,7 +126,7 @@ export default function Orbit() {
                           {item.hint}
                         </span>
                       )}
-                    </div>
+                    </a>
                   </li>
                 );
               })}

@@ -7,12 +7,14 @@ import Projects from "./component/Projects";
 import Footer from "./component/Footer";
 import Faq from './component/Faq';
 import Orbit from './component/Orbit';
+import SystemsDetails from './component/SystemsDetails';
 
 export default function Page() {
   return (
     <div className="relative z-10">
       <Nav />
       <Orbit />
+      <SystemsDetails />
       <SecOne />
       <SecTwo />
       <SecThree />

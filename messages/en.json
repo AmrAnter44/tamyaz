@@ -65,6 +65,120 @@
       }
     }
   },
+  "systemsDetails": {
+    "eyebrow": "Live demos available",
+    "title": "Every system, in detail",
+    "subtitle": "Pick the system that fits your business and try the demo right now, no sign-up — the demo runs on real data that refreshes every day.",
+    "demoLabel": "What you'll see in the demo:",
+    "demoCta": "Try the demo",
+    "demoAria": "Try the {name} demo (opens in a new tab)",
+    "note": "Every system is in Arabic, works on mobile and desktop, and installs as an app",
+    "mdDemo": "Demo",
+    "items": {
+      "cafe": {
+        "name": "Tamyaz Cafe",
+        "desc": "A complete system for cafés and coffee shops, from the cashier to the reports.",
+        "points": [
+          "Fast cashier and point of sale",
+          "Tables and open orders",
+          "Inventory and each product's ingredients",
+          "Shifts and the cash drawer",
+          "Daily and monthly sales reports"
+        ],
+        "url": "https://demo.cafe.tamyaz.online/login"
+      },
+      "resto": {
+        "name": "Tamyaz Resto",
+        "desc": "Run the whole restaurant: dining room, kitchen and delivery in one place.",
+        "points": [
+          "QR menu for guests on their phones",
+          "Kitchen orders in real time",
+          "Delivery, takeaway and dine-in",
+          "Branches and cashiers",
+          "Sales reports and best-selling items"
+        ],
+        "url": "https://demo.resto.tamyaz.online/login"
+      },
+      "barber": {
+        "name": "Tamyaz Barber",
+        "desc": "For salons and barbershops: bookings, barbers and the cash drawer.",
+        "points": [
+          "Bookings and barber schedules",
+          "Barbers, commissions and shifts",
+          "Services and prices",
+          "Cash drawer and expenses",
+          "Hourly daily reports"
+        ],
+        "url": "https://demo.barber.tamyaz.online/login"
+      },
+      "clinic": {
+        "name": "Tamyaz Clinic",
+        "desc": "For clinics and medical centers: from the front desk to the accounts.",
+        "points": [
+          "Appointments and front desk",
+          "Patient files and sessions",
+          "Invoices, quotes and packages",
+          "Staff attendance and payroll",
+          "Clinic website and online booking requests"
+        ],
+        "url": "https://demo.clinc.tamyaz.online/login"
+      },
+      "dental": {
+        "name": "Tamyaz Dental",
+        "desc": "Built specifically for dental clinics and treatment plans.",
+        "points": [
+          "Clinic appointments",
+          "Patient file and treatment plan",
+          "Invoices and installments",
+          "Expenses and reports"
+        ],
+        "url": "https://demo.dental.tamyaz.online/login"
+      },
+      "pharma": {
+        "name": "Tamyaz Pharma",
+        "desc": "For pharmacies: sales, stock and expiry dates under control.",
+        "points": [
+          "Pharmacy point of sale",
+          "Stock and expiry dates",
+          "Purchases and suppliers",
+          "Shifts and cash-drawer differences",
+          "Receivables and payables"
+        ],
+        "url": "https://demo.pharma.tamyaz.online/login"
+      },
+      "bar": {
+        "name": "Tamyaz Bar",
+        "hint": "Gym bar",
+        "desc": "Cashier for the gym bar: protein, juices and snacks.",
+        "points": [
+          "Gym-bar cashier: protein, juices and snacks",
+          "Orders and add-ons",
+          "Cash drawer and payments",
+          "Branches",
+          "Daily and monthly reports"
+        ],
+        "url": "https://demo.bar.tamyaz.online/ar/login"
+      },
+      "shop": {
+        "name": "Tamyaz Store",
+        "desc": "An online store under your name plus an in-store cashier, sharing one inventory.",
+        "points": [
+          "Online store under your name + in-store cashier",
+          "Products, sizes and colors",
+          "Orders and shipping",
+          "Branches and inventory",
+          "Direct ordering on WhatsApp"
+        ],
+        "url": "https://demo.shop.tamyaz.online/login"
+      }
+    },
+    "custom": {
+      "title": "Need something custom?",
+      "text": "If your business needs a different system or changes to any of these, we'll build it custom, tailored to how you work — from idea to launch.",
+      "whatsapp": "Chat on WhatsApp",
+      "form": "Submit your request"
+    }
+  },
   "stats": {
     "title": "Our Statistics",
     "subtitle": "Numbers that reflect our journey of excellence and innovation",
