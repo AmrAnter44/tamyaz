@@ -83,7 +83,7 @@ export default function OptimizedFooter() {
     },
     { 
       icon: MessageCircle, 
-      link: "https://wa.me/201055119164",
+      link: "https://wa.me/201028518754",
       hoverColor: "hover:text-[#6fd39a]",
       label: "Contact Tamyaz on WhatsApp"
     }

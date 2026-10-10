@@ -32,7 +32,7 @@ export default function OptimizedWhatsAppCTA() {
   }, [isVisible]);
 
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/201055119164', '_blank');
+    window.open('https://wa.me/201028518754', '_blank');
   };
 
   return (

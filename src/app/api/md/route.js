@@ -159,7 +159,7 @@ function homeMarkdown(locale, messages) {
       out.push("");
       out.push(details.custom.text ?? "");
       out.push("");
-      out.push(`- WhatsApp: https://wa.me/201055119164`);
+      out.push(`- WhatsApp: https://wa.me/201028518754`);
       out.push(`- ${details.custom.form}: ${SITE_URL}/${locale}/form`);
       out.push("");
     }

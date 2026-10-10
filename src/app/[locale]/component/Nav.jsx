@@ -210,7 +210,7 @@ export default function EnhancedNavbar() {
                   {isRTL ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
                 </a>
                 <a
-                  href="https://wa.me/201055119164"
+                  href="https://wa.me/201028518754"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-secondary btn-lg"

@@ -35,7 +35,7 @@ const ICONS = {
 const ORDER = ["cafe", "resto", "barber", "clinic", "dental", "pharma", "bar", "shop"];
 
 // نفس رقم الواتساب المستخدم في باقي الموقع (Nav / Footer / Cta)
-const WHATSAPP_URL = "https://wa.me/201055119164";
+const WHATSAPP_URL = "https://wa.me/201028518754";
 
 export default function SystemsDetails() {
   const t = useTranslations("systemsDetails");
