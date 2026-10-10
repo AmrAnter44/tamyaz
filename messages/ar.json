@@ -109,7 +109,8 @@
           "الخزنة والمصاريف",
           "تقارير يومية بالساعة"
         ],
-        "url": "https://demo.barber.tamyaz.online/login"
+        "url": "https://demo.barber.tamyaz.online/login",
+        "branches": 8
       },
       "clinic": {
         "name": "تميز كلينك",
@@ -144,7 +145,8 @@
           "الشيفتات وفروقات الخزنة",
           "لينا وعلينا"
         ],
-        "url": "https://demo.pharma.tamyaz.online/login"
+        "url": "https://demo.pharma.tamyaz.online/login",
+        "branches": 6
       },
       "bar": {
         "name": "تميز بار",
@@ -177,7 +179,8 @@
       "text": "لو شغلك محتاج سيستم مختلف أو تعديلات على أي سيستم من دول، بنعملهولك كاستم على مقاس شغلك — من الفكرة لحد التشغيل.",
       "whatsapp": "كلمنا واتساب",
       "form": "سجّل طلبك"
-    }
+    },
+    "branchesLabel": "{count, plural, one {فرع واحد شغال معانا} two {فرعين شغالين معانا} few {# فروع شغالة معانا} other {# فرع شغال معانا}}"
   },
   "stats": {
     "title": "إحصائياتنا",
@@ -233,6 +236,8 @@
     "relatedProjects": "مشاريع ذات صلة",
     "visitWebsite": "زيارة الموقع",
     "followOnInstagram": "تابعنا على انستجرام",
+    "googlePlay": "حمّله من Google Play",
+    "appStore": "حمّله من App Store",
     "features": "إيه اللي في النظام",
     "benefits": "إيه اللي هتكسبه",
     "services": "الخدمات",

@@ -88,6 +88,9 @@ export default function SystemsDetails() {
                           {item.name}
                         </h3>
                         {item.hint && <span className="t-chip">{item.hint}</span>}
+                        {item.branches > 0 && (
+                          <span className="t-chip num">{t("branchesLabel", { count: item.branches })}</span>
+                        )}
                       </div>
                     </div>
 

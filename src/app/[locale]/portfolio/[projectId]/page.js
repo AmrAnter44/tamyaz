@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from 'next-intl';
 import { projectsData, getCategory, getProjectLink } from "@/data/projects";
-import { Instagram, ExternalLink, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X, Maximize2, Check } from "lucide-react";
+import { Instagram, ExternalLink, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, X, Maximize2, Check, Play, Apple } from "lucide-react";
 import { notFound } from "next/navigation";
 import Nav from "../../component/Nav";
 import Footer from "../../component/Footer";
@@ -152,6 +152,29 @@ export default function ProjectDetailPage() {
             >
               <ExternalLink size={20} />
               <span>{t('visitWebsite')}</span>
+            </a>
+          )}
+          {/* روابط المتاجر للمشاريع اللي ليها تطبيق موبايل منشور */}
+          {project.appLinks?.android && (
+            <a
+              href={project.appLinks.android}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`btn btn-secondary min-h-11 rounded-full`}
+            >
+              <Play size={18} />
+              <span>{t('googlePlay')}</span>
+            </a>
+          )}
+          {project.appLinks?.ios && (
+            <a
+              href={project.appLinks.ios}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`btn btn-secondary min-h-11 rounded-full`}
+            >
+              <Apple size={18} />
+              <span>{t('appStore')}</span>
             </a>
           )}
           {project.instagramLink && (

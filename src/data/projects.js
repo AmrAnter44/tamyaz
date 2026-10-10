@@ -77,8 +77,8 @@ export const projectsData = [
     },
     thumbnail: "/projects/memo-academy/logo-white.png",
     description: {
-      ar: "نظام إدارة متكامل لأكاديمية حلاقة بثلاثة فروع، بيغطي دورة الطالب كاملة من أول ما يبقى مهتم لحد ما يتخرّج وياخد شهادة موثّقة. تسعتاشر موديول بيدير الطلاب والمجموعات والحضور بالباركود والإيصالات والمصروفات والمرتبات والشهادات والتقارير المالية. عربي بالكامل بتخطيط من اليمين لليسار، وبيتثبّت على الموبايل كتطبيق، وبحماية على طبقتين مستقلتين تخلّي الأرقام المالية محجوبة عن الموظفين على مستوى قاعدة البيانات مش الشاشة.",
-      en: "A complete management system for a three-branch barber academy, covering the student journey from first inquiry to graduation with a verified certificate. Nineteen modules handle students, groups, barcode attendance, receipts, expenses, payroll, certificates, and financial reports. Fully Arabic with a right-to-left layout, installable on mobile as an app, and protected by two independent security layers that hide financial figures from staff at the database level rather than the screen."
+      ar: "نظام إدارة متكامل لأكاديمية حلاقة بثلاثة فروع، بيغطي دورة الطالب كاملة من أول ما يبقى مهتم لحد ما يتخرّج وياخد شهادة موثّقة. تسعتاشر موديول بيدير الطلاب والمجموعات والحضور بالباركود والإيصالات والمصروفات والمرتبات والشهادات والتقارير المالية. عربي بالكامل بتخطيط من اليمين لليسار، وبيتثبّت على الموبايل كتطبيق، وبحماية على طبقتين مستقلتين تخلّي الأرقام المالية محجوبة عن الموظفين على مستوى قاعدة البيانات مش الشاشة. وكورسات الأكاديمية أونلاين ليها تطبيق ومنصة مستقلين — تفاصيلهم في «Memo Online Courses — App & Platform».",
+      en: "A complete management system for a three-branch barber academy, covering the student journey from first inquiry to graduation with a verified certificate. Nineteen modules handle students, groups, barcode attendance, receipts, expenses, payroll, certificates, and financial reports. Fully Arabic with a right-to-left layout, installable on mobile as an app, and protected by two independent security layers that hide financial figures from staff at the database level rather than the screen. The academy's online courses have their own app and platform — see \"Memo Online Courses — App & Platform\"."
     },
     features: {
       ar: [
@@ -255,6 +255,368 @@ export const projectsData = [
     ],
     websiteLink: "",
     instagramLink: "/"
+  },
+  {
+    id: "memo-cosmetics-system",
+    name: "Memo Cosmetics System",
+    categoryId: "memo-group",
+    icon: "system",
+    highlights: {
+      ar: ["كاشير بالباركود", "3 مستويات سعر", "إيصال حراري 80mm", "استيراد من Excel", "PWA"],
+      en: ["Barcode POS", "3 price levels", "80mm thermal receipts", "Excel import", "PWA"],
+    },
+    thumbnail: "/projects/memo-cosmetics-system/logo.png",
+    description: {
+      ar: "سيستم بيع وإدارة لمحل ميمو كوزمتكس: كاشير بالباركود، وإيصالات حرارية 80mm، وتكويد الأصناف وطباعة استيكرات الباركود، ومخزون، وطلبات الموقع، والعملاء والتجار، والتقارير. كل صنف ليه تلات أسعار — تكلفة وتاجر وزبون — والفاتورة بتاخد السعر الصح حسب نوع العميل، وسعر التكلفة والربح محجوبين عن الكاشير على مستوى قاعدة البيانات. بيتثبّت كتطبيق على الموبايل والكمبيوتر، ومعمول بنفس هوية أنظمة ميمو.",
+      en: "A sales and management system for the Memo Cosmetics shop: a barcode point of sale, 80mm thermal receipts, product coding with printed barcode labels, inventory, website orders, customers and traders, and reports. Every product carries three prices — cost, trader, and customer — the invoice picks the right one for the type of buyer, and cost and profit are hidden from the cashier at the database level. It installs as an app on phone and desktop, and shares the same identity as the other Memo systems."
+    },
+    features: {
+      ar: [
+        "كاشير بمسح الباركود أو البحث بالاسم والكود، وكروت أصناف متقسّمة بالتبويبات، وصوت تنبيه لو الباركود مش موجود.",
+        "تلات أسعار لكل صنف: التكلفة، وسعر التاجر (الجملة)، وسعر الزبون — والفاتورة بتتحوّل لسعر التاجر لوحدها أول ما تختار عميل تاجر.",
+        "خصم على الفاتورة، والمبلغ المستلم والباقي أو المتبقّي على العميل، والدفع كاش أو إنستاباي أو محفظة أو فيزا.",
+        "تعديل سعر الصنف جوه الفاتورة بصلاحية بس، والتعديل بيتسجّل.",
+        "إيصال حراري 80mm بيتطبع بعد الفاتورة، مع إمكانية الطباعة على طول من غير نافذة الطباعة.",
+        "تكويد الأصناف وطباعة استيكرات باركود على رول 38×25مم أو ورق A4، بسعر الزبون أو التاجر أو من غير سعر، وعدد الاستيكرات ممكن يساوي المخزون.",
+        "استيراد الأصناف وأسعارها ورصيدها الافتتاحي من ملف Excel.",
+        "مخزون في مكان واحد: فواتير شراء، وتوريد سريع، وتالف، وجرد، وسجل لكل حركة بالكمية والرصيد بعدها.",
+        "تنبيه بالأصناف اللي وصلت للحد الأدنى أو خلصت، وقيمة المخزون بالتكلفة وبسعر البيع والربح المتوقّع منه.",
+        "طلبات الموقع بتوصل السيستم بتنبيه صوتي، وبتمشي بمراحل من «جديد» لحد «اتسلّم» — التأكيد بيخصم من المخزون والإلغاء بسبب بيرجّعه.",
+        "إلغاء فاتورة البيع بيرجّع البضاعة للمخزون.",
+        "ملف لكل عميل وتاجر بتتجمّع فيه فواتيره.",
+        "تقارير بأي فترة: صافي المبيعات، والربح والهامش، وتكلفة البضاعة المباعة، ومتوسط الفاتورة، ورسم للمبيعات اليومية، وتوزيع حسب طريقة الدفع والمصدر، وأعلى 20 صنف — مع تصدير الفواتير CSV.",
+        "تلات أدوار — مالك، أدمن، كاشير — وصلاحيات لكل مستخدم بتتعدّل من الإعدادات. الكاشير مايشوفش التكلفة ولا الربح، والقيود متطبّقة في قاعدة البيانات نفسها مش في الشاشة بس.",
+        "سجل عمليات بيوضّح مين عمل إيه.",
+        "بيانات المحل ومصاريف التوصيل والتبويبات بتتعدّل من الإعدادات.",
+        "تطبيق PWA بيتثبّت على الموبايل والكمبيوتر، وصفحات الفلوس والعملاء مابتتخزّنش على الجهاز."
+      ],
+      en: [
+        "A point of sale driven by barcode scans or search by name and code, product cards grouped into tabs, and an alert sound when a barcode is not found.",
+        "Three prices per product: cost, trader (wholesale), and customer — and the invoice switches to trader pricing on its own as soon as a trader customer is selected.",
+        "Invoice discount, amount received with change or balance owed, and payment by cash, InstaPay, mobile wallet, or card.",
+        "Changing an item's price inside the invoice requires a permission, and the change is logged.",
+        "An 80mm thermal receipt printed after the sale, with the option to print directly without the print dialog.",
+        "Product coding with barcode labels printed on 38×25mm rolls or A4 sheets, showing the customer price, the trader price, or no price, with label count optionally matching stock.",
+        "Products, prices, and opening stock imported from an Excel file.",
+        "Inventory in a single location: purchase invoices, quick restock, damaged goods, stocktakes, and a log of every movement with quantity and resulting balance.",
+        "Alerts for products at minimum level or out of stock, plus inventory value at cost and at selling price, and the expected profit in stock.",
+        "Website orders arrive with a sound alert and move through stages from \"new\" to \"delivered\" — confirming deducts stock, and cancelling with a reason returns it.",
+        "Cancelling a sales invoice returns the goods to stock.",
+        "A file per customer and trader where their invoices accumulate.",
+        "Reports over any period: net sales, profit and margin, cost of goods sold, average invoice, a daily sales chart, breakdown by payment method and source, and the top 20 products — with invoice export to CSV.",
+        "Three roles — owner, admin, cashier — and per-user permissions edited from settings. Cashiers never see cost or profit, and the restrictions are enforced in the database itself, not only on screen.",
+        "An activity log showing who did what.",
+        "Shop details, delivery fees, and product tabs edited from settings.",
+        "An installable PWA for phone and desktop, with money and customer pages never cached on the device."
+      ]
+    },
+    benefits: {
+      ar: [
+        "البيع بقى بالمسح مش بالذاكرة: الكاشير مش محتاج يحفظ أسعار مئات الأصناف، والسعر بيطلع صح حسب الزبون أو التاجر.",
+        "سعر الجملة مابيتدّاش بالغلط: الفاتورة بتتحوّل لسعر التاجر لما تختار تاجر بس، وأي تعديل يدوي في السعر محتاج صلاحية ومتسجّل.",
+        "تكلفتك وربحك سر: الكاشير بيشتغل على السيستم كله من غير ما يشوف سعر التكلفة ولا الربح.",
+        "بتعرف ربحك الحقيقي مش مبيعاتك بس: الربح محسوب على تكلفة الصنف وقت البيع.",
+        "البضاعة مابتخلصش فجأة: تنبيه الحد الأدنى بيقولك تطلب إيه قبل ما يخلص.",
+        "كل قطعة ليها أثر: أي توريد أو تالف أو جرد أو بيع متسجّل في حركة المخزون، فالعجز بيبان ومعروف حصل فين.",
+        "استيكر الباركود بيتطبع من السيستم نفسه، فالمنتج بيتكوّد مرة واحدة وبعدها البيع كله بالمسح.",
+        "المحل والموقع على مخزون واحد وأسعار واحدة، فمفيش طلب أونلاين لحاجة خلصانة في المحل.",
+        "قرارات الشراء مبنية على أرقام: الأصناف الأكثر مبيعًا والإيراد حسب طريقة الدفع قدامك.",
+        "بيشتغل من الموبايل أو الكمبيوتر كتطبيق، من غير برامج تتسطّب."
+      ],
+      en: [
+        "Selling by scan, not by memory: the cashier doesn't need to remember hundreds of prices, and the right price appears for a customer or a trader.",
+        "Wholesale prices aren't handed out by mistake: the invoice switches to trader pricing only when a trader is selected, and any manual price change needs a permission and is logged.",
+        "Your cost and profit stay private: the cashier runs the whole system without seeing cost price or profit.",
+        "You see real profit, not just sales: profit is calculated on each item's cost at the time of sale.",
+        "Stock doesn't run out by surprise: the minimum-level alert tells you what to reorder before it's gone.",
+        "Every piece leaves a trace: every restock, damage, stocktake, or sale is recorded as a stock movement, so shortages surface and you know where they happened.",
+        "Barcode labels print from the system itself, so each product is coded once and every sale after that is a scan.",
+        "The shop and the website share one stock and one price list, so nobody orders online something that's sold out in the shop.",
+        "Purchasing decisions rest on numbers: best-selling products and revenue by payment method are in front of you.",
+        "Runs on phone or desktop as an app, with no software to install."
+      ]
+    },
+    websiteLink: "",
+  },
+  {
+    id: "memo-academy-app",
+    // كورسات ميمو أونلاين: تطبيق الطالب + منصة الإدارة (Memo-onlinecourses: apps/mobile + apps/admin)
+    name: "Memo Online Courses — App & Platform",
+    categoryId: "memo-group",
+    icon: "app",
+    highlights: {
+      ar: ["تطبيق أندرويد وآيفون", "منصة إدارة شغّالة", "امتحانات MCQ وعملية", "شهادة بكود تحقق", "جهاز واحد لكل حساب"],
+      en: ["Android & iOS app", "Live admin platform", "MCQ & practical exams", "Verifiable certificate", "One device per account"],
+    },
+    thumbnail: "/projects/memo-academy-app/logo.png",
+    description: {
+      ar: "كورسات ميمو أونلاين: تطبيق للطلبة على أندرويد وآيفون، ومنصة إدارة شغّالة بتدير الكورسات والحلقات والامتحانات وأكواد الفتح والطلبة. في التطبيق الطالب بيتعلّم الحلاقة والصبغة والشبكية والدقن بفيديوهات مترتبة خطوة بخطوة، وكل حلقة بتفتح اللي بعدها. الامتحانات اختيار من متعدد بيتصحح على السيرفر، أو عملية بصورة بيراجعها الأدمن، ولما الطالب يخلّص الكورس بياخد شهادة باسمه بكود تحقق. الكورسات بتتفتح بأكواد من الإدارة، والحساب مربوط بجهاز واحد عشان المحتوى مايتشيّرش. ومن المنصة الأكاديمية بتنزّل الكورسات وترفع الفيديوهات وتولّد الأكواد وتراجع امتحانات الصور وتتابع الطلبة وأجهزتهم.",
+      en: "Memo's online courses: a student app on Android and iOS, plus a live admin platform that runs the courses, lessons, exams, unlock codes, and students. In the app, students learn cutting, colouring, fades, and beard work through step-by-step videos, with each lesson unlocking the next. Exams are either multiple choice, graded on the server, or practical with a photo reviewed by the admin, and finishing a course earns a certificate in the student's name with a verification code. Courses unlock with codes issued by the academy, each account is bound to one device so content isn't shared. From the platform, the academy publishes courses, uploads videos, generates codes, reviews photo exams, and follows students and their devices."
+    },
+    features: {
+      ar: [
+        "قائمة بالكورسات المنشورة، بتوضّح المفتوح والمقفول وتقدّم الطالب في كل كورس.",
+        "كل كورس متقسّم حلقات وامتحانات، بشريط تقدّم بيوري الطالب أنجز كام من كام.",
+        "مشغّل فيديو بيكمّل من آخر لحظة وقف عندها الطالب، وبيحفظ مكانه أثناء المشاهدة.",
+        "تعلّم بالترتيب: الحلقة المقفولة مابتشتغلش أصلًا، والتحقق من القفل بيحصل على السيرفر مش في التطبيق.",
+        "امتحانات اختيار من متعدد بتتصحح على السيرفر بنسبة نجاح محددة (60% افتراضيًا)، ومفتاح الإجابة مابيوصلش للموبايل.",
+        "امتحانات عملية: الطالب بيرفع صورة شغله، والأدمن بيقبلها أو يرفضها من شاشة المراجعة.",
+        "شهادة إتمام بإطار ذهبي باسم الطالب وكود تحقق، بتتصدر بس لما كل الحلقات تخلص وكل الامتحانات تنجح — وصفحة تحقق عامة بالكود.",
+        "فتح الكورسات بكود من الإدارة بيتقفل على أول حساب يستخدمه، والكود الواحد ممكن يفتح باقة كورسات وممكن يبقى ليه تاريخ انتهاء.",
+        "على الآيفون الكورس بيتفعّل على حساب الطالب من الإدارة مباشرة بدل الكود.",
+        "الحساب مربوط بجهاز واحد؛ لو اتفتح من جهاز تاني الطالب بيشوف إن جهازه مش متسجّل، والأدمن بس اللي يفك الربط.",
+        "إشعارات للطلبة لما كورس أو حلقة جديدة تنزل.",
+        "منصة الكورسات أونلاين شغّالة وبتدير كل حاجة: الكورسات والحلقات ورفع الفيديو ونشرها، والامتحانات، وأكواد الفتح، والطلاب وأجهزتهم، ومراجعة امتحانات الصور، والشهادات.",
+        "حساب بالإيميل مع استرجاع كلمة المرور، وصفحات الخصوصية والشروط والدعم وطلب حذف البيانات اللي المتاجر بتطلبها.",
+        "التطبيق منشور على جوجل بلاي وآب ستور.",
+        "عربي بالكامل من اليمين لليسار، بثيم غامق وذهبي من لوجو ميمو."
+      ],
+      en: [
+        "A catalogue of published courses showing which are unlocked, which are locked, and the student's progress in each.",
+        "Each course is split into lessons and exams, with a progress bar showing how much is done.",
+        "A video player that resumes from the exact moment the student stopped, saving their position while they watch.",
+        "Sequential learning: a locked lesson simply won't play, and the lock is checked on the server, not in the app.",
+        "Multiple-choice exams graded on the server with a set pass mark (60% by default), and the answer key never reaches the phone.",
+        "Practical exams: the student uploads a photo of their work, and the admin approves or rejects it from the review screen.",
+        "A gold-framed completion certificate with the student's name and a verification code, issued only once every lesson is done and every exam passed — plus a public verification page by code.",
+        "Courses unlock with a code from the academy that locks to the first account that uses it; one code can unlock a bundle of courses and can carry an expiry date.",
+        "On iPhone, the course is activated on the student's account directly by the academy instead of by code.",
+        "Each account is bound to one device; opening it on another device shows the student that the device isn't registered, and only the admin can release the binding.",
+        "Notifications to students when a new course or lesson is published.",
+        "The online courses platform is live and runs everything: courses, lessons, video upload and publishing, exams, unlock codes, students and their devices, photo-exam reviews, and certificates.",
+        "Email accounts with password recovery, plus the privacy, terms, support, and data-deletion pages the app stores require.",
+        "The app is published on Google Play and the App Store.",
+        "Fully Arabic, right to left, in a dark and gold theme taken from the Memo logo."
+      ]
+    },
+    benefits: {
+      ar: [
+        "مصدر دخل تاني من غير قاعة ولا كابتن: الكورسات المصوّرة بتتباع بكود، فبتوصل لطلاب برة فروعك ومن غير سقف لعدد المقاعد.",
+        "محتواك محمي: الكود بيتقفل على حساب الطالب بعد أول استخدام، والحساب نفسه مربوط بجهاز واحد — فمينفعش كود ولا حساب يتداول بين عشرة.",
+        "الامتحان قبل ما الطالب يكمّل بيضمن إنه فاهم فعلًا — فالخريج بتاعك بيطلع بمستوى، وده اللي بيحافظ على سمعة الأكاديمية.",
+        "الامتحان العملي بالصورة بيخليك تحكم على شغل حقيقي مش على الحفظ، من غير ما الطالب ييجي الفرع.",
+        "الطالب بيكمّل من حيث وقف في أي وقت، وشريط التقدّم بيحفّزه يخلّص — يعني نسبة إكمال أعلى وشكاوى أقل.",
+        "الشهادة بكود تحقق، فأي حد يقدر يتأكد منها — وده بيدّي الكورس الأونلاين وزن قدام صاحب الشغل.",
+        "أول ما تنزّل كورس جديد الطلبة بيعرفوا بإشعار، من غير ما تعتمد على بوستات وجروبات.",
+        "الأكاديمية بتدير الكورسات أونلاين بنفسها من المنصة: تنزّل كورس، تولّد أكواد، تتابع الطلبة، تفك ربط جهاز، وتراجع الامتحانات — من غير مبرمج."
+      ],
+      en: [
+        "A second revenue stream with no room and no trainer: recorded courses sell by code, reaching students beyond your branches with no cap on seats.",
+        "Your content stays protected: the code locks to the student's account after first use, and the account itself is bound to one device — so neither a code nor an account can circulate among ten people.",
+        "The exam gate before progressing ensures the student actually understood — your graduates leave with a real standard, which is what protects the academy's reputation.",
+        "Photo-based practical exams let you judge real work rather than memorisation, without the student coming to a branch.",
+        "Students resume from where they stopped at any time, and the progress bar pushes them to finish — higher completion rates and fewer complaints.",
+        "The certificate carries a verification code anyone can check — which gives an online course real weight with an employer.",
+        "Students learn about a new course the moment it's published through a notification, without relying on posts and groups.",
+        "The academy runs its online courses itself from the platform: publish a course, generate codes, follow students, release a device, and review exams — no developer needed."
+      ]
+    },
+    imageGroups: [
+      {
+        label: { ar: "تطبيق الطالب", en: "Student app" },
+        images: Array.from({ length: 7 }, (_, i) => `/projects/memo-academy/app-${i + 1}.jpeg`),
+      },
+    ],
+    // روابط المتاجر بتظهر كزراير Google Play / App Store في صفحة المشروع
+    appLinks: {
+      android: "https://play.google.com/store/apps/details?id=com.memo.barber",
+      ios: "https://apps.apple.com/app/id6782357346",
+    },
+    websiteLink: "",
+  },
+  {
+    id: "memo-customer-app",
+    name: "MEMO Customer App",
+    categoryId: "memo-group",
+    icon: "app",
+    highlights: {
+      ar: ["أندرويد وآيفون", "اختيار الفرع والكابتن", "الدور لحظيًا", "نقاط ولاء"],
+      en: ["Android & iOS", "Choose branch & barber", "Live queue", "Loyalty points"],
+    },
+    thumbnail: "/projects/memo-customer-app/logo.png",
+    description: {
+      ar: "تطبيق لعملاء محلات ميمو على أندرويد وآيفون باسم «MEMO — ميمو»: العميل بيختار الفرع والكابتن ويحجز دوره، ويتابع ترتيبه في الدور لحظة بلحظة من مكانه، وبيجمع نقاط ولاء على كل فاتورة. التطبيق على نفس قاعدة بيانات سيستم المحلات، فالحجز بيوصل للريسبشن والكابتن فورًا. التصفّح متاح من غير حساب، والموقع بيُستخدم بس لعرض أقرب فرع.",
+      en: "An Android and iOS app for Memo barbershop customers, published as \"MEMO — ميمو\": the customer picks a branch and a barber, books a place in the queue, follows their position live from wherever they are, and earns loyalty points on every invoice. It runs on the same database as the shop system, so a booking reaches reception and the barber instantly. Browsing works without an account, and location is used only to show the nearest branch."
+    },
+    features: {
+      ar: [
+        "حجز في خطوات: اختيار الفرع، وبعده الكابتن بالاسم أو «أي كابتن» والنظام يختار الأقل ازدحامًا.",
+        "حالة كل كابتن ظاهرة (متاح، مشغول، مش موجود) وبتتحدّث لحظيًا.",
+        "شاشة «الدور» بترتيبك والوقت المتوقع، وبتتحدّث لوحدها من غير ما تعمل تحديث.",
+        "بدون عربون — الدفع في المحل.",
+        "نقاط ولاء بتتحسب تلقائيًا على الفاتورة — نقطة على كل عشرة جنيه — وظاهرة في حسابك مع سجل حجوزاتك.",
+        "تقييم بالنجوم وتعليق بعد الخدمة، وبيتحسب في تقييم الكابتن.",
+        "إشعارات بتحديثات الدور والحجز.",
+        "تسجيل دخول برقم الموبايل، وتصفّح الفروع والكباتن كضيف من غير حساب.",
+        "الموقع بيتطلب أثناء الاستخدام بس لعرض أقرب فرع، ومش بيتشارك مع أي جهة.",
+        "حذف الحساب وكل بياناته من جوه التطبيق، وسياسة خصوصية منشورة — وهو منشور على جوجل بلاي وآب ستور.",
+        "عربي بالكامل بهوية ميمو الأسود والذهبي."
+      ],
+      en: [
+        "Booking in steps: choose a branch, then a barber by name or \"any barber\" and the system picks the least busy.",
+        "Each barber's status (available, busy, away) is shown and updates live.",
+        "A \"queue\" screen with your position and estimated time that refreshes on its own.",
+        "No deposit — payment happens in the shop.",
+        "Loyalty points accrue automatically on each invoice — one point per ten pounds — shown in your account alongside your booking history.",
+        "Star ratings and a comment after service, feeding into the barber's rating.",
+        "Notifications for queue and booking updates.",
+        "Sign-in with a phone number, and guest browsing of branches and barbers without an account.",
+        "Location is requested only while the app is in use, to show the nearest branch, and is not shared with anyone.",
+        "Account and data deletion from inside the app, with a published privacy policy; the app is live on Google Play and the App Store.",
+        "Fully Arabic in Memo's black and gold identity."
+      ]
+    },
+    benefits: {
+      ar: [
+        "الريسبشن بيتفضّى من الرد على التليفون: العميل بيحجز من التطبيق بنفسه، فالموظف يرجع للكاشير وللعملاء اللي قدامه.",
+        "كل حجز بيدخل النظام مظبوط من أول ثانية — مفيش نقل يدوي من الواتساب ولا حجز بينسى ولا يتكرر ومحدش مسؤول عنه.",
+        "العميل مابيمشيش من الزحمة: شايف دوره لحظيًا من بيته فبييجي في وقته، والزحمة بتتوزّع لما يشوف الفرع الفاضي قبل ما يتحرك.",
+        "نقاط الولاء بترجّع العميل من غير خصومات بتاكل من هامشك.",
+        "التقييم بيوصلك بعد كل خدمة، فتعرف رأي العميل قبل ما يختفي.",
+        "التطبيق أرخص موظف ريسبشن عندك: شغال 24 ساعة وبيدخّل البيانات صح من المصدر."
+      ],
+      en: [
+        "Reception is freed from answering the phone: customers book themselves in the app, so staff return to the register and the people in front of them.",
+        "Every booking enters the system correctly from the first second — no manual transfer from WhatsApp, no forgotten or duplicated booking with nobody accountable.",
+        "Customers stop walking out over crowding: they watch their place in the queue from home and arrive on time, and crowds spread out once they can see which branch is free.",
+        "Loyalty points bring customers back without discounts eating into your margin.",
+        "A rating arrives after every service, so you hear the customer's opinion before they disappear.",
+        "The app is the cheapest receptionist you have: it works 24 hours and enters the data correctly at the source."
+      ]
+    },
+    imageGroups: [
+      {
+        label: { ar: "تطبيق العميل", en: "Customer app" },
+        images: Array.from({ length: 6 }, (_, i) => `/projects/memo-barbershop/mobile-${i + 1}.jpeg`),
+      },
+    ],
+    appLinks: {
+      android: "https://play.google.com/store/apps/details?id=com.memo.customer",
+      ios: "https://apps.apple.com/app/id6783862323",
+    },
+    websiteLink: "",
+  },
+  {
+    id: "memo-group-website",
+    name: "Memo Group Website",
+    categoryId: "memo-group",
+    icon: "website",
+    highlights: {
+      ar: ["6 أنشطة", "الفروع بالمسافة", "عربي RTL", "شغال على أي شاشة"],
+      en: ["6 businesses", "Branches by distance", "Arabic RTL", "Works on any screen"],
+    },
+    thumbnail: "/projects/memo-group-site/logo.png",
+    description: {
+      ar: "الموقع الرسمي لـ MEMO Group على memobarber.com: بيعرّف بالمجموعة وأنشطتها الستة — Memo Barbershop وMemo Hair Unit وMemo Skincare وMemo Academy وMemo Cosmetics وEl Monafes — وبيحكي قصة المؤسس والرؤية والاعتمادات، وبيوصّل الزائر لأقرب فرع ولتطبيقات ميمو. الفروع والخدمات بتتقري من نفس قاعدة بيانات سيستم المحلات، فأي تعديل في الداشبورد بيظهر على الموقع.",
+      en: "The official MEMO Group website at memobarber.com: it introduces the group and its six businesses — Memo Barbershop, Memo Hair Unit, Memo Skincare, Memo Academy, Memo Cosmetics, and El Monafes — tells the founder's story, vision, and accreditations, and points visitors to the nearest branch and to Memo's apps. Branches and services are read from the same database as the shop system, so any change in the dashboard shows up on the site."
+    },
+    features: {
+      ar: [
+        "صفحة رئيسية بتعرض المنظومة، والمؤسس، والحضور التشغيلي، والاعتمادات، والرؤية.",
+        "صفحة لكل نشاط من الأنشطة الستة بتفاصيله وفريقه، مع تنقّل بين الأنشطة.",
+        "صفحة «من نحن» بقصة المجموعة: المؤسس، الرؤية والثقافة، الجودة، القيادة والفريق، والاعتمادات.",
+        "الفروع مترتبة حسب المسافة من الزائر لو سمح بموقعه، ولو رفض بتظهر من غير مسافة.",
+        "صفحة لكل فرع فيها فيديوهات ومعرض صور ولينك مباشر على خرايط جوجل.",
+        "صفحة خدمات متغذية من نفس قاعدة بيانات الداشبورد.",
+        "دعوة لتحميل تطبيق ميمو، وصفحة روابط بتجمع التطبيقات وحسابات السوشيال في مكان واحد.",
+        "صفحة QR جاهزة للطباعة بتوصّل للتطبيق والحسابات.",
+        "صفحات الخصوصية والشروط وحذف الحساب اللي متاجر التطبيقات بتطلبها لتطبيق العملاء.",
+        "بيانات منظّمة لمحركات البحث، وخريطة موقع، وصور مشاركة للسوشيال — عشان الموقع يظهر صح على جوجل ولما يتشيّر.",
+        "عربي بالكامل من اليمين لليسار بهوية ميمو الغامقة والذهبي، وشغال على أي شاشة."
+      ],
+      en: [
+        "A homepage presenting the ecosystem, the founder, the operational presence, accreditations, and the vision.",
+        "A page for each of the six businesses with its details and team, with navigation between them.",
+        "An \"About\" page with the group's story: the founder, vision and culture, quality, leadership and team, and accreditations.",
+        "Branches sorted by distance from the visitor when they share their location, and listed without distance when they don't.",
+        "A page per branch with videos, a photo gallery, and a direct Google Maps link.",
+        "A services page fed from the same database as the dashboard.",
+        "Calls to download the Memo app, and a links page gathering the apps and social accounts in one place.",
+        "A print-ready QR page leading to the app and the accounts.",
+        "The privacy, terms, and account-deletion pages the app stores require for the customer app.",
+        "Structured data for search engines, a sitemap, and social share images — so the site shows up properly on Google and when shared.",
+        "Fully Arabic, right to left, in Memo's dark and gold identity, working on any screen."
+      ]
+    },
+    benefits: {
+      ar: [
+        "المجموعة بقى ليها بيت رسمي على دومين باسمها، بيعرض كل أنشطتها في مكان واحد بدل صفحات سوشيال متفرقة.",
+        "الزائر بيوصل لأقرب فرع في ثواني: الفروع مترتبة بالمسافة ومعاها لينك الخرايط.",
+        "الموقع بيشتغل لصالح التطبيق: كل صفحة بتدفع الزائر يحمّل تطبيق ميمو ويحجز منه.",
+        "مفيش تحديث مزدوج: الفروع والخدمات بتتعدّل من الداشبورد وتظهر على الموقع لوحدها.",
+        "قصة المؤسس والاعتمادات مكتوبة قدام العميل والمتدرب والشريك، وده بيبني ثقة قبل أول زيارة.",
+        "متطلبات المتاجر جاهزة: صفحات الخصوصية والشروط وحذف الحساب منشورة على نفس الدومين."
+      ],
+      en: [
+        "The group now has an official home on its own domain, showing all its businesses in one place instead of scattered social pages.",
+        "Visitors reach the nearest branch in seconds: branches are sorted by distance with a map link.",
+        "The site works for the app: every page pushes the visitor to download the Memo app and book from it.",
+        "No double updates: branches and services are edited in the dashboard and appear on the site on their own.",
+        "The founder's story and accreditations are in front of customers, trainees, and partners, building trust before the first visit.",
+        "App-store requirements are covered: privacy, terms, and account-deletion pages live on the same domain."
+      ]
+    },
+    websiteLink: "https://memobarber.com",
+  },
+  {
+    id: "memo-cosmetics-website",
+    name: "Memo Cosmetics Website",
+    categoryId: "memo-group",
+    icon: "website",
+    highlights: {
+      ar: ["متجر أونلاين", "الدفع عند الاستلام", "توصيل لكل المحافظات", "سعر المستهلك"],
+      en: ["Online store", "Cash on delivery", "Delivery nationwide", "Retail prices"],
+    },
+    thumbnail: "/projects/memo-cosmetics-site/logo.png",
+    description: {
+      ar: "متجر أونلاين لميمو كوزمتكس على memocosmetic.com: كتالوج بالأقسام والبحث، وسلة، وطلب بالدفع عند الاستلام لكل المحافظات. الموقع بيعرض سعر المستهلك بس — والجملة بتتم في المحل — والطلب بيوصل على طول لسيستم المحل، ومنه بيتأكد ويتجهّز ويتشحن ويتخصم من نفس المخزون.",
+      en: "An online store for Memo Cosmetics at memocosmetic.com: a catalogue with categories and search, a cart, and cash-on-delivery ordering to every governorate. The site shows the customer price only — wholesale is handled in the shop — and each order goes straight into the shop system, where it is confirmed, prepared, shipped, and deducted from the same stock."
+    },
+    features: {
+      ar: [
+        "صفحة رئيسية، ومتجر بكل المنتجات، وصفحة لكل قسم، وصفحة لكل منتج بصوره.",
+        "بحث بالاسم أو الكود، وفلترة بالقسم، وترتيب بالأحدث أو بالسعر، واختيار «المتوفر بس».",
+        "سلة وطلب في خطوتين — البيانات وعنوان التوصيل — من غير تسجيل حساب.",
+        "الدفع كاش عند الاستلام بس، والطلب بيتأكد بمكالمة قبل الشحن.",
+        "مصاريف التوصيل حسب المحافظة، ومعاها حد للتوصيل المجاني بيتحدد من السيستم.",
+        "بيعرض سعر المستهلك بس؛ سعر التاجر والتكلفة مابيظهروش على الموقع.",
+        "المحل بيتحكم من السيستم في المنتجات اللي بتظهر على الموقع، والمخزون واحد للمحل والموقع.",
+        "التحقق من رقم الموبايل المصري قبل إرسال الطلب، وحماية من طلبات البوتات.",
+        "زرار واتساب للاستفسار من أي صفحة.",
+        "خريطة موقع وملف robots عشان المنتجات تظهر على جوجل."
+      ],
+      en: [
+        "A homepage, a shop with every product, a page per category, and a page per product with its images.",
+        "Search by name or code, filter by category, sort by newest or price, and an \"in stock only\" option.",
+        "A cart and a two-step checkout — details and delivery address — with no account required.",
+        "Cash on delivery only, with the order confirmed by phone before shipping.",
+        "Delivery fees by governorate, plus a free-delivery threshold set from the system.",
+        "Customer prices only; trader and cost prices never appear on the site.",
+        "The shop controls from the system which products appear online, and the shop and the site share one stock.",
+        "Egyptian mobile number validation before an order is sent, and protection against bot orders.",
+        "A WhatsApp button for questions on every page.",
+        "A sitemap and robots file so products can show up on Google."
+      ]
+    },
+    benefits: {
+      ar: [
+        "المحل بقى بيبيع لكل المحافظات 24 ساعة من غير فرع تاني ولا إيجار.",
+        "مفيش مخاطرة دفع أونلاين ولا عمولات بوابات دفع: الزبون بيدفع لما يستلم، والطلب بيتأكد بمكالمة قبل الشحن.",
+        "أسعار الجملة محمية: الموقع بيعرض سعر الزبون بس، والتاجر بيتعامل معاك في المحل.",
+        "الطلب مابيتوهش في الواتساب: بيدخل السيستم برقم، ويوصل بتنبيه صوتي، ويتتابع لحد التسليم.",
+        "مفيش بيع لحاجة خلصانة: الموقع والمحل على نفس المخزون.",
+        "السعر اللي تغيّره في السيستم بيتغيّر على الموقع في نفس اللحظة — من غير مبرمج."
+      ],
+      en: [
+        "The shop now sells to every governorate around the clock, with no second branch and no rent.",
+        "No online-payment risk and no gateway fees: the customer pays on delivery, and every order is confirmed by phone before shipping.",
+        "Wholesale prices stay protected: the site shows the customer price only, and traders deal with you in the shop.",
+        "Orders don't get lost in WhatsApp: each one enters the system with a number, arrives with a sound alert, and is tracked to delivery.",
+        "Nothing sold that's out of stock: the site and the shop run on the same inventory.",
+        "A price you change in the system changes on the site at the same moment — no developer needed."
+      ]
+    },
+    websiteLink: "https://memocosmetic.com",
   },
   {
     id: "cafe-system",

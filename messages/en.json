@@ -109,7 +109,8 @@
           "Cash drawer and expenses",
           "Hourly daily reports"
         ],
-        "url": "https://demo.barber.tamyaz.online/login"
+        "url": "https://demo.barber.tamyaz.online/login",
+        "branches": 8
       },
       "clinic": {
         "name": "Tamyaz Clinic",
@@ -144,7 +145,8 @@
           "Shifts and cash-drawer differences",
           "Receivables and payables"
         ],
-        "url": "https://demo.pharma.tamyaz.online/login"
+        "url": "https://demo.pharma.tamyaz.online/login",
+        "branches": 6
       },
       "bar": {
         "name": "Tamyaz Bar",
@@ -177,7 +179,8 @@
       "text": "If your business needs a different system or changes to any of these, we'll build it custom, tailored to how you work — from idea to launch.",
       "whatsapp": "Chat on WhatsApp",
       "form": "Submit your request"
-    }
+    },
+    "branchesLabel": "{count, plural, one {# branch running with us} other {# branches running with us}}"
   },
   "stats": {
     "title": "Our Statistics",
@@ -233,6 +236,8 @@
     "relatedProjects": "Related Projects",
     "visitWebsite": "Visit Website",
     "followOnInstagram": "Follow on Instagram",
+    "googlePlay": "Get it on Google Play",
+    "appStore": "Download on the App Store",
     "features": "What's inside the system",
     "benefits": "What you gain",
     "services": "Services",
