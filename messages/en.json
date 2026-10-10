@@ -5,14 +5,65 @@
   },
   "navbar": {
     "cta": "Start Now",
-    "switchLanguage": "العربية"
+    "switchLanguage": "العربية",
+    "links": {
+      "systems": "Systems",
+      "services": "Services",
+      "portfolio": "Our Work",
+      "package": "Packages",
+      "faq": "FAQ"
+    }
   },
   "hero": {
     "title": "Is It",
     "titleHighlight": "Excellence",
     "titleEnd": "You're Looking For?",
     "description": "Whether you need to create a brand identity, website, mobile app, marketing campaign, or even accounting and inventory systems - the key to making your project a success starts with having a well-thought-out creative brief.",
-    "cta": "Contact Us!"
+    "cta": "Contact Us!",
+    "eyebrow": "8 business management systems",
+    "whatsapp": "Chat on WhatsApp",
+    "card": {
+      "title": "Dashboard",
+      "live": "Live",
+      "sales": "Sales today",
+      "orders": "Orders today",
+      "expenses": "Expenses"
+    }
+  },
+  "orbit": {
+    "eyebrow": "The Tamyaz ecosystem",
+    "title": "8 systems around your business",
+    "subtitle": "Every type of business gets a system built for it — in Arabic, on mobile and desktop.",
+    "items": {
+      "cafe": {
+        "name": "Tamyaz Cafe"
+      },
+      "restaurant": {
+        "name": "Tamyaz Restaurant"
+      },
+      "barber": {
+        "name": "Tamyaz Barber"
+      },
+      "clinic": {
+        "name": "Tamyaz Clinic"
+      },
+      "dental": {
+        "name": "Tamyaz Dental",
+        "hint": "Dentists"
+      },
+      "pharmacy": {
+        "name": "Tamyaz Pharmacy",
+        "hint": "Pharmacies"
+      },
+      "gym": {
+        "name": "Tamyaz Bar",
+        "hint": "Gyms"
+      },
+      "store": {
+        "name": "Tamyaz Store",
+        "hint": "Retail"
+      }
+    }
   },
   "stats": {
     "title": "Our Statistics",

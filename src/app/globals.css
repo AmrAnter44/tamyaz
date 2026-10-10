@@ -1,39 +1,493 @@
 @import "tailwindcss";
 
+/* ===== Unified dark design — Tamyaz (accent #F8DE04) =====
+   الموقع داكن دايمًا، ولون الماركة هو الفرق الوحيد بين تميز وفيت بوست */
 :root {
-  --background: #ffffff;
-  --foreground: #141414;
+  color-scheme: dark;
+  --accent: #F8DE04;
+  --accent-rgb: 248, 222, 4;
+  --on-accent: #1d1d1b;
+  --background: #0b0b0a;
+  --foreground: #ecece6;
+  --ink: #ecece6;
+  --ink-2: #9a9a93;
+  --ink-3: #a9a9a2;
+  --ink-4: #6f6f69;
+  --field: #111110;
+  --line: rgba(255, 255, 255, 0.07);
+  --glass: rgba(20, 20, 18, 0.62);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: #F8DE04;
+  --color-on-accent: #1d1d1b;
+  --color-ink: #ecece6;
+  --color-ink-2: #9a9a93;
+  --color-ink-3: #a9a9a2;
+  --color-ink-4: #6f6f69;
+  --color-page: #0b0b0a;
+  --color-field: #111110;
+  --font-sans: var(--font-cairo), system-ui, sans-serif;
+  /* أي أصفر قديم في الكود بقى لون الماركة، والرماديات بقت درجات الحبر */
+  --color-yellow-300: #F8DE04;
+  --color-yellow-400: #F8DE04;
+  --color-yellow-500: #F8DE04;
+  --color-amber-300: #F8DE04;
+  --color-gray-200: #ecece6;
+  --color-gray-300: #a9a9a2;
+  --color-gray-400: #9a9a93;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #141414;
-    --foreground: #ededed;
-  }
+html {
+  background-color: #0b0b0a;
+  scroll-behavior: smooth;
 }
 
 html, body {
-  height: 100%;
   width: 100%;
-  font-family: 'Cairo', sans-serif;
-  direction: rtl;
-  unicode-bidi: bidi-override;
-  background: var(--background);
-  color: var(--foreground);
+  min-height: 100%;
   overflow-x: hidden;
-  scroll-behavior: smooth;
-  background-color: black;
+}
+
+/* clip بدل hidden: بيمنع السكرول الأفقي من غير ما يحوّل body لحاوية سكرول (sticky يفضل شغال) */
+@supports (overflow: clip) {
+  html, body { overflow-x: clip; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-cairo), Cairo, system-ui, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(1100px 620px at 85% -10%, rgba(var(--accent-rgb), 0.14), transparent 70%),
+    radial-gradient(800px 600px at 0% 45%, rgba(var(--accent-rgb), 0.06), transparent 70%),
+    #0b0b0a;
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   user-select: none;
+}
+
+h1, h2, h3, h4, h5, h6, button, input, select, textarea {
+  font-family: inherit;
+}
+
+::selection {
+  background: rgba(var(--accent-rgb), 0.35);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* أرقام لاتيني بعرض ثابت */
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* كلاسات المكونات جوه layer عشان أي utility من Tailwind (hidden, w-full…) تقدر تغيّرها */
+@layer components {
+/* ===== Surfaces ===== */
+.t-card {
+  position: relative;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(34, 34, 31, 0.82), rgba(21, 21, 19, 0.82));
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 1px 0 rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 28px 50px -30px rgba(0, 0, 0, 0.95);
+}
+
+.t-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 18px auto;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.t-card-hover {
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.t-card-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(var(--accent-rgb), 0.28);
+}
+
+.t-soft {
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.t-row {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.t-glass {
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.t-raised {
+  background: linear-gradient(#2b2b28, #1f1f1d);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.t-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.12);
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.28);
+}
+
+.t-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.12);
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.28);
+}
+
+.t-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #a9a9a2;
+  background: rgba(169, 169, 162, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(169, 169, 162, 0.28);
+}
+
+.t-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+}
+
+/* ===== Buttons (pill, ≥44px) ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-lg {
+  min-height: 52px;
+  padding: 0 26px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 0 10px 26px -10px rgba(var(--accent-rgb), 0.6);
+}
+
+.btn-primary:hover {
+  color: var(--on-accent);
+  box-shadow: 0 14px 30px -10px rgba(var(--accent-rgb), 0.75);
+}
+
+.btn-lg.btn-primary {
+  box-shadow: 0 14px 30px -12px rgba(var(--accent-rgb), 0.6);
+}
+
+.btn-lg.btn-primary:hover {
+  box-shadow: 0 16px 34px -12px rgba(var(--accent-rgb), 0.75);
+}
+
+.btn-light {
+  background: #ecece6;
+  color: #121211;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--ink);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+}
+
+.btn-danger {
+  background: rgba(255, 138, 128, 0.1);
+  border: 1px solid rgba(255, 138, 128, 0.28);
+  color: #ff8a80;
+}
+
+/* الزرار مايعديش عرض الشاشة: على الموبايل الصغير النص يلف لسطرين بدل ما يطلع برا */
+.btn { max-width: 100%; }
+
+@media (max-width: 479px) {
+  .btn {
+    white-space: normal;
+    text-align: center;
+    padding-block: 8px;
+  }
+}
+
+/* ===== Inputs ===== */
+.t-field {
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 14px;
+  background: #111110;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--ink);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.t-field:focus,
+.t-field:focus-within {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.12);
+}
+
+/* زرار اختيار (segment / option) */
+.t-option {
+  min-height: 44px;
+  border-radius: 14px;
+  background: #111110;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #c9c9c2;
+  font-weight: 700;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.t-option:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--ink);
+}
+
+.t-option[aria-pressed="true"],
+.t-option.is-selected {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.08);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.12);
+}
+
+/* ===== Orbit (أنظمة تميز حوالين اللوجو) ===== */
+.orbit-wrap {
+  container-type: inline-size;
+  width: min(100%, 620px);
+  margin-inline: auto;
+}
+
+.orbit {
+  --tile: 64px;
+  --r: 104px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+@media (min-width: 360px) {
+  .orbit { --tile: 72px; --r: 120px; }
+}
+
+@media (min-width: 640px) {
+  .orbit { --tile: 92px; --r: 210px; }
+}
+
+@media (min-width: 768px) {
+  .orbit { --tile: 104px; --r: 240px; }
+}
+
+/* نص القطر محسوب من عرض الحاوية نفسها: مايتقصّش على أي مقاس */
+/* المربعات بتفضل معدولة وهي بتلف، فأسوأ حالة لما اتنين جنب بعض يبقوا على زاوية ٤٥°:
+   المسافة بين المراكز = 2r·sin(22.5°)، ولازم كل محور منها (÷√2) يبقى ≥ عرض المربع
+   → r ≥ 1.85 × tile. بالقيم دي: tile = 20cqi و r = 40cqi − 8px ≥ 37cqi على أي عرض ≥ 270px */
+@supports (width: 1cqi) {
+  .orbit {
+    --tile: clamp(56px, 20cqi, 104px);
+    --r: calc(50cqi - var(--tile) / 2 - 8px);
+  }
+}
+
+.orbit-path {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--r) * 2);
+  height: calc(var(--r) * 2);
+  margin: calc(var(--r) * -1) 0 0 calc(var(--r) * -1);
+  border-radius: 50%;
+  border: 2px dashed rgba(var(--accent-rgb), 0.45);
+  box-shadow: 0 0 40px -10px rgba(var(--accent-rgb), 0.25), inset 0 0 40px -10px rgba(var(--accent-rgb), 0.18);
+  animation: orbit-spin 90s linear infinite;
+  pointer-events: none;
+}
+
+.orbit-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--r) * 0.95);
+  height: calc(var(--r) * 0.95);
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(var(--accent-rgb), 0.16), transparent 68%);
+}
+
+.orbit-center img {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(var(--accent-rgb), 0.25));
+}
+
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: orbit-spin 48s linear infinite;
+}
+
+.orbit-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--tile);
+  height: var(--tile);
+  margin: calc(var(--tile) / -2) 0 0 calc(var(--tile) / -2);
+  transform: rotate(var(--a)) translateY(calc(var(--r) * -1)) rotate(calc(var(--a) * -1));
+}
+
+.orbit-tile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 2px;
+  border-radius: 18px;
+  text-align: center;
+  color: var(--accent);
+  /* نفس بلاطة الأيقونة الناعمة في التصميم (accent @ .12 + حلقة .28) فوق خلفية مصمتة عشان الخط المتقطع مايبانش من تحتها */
+  background:
+    linear-gradient(rgba(var(--accent-rgb), 0.12), rgba(var(--accent-rgb), 0.12)),
+    linear-gradient(180deg, #22221f, #151513);
+  border: 1px solid rgba(var(--accent-rgb), 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 18px 34px -22px rgba(0, 0, 0, 0.95);
+  animation: orbit-spin 48s linear infinite reverse;
+  transition: background 0.45s ease, color 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+}
+
+.orbit-tile svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 360px) {
+  .orbit-tile svg { width: 22px; height: 22px; }
+}
+
+.orbit-label {
+  display: block;
+  max-width: 100%;
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--ink);
+  overflow-wrap: break-word;
+  hyphens: auto;
+  transition: color 0.45s ease;
+}
+
+.orbit-hint {
+  display: none;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--ink-2);
+  transition: color 0.45s ease;
+}
+
+@media (min-width: 640px) {
+  .orbit-tile { border-radius: 22px; gap: 4px; padding: 4px; }
+  .orbit-tile svg { width: 28px; height: 28px; }
+  .orbit-label { font-size: 12px; }
+}
+
+@media (min-width: 768px) {
+  .orbit-tile svg { width: 32px; height: 32px; }
+  .orbit-label { font-size: 13px; }
+  .orbit-hint { display: block; }
+}
+
+.orbit-tile.is-active {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.14), 0 0 34px rgba(var(--accent-rgb), 0.55);
+}
+
+.orbit-tile.is-active .orbit-label,
+.orbit-tile.is-active .orbit-hint {
+  color: var(--on-accent);
+}
+
+@keyframes orbit-spin {
+  to { transform: rotate(360deg); }
+}
 }
 
 /* ملحوظة: كان هنا content-visibility: auto على كل section و img.
@@ -116,8 +570,27 @@ html, body {
   }
 
   .floaty,
-  .reveal.is-visible .sweep {
+  .reveal.is-visible .sweep,
+  .orbit-path,
+  .orbit-ring,
+  .orbit-tile {
     animation: none;
+  }
+
+  .orbit-tile,
+  .orbit-label,
+  .orbit-hint,
+  .btn,
+  .t-card-hover {
+    transition: none;
+  }
+
+  .t-card-hover:hover {
+    transform: none;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 }
 

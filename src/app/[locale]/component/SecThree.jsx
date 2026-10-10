@@ -53,17 +53,17 @@ export default function OptimizedSpecializations() {
   const services = t.raw('services');
 
   return (
-    <div className={`min-h-screen bg-black ${isRTL ? 'rtl font-arabic' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
-      <div className="py-20 px-6">
+    <div id="services" className={`scroll-mt-24 ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
+      <div className="py-16 sm:py-20 px-4 sm:px-6">
         <motion.div
           ref={ref}
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          className="container mx-auto"
+          className="max-w-[1200px] mx-auto"
         >
           {/* العنوان */}
           <motion.h2
-            className={`text-center text-4xl lg:text-5xl font-bold p-4 m-4 text-yellow-300 ${isRTL ? 'font-arabic' : ''}`}
+            className="text-center text-[28px] sm:text-4xl font-extrabold text-ink"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
@@ -72,7 +72,7 @@ export default function OptimizedSpecializations() {
           </motion.h2>
 
           {/* شبكة الخدمات */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
             {services.map((serviceTitle, index) => {
               const IconComponent = iconMap[index];
 
@@ -86,26 +86,16 @@ export default function OptimizedSpecializations() {
                     duration: 0.5,
                     ease: "easeOut"
                   }}
-                  whileHover={{ scale: 1.05, y: -8 }}
-                  className="relative flex flex-col justify-center items-center
-                            h-56 overflow-hidden
-                            bg-gradient-to-br from-yellow-400 via-yellow-300 to-yellow-400
-                            rounded-3xl
-                            transition-all duration-300 cursor-pointer group
-                            shadow-xl hover:shadow-2xl"
+                  className="t-card t-card-hover p-6 flex flex-col items-start gap-4 min-h-[168px] group"
                 >
                   {/* الأيقونة */}
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.3 }}
-                    className="mb-6"
-                  >
-                    {IconComponent && <IconComponent className="w-20 h-20 text-black group-hover:text-gray-800" strokeWidth={1.5} />}
-                  </motion.div>
+                  <span className="t-icon !w-14 !h-14 !rounded-2xl">
+                    {IconComponent && <IconComponent className="w-7 h-7" strokeWidth={1.7} aria-hidden="true" />}
+                  </span>
 
                   {/* النص */}
-                  <div className="flex flex-col items-center justify-center">
-                    <h3 className={`text-black text-xl lg:text-2xl font-bold text-center px-6 leading-tight ${isRTL ? 'font-arabic' : ''}`}>
+                  <div className="flex flex-col">
+                    <h3 className="text-ink text-lg lg:text-xl font-bold leading-snug">
                       {serviceTitle}
                     </h3>
                   </div>
@@ -119,20 +109,15 @@ export default function OptimizedSpecializations() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 1.2, duration: 0.6 }}
-            className="mt-16 text-center"
+            className="mt-12 text-center"
           >
-            <p className={`text-yellow-300 text-xl lg:text-2xl font-bold ${isRTL ? 'font-arabic' : ''}`}>
+            <p className="text-accent text-lg sm:text-xl lg:text-2xl font-bold">
               {t('teamText')}
             </p>
           </motion.div>
         </motion.div>
       </div>
 
-      <style jsx>{`
-        .font-arabic {
-          font-family: 'Cairo', sans-serif;
-        }
-      `}</style>
     </div>
   );
 }

@@ -108,6 +108,15 @@ function homeMarkdown(locale, messages) {
     out.push("");
   }
 
+  // أنظمة تميز الـ٨ (قسم الـorbit في الرئيسية)
+  const systems = Object.values(messages.orbit?.items ?? {});
+  if (systems.length) {
+    out.push(`## ${messages.orbit.title}`);
+    out.push("");
+    systems.forEach((s) => out.push(`- ${s.name}${s.hint ? ` (${s.hint})` : ""}`));
+    out.push("");
+  }
+
   if (messages.about?.points?.length) {
     out.push(`## ${messages.about.title}`);
     out.push("");

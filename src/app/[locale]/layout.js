@@ -1,4 +1,4 @@
-import { Geist, Cairo } from "next/font/google";
+import { Cairo } from "next/font/google";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
@@ -8,19 +8,22 @@ import FloatingWhatsAppCTA from './component/Cta';
 import { SITE_URL, LOCALES } from '@/lib/site';
 import "../globals.css";
 
-// تحسين تحميل الخطوط
-const geist = Geist({
-  subsets: ['latin'],
+// خط واحد بس في الموقع كله: Cairo (عربي + لاتيني)
+const cairo = Cairo({
+  subsets: ['arabic', 'latin'],
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
   preload: true,
+  variable: '--font-cairo',
 });
 
-const cairo = Cairo({
-  subsets: ['arabic'],
-  weight: ['500', '800'],
-  display: 'swap',
-  preload: true,
-});
+// الموقع داكن دايمًا — لون شريط المتصفح نفس خلفية الصفحة
+export const viewport = {
+  themeColor: '#0b0b0a',
+  colorScheme: 'dark',
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -120,10 +123,8 @@ export default async function LocaleLayout({ children, params }) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={geist.className}>
+    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={`${cairo.variable} dark`} style={{ colorScheme: 'dark' }}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* نسخة الماركداون وملف llms.txt للوكلاء الذكية */}
         <link rel="alternate" type="text/plain" href={`${SITE_URL}/llms.txt`} title="llms.txt" />
         <script
@@ -133,7 +134,7 @@ export default async function LocaleLayout({ children, params }) {
           }}
         />
       </head>
-      <body className={cairo.className}>
+      <body className={`${cairo.className} text-ink antialiased`}>
         <NextIntlClientProvider messages={messages}>
           {children}
           <FloatingWhatsAppCTA />

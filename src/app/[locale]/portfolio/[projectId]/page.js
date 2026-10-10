@@ -106,35 +106,35 @@ export default function ProjectDetailPage() {
   return (
     <>
       <Nav />
-      <div className="min-h-screen bg-black py-24 px-6" dir={isRTL ? "rtl" : "ltr"}>
+      <div className="min-h-screen pt-28 sm:pt-32 pb-20 px-4 sm:px-6" dir={isRTL ? "rtl" : "ltr"}>
       <div className="max-w-6xl mx-auto">
         {/* Back Button */}
         <Link
           href={`/${locale}/portfolio`}
-          className={`inline-flex items-center gap-2 px-4 py-2 border border-yellow-300/40 text-yellow-300 hover:bg-yellow-300 hover:text-black rounded-full font-bold text-sm transition-all mb-8 ${isRTL ? 'font-arabic' : ''}`}
+          className={`btn btn-secondary mb-8`}
         >
           {isRTL ? <ArrowRight size={16} /> : <ArrowLeft size={16} />}
           <span>{t('backToPortfolio')}</span>
         </Link>
 
         {/* Project Title */}
-        <h1 className={`text-4xl lg:text-5xl font-bold text-yellow-300 mb-4 ${isRTL ? 'font-arabic' : ''}`}>
+        <h1 className={`text-[32px] sm:text-4xl lg:text-5xl font-extrabold text-ink mb-4`}>
           {project.name}
         </h1>
 
         {/* Project Description */}
-        <p className={`text-gray-300 text-lg lg:text-xl mb-8 leading-relaxed ${isRTL ? 'font-arabic' : ''}`}>
+        <p className={`text-ink-3 text-lg lg:text-xl mb-8 leading-relaxed`}>
           {project.description[locale]}
         </p>
 
         {/* Social Links */}
-        <div className="flex gap-4 mb-12">
+        <div className="flex flex-wrap gap-3 mb-12">
           {project.websiteLink && (
             <a
               href={project.websiteLink}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-6 py-3 bg-yellow-300 text-black font-bold rounded-full hover:bg-yellow-400 transition-colors ${isRTL ? 'font-arabic' : ''}`}
+              className={`btn btn-primary`}
             >
               <ExternalLink size={20} />
               <span>{t('visitWebsite')}</span>
@@ -145,7 +145,7 @@ export default function ProjectDetailPage() {
               href={project.instagramLink}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-2 px-6 py-3 border-2 border-yellow-300 text-yellow-300 font-bold rounded-full hover:bg-yellow-300 hover:text-black transition-colors ${isRTL ? 'font-arabic' : ''}`}
+              className={`btn btn-secondary`}
             >
               <Instagram size={20} />
               <span>{t('followOnInstagram')}</span>
@@ -165,10 +165,10 @@ export default function ProjectDetailPage() {
                     type="button"
                     onClick={() => setGroup(i)}
                     aria-current={i === group}
-                    className={`flex-1 min-w-0 px-3 py-2.5 rounded-full font-bold text-xs sm:text-sm transition-colors ${isRTL ? 'font-arabic' : ''} ${
+                    className={`flex-1 min-w-0 px-3 py-2 min-h-11 rounded-full font-bold text-xs sm:text-sm transition-colors ${
                       i === group
-                        ? 'bg-yellow-300 text-black'
-                        : 'text-yellow-300/80 hover:text-yellow-300 hover:bg-white/5'
+                        ? 't-raised text-ink'
+                        : 'text-ink-2 hover:text-ink hover:bg-white/5'
                     }`}
                   >
                     <span className="block truncate">{g.label[locale]}</span>
@@ -207,7 +207,7 @@ export default function ProjectDetailPage() {
                 type="button"
                 onClick={() => setZoomed(true)}
                 aria-label={isRTL ? "تكبير الصورة" : "Zoom image"}
-                className="absolute top-3 start-3 z-10 p-2 rounded-full bg-black/60 text-yellow-300 border border-white/10 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 transition-opacity"
+                className="absolute top-3 start-3 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-black/60 text-accent border border-white/10 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100 transition-opacity"
               >
                 <Maximize2 size={16} />
               </button>
@@ -218,7 +218,7 @@ export default function ProjectDetailPage() {
                     type="button"
                     onClick={() => go(isRTL ? 1 : -1)}
                     aria-label={isRTL ? "السابق" : "Previous"}
-                    className="absolute top-1/2 -translate-y-1/2 start-3 z-10 p-2 rounded-full bg-black/60 hover:bg-yellow-300 text-yellow-300 hover:text-black border border-white/10 transition-colors"
+                    className="absolute top-1/2 -translate-y-1/2 start-3 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-black/60 hover:bg-accent text-accent hover:text-on-accent border border-white/10 transition-colors"
                   >
                     {isRTL ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
                   </button>
@@ -226,7 +226,7 @@ export default function ProjectDetailPage() {
                     type="button"
                     onClick={() => go(isRTL ? -1 : 1)}
                     aria-label={isRTL ? "التالي" : "Next"}
-                    className="absolute top-1/2 -translate-y-1/2 end-3 z-10 p-2 rounded-full bg-black/60 hover:bg-yellow-300 text-yellow-300 hover:text-black border border-white/10 transition-colors"
+                    className="absolute top-1/2 -translate-y-1/2 end-3 z-10 w-11 h-11 flex items-center justify-center rounded-full bg-black/60 hover:bg-accent text-accent hover:text-on-accent border border-white/10 transition-colors"
                   >
                     {isRTL ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
                   </button>
@@ -243,7 +243,7 @@ export default function ProjectDetailPage() {
         {/* طبقة التكبير */}
         {zoomed && (
           <div
-            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] bg-[#0b0b0a]/95 flex items-center justify-center p-4"
             onClick={() => setZoomed(false)}
             role="dialog"
             aria-modal="true"
@@ -252,7 +252,7 @@ export default function ProjectDetailPage() {
               type="button"
               onClick={() => setZoomed(false)}
               aria-label={isRTL ? "إغلاق" : "Close"}
-              className="absolute top-5 end-5 p-2 rounded-full bg-white/10 hover:bg-yellow-300 text-yellow-300 hover:text-black transition-colors"
+              className="absolute top-5 end-5 w-11 h-11 flex items-center justify-center rounded-full bg-white/10 hover:bg-accent text-accent hover:text-on-accent transition-colors"
             >
               <X size={22} />
             </button>
@@ -279,7 +279,7 @@ export default function ProjectDetailPage() {
                   type="button"
                   onClick={(e) => { e.stopPropagation(); go(isRTL ? 1 : -1); }}
                   aria-label={isRTL ? "السابق" : "Previous"}
-                  className="absolute top-1/2 -translate-y-1/2 start-4 p-3 rounded-full bg-white/10 hover:bg-yellow-300 text-yellow-300 hover:text-black transition-colors"
+                  className="absolute top-1/2 -translate-y-1/2 start-4 p-3 rounded-full bg-white/10 hover:bg-accent text-accent hover:text-on-accent transition-colors"
                 >
                   {isRTL ? <ChevronRight size={24} /> : <ChevronLeft size={24} />}
                 </button>
@@ -287,7 +287,7 @@ export default function ProjectDetailPage() {
                   type="button"
                   onClick={(e) => { e.stopPropagation(); go(isRTL ? -1 : 1); }}
                   aria-label={isRTL ? "التالي" : "Next"}
-                  className="absolute top-1/2 -translate-y-1/2 end-4 p-3 rounded-full bg-white/10 hover:bg-yellow-300 text-yellow-300 hover:text-black transition-colors"
+                  className="absolute top-1/2 -translate-y-1/2 end-4 p-3 rounded-full bg-white/10 hover:bg-accent text-accent hover:text-on-accent transition-colors"
                 >
                   {isRTL ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
                 </button>
@@ -317,16 +317,16 @@ export default function ProjectDetailPage() {
           <div className="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
             {project.features?.[locale]?.length > 0 && (
               <section>
-                <h2 className={`text-2xl font-bold text-yellow-300 mb-6 ${isRTL ? 'font-arabic' : ''}`}>
+                <h2 className={`text-2xl font-extrabold text-ink mb-6`}>
                   {t('features')}
                 </h2>
                 <ul className="space-y-3">
                   {project.features[locale].map((item, i) => (
                     <li
                       key={i}
-                      className={`flex gap-3 text-gray-300 leading-relaxed ${isRTL ? 'font-arabic' : ''}`}
+                      className={`flex gap-3 text-ink-3 leading-relaxed`}
                     >
-                      <span aria-hidden="true" className="shrink-0 mt-2 w-1.5 h-1.5 rounded-full bg-yellow-300" />
+                      <span aria-hidden="true" className="shrink-0 mt-2 w-1.5 h-1.5 rounded-full bg-accent" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -336,16 +336,16 @@ export default function ProjectDetailPage() {
 
             {project.benefits?.[locale]?.length > 0 && (
               <section>
-                <h2 className={`text-2xl font-bold text-yellow-300 mb-6 ${isRTL ? 'font-arabic' : ''}`}>
+                <h2 className={`text-2xl font-extrabold text-ink mb-6`}>
                   {t('benefits')}
                 </h2>
                 <ul className="space-y-3">
                   {project.benefits[locale].map((item, i) => (
                     <li
                       key={i}
-                      className={`flex gap-3 rounded-xl border border-white/10 bg-white/5 p-4 text-gray-200 leading-relaxed ${isRTL ? 'font-arabic' : ''}`}
+                      className={`flex gap-3 t-row p-4 text-ink leading-relaxed`}
                     >
-                      <Check size={18} className="shrink-0 mt-1 text-yellow-300" />
+                      <Check size={18} className="shrink-0 mt-1 text-accent" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -358,7 +358,7 @@ export default function ProjectDetailPage() {
         {/* Related Projects */}
         {relatedProjects.length > 0 && (
           <div className="mt-20">
-            <h2 className={`text-2xl font-bold text-yellow-300 mb-8 ${isRTL ? 'font-arabic' : ''}`}>
+            <h2 className={`text-2xl font-extrabold text-ink mb-8`}>
               {t('relatedProjects')}
             </h2>
             <div className="flex flex-col sm:flex-row gap-6">
@@ -382,9 +382,6 @@ export default function ProjectDetailPage() {
       </div>
 
       <style jsx>{`
-        .font-arabic {
-          font-family: 'Cairo', sans-serif;
-        }
         /* عرض الصورة محكوم بعرض الحاوية وارتفاع الشاشة مع بعض.
            على الموبايل بنسمح بارتفاع أكبر عشان لقطات الموبايل الطولية تاخد عرض الشاشة */
         .slide {

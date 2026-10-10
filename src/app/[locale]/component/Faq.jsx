@@ -43,66 +43,60 @@ export default function OptimizedFAQSection() {
   };
 
   return (
-    <section className={`py-20 px-6 bg-black relative ${isRTL ? 'rtl' : 'ltr'}`}>
+    <section id="faq" className={`py-16 sm:py-20 px-4 sm:px-6 relative scroll-mt-24 ${isRTL ? 'rtl' : 'ltr'}`}>
       <motion.div
         ref={ref}
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="max-w-4xl mx-auto relative z-10"
+        className="max-w-3xl mx-auto relative z-10"
       >
         {/* العنوان */}
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-10"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <motion.div
-            className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full mb-6 mx-auto"
-            whileHover={{ rotate: 360, scale: 1.1 }}
-            transition={{ duration: 0.6 }}
-          >
-            <HelpCircle size={40} className="text-white" />
-          </motion.div>
+          <span className="t-icon !w-14 !h-14 !rounded-2xl mb-5 mx-auto">
+            <HelpCircle size={28} aria-hidden="true" />
+          </span>
           
-          <h2 className={`text-4xl lg:text-5xl font-bold text-white mb-6 ${isRTL ? 'font-arabic' : ''}`}>
+          <h2 className="text-[28px] sm:text-4xl font-extrabold text-ink mb-3">
             {t('title')}
           </h2>
           
-          <p className="text-xl text-gray-300">
+          <p className="text-base sm:text-lg text-ink-2">
             {t('subtitle')}
           </p>
         </motion.div>
 
         {/* الأسئلة */}
-        <div className="space-y-4 mb-12">
+        <div className="space-y-3 mb-10">
           {displayedItems.map((faq, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ scale: 1.01 }}
               className="group"
             >
-              <div 
-                className={`bg-gradient-to-r ${
-                  openIndex === index
-                    ? 'from-yellow-400 to-yellow-500' 
-                    : 'from-gray-700 to-gray-800 hover:from-yellow-400/20 hover:to-yellow-500/20'
-                } p-1 rounded-2xl transition-all duration-300`}
+              <div
+                className={`t-card transition-colors duration-300 ${
+                  openIndex === index ? '!border-accent/40' : 'hover:!border-white/15'
+                }`}
               >
-                <div className="bg-gray-900 rounded-2xl p-6">
+                <div className="p-4 sm:p-6">
                   {/* السؤال */}
                   <button
                     onClick={() => toggleFAQ(index)}
-                    className={`w-full flex items-start justify-between ${isRTL ? 'text-right' : 'text-left'} group`}
+                    aria-expanded={openIndex === index}
+                    className={`w-full min-h-11 flex items-start justify-between ${isRTL ? 'text-right' : 'text-left'} group`}
                   >
                     <div className="flex-1">
-                      <span className="inline-block text-xs px-3 py-1 bg-gray-700 text-gray-300 rounded-full mb-3">
+                      <span className="t-chip mb-3">
                         {faq.category}
                       </span>
-                      <h3 className={`text-lg font-bold text-white group-hover:text-yellow-300 transition-colors leading-relaxed ${isRTL ? 'font-arabic' : ''}`}>
+                      <h3 className="text-base sm:text-lg font-bold text-ink group-hover:text-accent transition-colors leading-relaxed">
                         {faq.question}
                       </h3>
                     </div>
@@ -110,12 +104,12 @@ export default function OptimizedFAQSection() {
                     <motion.div
                       animate={{ rotate: openIndex === index ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
-                      className={`flex-shrink-0 ${isRTL ? 'mr-4' : 'ml-4'}`}
+                      className="flex-shrink-0 ms-4 w-9 h-9 rounded-full t-raised flex items-center justify-center"
                     >
                       {openIndex === index ? (
-                        <Minus className="w-6 h-6 text-yellow-400" />
+                        <Minus className="w-5 h-5 text-accent" />
                       ) : (
-                        <Plus className="w-6 h-6 text-gray-400 group-hover:text-yellow-400 transition-colors" />
+                        <Plus className="w-5 h-5 text-ink-2 group-hover:text-accent transition-colors" />
                       )}
                     </motion.div>
                   </button>
@@ -131,9 +125,9 @@ export default function OptimizedFAQSection() {
                         transition={{ duration: 0.3, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <div className={`pt-6 ${isRTL ? 'text-right' : 'text-left'}`}>
-                          <div className="h-px bg-gradient-to-r from-transparent via-yellow-400/30 to-transparent mb-4" />
-                          <p className="text-gray-300 leading-relaxed text-sm">
+                        <div className={`pt-5 ${isRTL ? 'text-right' : 'text-left'}`}>
+                          <div className="t-rule mb-4" />
+                          <p className="text-ink-3 leading-[1.9] text-sm sm:text-[15px]">
                             {faq.answer}
                           </p>
                         </div>
@@ -149,7 +143,7 @@ export default function OptimizedFAQSection() {
         {/* زرار عرض المزيد */}
         {!showAll && faqItems.length > 3 && (
           <motion.div 
-            className="text-center mb-12"
+            className="text-center mb-10"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.5 }}
@@ -158,7 +152,7 @@ export default function OptimizedFAQSection() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setShowAll(true)}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+              className="btn btn-primary btn-lg"
             >
               <span>{t('viewAll')}</span>
               <ChevronDown className="w-5 h-5" />
@@ -173,20 +167,15 @@ export default function OptimizedFAQSection() {
           transition={{ delay: 0.8, duration: 0.6 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-6 bg-gray-800/50 backdrop-blur-sm px-8 py-4 rounded-full border border-gray-700/50">
+          <div className="inline-flex items-center gap-6 t-glass px-8 py-3 rounded-full">
             <div className="text-center">
-              <div className="text-2xl font-bold text-yellow-400">24/7</div>
-              <div className="text-sm text-gray-400">{t('technicalSupport')}</div>
+              <div className="num text-2xl font-extrabold text-accent" dir="ltr">24/7</div>
+              <div className="text-sm text-ink-2">{t('technicalSupport')}</div>
             </div>
           </div>
         </motion.div>
       </motion.div>
 
-      <style jsx>{`
-        .font-arabic {
-          font-family: 'Cairo', sans-serif;
-        }
-      `}</style>
     </section>
   );
 }

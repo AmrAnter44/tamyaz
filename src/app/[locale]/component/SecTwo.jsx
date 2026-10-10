@@ -41,39 +41,40 @@ export default function LightAboutSection() {
   return (
     <section
       ref={ref}
-      className={`py-20 px-6 bg-yellow-300 text-black`}
+      id="about"
+      className="py-16 sm:py-20 px-4 sm:px-6 text-ink scroll-mt-24"
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      <div className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-[1200px] mx-auto">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           {/* النصوص */}
-          <div className={`space-y-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className={`space-y-8 min-w-0 ${isRTL ? 'text-right' : 'text-left'}`}>
             {/* العنوان */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
-              className="space-y-6"
+              className="space-y-4"
             >
-<h2 className={`text-4xl lg:text-5xl font-bold leading-tight ${isRTL ? 'font-arabic' : ''}`}>
+<h2 className="text-[28px] sm:text-4xl lg:text-[44px] font-extrabold leading-tight text-ink">
   {t('title')}
 </h2>
-<h3 className="text-xl font-medium">{t('subtitle')}</h3> {/* Changed from p to h3 */}
+<h3 className="text-lg sm:text-xl font-semibold text-ink-3">{t('subtitle')}</h3> {/* Changed from p to h3 */}
             </motion.div>
 
             {/* النقاط */}
-            <div className="space-y-4">
+            <div className="space-y-3">
               {points.map((point, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, x: isRTL ? 50 : -50 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors group"
+                  className="t-row p-4 hover:border-accent/30 transition-colors group"
                 >
                   <div className="flex gap-4 items-start">
-                    <CheckCircle className="text-gray-700 group-hover:text-black mt-1 flex-shrink-0" size={24} />
-                    <p className={`group-hover:text-gray-700 transition-colors font-medium ${isRTL ? 'font-arabic text-right' : 'text-left'}`}>
+                    <CheckCircle className="text-accent mt-0.5 flex-shrink-0" size={22} aria-hidden="true" />
+                    <p className={`text-ink font-medium leading-relaxed ${isRTL ? 'text-right' : 'text-left'}`}>
                       {point}
                     </p>
                   </div>
@@ -87,7 +88,7 @@ export default function LightAboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.5, duration: 0.5 }}
-              className="group flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 w-fit"
+              className="group btn btn-primary btn-lg w-fit"
             >
               <span>{t('cta')}</span>
               <motion.div whileHover={{ x: isRTL ? -5 : 5 }}>
@@ -105,26 +106,22 @@ export default function LightAboutSection() {
           >
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="relative bg-black text-white p-12 rounded-3xl shadow-2xl text-center"
+              className="t-card p-10 sm:p-12 text-center overflow-hidden"
+              style={{ background: "radial-gradient(500px 260px at 100% 0%, rgba(248,222,4,.12), transparent 70%), linear-gradient(180deg,#252522,#151513)", borderColor: "rgba(248,222,4,.28)" }}
             >
               <motion.div
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="text-6xl font-bold mb-4"
+                className="num text-6xl sm:text-7xl font-extrabold mb-3 text-accent"
               >
                 {t('experienceNumber')}
               </motion.div>
-              <div className="text-xl font-bold">{t('experience')}</div>
+              <div className="text-xl font-bold text-ink">{t('experience')}</div>
             </motion.div>
           </motion.div>
         </div>
       </div>
 
-      <style jsx>{`
-        .font-arabic {
-          font-family: 'Cairo', sans-serif;
-        }
-      `}</style>
     </section>
   );
 }

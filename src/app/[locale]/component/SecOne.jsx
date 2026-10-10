@@ -110,13 +110,13 @@ export default function ResponsiveStatsSection() {
   const isRTL = locale === 'ar';
 
   return (
-    <section className={`bg-black text-white py-16 px-6 ${isRTL ? 'rtl font-arabic' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
+    <section className={`text-ink py-16 sm:py-20 px-4 sm:px-6 ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <motion.div
         ref={ref}
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.8 }}
-        className="max-w-4xl mx-auto"
+        className="max-w-[1200px] mx-auto"
       >
         {/* عنوان القسم */}
         <motion.div 
@@ -125,16 +125,16 @@ export default function ResponsiveStatsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <h2 className={`text-3xl md:text-4xl font-bold text-yellow-300 mb-4 ${isRTL ? 'font-arabic' : ''}`}>
+          <h2 className="text-[28px] sm:text-4xl font-extrabold text-ink mb-3">
             {t('title')}
           </h2>
-          <p className={`text-gray-300 max-w-2xl mx-auto ${isRTL ? 'font-arabic' : ''}`}>
+          <p className="text-base text-ink-2 max-w-2xl mx-auto">
             {t('subtitle')}
           </p>
         </motion.div>
 
         {/* Grid Layout */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {statsConfig.map((stat, index) => (
             <motion.div
               key={stat.id}
@@ -157,20 +157,16 @@ export default function ResponsiveStatsSection() {
                 duration: 0.6,
                 ease: "easeOut"
               }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="relative bg-yellow-300 rounded-2xl p-6 text-black shadow-xl hover:shadow-yellow-300/20 transition-all duration-300"
+              className="t-card p-4 sm:p-6 text-ink flex flex-col items-start gap-3 min-w-0"
             >
               {/* الأيقونة */}
-              <div className="flex justify-center mb-4">
-                <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-                  <stat.icon className="w-6 h-6 text-yellow-300" />
-                </div>
-              </div>
+              <span className="t-icon">
+                <stat.icon className="w-5 h-5" aria-hidden="true" />
+              </span>
 
               {/* المحتوى */}
-              <div className="text-center">
-                <div className="text-2xl lg:text-3xl font-bold mb-2">
+              <div className="min-w-0">
+                <div className="num text-2xl lg:text-[34px] leading-tight font-extrabold mb-1 text-ink" dir="ltr" style={{ textAlign: isRTL ? 'right' : 'left' }}>
                   {isInView && (
                     <CountUp 
                       end={stat.value} 
@@ -179,10 +175,10 @@ export default function ResponsiveStatsSection() {
                     />
                   )}
                 </div>
-                <div className={`text-sm lg:text-base font-bold leading-tight mb-2 ${isRTL ? 'font-arabic' : ''}`}>
+                <div className="text-sm lg:text-base font-bold leading-snug mb-1 text-ink">
                   {t(stat.key)}
                 </div>
-                <div className={`text-xs lg:text-sm opacity-70 ${isRTL ? 'font-arabic' : ''}`}>
+                <div className="text-xs lg:text-sm text-ink-2 leading-relaxed">
                   {t(`descriptions.${stat.descKey}`)}
                 </div>
               </div>
@@ -191,11 +187,6 @@ export default function ResponsiveStatsSection() {
         </div>
       </motion.div>
 
-      <style jsx>{`
-        .font-arabic {
-          font-family: 'Cairo', sans-serif;
-        }
-      `}</style>
     </section>
   );
 }

@@ -91,7 +91,7 @@ export default function PackageCalculator() {
 
   return (
     <section
-      className={`bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white py-20 px-6 ${isRTL ? 'rtl font-arabic' : 'ltr'}`}
+      className={`text-ink pt-16 sm:pt-20 pb-28 px-4 sm:px-6 ${isRTL ? 'rtl' : 'ltr'}`}
       dir={isRTL ? 'rtl' : 'ltr'}
     >
       <motion.div
@@ -99,83 +99,83 @@ export default function PackageCalculator() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={containerVariants}
-        className="max-w-6xl mx-auto"
+        className="max-w-[1200px] mx-auto"
       >
         {/* Header */}
-        <motion.div variants={itemVariants} className="text-center mb-16">
+        <motion.div variants={itemVariants} className="text-center mb-12">
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-yellow-300 rounded-2xl flex items-center justify-center rotate-3 shadow-lg shadow-yellow-300/20">
-              <Sparkles className="w-8 h-8 text-black" />
+            <div className="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center shadow-[0_14px_30px_-12px_rgba(248,222,4,0.6)]">
+              <Sparkles className="w-8 h-8 text-on-accent" />
             </div>
           </div>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${isRTL ? 'font-arabic' : ''}`}>
+          <h2 className="text-[28px] sm:text-4xl md:text-5xl font-extrabold mb-4 text-ink">
             {t('title')}
           </h2>
-          <p className={`text-gray-400 text-lg max-w-2xl mx-auto ${isRTL ? 'font-arabic' : ''}`}>
+          <p className="text-ink-2 text-base sm:text-lg max-w-2xl mx-auto">
             {t('subtitle')}
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-8">
+        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-6 lg:gap-8">
           {/* Left Column - Services */}
           <div className="space-y-6">
             {/* Marketing Services */}
             <motion.div
               variants={itemVariants}
-              className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-yellow-300/30 transition-all duration-300"
+              className="t-card p-5 sm:p-8"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Package className="w-6 h-6 text-yellow-300" />
-                <h3 className={`text-2xl font-bold ${isRTL ? 'font-arabic' : ''}`}>
+                <Package className="w-6 h-6 text-accent" />
+                <h3 className={`text-2xl font-bold`}>
                   {t('marketing.title')}
                 </h3>
               </div>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-3">
-                  <label className={`block text-sm font-semibold mb-3 text-gray-300 ${isRTL ? 'font-arabic' : ''}`}>
+                  <label className={`block text-sm font-semibold mb-3 text-ink-3`}>
                     {t('marketing.reels')}
                     {reels > 6 && (
-                      <span className="text-yellow-300 text-xs ml-2">(-10%)</span>
+                      <span className="text-accent text-xs ms-2">(-10%)</span>
                     )}
                   </label>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setReels(4)}
-                      className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all border-2 ${
+                      className={`t-option flex-1 px-2 text-sm ${
                         reels === 4
-                          ? 'bg-yellow-300 text-black border-white'
-                          : 'bg-white/10 text-white hover:bg-white/20 border-white'
+                          ? 'is-selected'
+                          : ''
                       }`}
                     >
                       4
                     </button>
                     <button
                       onClick={() => setReels(6)}
-                      className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all border-2 ${
+                      className={`t-option flex-1 px-2 text-sm ${
                         reels === 6
-                          ? 'bg-yellow-300 text-black border-white'
-                          : 'bg-white/10 text-white hover:bg-white/20 border-white'
+                          ? 'is-selected'
+                          : ''
                       }`}
                     >
                       6
                     </button>
                     <button
                       onClick={() => setReels(8)}
-                      className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all border-2 ${
+                      className={`t-option flex-1 px-2 text-sm ${
                         reels === 8
-                          ? 'bg-yellow-300 text-black border-white'
-                          : 'bg-white/10 text-white hover:bg-white/20 border-white'
+                          ? 'is-selected'
+                          : ''
                       }`}
                     >
                       8
                     </button>
                     <button
                       onClick={() => setReels(12)}
-                      className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all border-2 ${
+                      className={`t-option flex-1 px-2 text-sm ${
                         reels === 12
-                          ? 'bg-yellow-300 text-black border-white'
-                          : 'bg-white/10 text-white hover:bg-white/20 border-white'
+                          ? 'is-selected'
+                          : ''
                       }`}
                     >
                       12
@@ -185,20 +185,20 @@ export default function PackageCalculator() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => setReelsType('mobile')}
-                        className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                        className={`t-option flex-1 px-2 text-sm ${
                           reelsType === 'mobile'
-                            ? 'bg-yellow-300 text-black'
-                            : 'bg-white/10 text-white hover:bg-white/20'
+                            ? 'is-selected'
+                            : ''
                         }`}
                       >
                         {t('marketing.mobile')}
                       </button>
                       <button
                         onClick={() => setReelsType('camera')}
-                        className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                        className={`t-option flex-1 px-2 text-sm ${
                           reelsType === 'camera'
-                            ? 'bg-yellow-300 text-black'
-                            : 'bg-white/10 text-white hover:bg-white/20'
+                            ? 'is-selected'
+                            : ''
                         }`}
                       >
                         {t('marketing.camera')}
@@ -217,20 +217,20 @@ export default function PackageCalculator() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => setPhotosType('mobile')}
-                        className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                        className={`t-option flex-1 px-2 text-sm ${
                           photosType === 'mobile'
-                            ? 'bg-yellow-300 text-black'
-                            : 'bg-white/10 text-white hover:bg-white/20'
+                            ? 'is-selected'
+                            : ''
                         }`}
                       >
                         {t('marketing.mobile')}
                       </button>
                       <button
                         onClick={() => setPhotosType('camera')}
-                        className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                        className={`t-option flex-1 px-2 text-sm ${
                           photosType === 'camera'
-                            ? 'bg-yellow-300 text-black'
-                            : 'bg-white/10 text-white hover:bg-white/20'
+                            ? 'is-selected'
+                            : ''
                         }`}
                       >
                         {t('marketing.camera')}
@@ -239,49 +239,49 @@ export default function PackageCalculator() {
                   )}
                 </div>
                 <div className="space-y-3">
-                  <label className={`block text-sm font-semibold mb-3 text-gray-300 ${isRTL ? 'font-arabic' : ''}`}>
+                  <label className={`block text-sm font-semibold mb-3 text-ink-3`}>
                     {t('marketing.designs')}
                     {designs > 6 && (
-                      <span className="text-yellow-300 text-xs ml-2">(-10%)</span>
+                      <span className="text-accent text-xs ms-2">(-10%)</span>
                     )}
                   </label>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setDesigns(4)}
-                      className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all border-2 ${
+                      className={`t-option flex-1 px-2 text-sm ${
                         designs === 4
-                          ? 'bg-yellow-300 text-black border-white'
-                          : 'bg-white/10 text-white hover:bg-white/20 border-white'
+                          ? 'is-selected'
+                          : ''
                       }`}
                     >
                       4
                     </button>
                     <button
                       onClick={() => setDesigns(8)}
-                      className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all border-2 ${
+                      className={`t-option flex-1 px-2 text-sm ${
                         designs === 8
-                          ? 'bg-yellow-300 text-black border-white'
-                          : 'bg-white/10 text-white hover:bg-white/20 border-white'
+                          ? 'is-selected'
+                          : ''
                       }`}
                     >
                       8
                     </button>
                     <button
                       onClick={() => setDesigns(12)}
-                      className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all border-2 ${
+                      className={`t-option flex-1 px-2 text-sm ${
                         designs === 12
-                          ? 'bg-yellow-300 text-black border-white'
-                          : 'bg-white/10 text-white hover:bg-white/20 border-white'
+                          ? 'is-selected'
+                          : ''
                       }`}
                     >
                       12
                     </button>
                     <button
                       onClick={() => setDesigns(16)}
-                      className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all border-2 ${
+                      className={`t-option flex-1 px-2 text-sm ${
                         designs === 16
-                          ? 'bg-yellow-300 text-black border-white'
-                          : 'bg-white/10 text-white hover:bg-white/20 border-white'
+                          ? 'is-selected'
+                          : ''
                       }`}
                     >
                       16
@@ -299,20 +299,20 @@ export default function PackageCalculator() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => setVideosType('mobile')}
-                        className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                        className={`t-option flex-1 px-2 text-sm ${
                           videosType === 'mobile'
-                            ? 'bg-yellow-300 text-black'
-                            : 'bg-white/10 text-white hover:bg-white/20'
+                            ? 'is-selected'
+                            : ''
                         }`}
                       >
                         {t('marketing.mobile')}
                       </button>
                       <button
                         onClick={() => setVideosType('camera')}
-                        className={`flex-1 px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                        className={`t-option flex-1 px-2 text-sm ${
                           videosType === 'camera'
-                            ? 'bg-yellow-300 text-black'
-                            : 'bg-white/10 text-white hover:bg-white/20'
+                            ? 'is-selected'
+                            : ''
                         }`}
                       >
                         {t('marketing.camera')}
@@ -338,11 +338,11 @@ export default function PackageCalculator() {
             {/* Website Package */}
             <motion.div
               variants={itemVariants}
-              className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-yellow-300/30 transition-all duration-300"
+              className="t-card p-5 sm:p-8"
             >
               <div className="flex items-center gap-3 mb-6">
-                <CreditCard className="w-6 h-6 text-yellow-300" />
-                <h3 className={`text-2xl font-bold ${isRTL ? 'font-arabic' : ''}`}>
+                <CreditCard className="w-6 h-6 text-accent" />
+                <h3 className={`text-2xl font-bold`}>
                   {t('website.title')}
                 </h3>
               </div>
@@ -393,20 +393,20 @@ export default function PackageCalculator() {
                       isRTL={isRTL}
                     />
                   </div>
-                  <div className="bg-white/5 rounded-xl p-4 space-y-2">
-                    <div className={`flex justify-between text-sm ${isRTL ? 'font-arabic' : ''}`}>
-                      <span className="text-gray-400">{t('summary.basePrice')}</span>
-                      <span className="text-white font-semibold">{websiteBasePrice.toLocaleString()} {t('summary.egp')}</span>
+                  <div className="t-row p-4 space-y-2">
+                    <div className="flex justify-between gap-3 text-sm">
+                      <span className="text-ink-2">{t('summary.basePrice')}</span>
+                      <span className="num text-ink font-semibold">{websiteBasePrice.toLocaleString('en-US')} {t('summary.egp')}</span>
                     </div>
                     {websiteCashDiscount > 0 && (
-                      <div className={`flex justify-between text-sm ${isRTL ? 'font-arabic' : ''}`}>
-                        <span className="text-gray-400">{t('summary.cashDiscount')}</span>
-                        <span className="text-green-400 font-semibold">-{websiteCashDiscount.toLocaleString()} {t('summary.egp')}</span>
+                      <div className="flex justify-between gap-3 text-sm">
+                        <span className="text-ink-2">{t('summary.cashDiscount')}</span>
+                        <span className="num text-[#6fd39a] font-semibold">-{websiteCashDiscount.toLocaleString('en-US')} {t('summary.egp')}</span>
                       </div>
                     )}
-                    <div className={`flex justify-between text-base pt-2 border-t border-white/10 ${isRTL ? 'font-arabic' : ''}`}>
-                      <span className="text-yellow-300 font-bold">{websitePayment === 'cash' ? t('summary.total') : t('summary.monthly')}</span>
-                      <span className="text-yellow-300 font-bold text-xl">{websiteMonthly.toLocaleString()} {t('summary.egp')}</span>
+                    <div className="flex justify-between gap-3 text-base pt-2 border-t border-white/10">
+                      <span className="text-accent font-bold">{websitePayment === 'cash' ? t('summary.total') : t('summary.monthly')}</span>
+                      <span className="num text-accent font-bold text-xl">{websiteMonthly.toLocaleString('en-US')} {t('summary.egp')}</span>
                     </div>
                   </div>
                 </div>
@@ -416,11 +416,11 @@ export default function PackageCalculator() {
             {/* Management Package */}
             <motion.div
               variants={itemVariants}
-              className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10 hover:border-yellow-300/30 transition-all duration-300"
+              className="t-card p-5 sm:p-8"
             >
               <div className="flex items-center gap-3 mb-6">
-                <Receipt className="w-6 h-6 text-yellow-300" />
-                <h3 className={`text-2xl font-bold ${isRTL ? 'font-arabic' : ''}`}>
+                <Receipt className="w-6 h-6 text-accent" />
+                <h3 className={`text-2xl font-bold`}>
                   {t('management.title')}
                 </h3>
               </div>
@@ -477,20 +477,20 @@ export default function PackageCalculator() {
                       isRTL={isRTL}
                     />
                   </div>
-                  <div className="bg-white/5 rounded-xl p-4 space-y-2">
-                    <div className={`flex justify-between text-sm ${isRTL ? 'font-arabic' : ''}`}>
-                      <span className="text-gray-400">{t('summary.basePrice')}</span>
-                      <span className="text-white font-semibold">{managementBasePrice.toLocaleString()} {t('summary.egp')}</span>
+                  <div className="t-row p-4 space-y-2">
+                    <div className="flex justify-between gap-3 text-sm">
+                      <span className="text-ink-2">{t('summary.basePrice')}</span>
+                      <span className="num text-ink font-semibold">{managementBasePrice.toLocaleString('en-US')} {t('summary.egp')}</span>
                     </div>
                     {managementCashDiscount > 0 && (
-                      <div className={`flex justify-between text-sm ${isRTL ? 'font-arabic' : ''}`}>
-                        <span className="text-gray-400">{t('summary.cashDiscount')}</span>
-                        <span className="text-green-400 font-semibold">-{managementCashDiscount.toLocaleString()} {t('summary.egp')}</span>
+                      <div className="flex justify-between gap-3 text-sm">
+                        <span className="text-ink-2">{t('summary.cashDiscount')}</span>
+                        <span className="num text-[#6fd39a] font-semibold">-{managementCashDiscount.toLocaleString('en-US')} {t('summary.egp')}</span>
                       </div>
                     )}
-                    <div className={`flex justify-between text-base pt-2 border-t border-white/10 ${isRTL ? 'font-arabic' : ''}`}>
-                      <span className="text-yellow-300 font-bold">{managementPayment === 'cash' ? t('summary.total') : t('summary.monthly')}</span>
-                      <span className="text-yellow-300 font-bold text-xl">{managementMonthly.toLocaleString()} {t('summary.egp')}</span>
+                    <div className="flex justify-between gap-3 text-base pt-2 border-t border-white/10">
+                      <span className="text-accent font-bold">{managementPayment === 'cash' ? t('summary.total') : t('summary.monthly')}</span>
+                      <span className="num text-accent font-bold text-xl">{managementMonthly.toLocaleString('en-US')} {t('summary.egp')}</span>
                     </div>
                   </div>
                 </div>
@@ -503,13 +503,13 @@ export default function PackageCalculator() {
             variants={itemVariants}
             className="lg:sticky lg:top-8 h-fit"
           >
-            <div className="bg-gradient-to-br from-yellow-300 to-yellow-400 rounded-3xl p-8 text-black shadow-2xl shadow-yellow-300/20">
-              <h3 className={`text-2xl font-bold mb-6 ${isRTL ? 'font-arabic' : ''}`}>
+            <div className="t-card p-6 sm:p-8 text-ink" style={{ background: 'radial-gradient(500px 260px at 100% 0%, rgba(248,222,4,.14), transparent 70%), linear-gradient(180deg,#252522,#151513)', borderColor: 'rgba(248,222,4,.28)' }}>
+              <h3 className={`text-2xl font-bold mb-6`}>
                 {t('summary.title')}
               </h3>
 
               {/* Price Breakdown */}
-              <div className="space-y-3 mb-6 pb-6 border-b-2 border-black/20">
+              <div className="space-y-3 mb-6 pb-6 border-b border-white/10">
                 {marketingTotal > 0 && (
                   <PriceRow label={t('summary.marketing')} amount={marketingTotal} isRTL={isRTL} />
                 )}
@@ -533,11 +533,11 @@ export default function PackageCalculator() {
 
               {/* Total */}
               <div className="space-y-2">
-                <div className={`flex justify-between items-baseline ${isRTL ? 'font-arabic' : ''}`}>
-                  <span className="text-lg font-semibold opacity-80">{t('summary.monthly')}</span>
-                  <span className="text-4xl font-bold">{monthlyPayment.toLocaleString()}</span>
+                <div className={`flex flex-wrap justify-between items-baseline gap-x-3 gap-y-1`}>
+                  <span className="text-lg font-semibold text-ink-3">{t('summary.monthly')}</span>
+                  <span className="num text-4xl font-extrabold text-accent" dir="ltr">{monthlyPayment.toLocaleString('en-US')}</span>
                 </div>
-                <div className={`text-sm opacity-70 ${isRTL ? 'text-left' : 'text-right'} ${isRTL ? 'font-arabic' : ''}`}>
+                <div className={`text-sm text-ink-2 ${isRTL ? 'text-left' : 'text-right'}`}>
                   {t('summary.egp')}
                 </div>
               </div>
@@ -546,11 +546,6 @@ export default function PackageCalculator() {
         </div>
       </motion.div>
 
-      <style jsx>{`
-        .font-arabic {
-          font-family: 'Cairo', sans-serif;
-        }
-      `}</style>
     </section>
   );
 }
@@ -559,27 +554,27 @@ export default function PackageCalculator() {
 function InputGroup({ label, value, onChange, isRTL, showDiscount = false }) {
   return (
     <div>
-      <label className={`block text-sm font-semibold mb-3 text-gray-300 ${isRTL ? 'font-arabic' : ''}`}>
+      <label className={`block text-sm font-semibold mb-3 text-ink-3`}>
         {label}
         {showDiscount && (
-          <span className="text-yellow-300 text-xs ml-2">(-10%)</span>
+          <span className="text-accent text-xs ms-2">(-10%)</span>
         )}
       </label>
-      <div className="flex items-center gap-3 bg-white/10 border border-white/20 rounded-xl p-1">
+      <div className="t-field flex items-center gap-3 !px-1 !min-h-[52px]">
         <button
           onClick={() => onChange(Math.max(0, value - 1))}
-          className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 active:scale-95 transition-all flex items-center justify-center group"
+          className="w-11 h-11 rounded-[11px] t-raised hover:brightness-125 active:scale-95 transition-all flex items-center justify-center group"
         >
-          <Minus className="w-5 h-5 text-white group-hover:text-yellow-300 transition-colors" />
+          <Minus className="w-5 h-5 text-ink group-hover:text-accent transition-colors" />
         </button>
         <div className="flex-1 text-center">
-          <span className="text-2xl font-bold text-white">{value}</span>
+          <span className="num text-2xl font-bold text-ink" dir="ltr">{value}</span>
         </div>
         <button
           onClick={() => onChange(value + 1)}
-          className="w-10 h-10 rounded-lg bg-white/10 hover:bg-white/20 active:scale-95 transition-all flex items-center justify-center group"
+          className="w-11 h-11 rounded-[11px] t-raised hover:brightness-125 active:scale-95 transition-all flex items-center justify-center group"
         >
-          <Plus className="w-5 h-5 text-white group-hover:text-yellow-300 transition-colors" />
+          <Plus className="w-5 h-5 text-ink group-hover:text-accent transition-colors" />
         </button>
       </div>
     </div>
@@ -590,20 +585,20 @@ function ToggleGroup({ label, checked, onChange, isRTL }) {
   return (
     <div
       onClick={() => onChange(!checked)}
-      className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all duration-300 cursor-pointer ${
-        checked
-          ? 'border-yellow-300 bg-yellow-300/10 shadow-lg shadow-yellow-300/20'
-          : 'border-white/20 bg-white/5 hover:border-white/40'
-      }`}
+      role="checkbox"
+      aria-checked={checked}
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); onChange(!checked); } }}
+      className={`t-option flex items-center gap-3 px-4 py-3 min-h-[52px] cursor-pointer ${checked ? 'is-selected' : ''}`}
     >
       <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
         checked
-          ? 'bg-yellow-300 border-yellow-300'
-          : 'bg-white/10 border-white/20'
+          ? 'bg-accent border-accent'
+          : 'bg-white/5 border-white/25'
       }`}>
         {checked && (
           <svg
-            className="w-3 h-3 text-black"
+            className="w-3 h-3 text-on-accent"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -612,7 +607,7 @@ function ToggleGroup({ label, checked, onChange, isRTL }) {
           </svg>
         )}
       </div>
-      <span className={`text-sm font-semibold flex-1 ${checked ? 'text-yellow-300' : 'text-gray-300'} ${isRTL ? 'font-arabic' : ''}`}>
+      <span className={`text-sm font-semibold flex-1 ${checked ? 'text-accent' : 'text-ink-3'}`}>
         {label}
       </span>
     </div>
@@ -621,11 +616,11 @@ function ToggleGroup({ label, checked, onChange, isRTL }) {
 
 function PriceRow({ label, amount, isRTL, isDiscount = false }) {
   return (
-    <div className={`flex justify-between items-center text-sm ${isRTL ? 'font-arabic' : ''}`}>
-      <span className="opacity-80">{label}</span>
-      <span className={`font-semibold ${isDiscount ? 'text-green-700' : ''}`}>
+    <div className={`flex justify-between items-center text-sm`}>
+      <span className="text-ink-3">{label}</span>
+      <span className={`font-semibold num ${isDiscount ? 'text-[#6fd39a]' : 'text-ink'}`}>
         {isDiscount && '- '}
-        {Math.abs(amount).toLocaleString()}
+        {Math.abs(amount).toLocaleString('en-US')}
       </span>
     </div>
   );
@@ -636,13 +631,10 @@ function PaymentOption({ label, selected, onClick, disabled, isRTL }) {
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`relative w-full aspect-square flex items-center justify-center text-center px-2 py-4 rounded-xl border-2 transition-all duration-300 ${
-        selected
-          ? 'border-yellow-300 bg-black shadow-lg shadow-yellow-300/30'
-          : 'border-black/20 bg-white/50 hover:border-black/60 hover:bg-white/70'
-      } ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${isRTL ? 'font-arabic' : ''}`}
+      aria-pressed={selected}
+      className={`t-option relative w-full flex items-center justify-center text-center px-2 py-3 min-h-[52px] ${selected ? 'is-selected' : ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
     >
-      <span className={`font-bold text-base ${selected ? 'text-yellow-300' : 'text-black/80'}`}>
+      <span className="font-bold text-sm sm:text-base">
         {label}
       </span>
     </button>
@@ -653,13 +645,10 @@ function SystemOption({ label, selected, onClick, isRTL }) {
   return (
     <button
       onClick={onClick}
-      className={`relative w-full aspect-square flex items-center justify-center text-center px-2 py-3 rounded-xl border-2 transition-all duration-300 ${
-        selected
-          ? 'border-yellow-300 bg-yellow-300/10 shadow-lg shadow-yellow-300/20'
-          : 'border-white/20 bg-white/5 hover:border-white/40'
-      } ${isRTL ? 'font-arabic' : ''}`}
+      aria-pressed={selected}
+      className={`t-option relative w-full flex items-center justify-center text-center px-2 py-4 min-h-[72px] sm:min-h-[88px] ${selected ? 'is-selected' : ''}`}
     >
-      <span className={`font-bold text-sm ${selected ? 'text-yellow-300' : 'text-white'}`}>
+      <span className="font-bold text-sm">
         {label}
       </span>
     </button>

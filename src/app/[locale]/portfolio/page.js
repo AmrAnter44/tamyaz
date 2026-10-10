@@ -29,9 +29,9 @@ export default function PortfolioPage() {
   return (
     <>
       <Nav />
-      <div className="min-h-screen bg-black py-24 px-6" dir={isRTL ? "rtl" : "ltr"}>
+      <div className="min-h-screen py-12 sm:py-16 px-4 sm:px-6" dir={isRTL ? "rtl" : "ltr"}>
       <div className="max-w-7xl mx-auto">
-        <Reveal as="h1" className={`text-center text-4xl lg:text-5xl font-bold text-yellow-300 mb-12 ${isRTL ? 'font-arabic' : ''}`}>
+        <Reveal as="h1" className={`text-center text-[32px] sm:text-4xl lg:text-5xl font-extrabold text-ink mb-12`}>
           {t('title')}
         </Reveal>
 
@@ -43,14 +43,14 @@ export default function PortfolioPage() {
             <section key={section.key} className="mb-16 last:mb-0">
               {section.category && !grouped && (
                 <Reveal as="div" className="flex items-center gap-4 mb-8">
-                  <h2 className={`text-2xl lg:text-3xl font-bold text-yellow-300 whitespace-nowrap ${isRTL ? 'font-arabic' : ''}`}>
+                  <h2 className={`text-2xl lg:text-3xl font-extrabold text-ink min-w-0 sm:whitespace-nowrap`}>
                     {section.category.name[locale]}
                   </h2>
                   <span
-                    className="sweep h-px flex-1 bg-yellow-300/25"
+                    className="sweep h-px flex-1 min-w-6 bg-accent/25"
                     style={{ "--sweep-origin": isRTL ? "right" : "left" }}
                   />
-                  <span className="text-sm font-bold text-white/50" dir="ltr">
+                  <span className="text-sm font-bold text-ink-2" dir="ltr">
                     {section.projects.length}
                   </span>
                 </Reveal>
@@ -88,12 +88,6 @@ export default function PortfolioPage() {
           );
         })}
       </div>
-
-      <style jsx>{`
-        .font-arabic {
-          font-family: 'Cairo', sans-serif;
-        }
-      `}</style>
     </div>
     <Footer />
     </>
