@@ -142,8 +142,8 @@ export default function SystemsDetails() {
             className="t-card overflow-hidden px-5 py-8 sm:px-10 sm:py-10 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-10"
             style={{
               background:
-                "radial-gradient(520px 260px at 100% 0%, rgba(248,222,4,.12), transparent 70%), linear-gradient(180deg,#252522,#151513)",
-              borderColor: "rgba(248,222,4,.28)",
+                "radial-gradient(520px 260px at 100% 0%, rgba(247,215,0,.12), transparent 70%), linear-gradient(180deg,#252522,#151513)",
+              borderColor: "rgba(247,215,0,.28)",
             }}
           >
             <div className="flex flex-col gap-3 flex-1 min-w-0 text-center lg:text-start">

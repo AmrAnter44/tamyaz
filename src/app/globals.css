@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-/* ===== Unified dark design — Tamyaz (accent #F8DE04) =====
+/* ===== Unified dark design — Tamyaz (accent #F7D700) =====
    الموقع داكن دايمًا، ولون الماركة هو الفرق الوحيد بين تميز وفيت بوست */
 :root {
   color-scheme: dark;
-  --accent: #F8DE04;
-  --accent-rgb: 248, 222, 4;
+  --accent: #F7D700;
+  --accent-rgb: 247,215,0;
   --on-accent: #1d1d1b;
   --background: #0b0b0a;
   --foreground: #ecece6;
@@ -21,7 +21,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-accent: #F8DE04;
+  --color-accent: #F7D700;
   --color-on-accent: #1d1d1b;
   --color-ink: #ecece6;
   --color-ink-2: #9a9a93;
@@ -31,10 +31,10 @@
   --color-field: #111110;
   --font-sans: var(--font-cairo), system-ui, sans-serif;
   /* أي أصفر قديم في الكود بقى لون الماركة، والرماديات بقت درجات الحبر */
-  --color-yellow-300: #F8DE04;
-  --color-yellow-400: #F8DE04;
-  --color-yellow-500: #F8DE04;
-  --color-amber-300: #F8DE04;
+  --color-yellow-300: #F7D700;
+  --color-yellow-400: #F7D700;
+  --color-yellow-500: #F7D700;
+  --color-amber-300: #F7D700;
   --color-gray-200: #ecece6;
   --color-gray-300: #a9a9a2;
   --color-gray-400: #9a9a93;

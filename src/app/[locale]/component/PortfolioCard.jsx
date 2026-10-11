@@ -24,7 +24,7 @@ export default function PortfolioCard({ href, title, thumbnail, badge, subtitle,
     >
       <div className={`${compact ? 'h-52' : 'h-64'} flex flex-col p-4 relative`}>
         {/* Clickable indicator */}
-        <div className="absolute top-3 end-3 bg-accent text-on-accent px-3 py-1.5 rounded-full text-xs font-bold z-10 flex items-center gap-1.5 shadow-[0_8px_20px_-10px_rgba(248,222,4,0.6)]">
+        <div className="absolute top-3 end-3 bg-accent text-on-accent px-3 py-1.5 rounded-full text-xs font-bold z-10 flex items-center gap-1.5 shadow-[0_8px_20px_-10px_rgba(247,215,0,0.6)]">
           <span>{badge}</span>
           <span className={`transition-transform duration-300 ${isRTL ? "group-hover:-translate-x-0.5" : "group-hover:translate-x-0.5"}`}>
             {external ? <ExternalLink size={11} /> : <ArrowRight size={11} className={isRTL ? "rotate-180" : ""} />}

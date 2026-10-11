@@ -89,7 +89,7 @@ export default function OptimizedWhatsAppCTA() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               aria-label={t('mainText')}
-              className="group relative bg-accent text-on-accent rounded-full shadow-[0_14px_30px_-12px_rgba(248,222,4,0.6)] transition-all duration-200"
+              className="group relative bg-accent text-on-accent rounded-full shadow-[0_14px_30px_-12px_rgba(247,215,0,0.6)] transition-all duration-200"
             >
               <div className="relative flex items-center gap-2.5 px-4 min-h-[52px]">
                 <MessageCircle size={24} className="flex-shrink-0" />

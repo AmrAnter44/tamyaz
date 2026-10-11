@@ -107,7 +107,7 @@ export default function LightAboutSection() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               className="t-card p-10 sm:p-12 text-center overflow-hidden"
-              style={{ background: "radial-gradient(500px 260px at 100% 0%, rgba(248,222,4,.12), transparent 70%), linear-gradient(180deg,#252522,#151513)", borderColor: "rgba(248,222,4,.28)" }}
+              style={{ background: "radial-gradient(500px 260px at 100% 0%, rgba(247,215,0,.12), transparent 70%), linear-gradient(180deg,#252522,#151513)", borderColor: "rgba(247,215,0,.28)" }}
             >
               <motion.div
                 animate={{ scale: [1, 1.05, 1] }}

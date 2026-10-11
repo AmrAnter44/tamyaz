@@ -104,7 +104,7 @@ export default function PackageCalculator() {
         {/* Header */}
         <motion.div variants={itemVariants} className="text-center mb-12">
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center shadow-[0_14px_30px_-12px_rgba(248,222,4,0.6)]">
+            <div className="w-16 h-16 bg-accent rounded-2xl flex items-center justify-center shadow-[0_14px_30px_-12px_rgba(247,215,0,0.6)]">
               <Sparkles className="w-8 h-8 text-on-accent" />
             </div>
           </div>
@@ -503,7 +503,7 @@ export default function PackageCalculator() {
             variants={itemVariants}
             className="lg:sticky lg:top-8 h-fit"
           >
-            <div className="t-card p-6 sm:p-8 text-ink" style={{ background: 'radial-gradient(500px 260px at 100% 0%, rgba(248,222,4,.14), transparent 70%), linear-gradient(180deg,#252522,#151513)', borderColor: 'rgba(248,222,4,.28)' }}>
+            <div className="t-card p-6 sm:p-8 text-ink" style={{ background: 'radial-gradient(500px 260px at 100% 0%, rgba(247,215,0,.14), transparent 70%), linear-gradient(180deg,#252522,#151513)', borderColor: 'rgba(247,215,0,.28)' }}>
               <h3 className={`text-2xl font-bold mb-6`}>
                 {t('summary.title')}
               </h3>

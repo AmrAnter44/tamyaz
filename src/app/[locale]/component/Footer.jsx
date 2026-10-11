@@ -102,8 +102,8 @@ export default function OptimizedFooter() {
         <section
           className="t-card p-6 sm:p-10 lg:p-11 flex flex-wrap items-center gap-6"
           style={{
-            background: 'radial-gradient(600px 300px at 100% 0%, rgba(248,222,4,.12), transparent 70%), linear-gradient(180deg,#252522,#151513)',
-            borderColor: 'rgba(248,222,4,.28)',
+            background: 'radial-gradient(600px 300px at 100% 0%, rgba(247,215,0,.12), transparent 70%), linear-gradient(180deg,#252522,#151513)',
+            borderColor: 'rgba(247,215,0,.28)',
           }}
         >
           <div className="flex-[1_1_320px] min-w-0 flex flex-col gap-2">
