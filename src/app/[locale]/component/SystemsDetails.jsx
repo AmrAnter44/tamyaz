@@ -123,6 +123,14 @@ export default function SystemsDetails() {
                       <span>{t("demoCta")}</span>
                       <ExternalLink size={17} aria-hidden="true" />
                     </a>
+                    <a
+                      href={`/${locale}/form?system=${key}`}
+                      className="btn btn-secondary w-full"
+                      aria-label={`${t("custom.form")} — ${item.name}`}
+                    >
+                      <span>{t("custom.form")}</span>
+                      <Arrow size={17} aria-hidden="true" />
+                    </a>
                   </article>
                 </Reveal>
               </li>
@@ -162,7 +170,7 @@ export default function SystemsDetails() {
                 <MessageCircle size={20} aria-hidden="true" />
                 <span>{t("custom.whatsapp")}</span>
               </a>
-              <a href={`/${locale}/form`} className="btn btn-secondary btn-lg">
+              <a href={`/${locale}/form?system=custom`} className="btn btn-secondary btn-lg">
                 <span>{t("custom.form")}</span>
                 <Arrow size={18} aria-hidden="true" />
               </a>

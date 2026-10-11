@@ -5,6 +5,7 @@ import { Home, MessageCircle, ArrowLeft, ArrowRight, Globe } from 'lucide-react'
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/routing';
 import Image from 'next/image';
+import LeadForm from '../component/LeadForm';
 
 export default function Form() {
   const t = useTranslations('form');
@@ -73,16 +74,8 @@ export default function Form() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex justify-center"
         >
-          <div className="t-card p-2 sm:p-3 w-full max-w-3xl">
-            <div className="bg-white rounded-[16px] overflow-hidden">
-            <iframe
-              src="https://docs.google.com/forms/d/e/1FAIpQLScSZa4T1yLUIQs-PpJTiKWZ5XHeAzGO4wAEBm4wgbui-zecJQ/viewform?embedded=true"
-              className="block w-full h-[1400px] max-w-2xl mx-auto px-1 sm:px-4 py-4 sm:py-6"
-              title="Tamyaz Registration Form"
-            >
-              Loading…
-            </iframe>
-            </div>
+          <div className="w-full max-w-3xl">
+            <LeadForm locale={locale} />
           </div>
         </motion.div>
 
