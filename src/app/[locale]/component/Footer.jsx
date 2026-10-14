@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Mail, MessageCircle, Facebook, Instagram } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/routing';
+import { SYSTEM_ORDER, SYSTEM_SLUGS } from '@/content/system-links';
 
 // Hook محسن للIntersection Observer
 const useInView = (options = {}) => {
@@ -55,6 +56,8 @@ SocialIcon.displayName = 'SocialIcon';
 
 export default function OptimizedFooter() {
   const t = useTranslations('footer');
+  const tNav = useTranslations('navbar');
+  const tSys = useTranslations('systemsDetails');
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -124,6 +127,43 @@ export default function OptimizedFooter() {
             {t('register')}
           </a>
         </section>
+
+        {/* روابط داخلية: كل الأنظمة والصفحات المهمة (مهمة للزواحف ومحركات الذكاء الاصطناعي) */}
+        <nav aria-label={isRTL ? 'روابط الموقع' : 'Site links'} className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className="flex flex-col gap-3 min-w-0">
+            <a href={`/${locale}/systems`} className="text-base font-extrabold text-ink hover:text-accent transition-colors w-fit">
+              {isRTL ? 'أنظمة تميز' : 'Tamyaz systems'}
+            </a>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 list-none p-0 m-0 text-sm">
+              {SYSTEM_ORDER.map((key) => (
+                <li key={key} className="min-w-0">
+                  <a href={`/${locale}/systems/${SYSTEM_SLUGS[key]}`} className="text-ink-2 hover:text-accent transition-colors">
+                    {tSys(`items.${key}.name`)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex flex-col gap-3 min-w-0">
+            <span className="text-base font-extrabold text-ink">{isRTL ? 'تميز' : 'Tamyaz'}</span>
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 list-none p-0 m-0 text-sm">
+              {[
+                { href: `/${locale}/about`, label: tNav('links.about') },
+                { href: `/${locale}/portfolio`, label: tNav('links.portfolio') },
+                { href: `/${locale}/blog`, label: tNav('links.blog') },
+                { href: `/${locale}/faq`, label: tNav('links.faq') },
+                { href: `/${locale}/package`, label: tNav('links.package') },
+                { href: `/${locale}/form`, label: t('register') },
+              ].map((link) => (
+                <li key={link.href} className="min-w-0">
+                  <a href={link.href} className="text-ink-2 hover:text-accent transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
 
         <div className="t-rule" />
 

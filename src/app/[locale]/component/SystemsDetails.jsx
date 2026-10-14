@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import Reveal from "./Reveal";
+import { SYSTEM_SLUGS } from "@/content/system-links";
 
 // تفاصيل أنظمة تميز الـ٨ + روابط الديمو — النصوص والروابط من ملفات الترجمة (systemsDetails.items)
 // المفاتيح هنا هي اللي في الـid بتاع كل كارت (#sys-<key>)، والـOrbit بيلينك عليها
@@ -85,7 +86,9 @@ export default function SystemsDetails() {
                           id={`sys-${key}-title`}
                           className="text-lg font-extrabold leading-snug text-ink"
                         >
-                          {item.name}
+                          <a href={`/${locale}/systems/${SYSTEM_SLUGS[key]}`} className="hover:text-accent transition-colors">
+                            {item.name}
+                          </a>
                         </h3>
                         {item.hint && <span className="t-chip">{item.hint}</span>}
                         {item.branches > 0 && (
@@ -122,6 +125,13 @@ export default function SystemsDetails() {
                     >
                       <span>{t("demoCta")}</span>
                       <ExternalLink size={17} aria-hidden="true" />
+                    </a>
+                    <a
+                      href={`/${locale}/systems/${SYSTEM_SLUGS[key]}`}
+                      className="btn btn-secondary w-full"
+                    >
+                      <span>{t("details")}</span>
+                      <Arrow size={17} aria-hidden="true" />
                     </a>
                     <a
                       href={`/${locale}/form?system=${key}`}

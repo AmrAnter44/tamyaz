@@ -1,27 +1,55 @@
 import createIntlMiddleware from 'next-intl/middleware';
-import { routing } from '../src/i18n/routing';
+import { routing } from './i18n/routing';
 import { NextResponse } from 'next/server';
+import { hasMarkdownTwin } from './lib/markdown-routes';
 
 const intlMiddleware = createIntlMiddleware(routing);
 
 const LOCALES = routing.locales;
 
-// أي مسار فيه امتداد ملف (صور، robots.txt، sitemap.xml...) بيعدّي زي ما هو
+// أي مسار فيه امتداد ملف (صور، robots.txt، sitemap.xml، feed.xml...) بيعدّي زي ما هو
 const HAS_EXTENSION = /\.[a-zA-Z0-9]+$/;
 
-// بيوصّل الطلب لنسخة الماركداون بتاعة نفس الصفحة
+// بيوصّل الطلب لنسخة الماركداون بتاعة نفس الصفحة (src/app/api/md/[...path] → src/lib/markdown-pages.js)
 function rewriteToMarkdown(request, pagePath) {
   const url = request.nextUrl.clone();
-  url.pathname = '/api/md';
+  const segments = String(pagePath || '/').split('/').filter(Boolean).map(encodeURIComponent);
+  // المسار جوّه الـURL نفسه (مش query) عشان الـroute ياخده من params بشكل مضمون
+  url.pathname = ['/api/md', ...segments].join('/');
   url.search = '';
-  url.searchParams.set('path', pagePath || '/');
-  return NextResponse.rewrite(url);
+  const response = NextResponse.rewrite(url);
+  // نفس الرابط بيرجّع HTML أو Markdown حسب Accept — الكاش لازم يفرّق بينهم
+  response.headers.set('Vary', 'Accept, Accept-Language');
+  return response;
+}
+
+// بيحوّل هيدر Accept لـ { mediaType: q }
+function parseAccept(header) {
+  const out = {};
+  for (const part of header.split(',')) {
+    const [type, ...params] = part.trim().split(';');
+    if (!type) continue;
+    const q = params.map((p) => p.trim()).find((p) => p.startsWith('q='));
+    const value = q ? Number.parseFloat(q.slice(2)) : 1;
+    out[type.trim().toLowerCase()] = Number.isNaN(value) ? 0 : value;
+  }
+  return out;
+}
+
+// true بس لو الطالب عايز markdown ومافضّلش HTML عليه. المتصفحات عمرها ما بتطلب text/markdown.
+function prefersMarkdown(request) {
+  const header = request.headers.get('accept');
+  if (!header || !header.toLowerCase().includes('text/markdown')) return false;
+  const accept = parseAccept(header);
+  const markdown = accept['text/markdown'] ?? 0;
+  const html = accept['text/html'] ?? 0;
+  return markdown > 0 && markdown >= html;
 }
 
 export default function middleware(request) {
   const { pathname, origin } = request.nextUrl;
 
-  // ١) رابط منتهي بـ.md — مثال: /ar/portfolio.md
+  // ١) رابط منتهي بـ.md — مثال: /ar/systems/cafe-pos-system.md
   if (pathname.endsWith('.md')) {
     return rewriteToMarkdown(request, pathname.slice(0, -3));
   }
@@ -31,10 +59,13 @@ export default function middleware(request) {
     return NextResponse.next();
   }
 
-  // ٣) الوكيل طالب ماركداون صراحةً في هيدر Accept
-  const accept = request.headers.get('accept') ?? '';
-  if (accept.includes('text/markdown')) {
-    return rewriteToMarkdown(request, pathname);
+  // ٣) الوكيل طالب ماركداون صراحةً في هيدر Accept، والصفحة ليها نسخة ماركداون
+  if (prefersMarkdown(request)) {
+    const segments = pathname.split('/').filter(Boolean);
+    const locale = LOCALES.includes(segments[0]) ? segments.shift() : routing.defaultLocale;
+    if (hasMarkdownTwin(segments)) {
+      return rewriteToMarkdown(request, ['', locale, ...segments].join('/'));
+    }
   }
 
   const response = intlMiddleware(request);
@@ -49,11 +80,10 @@ export default function middleware(request) {
   );
 
   // إعلان موارد الوكلاء: نسخة الماركداون من نفس الصفحة، وملف llms.txt
-  const isLocalePage = LOCALES.some(
-    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
-  );
+  const segments = pathname.split('/').filter(Boolean);
+  const isLocalePage = LOCALES.includes(segments[0]);
 
-  if (isLocalePage) {
+  if (isLocalePage && hasMarkdownTwin(segments.slice(1))) {
     const clean = pathname.replace(/\/$/, '');
     response.headers.append(
       'Link',

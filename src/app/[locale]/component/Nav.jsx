@@ -17,6 +17,8 @@ function useScrollAnimation() {
   return [ref, isInView];
 }
 
+const HIDE_HERO_PREFIXES = ['/portfolio/', '/systems', '/faq', '/about', '/blog'];
+
 export default function EnhancedNavbar() {
   const t = useTranslations('navbar');
   const tHero = useTranslations('hero');
@@ -62,12 +64,16 @@ export default function EnhancedNavbar() {
   };
 
   const links = [
-    { href: `/${locale}#systems`, label: t('links.systems') },
+    { href: `/${locale}/systems`, label: t('links.systems') },
     { href: `/${locale}#services`, label: t('links.services') },
     { href: `/${locale}/portfolio`, label: t('links.portfolio') },
     { href: `/${locale}/package`, label: t('links.package') },
-    { href: `/${locale}#faq`, label: t('links.faq') },
+    { href: `/${locale}/blog`, label: t('links.blog') },
+    { href: `/${locale}/faq`, label: t('links.faq') },
   ];
+
+  // الهيرو بيظهر في الرئيسية وصفحة الأعمال بس، مش في الصفحات الداخلية
+  const showHero = !HIDE_HERO_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 
   return (
     <main
@@ -95,7 +101,6 @@ export default function EnhancedNavbar() {
                 priority
                 className="w-9 h-9 shrink-0 object-contain"
               />
-              <span className="font-extrabold text-lg text-ink truncate">{isRTL ? 'تميز' : 'Tamyaz'}</span>
             </a>
 
             {/* روابط الأقسام — ديسكتوب */}
@@ -178,7 +183,7 @@ export default function EnhancedNavbar() {
       </motion.header>
 
       {/* Hero Section */}
-      {!pathname.startsWith('/portfolio/') && <section
+      {showHero && <section
         ref={heroRef}
         className="relative w-full overflow-hidden pt-28 sm:pt-32 pb-12 lg:pb-20"
       >

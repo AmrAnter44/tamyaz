@@ -1,11 +1,13 @@
 import { Cairo } from "next/font/google";
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { notFound } from 'next/navigation';
 import { Analytics } from "@vercel/analytics/react";
 import FloatingWhatsAppCTA from './component/Cta';
-import { SITE_URL, LOCALES } from '@/lib/site';
+import { SITE_URL, siteConfig } from '@/lib/site';
+import { organizationSchema, websiteSchema } from '@/lib/schema';
+import JsonLd from '@/components/JsonLd';
 import "../globals.css";
 
 // خط واحد بس في الموقع كله: Cairo (عربي + لاتيني)
@@ -34,24 +36,20 @@ export async function generateMetadata({ params }) {
   const messages = await getMessages({ locale });
 
   const title = messages.metadata?.title || 'Tamyaz';
-  const description =
-    messages.metadata?.description || 'Create Your Website With One Step';
+  const description = messages.metadata?.description || siteConfig.tagline[locale];
 
+  // ملحوظة: مفيش canonical هنا عمدًا — كل صفحة بتحط canonical و hreflang بتوعها عن طريق
+  // buildPageMetadata (src/lib/metadata.js)، عشان الصفحات الفرعية ماتورثش canonical الرئيسية.
   return {
     metadataBase: new URL(SITE_URL),
     title,
     description,
-    alternates: {
-      canonical: `${SITE_URL}/${locale}`,
-      // نسخ اللغات عشان محركات البحث والوكلاء يعرفوا الربط بينهم
-      languages: Object.fromEntries(LOCALES.map((l) => [l, `${SITE_URL}/${l}`])),
-    },
+    applicationName: 'Tamyaz',
     openGraph: {
       type: 'website',
-      siteName: 'Tamyaz',
+      siteName: locale === 'ar' ? 'تميز' : 'Tamyaz',
       title,
       description,
-      url: `${SITE_URL}/${locale}`,
       locale: locale === 'ar' ? 'ar_EG' : 'en_US',
       images: [{ url: '/logo.svg', alt: 'Tamyaz' }],
     },
@@ -69,50 +67,6 @@ export async function generateMetadata({ params }) {
   };
 }
 
-// بيانات منظّمة عشان النماذج ومحركات البحث تفهم الشركة وخدماتها، مش بس تقرا نصوص
-function structuredData(locale, messages) {
-  const organization = {
-    '@type': 'Organization',
-    '@id': `${SITE_URL}/#organization`,
-    name: 'Tamyaz',
-    alternateName: 'تميز',
-    url: SITE_URL,
-    logo: `${SITE_URL}/logo.svg`,
-    description: messages.metadata?.description ?? messages.hero?.description,
-    areaServed: 'EG',
-    knowsLanguage: ['ar', 'en'],
-    makesOffer: (messages.specializations?.services ?? []).map((service) => ({
-      '@type': 'Offer',
-      itemOffered: { '@type': 'Service', name: service },
-    })),
-  };
-
-  const website = {
-    '@type': 'WebSite',
-    '@id': `${SITE_URL}/#website`,
-    url: `${SITE_URL}/${locale}`,
-    name: 'Tamyaz',
-    inLanguage: locale,
-    publisher: { '@id': `${SITE_URL}/#organization` },
-  };
-
-  const faq = messages.faq?.items?.length
-    ? {
-        '@type': 'FAQPage',
-        mainEntity: messages.faq.items.map((item) => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: { '@type': 'Answer', text: item.answer },
-        })),
-      }
-    : null;
-
-  return {
-    '@context': 'https://schema.org',
-    '@graph': [organization, website, faq].filter(Boolean),
-  };
-}
-
 export default async function LocaleLayout({ children, params }) {
   const { locale } = await params;
 
@@ -120,19 +74,23 @@ export default async function LocaleLayout({ children, params }) {
     notFound();
   }
 
+  setRequestLocale(locale);
   const messages = await getMessages();
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={`${cairo.variable} dark`} style={{ colorScheme: 'dark' }}>
       <head>
-        {/* نسخة الماركداون وملف llms.txt للوكلاء الذكية */}
+        {/* ملفات الوكلاء الذكية + خلاصة المدونة */}
         <link rel="alternate" type="text/plain" href={`${SITE_URL}/llms.txt`} title="llms.txt" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData(locale, messages)),
-          }}
+        <link rel="alternate" type="text/plain" href={`${SITE_URL}/llms-full.txt`} title="llms-full.txt" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          href={`${SITE_URL}/${locale}/feed.xml`}
+          title={locale === 'ar' ? 'مدونة تميز' : 'Tamyaz Blog'}
         />
+        {/* Organization + WebSite على كل الصفحات؛ باقي الـschema بيتبعت من كل صفحة */}
+        <JsonLd data={[organizationSchema(locale), websiteSchema(locale)]} />
       </head>
       <body className={`${cairo.className} text-ink antialiased`}>
         <NextIntlClientProvider messages={messages}>

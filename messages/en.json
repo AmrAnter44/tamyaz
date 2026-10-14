@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "Tamyaz - Integrated Agency for Digital & Creative Solutions",
-    "description": "Comprehensive solutions in software, accounting, inventory, and creative production"
+    "title": "Tamyaz | 8 Management & POS Systems for Cafés, Restaurants, Clinics and Pharmacies in Egypt",
+    "description": "Tamyaz is an Egyptian software company: café POS, restaurant system, barbershop booking, clinic and dental clinic software, pharmacy system, gym-bar POS, and retail POS with an online store — in Arabic, with free demos."
   },
   "navbar": {
     "cta": "Start Now",
@@ -11,7 +11,9 @@
       "services": "Services",
       "portfolio": "Our Work",
       "package": "Packages",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "blog": "Blog",
+      "about": "About"
     }
   },
   "hero": {
@@ -180,7 +182,8 @@
       "whatsapp": "Chat on WhatsApp",
       "form": "Submit your request"
     },
-    "branchesLabel": "{count, plural, one {# branch running with us} other {# branches running with us}}"
+    "branchesLabel": "{count, plural, one {# branch running with us} other {# branches running with us}}",
+    "details": "System details"
   },
   "stats": {
     "title": "Our Statistics",
