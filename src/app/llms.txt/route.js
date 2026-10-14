@@ -15,7 +15,7 @@ function buildLlmsTxt() {
   push(`> ${siteConfig.tagline.ar}`, "");
   push(`> ${siteConfig.tagline.en}`, "");
   push(
-    "Tamyaz is based in Egypt and serves businesses across Egypt. Every system is in Arabic, opens on mobile and desktop, installs as an app, and has a live demo with no sign-up. Tamyaz Barber currently runs in 8 branches and Tamyaz Pharma in 6 pharmacy branches. Pricing is per number of branches, by quote (no public price list for the systems).",
+    "Tamyaz is based in Egypt and serves businesses across Egypt. Every system is in Arabic, opens on mobile and desktop, installs as an app, and has a live demo with no sign-up. Branches running on Tamyaz systems today: Cafe 12+, Resto 4+, Barber 8+, Clinic 16+, Dental 9+, Pharma 6+, Gym Bar 11+, Store 5+ (70+ in total). Pricing: every system starts from EGP 1,500 per month and scales with the number of branches; exact quote on request. الأسعار: كل الأنظمة تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع.",
     ""
   );
 

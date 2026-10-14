@@ -36,7 +36,7 @@ const T = {
     branches: (n) => `السيستم شغال حاليًا في ${n} فروع.`,
     demo: (u) => `جرّب الديمو دلوقتي من غير تسجيل: [${u.replace("https://", "")}](${u}) — فيه داتا حقيقية بتتجدد كل يوم.`,
     page: (n, url) => `كل التفاصيل في صفحة [${n}](${url}).`,
-    custom: "وبنعدّل السيستم على مقاس شغلك، والباقات حسب عدد الفروع — كلمنا ونبعتلك عرض سعر.",
+    custom: "وبنعدّل السيستم على مقاس شغلك، والباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع — كلمنا ونبعتلك عرض سعر.",
     checklist: "Checklist قبل ما تقرر",
     checklistItems: (c) => [
       ...c.map((r) => `${r[0]}: ${r[2]}`),
@@ -78,7 +78,7 @@ const T = {
     branches: (n) => `The system currently runs in ${n} branches.`,
     demo: (u) => `Try the demo now with no sign-up: [${u.replace("https://", "")}](${u}) — it runs on real data that refreshes daily.`,
     page: (n, url) => `Full details on the [${n}](${url}) page.`,
-    custom: "We tailor the system to how you work, and plans depend on the number of branches — contact us for a quote.",
+    custom: "We tailor the system to how you work, and plans start from EGP 1,500/month and scale with the number of branches — contact us for a quote.",
     checklist: "Checklist before you decide",
     checklistItems: (c) => [
       ...c.map((r) => `${r[0]}: ${r[2]}`),

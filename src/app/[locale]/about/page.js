@@ -18,7 +18,7 @@ const COPY = {
     whatTitle: "إحنا مين؟",
     what: [
       "تميز (Tamyaz) شركة برمجيات مصرية بدأت في 2023. بنبني أنظمة إدارة وكاشير جاهزة لأنواع البيزنس اللي بتقابلها كل يوم في مصر، وبنعدّلها على مقاس شغل كل عميل.",
-      "كل سيستم بالعربي، بيفتح على الموبايل والكمبيوتر، وبيتنزل كتطبيق، وليه ديمو مفتوح من غير تسجيل فيه داتا حقيقية بتتجدد كل يوم. تميز باربر شغال حاليًا في 8 فروع، وتميز فارما في 6 فروع صيدليات.",
+      "كل سيستم بالعربي، بيفتح على الموبايل والكمبيوتر، وبيتنزل كتطبيق، وليه ديمو مفتوح من غير تسجيل فيه داتا حقيقية بتتجدد كل يوم. الفروع الشغالة على أنظمة تميز حاليًا: كافيه +12، مطاعم +4، باربر +8، كلينك +16، أسنان +9، فارما +6، بار الجيم +11، متجر +5 — أكتر من 70 فرع إجمالًا.",
       "وجنب الأنظمة بنعمل مواقع إلكترونية وتطبيقات موبايل وهوية بصرية وتصميمات سوشيال ميديا وإنتاج فيديو.",
     ],
     systemsTitle: "أنظمتنا الـ8",
@@ -40,7 +40,7 @@ const COPY = {
     whatTitle: "Who we are",
     what: [
       "Tamyaz (تميز) is an Egyptian software company that started in 2023. We build ready-made management and POS systems for the kinds of businesses you meet every day in Egypt, and we tailor them to how each client works.",
-      "Every system is in Arabic, opens on mobile and desktop, installs as an app, and has an open demo with no sign-up running on real data that refreshes daily. Tamyaz Barber currently runs in 8 branches and Tamyaz Pharma in 6 pharmacy branches.",
+      "Every system is in Arabic, opens on mobile and desktop, installs as an app, and has an open demo with no sign-up running on real data that refreshes daily. Branches running on Tamyaz systems today: Cafe 12+, Resto 4+, Barber 8+, Clinic 16+, Dental 9+, Pharma 6+, Gym Bar 11+, Store 5+ (70+ in total).",
       "Alongside the systems, we build websites, mobile apps, brand identity, social media designs and video content.",
     ],
     systemsTitle: "Our 8 systems",

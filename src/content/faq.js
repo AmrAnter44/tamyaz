@@ -1,6 +1,6 @@
 // الأسئلة الشائعة على مستوى الشركة — بتغذّي /[locale]/faq ونسختها الماركداون و llms-full.txt.
 // كل إجابة لازم تكون مدعومة بمحتوى الموقع (messages/*.json, src/content/systems.js, src/data/projects.js).
-// متعمّد إن مفيش أرقام أسعار هنا: التسعير حسب عدد الفروع وبعرض سعر.
+// السعر: يبدأ من 1500 جنيه شهرياً (قرار عمرو) وبيزيد حسب عدد الفروع، والنهائي بعرض سعر.
 
 const faqs = {
   ar: [
@@ -32,7 +32,7 @@ const faqs = {
     {
       id: "branches",
       q: "هل الأنظمة بتدعم أكتر من فرع؟",
-      a: "أيوه. أنظمة الباربر والصيدليات والمطاعم وبار الجيم والمتجر فيها إدارة فروع. تميز باربر شغال حاليًا في 8 فروع، وتميز فارما شغال في 6 فروع صيدليات. لباقي الأنظمة كلمنا عن عدد فروعك ونظبط السيستم عليه.",
+      a: "أيوه. أنظمة الباربر والصيدليات والمطاعم وبار الجيم والمتجر فيها إدارة فروع. الفروع الشغالة على أنظمة تميز حاليًا: كافيه +12، مطاعم +4، باربر +8، كلينك +16، أسنان +9، فارما +6، بار الجيم +11، متجر +5 — أكتر من 70 فرع إجمالًا. كلمنا عن عدد فروعك ونظبط السيستم عليه.",
     },
     {
       id: "customization",
@@ -42,7 +42,7 @@ const faqs = {
     {
       id: "pricing",
       q: "الأسعار بكام؟",
-      a: "الباقات حسب عدد الفروع واحتياج شغلك، فمفيش سعر واحد للكل. كلمنا على واتساب (+20 102 851 8754) أو سجّل طلبك على tamyaz.online/ar/form ونبعتلك عرض سعر.",
+      a: "الباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع واحتياج شغلك. كلمنا على واتساب (+20 102 851 8754) أو سجّل طلبك على tamyaz.online/ar/form ونبعتلك عرض سعر.",
     },
     {
       id: "how-to-start",
@@ -90,7 +90,7 @@ const faqs = {
     {
       id: "branches",
       q: "Do the systems support multiple branches?",
-      a: "Yes. The barber, pharmacy, restaurant, gym-bar and store systems include branch management. Tamyaz Barber currently runs in 8 branches and Tamyaz Pharma in 6 pharmacy branches. For the other systems, tell us how many branches you have and we will set it up accordingly.",
+      a: "Yes. The barber, pharmacy, restaurant, gym-bar and store systems include branch management. Branches running on Tamyaz systems today: Cafe 12+, Resto 4+, Barber 8+, Clinic 16+, Dental 9+, Pharma 6+, Gym Bar 11+, Store 5+ (70+ in total). Tell us how many branches you have and we will set it up accordingly.",
     },
     {
       id: "customization",
@@ -100,7 +100,7 @@ const faqs = {
     {
       id: "pricing",
       q: "How much does it cost?",
-      a: "Plans depend on the number of branches and what your business needs, so there is no single price. Message us on WhatsApp (+20 102 851 8754) or submit a request at tamyaz.online/en/form and we will send you a quote.",
+      a: "Plans start from EGP 1,500/month and scale with the number of branches and what your business needs. Message us on WhatsApp (+20 102 851 8754) or submit a request at tamyaz.online/en/form and we will send you a quote.",
     },
     {
       id: "how-to-start",

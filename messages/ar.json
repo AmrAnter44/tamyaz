@@ -87,7 +87,8 @@
           "الشيفتات والخزنة",
           "تقارير المبيعات اليومية والشهرية"
         ],
-        "url": "https://demo.cafe.tamyaz.online/login"
+        "url": "https://demo.cafe.tamyaz.online/login",
+        "branches": 12
       },
       "resto": {
         "name": "تميز ريستورانت",
@@ -99,7 +100,8 @@
           "الفروع والكاشير",
           "تقارير المبيعات والأصناف الأكثر طلبًا"
         ],
-        "url": "https://demo.resto.tamyaz.online/login"
+        "url": "https://demo.resto.tamyaz.online/login",
+        "branches": 4
       },
       "barber": {
         "name": "تميز باربر",
@@ -124,7 +126,8 @@
           "حضور الفريق والرواتب",
           "موقع العيادة وطلبات الحجز أونلاين"
         ],
-        "url": "https://demo.clinc.tamyaz.online/login"
+        "url": "https://demo.clinc.tamyaz.online/login",
+        "branches": 16
       },
       "dental": {
         "name": "تميز دنتال",
@@ -135,7 +138,8 @@
           "الفواتير والتقسيط",
           "المصروفات والتقارير"
         ],
-        "url": "https://demo.dental.tamyaz.online/login"
+        "url": "https://demo.dental.tamyaz.online/login",
+        "branches": 9
       },
       "pharma": {
         "name": "تميز فارما",
@@ -161,7 +165,8 @@
           "الفروع",
           "تقارير يومية وشهرية"
         ],
-        "url": "https://demo.bar.tamyaz.online/ar/login"
+        "url": "https://demo.bar.tamyaz.online/ar/login",
+        "branches": 11
       },
       "shop": {
         "name": "تميز ستور",
@@ -173,7 +178,8 @@
           "الفروع والمخزون",
           "طلب مباشر على واتساب"
         ],
-        "url": "https://demo.shop.tamyaz.online/login"
+        "url": "https://demo.shop.tamyaz.online/login",
+        "branches": 5
       }
     },
     "custom": {
@@ -182,7 +188,7 @@
       "whatsapp": "كلمنا واتساب",
       "form": "سجّل طلبك"
     },
-    "branchesLabel": "{count, plural, one {فرع واحد شغال معانا} two {فرعين شغالين معانا} few {# فروع شغالة معانا} other {# فرع شغال معانا}}",
+    "branchesLabel": "{count}+ فرع شغالين معانا",
     "details": "تفاصيل السيستم"
   },
   "stats": {

@@ -25,7 +25,7 @@ const L = {
     how: "إزاي تبدأ؟",
     demo: "الديمو (من غير تسجيل)",
     branches: (n) => `شغال حاليًا في ${n} فروع.`,
-    pricing: "الأسعار: الباقات حسب عدد الفروع، كلمنا ونبعتلك عرض سعر.",
+    pricing: "الأسعار: الباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع، كلمنا ونبعتلك عرض سعر.",
     custom: "بنعدّل السيستم على مقاس شغلك.",
     proof: "من أعمالنا",
     faq: "أسئلة شائعة",
@@ -49,7 +49,7 @@ const L = {
     how: "How to get started",
     demo: "Demo (no sign-up)",
     branches: (n) => `Currently running in ${n} branches.`,
-    pricing: "Pricing: plans depend on the number of branches — contact us for a quote.",
+    pricing: "Pricing: plans start from EGP 1,500/month and scale with the number of branches — contact us for a quote.",
     custom: "We tailor the system to how you work.",
     proof: "From our work",
     faq: "Frequently asked questions",
@@ -189,7 +189,7 @@ function aboutPage(locale) {
     locale === "ar"
       ? [
           "تميز (Tamyaz) شركة برمجيات مصرية بدأت في 2023. بنبني أنظمة إدارة وكاشير جاهزة لأنواع البيزنس اللي بتقابلها كل يوم في مصر، وبنعدّلها على مقاس شغل كل عميل.",
-          "كل سيستم بالعربي، بيفتح على الموبايل والكمبيوتر، وبيتنزل كتطبيق، وليه ديمو مفتوح من غير تسجيل. تميز باربر شغال حاليًا في 8 فروع، وتميز فارما في 6 فروع صيدليات.",
+          "كل سيستم بالعربي، بيفتح على الموبايل والكمبيوتر، وبيتنزل كتطبيق، وليه ديمو مفتوح من غير تسجيل. الفروع الشغالة على أنظمة تميز حاليًا: كافيه +12، مطاعم +4، باربر +8، كلينك +16، أسنان +9، فارما +6، بار الجيم +11، متجر +5 — أكتر من 70 فرع إجمالًا.",
           `## ${L.ar.systems}`,
           systemsList("ar"),
           "## من أعمالنا",
@@ -197,7 +197,7 @@ function aboutPage(locale) {
         ]
       : [
           "Tamyaz (تميز) is an Egyptian software company that started in 2023. We build ready-made management and POS systems for the kinds of businesses you meet every day in Egypt, and tailor them to how each client works.",
-          "Every system is in Arabic, opens on mobile and desktop, installs as an app, and has an open demo with no sign-up. Tamyaz Barber currently runs in 8 branches and Tamyaz Pharma in 6 pharmacy branches.",
+          "Every system is in Arabic, opens on mobile and desktop, installs as an app, and has an open demo with no sign-up. Branches running on Tamyaz systems today: Cafe 12+, Resto 4+, Barber 8+, Clinic 16+, Dental 9+, Pharma 6+, Gym Bar 11+, Store 5+ (70+ in total).",
           `## ${L.en.systems}`,
           systemsList("en"),
           "## From our work",

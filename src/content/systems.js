@@ -11,7 +11,7 @@ function commonFaq(s) {
     ar: [
       {
         q: `${s.ar.name} بكام؟`,
-        a: `الباقات بتتحدد حسب عدد الفروع واحتياج شغلك. كلمنا على واتساب (+20 102 851 8754) أو سجّل طلبك من صفحة التواصل، ونبعتلك عرض سعر مناسب لحالتك.`,
+        a: `الباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع واحتياج شغلك. كلمنا على واتساب (+20 102 851 8754) أو سجّل طلبك من صفحة التواصل، ونبعتلك عرض سعر مناسب لحالتك.`,
       },
       {
         q: `أقدر أجرّب ${s.ar.name} قبل ما أشترك؟`,
@@ -29,7 +29,7 @@ function commonFaq(s) {
     en: [
       {
         q: `How much does ${s.en.name} cost?`,
-        a: `Plans are priced by the number of branches and what your business needs. Message us on WhatsApp (+20 102 851 8754) or submit a request on the contact page and we will send you a quote for your case.`,
+        a: `Plans start from EGP 1,500/month and scale with the number of branches and what your business needs. Message us on WhatsApp (+20 102 851 8754) or submit a request on the contact page and we will send you a quote for your case.`,
       },
       {
         q: `Can I try ${s.en.name} before subscribing?`,
@@ -91,6 +91,7 @@ export const systems = [
     key: "cafe",
     icon: "Coffee",
     demo: "https://demo.cafe.tamyaz.online/login",
+    branches: 12,
     related: ["restaurant-system", "gym-bar-system", "retail-pos-system"],
     article: "best-cafe-pos-system-egypt",
     portfolio: "/portfolio/cafe-system",
@@ -177,6 +178,7 @@ export const systems = [
     key: "resto",
     icon: "UtensilsCrossed",
     demo: "https://demo.resto.tamyaz.online/login",
+    branches: 4,
     related: ["cafe-pos-system", "gym-bar-system", "retail-pos-system"],
     article: "best-restaurant-management-system-egypt",
     ar: {
@@ -262,9 +264,9 @@ export const systems = [
       h1: "سيستم حجز وإدارة باربر شوب وصالونات في مصر",
       title: "سيستم حجز باربر في مصر — إدارة صالونات وباربر شوب | تميز باربر",
       description:
-        "تميز باربر: سيستم حجز وإدارة باربر شوب وصالونات في مصر — حجوزات ومواعيد الكباتن، عمولات وشيفتات، خدمات وأسعار، خزنة ومصاريف، وتقارير بالساعة. شغال في 8 فروع.",
+        "تميز باربر: سيستم حجز وإدارة باربر شوب وصالونات في مصر — حجوزات ومواعيد الكباتن، عمولات وشيفتات، خدمات وأسعار، خزنة ومصاريف، وتقارير بالساعة. شغال في أكتر من 8 فروع.",
       answer:
-        "تميز باربر سيستم حجز وإدارة للباربر شوب والصالونات في مصر: بيدير الحجوزات ومواعيد الكباتن، والعمولات والشيفتات، والخدمات والأسعار، والخزنة والمصاريف، مع تقارير يومية بالساعة. السيستم شغال حاليًا في 8 فروع، بالعربي وعلى الموبايل والكمبيوتر، والديمو متاح من غير تسجيل.",
+        "تميز باربر سيستم حجز وإدارة للباربر شوب والصالونات في مصر: بيدير الحجوزات ومواعيد الكباتن، والعمولات والشيفتات، والخدمات والأسعار، والخزنة والمصاريف، مع تقارير يومية بالساعة. السيستم شغال حاليًا في أكتر من 8 فروع، بالعربي وعلى الموبايل والكمبيوتر، والديمو متاح من غير تسجيل.",
       audience: [
         "الباربر شوب والصالونات الرجالي",
         "سلاسل الحلاقة اللي عندها أكتر من فرع",
@@ -282,7 +284,7 @@ export const systems = [
       faq: [
         {
           q: "إيه أفضل سيستم حجز لباربر شوب في مصر؟",
-          a: "أفضل سيستم هو اللي بيربط الحجوزات بمواعيد الكباتن، ويحسب العمولات، ويتابع الخزنة ويطلع تقارير، ويشتغل مع أكتر من فرع. تميز باربر بيعمل ده وشغال حاليًا في 8 فروع، والديمو متاح مجانًا.",
+          a: "أفضل سيستم هو اللي بيربط الحجوزات بمواعيد الكباتن، ويحسب العمولات، ويتابع الخزنة ويطلع تقارير، ويشتغل مع أكتر من فرع. تميز باربر بيعمل ده وشغال حاليًا في أكتر من 8 فروع، والديمو متاح مجانًا.",
         },
         {
           q: "هل السيستم بيحسب عمولات الكباتن؟",
@@ -290,7 +292,7 @@ export const systems = [
         },
         {
           q: "كام فرع شغال على تميز باربر؟",
-          a: "تميز باربر شغال حاليًا في 8 فروع.",
+          a: "تميز باربر شغال حاليًا في أكتر من 8 فروع.",
         },
       ],
     },
@@ -300,9 +302,9 @@ export const systems = [
       h1: "Barbershop & Salon Booking and Management System in Egypt",
       title: "Barbershop Booking System in Egypt — Salon Management | Tamyaz Barber",
       description:
-        "Tamyaz Barber: a booking and management system for barbershops and salons in Egypt — bookings and barber schedules, commissions and shifts, services and prices, cash drawer and expenses, hourly reports. Running in 8 branches.",
+        "Tamyaz Barber: a booking and management system for barbershops and salons in Egypt — bookings and barber schedules, commissions and shifts, services and prices, cash drawer and expenses, hourly reports. Running in 8+ branches.",
       answer:
-        "Tamyaz Barber is a booking and management system for barbershops and salons in Egypt: it handles bookings and barber schedules, commissions and shifts, services and prices, the cash drawer and expenses, with hourly daily reports. It currently runs in 8 branches, in Arabic on mobile and desktop, and the demo is open with no sign-up.",
+        "Tamyaz Barber is a booking and management system for barbershops and salons in Egypt: it handles bookings and barber schedules, commissions and shifts, services and prices, the cash drawer and expenses, with hourly daily reports. It currently runs in 8+ branches, in Arabic on mobile and desktop, and the demo is open with no sign-up.",
       audience: [
         "Barbershops and men's salons",
         "Barber chains with more than one branch",
@@ -320,10 +322,10 @@ export const systems = [
       faq: [
         {
           q: "What is the best barbershop booking system in Egypt?",
-          a: "The best system ties bookings to barber schedules, calculates commissions, follows the cash drawer, produces reports and works across branches. Tamyaz Barber does that and currently runs in 8 branches; the demo is free.",
+          a: "The best system ties bookings to barber schedules, calculates commissions, follows the cash drawer, produces reports and works across branches. Tamyaz Barber does that and currently runs in 8+ branches; the demo is free.",
         },
         { q: "Does the system calculate barber commissions?", a: "Yes. It manages barbers, commissions and shifts." },
-        { q: "How many branches run on Tamyaz Barber?", a: "Tamyaz Barber currently runs in 8 branches." },
+        { q: "How many branches run on Tamyaz Barber?", a: "Tamyaz Barber currently runs in 8+ branches." },
       ],
     },
   }),
@@ -333,6 +335,7 @@ export const systems = [
     key: "clinic",
     icon: "Stethoscope",
     demo: "https://demo.clinc.tamyaz.online/login",
+    branches: 16,
     related: ["dental-clinic-system", "pharmacy-system", "barber-booking-system"],
     article: "best-clinic-management-software-egypt",
     ar: {
@@ -410,6 +413,7 @@ systems.push(
     key: "dental",
     icon: "Smile",
     demo: "https://demo.dental.tamyaz.online/login",
+    branches: 9,
     related: ["clinic-management-system", "pharmacy-system", "barber-booking-system"],
     article: "best-dental-clinic-software-egypt",
     ar: {
@@ -486,9 +490,9 @@ systems.push(
       h1: "برنامج إدارة صيدلية وكاشير صيدليات في مصر",
       title: "برنامج إدارة صيدلية في مصر — كاشير ومخزون وصلاحيات | تميز فارما",
       description:
-        "تميز فارما: برنامج إدارة صيدليات في مصر — نقطة بيع للصيدلية، المخزون وتواريخ الصلاحية، المشتريات والموردين، الشيفتات وفروقات الخزنة، ولينا وعلينا. شغال في 6 فروع.",
+        "تميز فارما: برنامج إدارة صيدليات في مصر — نقطة بيع للصيدلية، المخزون وتواريخ الصلاحية، المشتريات والموردين، الشيفتات وفروقات الخزنة، ولينا وعلينا. شغال في أكتر من 6 فروع.",
       answer:
-        "تميز فارما برنامج إدارة صيدليات في مصر بيخلّي البيع والمخزون والصلاحيات تحت عينك: نقطة بيع للصيدلية، المخزون وتواريخ الصلاحية، المشتريات والموردين، الشيفتات وفروقات الخزنة، ولينا وعلينا. البرنامج شغال حاليًا في 6 فروع صيدليات، بالعربي وعلى الموبايل والكمبيوتر، والديمو متاح من غير تسجيل.",
+        "تميز فارما برنامج إدارة صيدليات في مصر بيخلّي البيع والمخزون والصلاحيات تحت عينك: نقطة بيع للصيدلية، المخزون وتواريخ الصلاحية، المشتريات والموردين، الشيفتات وفروقات الخزنة، ولينا وعلينا. البرنامج شغال حاليًا في أكتر من 6 فروع صيدليات، بالعربي وعلى الموبايل والكمبيوتر، والديمو متاح من غير تسجيل.",
       audience: [
         "الصيدليات الفردية",
         "سلاسل الصيدليات اللي عندها أكتر من فرع",
@@ -504,10 +508,10 @@ systems.push(
       faq: [
         {
           q: "إيه أفضل برنامج إدارة صيدلية في مصر؟",
-          a: "أفضل برنامج صيدلية هو اللي بيجمع الكاشير والمخزون بتواريخ الصلاحية والمشتريات والموردين والشيفتات وفروقات الخزنة ولينا وعلينا، بالعربي. تميز فارما بيعمل ده وشغال حاليًا في 6 فروع، والديمو متاح مجانًا.",
+          a: "أفضل برنامج صيدلية هو اللي بيجمع الكاشير والمخزون بتواريخ الصلاحية والمشتريات والموردين والشيفتات وفروقات الخزنة ولينا وعلينا، بالعربي. تميز فارما بيعمل ده وشغال حاليًا في أكتر من 6 فروع، والديمو متاح مجانًا.",
         },
         { q: "هل البرنامج بيتابع تواريخ الصلاحية؟", a: "أيوه. فيه المخزون وتواريخ الصلاحية." },
-        { q: "كام صيدلية شغالة على تميز فارما؟", a: "تميز فارما شغال حاليًا في 6 فروع." },
+        { q: "كام صيدلية شغالة على تميز فارما؟", a: "تميز فارما شغال حاليًا في أكتر من 6 فروع." },
       ],
     },
     en: {
@@ -516,9 +520,9 @@ systems.push(
       h1: "Pharmacy Management & POS System in Egypt",
       title: "Pharmacy Management System in Egypt — POS, Stock & Expiry Dates | Tamyaz Pharma",
       description:
-        "Tamyaz Pharma: a pharmacy management system in Egypt — pharmacy POS, stock and expiry dates, purchases and suppliers, shifts and cash-drawer differences, receivables and payables. Running in 6 branches.",
+        "Tamyaz Pharma: a pharmacy management system in Egypt — pharmacy POS, stock and expiry dates, purchases and suppliers, shifts and cash-drawer differences, receivables and payables. Running in 6+ branches.",
       answer:
-        "Tamyaz Pharma is a pharmacy management system in Egypt that keeps sales, stock and expiry dates under control: a pharmacy point of sale, stock and expiry dates, purchases and suppliers, shifts and cash-drawer differences, and receivables and payables. It currently runs in 6 pharmacy branches, in Arabic on mobile and desktop, and the demo is open with no sign-up.",
+        "Tamyaz Pharma is a pharmacy management system in Egypt that keeps sales, stock and expiry dates under control: a pharmacy point of sale, stock and expiry dates, purchases and suppliers, shifts and cash-drawer differences, and receivables and payables. It currently runs in 6+ pharmacy branches, in Arabic on mobile and desktop, and the demo is open with no sign-up.",
       audience: [
         "Independent pharmacies",
         "Pharmacy chains with more than one branch",
@@ -534,10 +538,10 @@ systems.push(
       faq: [
         {
           q: "What is the best pharmacy management system in Egypt?",
-          a: "The best pharmacy system brings the cashier, stock with expiry dates, purchases and suppliers, shifts, drawer differences and receivables/payables together in Arabic. Tamyaz Pharma does that and currently runs in 6 branches; the demo is free.",
+          a: "The best pharmacy system brings the cashier, stock with expiry dates, purchases and suppliers, shifts, drawer differences and receivables/payables together in Arabic. Tamyaz Pharma does that and currently runs in 6+ branches; the demo is free.",
         },
         { q: "Does the system track expiry dates?", a: "Yes. It includes stock and expiry dates." },
-        { q: "How many pharmacies run on Tamyaz Pharma?", a: "Tamyaz Pharma currently runs in 6 branches." },
+        { q: "How many pharmacies run on Tamyaz Pharma?", a: "Tamyaz Pharma currently runs in 6+ branches." },
       ],
     },
   }),
@@ -547,6 +551,7 @@ systems.push(
     key: "bar",
     icon: "Dumbbell",
     demo: "https://demo.bar.tamyaz.online/ar/login",
+    branches: 11,
     related: ["cafe-pos-system", "retail-pos-system", "restaurant-system"],
     article: "gym-bar-pos-system-guide",
     ar: {
@@ -616,6 +621,7 @@ systems.push(
     key: "shop",
     icon: "ShoppingBag",
     demo: "https://demo.shop.tamyaz.online/login",
+    branches: 5,
     related: ["cafe-pos-system", "pharmacy-system", "gym-bar-system"],
     article: "best-retail-pos-online-store-egypt",
     portfolio: "/portfolio/memo-cosmetics-system",

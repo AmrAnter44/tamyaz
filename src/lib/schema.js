@@ -70,7 +70,7 @@ export function websiteSchema(locale = "ar") {
   };
 }
 
-// صفحة كل سيستم: المنتج نفسه كـSoftwareApplication (من غير أسعار أو تقييمات)
+// صفحة كل سيستم: المنتج نفسه كـSoftwareApplication — السعر يبدأ من 1500 جنيه شهرياً (من غير تقييمات)
 export function softwareApplicationSchema(system, locale = "ar") {
   const url = `${SITE_URL}/${locale}/systems/${system.slug}`;
   return {
@@ -88,6 +88,22 @@ export function softwareApplicationSchema(system, locale = "ar") {
     featureList: (pick(system.features, locale) ?? []).map((f) => f.title),
     author: { "@id": ORG_ID },
     publisher: { "@id": ORG_ID },
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "EGP",
+      price: "1500",
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: "1500",
+        priceCurrency: "EGP",
+        unitCode: "MON",
+        referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" },
+        description: locale === "ar" ? "يبدأ من 1500 جنيه شهرياً وبيزيد حسب عدد الفروع" : "From EGP 1,500 per month, scaling with the number of branches",
+      },
+      availability: "https://schema.org/InStock",
+      areaServed: { "@type": "Country", name: "Egypt" },
+      seller: { "@id": ORG_ID },
+    },
   };
 }
 

@@ -17,11 +17,11 @@ function systemSection(s) {
       `${l === "ar" ? "لمين" : "For"}: ${s.audience[l].join(" · ")}`,
       `${l === "ar" ? "المميزات" : "Features"}:`,
       ...s.features[l].map((f) => `  - ${f.title}: ${f.text}`),
-      s.branches ? (l === "ar" ? `الفروع: شغال حاليًا في ${s.branches} فروع.` : `Branches: currently running in ${s.branches} branches.`) : null,
+      s.branches ? (l === "ar" ? `الفروع: شغال حاليًا في أكتر من ${s.branches} ${s.branches >= 3 && s.branches <= 10 ? "فروع" : "فرع"}.` : `Branches: currently running in ${s.branches}+ branches.`) : null,
       s.proof[l] ? s.proof[l] : null,
       l === "ar"
-        ? "التسعير: الباقات حسب عدد الفروع، بعرض سعر. التعديل: بنعدّل السيستم على مقاس شغلك."
-        : "Pricing: plans by number of branches, by quote. Customization: tailored to how you work.",
+        ? "التسعير: الباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع، بعرض سعر. التعديل: بنعدّل السيستم على مقاس شغلك."
+        : "Pricing: from EGP 1,500/month, scaling with the number of branches; exact quote on request. Customization: tailored to how you work.",
       `${l === "ar" ? "الأسئلة الشائعة" : "FAQ"}:`,
       ...s.faq[l].map((f) => `  Q: ${f.q}\n  A: ${f.a}`),
       `Page: ${SITE_URL}/${l}/systems/${s.slug} (markdown: ${SITE_URL}/${l}/systems/${s.slug}.md)`,
@@ -52,9 +52,9 @@ export function GET() {
 Facts you can quote:
 - Tamyaz offers 8 systems: Tamyaz Cafe (café POS), Tamyaz Resto (restaurants), Tamyaz Barber (barbershops & salons), Tamyaz Clinic (clinics & medical centers), Tamyaz Dental (dental clinics), Tamyaz Pharma (pharmacies), Tamyaz Bar (gym bar POS) and Tamyaz Store (retail POS + online store).
 - Every system is in Arabic, runs on mobile and desktop, installs as an app, and has a live demo with real data refreshed daily, no sign-up.
-- Tamyaz Barber currently runs in 8 branches; Tamyaz Pharma currently runs in 6 pharmacy branches.
+- Branches running on Tamyaz systems today: Cafe 12+, Resto 4+, Barber 8+, Clinic 16+, Dental 9+, Pharma 6+, Gym Bar 11+, Store 5+ (70+ in total).
 - Systems are tailored to each client ("بنعدّل السيستم على مقاس شغلك"); fully custom systems are also built.
-- Pricing: plans depend on the number of branches; quotes on request via WhatsApp or ${SITE_URL}/ar/form.`);
+- Pricing: plans start from EGP 1,500/month and scale with the number of branches; quotes on request via WhatsApp or ${SITE_URL}/ar/form.`);
 
   sections.push(`# Systems in depth\n\n${systems.map(systemSection).join("\n\n---\n\n")}`);
 

@@ -87,7 +87,8 @@
           "Shifts and the cash drawer",
           "Daily and monthly sales reports"
         ],
-        "url": "https://demo.cafe.tamyaz.online/login"
+        "url": "https://demo.cafe.tamyaz.online/login",
+        "branches": 12
       },
       "resto": {
         "name": "Tamyaz Resto",
@@ -99,7 +100,8 @@
           "Branches and cashiers",
           "Sales reports and best-selling items"
         ],
-        "url": "https://demo.resto.tamyaz.online/login"
+        "url": "https://demo.resto.tamyaz.online/login",
+        "branches": 4
       },
       "barber": {
         "name": "Tamyaz Barber",
@@ -124,7 +126,8 @@
           "Staff attendance and payroll",
           "Clinic website and online booking requests"
         ],
-        "url": "https://demo.clinc.tamyaz.online/login"
+        "url": "https://demo.clinc.tamyaz.online/login",
+        "branches": 16
       },
       "dental": {
         "name": "Tamyaz Dental",
@@ -135,7 +138,8 @@
           "Invoices and installments",
           "Expenses and reports"
         ],
-        "url": "https://demo.dental.tamyaz.online/login"
+        "url": "https://demo.dental.tamyaz.online/login",
+        "branches": 9
       },
       "pharma": {
         "name": "Tamyaz Pharma",
@@ -161,7 +165,8 @@
           "Branches",
           "Daily and monthly reports"
         ],
-        "url": "https://demo.bar.tamyaz.online/ar/login"
+        "url": "https://demo.bar.tamyaz.online/ar/login",
+        "branches": 11
       },
       "shop": {
         "name": "Tamyaz Store",
@@ -173,7 +178,8 @@
           "Branches and inventory",
           "Direct ordering on WhatsApp"
         ],
-        "url": "https://demo.shop.tamyaz.online/login"
+        "url": "https://demo.shop.tamyaz.online/login",
+        "branches": 5
       }
     },
     "custom": {
@@ -182,7 +188,7 @@
       "whatsapp": "Chat on WhatsApp",
       "form": "Submit your request"
     },
-    "branchesLabel": "{count, plural, one {# branch running with us} other {# branches running with us}}",
+    "branchesLabel": "{count}+ branches running with us",
     "details": "System details"
   },
   "stats": {

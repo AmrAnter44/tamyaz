@@ -22,11 +22,11 @@ const COPY = {
       "تميز بتقدّم 8 أنظمة جاهزة، كل واحد معمول لنوع بيزنس معيّن: الكافيهات، المطاعم، الباربر شوب، العيادات، عيادات الأسنان، الصيدليات، بار الجيم، والمحلات. كل سيستم بالعربي، بيفتح على الموبايل والكمبيوتر، بيتنزل كتطبيق، وليه ديمو تقدر تجربه دلوقتي من غير تسجيل.",
     details: "تفاصيل السيستم",
     demo: "الديمو",
-    branches: (n) => `شغال في ${n} فروع`,
+    branches: (n) => `شغال في ${n}+ فرع`,
     home: "الرئيسية",
     crumb: "الأنظمة",
     ctaTitle: "مش لاقي السيستم المناسب؟",
-    ctaText: "بنعدّل أي سيستم على مقاس شغلك، أو بنعملك سيستم كاستم من الفكرة لحد التشغيل. الباقات حسب عدد الفروع — كلمنا ونبعتلك عرض سعر.",
+    ctaText: "بنعدّل أي سيستم على مقاس شغلك، أو بنعملك سيستم كاستم من الفكرة لحد التشغيل. الباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع — كلمنا ونبعتلك عرض سعر.",
   },
   en: {
     title: "Tamyaz Systems: 8 Management & POS Systems for Businesses in Egypt",
@@ -37,11 +37,11 @@ const COPY = {
       "Tamyaz offers 8 ready-made systems, each built for one type of business: cafés, restaurants, barbershops, clinics, dental clinics, pharmacies, gym bars and retail shops. Every system is in Arabic, opens on mobile and desktop, installs as an app, and has a demo you can try right now with no sign-up.",
     details: "System details",
     demo: "Demo",
-    branches: (n) => `Running in ${n} branches`,
+    branches: (n) => `Running in ${n}+ branches`,
     home: "Home",
     crumb: "Systems",
     ctaTitle: "Can't find the right system?",
-    ctaText: "We tailor any system to how you work, or build you a custom one from idea to launch. Plans depend on the number of branches — contact us for a quote.",
+    ctaText: "We tailor any system to how you work, or build you a custom one from idea to launch. Plans start from EGP 1,500/month and scale with the number of branches — contact us for a quote.",
   },
 };
 
