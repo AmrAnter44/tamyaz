@@ -39,6 +39,7 @@ export function organizationSchema(locale = "ar") {
       "Cafe POS system",
       "Restaurant management system",
       "Barbershop booking system",
+      "Barbershop and men's salon management system",
       "Clinic management software",
       "Dental clinic software",
       "Pharmacy management system",
@@ -47,6 +48,8 @@ export function organizationSchema(locale = "ar") {
       "سيستم كاشير كافيه",
       "سيستم مطاعم",
       "سيستم حجز باربر",
+      "سيستم إدارة صالون حلاقة",
+      "سيستم كاشير للحلاق",
       "برنامج إدارة عيادات",
       "برنامج عيادة أسنان",
       "برنامج إدارة صيدلية",
@@ -70,7 +73,15 @@ export function websiteSchema(locale = "ar") {
   };
 }
 
-// صفحة كل سيستم: المنتج نفسه كـSoftwareApplication — السعر يبدأ من 1500 جنيه شهرياً (من غير تقييمات)
+// الأسعار المعلنة للفرع الواحد (جنيه) لكل الأنظمة — تميز باربر ليه أسعاره في content/systems.js (plans)
+const DEFAULT_PLANS = [
+  { months: 1, price: 2000 },
+  { months: 3, price: 5400 },
+  { months: 6, price: 9900 },
+  { months: 12, price: 18000 },
+];
+
+// صفحة كل سيستم: المنتج نفسه كـSoftwareApplication + Offers بالأسعار (من غير تقييمات)
 export function softwareApplicationSchema(system, locale = "ar") {
   const url = `${SITE_URL}/${locale}/systems/${system.slug}`;
   return {
@@ -86,9 +97,29 @@ export function softwareApplicationSchema(system, locale = "ar") {
     url,
     description: pick(system.answer, locale),
     featureList: (pick(system.features, locale) ?? []).map((f) => f.title),
+    ...(pick(system.keywords, locale)?.length ? { keywords: pick(system.keywords, locale).join(", ") } : {}),
     author: { "@id": ORG_ID },
     publisher: { "@id": ORG_ID },
-    offers: {
+    offers: (system.plans?.length ? system.plans : DEFAULT_PLANS).length
+      ? (system.plans?.length ? system.plans : DEFAULT_PLANS).map((pl) => ({
+          "@type": "Offer",
+          name:
+            locale === "ar"
+              ? (pl.months === 1 ? "اشتراك شهري للفرع" : pl.months === 12 ? "اشتراك سنة للفرع" : `اشتراك ${pl.months} شهور للفرع`)
+              : (pl.months === 1 ? "Monthly, per branch" : pl.months === 12 ? "1 year, per branch" : `${pl.months} months, per branch`),
+          price: String(pl.price),
+          priceCurrency: "EGP",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: String(pl.price),
+            priceCurrency: "EGP",
+            billingDuration: { "@type": "QuantitativeValue", value: pl.months, unitCode: "MON" },
+          },
+          availability: "https://schema.org/InStock",
+          areaServed: { "@type": "Country", name: "Egypt" },
+          seller: { "@id": ORG_ID },
+        }))
+      : {
       "@type": "Offer",
       priceCurrency: "EGP",
       price: "1500",
@@ -98,7 +129,9 @@ export function softwareApplicationSchema(system, locale = "ar") {
         priceCurrency: "EGP",
         unitCode: "MON",
         referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" },
-        description: locale === "ar" ? "يبدأ من 1500 جنيه شهرياً وبيزيد حسب عدد الفروع" : "From EGP 1,500 per month, scaling with the number of branches",
+        description:
+          pick(system.pricing, locale) ??
+          (locale === "ar" ? "يبدأ من 1500 جنيه شهرياً وبيزيد حسب عدد الفروع" : "From EGP 1,500 per month, scaling with the number of branches"),
       },
       availability: "https://schema.org/InStock",
       areaServed: { "@type": "Country", name: "Egypt" },

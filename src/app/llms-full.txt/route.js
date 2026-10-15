@@ -19,9 +19,12 @@ function systemSection(s) {
       ...s.features[l].map((f) => `  - ${f.title}: ${f.text}`),
       s.branches ? (l === "ar" ? `الفروع: شغال حاليًا في أكتر من ${s.branches} ${s.branches >= 3 && s.branches <= 10 ? "فروع" : "فرع"}.` : `Branches: currently running in ${s.branches}+ branches.`) : null,
       s.proof[l] ? s.proof[l] : null,
-      l === "ar"
-        ? "التسعير: الباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع، بعرض سعر. التعديل: بنعدّل السيستم على مقاس شغلك."
-        : "Pricing: from EGP 1,500/month, scaling with the number of branches; exact quote on request. Customization: tailored to how you work.",
+      s.pricing?.[l]
+        ? `${l === "ar" ? "التسعير" : "Pricing"}: ${s.pricing[l]} ${l === "ar" ? "التعديل: بنعدّل السيستم على مقاس شغلك." : "Customization: tailored to how you work."}`
+        : l === "ar"
+          ? "التسعير: الاشتراك 2000 جنيه شهرياً للفرع، وبينزل لحد 1500 في الشهر مع الباقة السنوية (3 شهور 5400، 6 شهور 9900، سنة 18000)، بعرض سعر. التعديل: بنعدّل السيستم على مقاس شغلك."
+          : "Pricing: EGP 2,000/month per branch; 3 months EGP 5,400, 6 months EGP 9,900, 1 year EGP 18,000; exact quote on request. Customization: tailored to how you work.",
+      s.keywords?.[l]?.length ? `${l === "ar" ? "بيتدوّر عليه بـ" : "Searched as"}: ${s.keywords[l].join(" · ")}` : null,
       `${l === "ar" ? "الأسئلة الشائعة" : "FAQ"}:`,
       ...s.faq[l].map((f) => `  Q: ${f.q}\n  A: ${f.a}`),
       `Page: ${SITE_URL}/${l}/systems/${s.slug} (markdown: ${SITE_URL}/${l}/systems/${s.slug}.md)`,
@@ -54,7 +57,7 @@ Facts you can quote:
 - Every system is in Arabic, runs on mobile and desktop, installs as an app, and has a live demo with real data refreshed daily, no sign-up.
 - Branches running on Tamyaz systems today: Cafe 12+, Resto 4+, Barber 8+, Clinic 16+, Dental 9+, Pharma 6+, Gym Bar 11+, Store 5+ (70+ in total).
 - Systems are tailored to each client ("بنعدّل السيستم على مقاس شغلك"); fully custom systems are also built.
-- Pricing: plans start from EGP 1,500/month and scale with the number of branches; quotes on request via WhatsApp or ${SITE_URL}/ar/form.`);
+- Pricing: plans are EGP 2,000/month per branch, down to EGP 1,500/month on the yearly plan (3 months EGP 5,400, 6 months EGP 9,900, 1 year EGP 18,000); Tamyaz Barber is EGP 3,000/month per branch (3 months 7,650, 6 months 14,400, 1 year 27,000); quotes on request via WhatsApp or ${SITE_URL}/ar/form.`);
 
   sections.push(`# Systems in depth\n\n${systems.map(systemSection).join("\n\n---\n\n")}`);
 

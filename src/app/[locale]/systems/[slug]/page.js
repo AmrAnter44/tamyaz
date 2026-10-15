@@ -36,15 +36,15 @@ const L = {
     customTitle: "بنعدّل السيستم على مقاس شغلك",
     customText: "لو شغلك ليه طريقة مختلفة، بنعدّل السيستم عليها. ولو محتاج حاجة مختلفة خالص بنعملهالك كاستم من الفكرة لحد التشغيل.",
     pricingTitle: "الأسعار",
-    pricingText: "الباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع، كلمنا ونبعتلك عرض سعر.",
+    pricingText: "الاشتراك 2000 جنيه شهرياً للفرع، وبينزل لحد 1500 في الشهر مع الباقة السنوية (3 شهور 5400، 6 شهور 9900، سنة 18000)، كلمنا ونبعتلك عرض سعر.",
     proofTitle: "من أعمالنا",
     proofLink: "شوف المشروع",
     faq: "أسئلة شائعة",
     related: "أنظمة تانية ممكن تفيدك",
-    article: "اقرأ دليل الاختيار",
+    article: "اقرا دليل الاختيار",
     common: "كل أنظمة تميز بالعربي، بتفتح على الموبايل والكمبيوتر، وبتتنزل كتطبيق.",
     ctaTitle: (n) => `عايز ${n} لشغلك؟`,
-    ctaText: "الباقات تبدأ من 1500 جنيه شهرياً. كلمنا على واتساب أو سجّل طلبك، ونبعتلك عرض سعر حسب عدد فروعك.",
+    ctaText: "الاشتراك من 2000 جنيه شهرياً للفرع (1500 في الشهر مع الباقة السنوية). كلمنا على واتساب أو سجّل طلبك، ونبعتلك عرض سعر حسب عدد فروعك.",
     wa: (n) => `أهلًا، مهتم بـ${n}`,
   },
   en: {
@@ -61,7 +61,7 @@ const L = {
     customTitle: "We tailor the system to your business",
     customText: "If your business works differently, we adapt the system to it. If you need something completely different, we build it custom from idea to launch.",
     pricingTitle: "Pricing",
-    pricingText: "Plans start from EGP 1,500/month and scale with the number of branches — contact us and we will send you a quote.",
+    pricingText: "Plans are EGP 2,000/month per branch, down to EGP 1,500/month on the yearly plan (3 months EGP 5,400, 6 months EGP 9,900, 1 year EGP 18,000) — contact us and we will send you a quote.",
     proofTitle: "From our work",
     proofLink: "See the project",
     faq: "Frequently asked questions",
@@ -69,7 +69,7 @@ const L = {
     article: "Read the buyer's guide",
     common: "Every Tamyaz system is in Arabic, opens on mobile and desktop, and installs as an app.",
     ctaTitle: (n) => `Want ${n} for your business?`,
-    ctaText: "Plans start from EGP 1,500/month. Message us on WhatsApp or submit a request and we will send a quote based on your number of branches.",
+    ctaText: "Plans from EGP 2,000/month per branch (EGP 1,500/month on the yearly plan). Message us on WhatsApp or submit a request and we will send a quote based on your number of branches.",
     wa: (n) => `Hi, I'm interested in ${n}`,
   },
 };
@@ -87,6 +87,7 @@ export async function generateMetadata({ params }) {
     path: `/systems/${slug}`,
     title: system.title[locale],
     description: system.description[locale],
+    keywords: system.keywords?.[locale],
   });
 }
 
@@ -112,7 +113,9 @@ export default async function SystemPage({ params }) {
   const name = system.productName[locale];
   const Arrow = locale === "ar" ? ArrowLeft : ArrowRight;
   const pageUrl = `${SITE_URL}/${locale}/systems/${slug}`;
-  const article = system.article ? getArticle(system.article) : null;
+  // دليل الاختيار الأساسي + أي مقالات إضافية (guides) — كلهم كروت «اقرا» تحت الأسئلة
+  const guides = [system.article, ...(system.guides ?? [])].filter(Boolean).map(getArticle).filter(Boolean);
+  const pricingText = system.pricing?.[locale] ?? t.pricingText;
   const related = system.related.map(getSystem).filter(Boolean);
   const crumbs = [
     { name: t.home, path: "" },
@@ -227,7 +230,7 @@ export default async function SystemPage({ params }) {
         </div>
         <div className="t-card p-5 sm:p-6 flex flex-col gap-3">
           <h2 className="text-lg font-extrabold text-ink">{t.pricingTitle}</h2>
-          <p className="text-[15px] leading-relaxed text-ink-2">{t.pricingText}</p>
+          <p className="text-[15px] leading-relaxed text-ink-2">{pricingText}</p>
         </div>
       </div>
 
@@ -235,8 +238,9 @@ export default async function SystemPage({ params }) {
         <FaqList items={system.faq[locale]} />
       </Section>
 
-      {article ? (
+      {guides.map((article) => (
         <a
+          key={article.slug}
           href={`/${locale}/blog/${article.slug}`}
           className="t-card t-card-hover p-5 sm:p-6 flex items-center gap-4"
         >
@@ -247,7 +251,7 @@ export default async function SystemPage({ params }) {
           </span>
           <Arrow size={20} className="text-accent shrink-0 ms-auto" aria-hidden="true" />
         </a>
-      ) : null}
+      ))}
 
       <Section title={t.related}>
         <ul className="grid grid-cols-1 sm:grid-cols-3 gap-3 list-none p-0 m-0">
@@ -265,7 +269,7 @@ export default async function SystemPage({ params }) {
       <CtaBox
         locale={locale}
         title={t.ctaTitle(name)}
-        text={t.ctaText}
+        text={system.pricing?.[locale] ?? t.ctaText}
         waText={t.wa(name)}
         formQuery={`?system=${system.key}`}
       />

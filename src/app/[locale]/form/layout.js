@@ -9,8 +9,8 @@ export async function generateMetadata({ params }) {
     markdown: false,
     title: ar ? "اطلب عرض سعر — تواصل مع تميز" : "Request a Quote — Contact Tamyaz",
     description: ar
-      ? "سجّل طلبك واختار السيستم اللي محتاجه، أو كلمنا على واتساب +20 102 851 8754 والباقات تبدأ من 1500 جنيه شهرياً حسب عدد فروعك."
-      : "Submit your request and choose the system you need, or message us on WhatsApp +20 102 851 8754 — plans start from EGP 1,500/month, quoted by number of branches.",
+      ? "سجّل طلبك واختار السيستم اللي محتاجه، أو كلمنا على واتساب +20 102 851 8754 والاشتراك من 2000 جنيه شهرياً للفرع (1500 في الشهر مع الباقة السنوية)."
+      : "Submit your request and choose the system you need, or message us on WhatsApp +20 102 851 8754 — plans from EGP 2,000/month per branch (EGP 1,500/month on the yearly plan).",
   });
 }
 

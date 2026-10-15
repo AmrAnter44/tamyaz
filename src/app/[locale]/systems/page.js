@@ -26,7 +26,7 @@ const COPY = {
     home: "الرئيسية",
     crumb: "الأنظمة",
     ctaTitle: "مش لاقي السيستم المناسب؟",
-    ctaText: "بنعدّل أي سيستم على مقاس شغلك، أو بنعملك سيستم كاستم من الفكرة لحد التشغيل. الباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع — كلمنا ونبعتلك عرض سعر.",
+    ctaText: "بنعدّل أي سيستم على مقاس شغلك، أو بنعملك سيستم كاستم من الفكرة لحد التشغيل. الاشتراك 2000 جنيه شهرياً للفرع، وبينزل لحد 1500 في الشهر مع الباقة السنوية (3 شهور 5400، 6 شهور 9900، سنة 18000) — كلمنا ونبعتلك عرض سعر.",
   },
   en: {
     title: "Tamyaz Systems: 8 Management & POS Systems for Businesses in Egypt",
@@ -41,7 +41,7 @@ const COPY = {
     home: "Home",
     crumb: "Systems",
     ctaTitle: "Can't find the right system?",
-    ctaText: "We tailor any system to how you work, or build you a custom one from idea to launch. Plans start from EGP 1,500/month and scale with the number of branches — contact us for a quote.",
+    ctaText: "We tailor any system to how you work, or build you a custom one from idea to launch. Plans are EGP 2,000/month per branch, down to EGP 1,500/month on the yearly plan (3 months EGP 5,400, 6 months EGP 9,900, 1 year EGP 18,000) — contact us for a quote.",
   },
 };
 

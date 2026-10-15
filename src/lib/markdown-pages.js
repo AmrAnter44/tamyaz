@@ -25,7 +25,7 @@ const L = {
     how: "إزاي تبدأ؟",
     demo: "الديمو (من غير تسجيل)",
     branches: (n) => `شغال حاليًا في ${n} فروع.`,
-    pricing: "الأسعار: الباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع، كلمنا ونبعتلك عرض سعر.",
+    pricing: "الأسعار: الاشتراك 2000 جنيه شهرياً للفرع، وبينزل لحد 1500 في الشهر مع الباقة السنوية (3 شهور 5400، 6 شهور 9900، سنة 18000)، كلمنا ونبعتلك عرض سعر.",
     custom: "بنعدّل السيستم على مقاس شغلك.",
     proof: "من أعمالنا",
     faq: "أسئلة شائعة",
@@ -49,7 +49,7 @@ const L = {
     how: "How to get started",
     demo: "Demo (no sign-up)",
     branches: (n) => `Currently running in ${n} branches.`,
-    pricing: "Pricing: plans start from EGP 1,500/month and scale with the number of branches — contact us for a quote.",
+    pricing: "Pricing: plans are EGP 2,000/month per branch, down to EGP 1,500/month on the yearly plan (3 months EGP 5,400, 6 months EGP 9,900, 1 year EGP 18,000) — contact us for a quote.",
     custom: "We tailor the system to how you work.",
     proof: "From our work",
     faq: "Frequently asked questions",
@@ -161,10 +161,17 @@ function systemPage(locale, slug) {
     s.howItWorks[locale].map((x, i) => `${i + 1}. ${x}`).join("\n"),
     `- ${t.demo}: ${s.demoUrl}`,
     `- ${t.custom}`,
-    `- ${t.pricing}`,
+    `- ${s.pricing?.[locale] ?? t.pricing}`,
     `## ${t.faq}`,
     s.faq[locale].map((f) => `### ${f.q}\n\n${f.a}`).join("\n\n"),
-    s.article ? `## ${t.guide}\n\n${url(locale, `/blog/${s.article}`)}.md` : null,
+    [s.article, ...(s.guides ?? [])].filter(Boolean).length
+      ? `## ${t.guide}\n\n${[s.article, ...(s.guides ?? [])]
+          .filter(Boolean)
+          .map(getArticle)
+          .filter(Boolean)
+          .map((a) => `- [${a.title[locale]}](${url(locale, `/blog/${a.slug}`)}.md)`)
+          .join("\n")}`
+      : null,
     `## ${t.related}`,
     s.related
       .map(getSystem)

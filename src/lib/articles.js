@@ -36,7 +36,7 @@ const T = {
     branches: (n) => `السيستم شغال حاليًا في ${n} فروع.`,
     demo: (u) => `جرّب الديمو دلوقتي من غير تسجيل: [${u.replace("https://", "")}](${u}) — فيه داتا حقيقية بتتجدد كل يوم.`,
     page: (n, url) => `كل التفاصيل في صفحة [${n}](${url}).`,
-    custom: "وبنعدّل السيستم على مقاس شغلك، والباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع — كلمنا ونبعتلك عرض سعر.",
+    custom: "وبنعدّل السيستم على مقاس شغلك، والاشتراك 2000 جنيه شهرياً للفرع، وبينزل لحد 1500 في الشهر مع الباقة السنوية (3 شهور 5400، 6 شهور 9900، سنة 18000) — كلمنا ونبعتلك عرض سعر.",
     checklist: "Checklist قبل ما تقرر",
     checklistItems: (c) => [
       ...c.map((r) => `${r[0]}: ${r[2]}`),
@@ -78,7 +78,7 @@ const T = {
     branches: (n) => `The system currently runs in ${n} branches.`,
     demo: (u) => `Try the demo now with no sign-up: [${u.replace("https://", "")}](${u}) — it runs on real data that refreshes daily.`,
     page: (n, url) => `Full details on the [${n}](${url}) page.`,
-    custom: "We tailor the system to how you work, and plans start from EGP 1,500/month and scale with the number of branches — contact us for a quote.",
+    custom: "We tailor the system to how you work, and plans are EGP 2,000/month per branch, down to EGP 1,500/month on the yearly plan (3 months EGP 5,400, 6 months EGP 9,900, 1 year EGP 18,000) — contact us for a quote.",
     checklist: "Checklist before you decide",
     checklistItems: (c) => [
       ...c.map((r) => `${r[0]}: ${r[2]}`),
@@ -96,7 +96,7 @@ const SECTOR = {
   ar: {
     "cafe-pos-system": ["الكافيه", "سيستم كاشير وإدارة كافيه"],
     "restaurant-system": ["المطعم", "سيستم مطاعم"],
-    "barber-booking-system": ["الباربر شوب", "سيستم حجز وإدارة باربر"],
+    "barber-booking-system": ["صالون الحلاقة", "سيستم إدارة صالون حلاقة وباربر شوب"],
     "clinic-management-system": ["العيادة", "برنامج إدارة عيادات"],
     "dental-clinic-system": ["عيادة الأسنان", "برنامج عيادة أسنان"],
     "pharmacy-system": ["الصيدلية", "برنامج إدارة صيدلية"],
@@ -106,7 +106,7 @@ const SECTOR = {
   en: {
     "cafe-pos-system": ["a café", "a café POS and management system"],
     "restaurant-system": ["a restaurant", "a restaurant system"],
-    "barber-booking-system": ["a barbershop", "a barbershop booking system"],
+    "barber-booking-system": ["a barbershop or men's salon", "a barbershop management system"],
     "clinic-management-system": ["a clinic", "clinic management software"],
     "dental-clinic-system": ["a dental clinic", "dental clinic software"],
     "pharmacy-system": ["a pharmacy", "a pharmacy management system"],
@@ -120,23 +120,27 @@ export function buildArticleBlocks(article, locale) {
   const system = article.system ? getSystem(article.system) : null;
   const [sector, category] = SECTOR[locale]?.[article.system] ?? ["", ""];
   const criteria = article.criteria[locale];
+  // article.sections[locale] (اختياري) بيغيّر عناوين/جداول القالب لمقال بعينه من غير ما يأثر على الباقي:
+  // whyTitle, howTitle, howIntro, head, typesTitle, typesIntro, typesHead, typeRows, optionTitle,
+  // fit: { title, goodTitle, good: [], otherTitle, other: [] }, readMore: [فقرات فيها روابط]
+  const o = article.sections?.[locale] ?? {};
   const blocks = [];
 
   blocks.push({ type: "p", text: `**${t.short}:** ${article.answer[locale]}` });
-  blocks.push({ type: "h2", text: t.why(sector) });
+  blocks.push({ type: "h2", text: o.whyTitle ?? t.why(sector) });
   blocks.push({ type: "p", text: article.context[locale] });
 
-  blocks.push({ type: "h2", text: t.how(category) });
-  blocks.push({ type: "p", text: t.howIntro });
-  blocks.push({ type: "table", head: t.head, rows: criteria });
+  blocks.push({ type: "h2", text: o.howTitle ?? t.how(category) });
+  blocks.push({ type: "p", text: o.howIntro ?? t.howIntro });
+  blocks.push({ type: "table", head: o.head ?? t.head, rows: criteria });
 
-  blocks.push({ type: "h2", text: t.types });
-  blocks.push({ type: "p", text: t.typesIntro });
-  blocks.push({ type: "table", head: t.typesHead, rows: t.typeRows });
+  blocks.push({ type: "h2", text: o.typesTitle ?? t.types });
+  blocks.push({ type: "p", text: o.typesIntro ?? t.typesIntro });
+  blocks.push({ type: "table", head: o.typesHead ?? t.typesHead, rows: o.typeRows ?? t.typeRows });
 
   if (system) {
     const url = `${SITE_URL}/${locale}/systems/${system.slug}`;
-    blocks.push({ type: "h2", text: t.option(system.productName[locale]) });
+    blocks.push({ type: "h2", text: o.optionTitle ?? t.option(system.productName[locale]) });
     blocks.push({ type: "p", text: system.answer[locale] });
     blocks.push({
       type: "ul",
@@ -145,8 +149,22 @@ export function buildArticleBlocks(article, locale) {
     if (system.branches) blocks.push({ type: "p", text: t.branches(system.branches) });
     if (system.proof[locale]) blocks.push({ type: "p", text: system.proof[locale] });
     blocks.push({ type: "p", text: t.demo(system.demoUrl) });
-    blocks.push({ type: "p", text: `${t.page(system.productName[locale], url)} ${t.custom}` });
+    blocks.push({ type: "p", text: `${t.page(system.productName[locale], url)} ${system.pricing?.[locale] ?? t.custom}` });
   }
+
+  if (o.fit) {
+    blocks.push({ type: "h2", text: o.fit.title });
+    if (o.fit.good?.length) {
+      blocks.push({ type: "h3", text: o.fit.goodTitle });
+      blocks.push({ type: "ul", items: o.fit.good });
+    }
+    if (o.fit.other?.length) {
+      blocks.push({ type: "h3", text: o.fit.otherTitle });
+      blocks.push({ type: "ul", items: o.fit.other });
+    }
+  }
+
+  for (const text of o.readMore ?? []) blocks.push({ type: "p", text });
 
   blocks.push({ type: "h2", text: t.checklist });
   blocks.push({ type: "ol", items: t.checklistItems(criteria) });

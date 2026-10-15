@@ -11,7 +11,7 @@ function commonFaq(s) {
     ar: [
       {
         q: `${s.ar.name} بكام؟`,
-        a: `الباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع واحتياج شغلك. كلمنا على واتساب (+20 102 851 8754) أو سجّل طلبك من صفحة التواصل، ونبعتلك عرض سعر مناسب لحالتك.`,
+        a: `الاشتراك 2000 جنيه شهرياً للفرع، وبينزل لحد 1500 في الشهر مع الباقة السنوية (3 شهور 5400، 6 شهور 9900، سنة 18000) واحتياج شغلك. كلمنا على واتساب (+20 102 851 8754) أو سجّل طلبك من صفحة التواصل، ونبعتلك عرض سعر مناسب لحالتك.`,
       },
       {
         q: `أقدر أجرّب ${s.ar.name} قبل ما أشترك؟`,
@@ -29,7 +29,7 @@ function commonFaq(s) {
     en: [
       {
         q: `How much does ${s.en.name} cost?`,
-        a: `Plans start from EGP 1,500/month and scale with the number of branches and what your business needs. Message us on WhatsApp (+20 102 851 8754) or submit a request on the contact page and we will send you a quote for your case.`,
+        a: `Plans are EGP 2,000/month per branch, down to EGP 1,500/month on the yearly plan (3 months EGP 5,400, 6 months EGP 9,900, 1 year EGP 18,000) and what your business needs. Message us on WhatsApp (+20 102 851 8754) or submit a request on the contact page and we will send you a quote for your case.`,
       },
       {
         q: `Can I try ${s.en.name} before subscribing?`,
@@ -65,8 +65,13 @@ function howItWorks(s) {
   };
 }
 
+// حقول اختيارية لكل سيستم:
+// - ar/en.pricing: نص تسعير خاص بالسيستم (بدل النص العام في الصفحة والماركداون و llms-full)
+// - ar/en.keywords: كلمات البحث اللي الناس بتكتبها (بتروح للميتاداتا وSoftwareApplication.keywords)
+// - guides: slugs مقالات إضافية (غير article) بتظهر كروت «اقرا» في صفحة السيستم
+// - ownFaq: true → أسئلة السيستم كاملة من عنده ومابتتضافش الأسئلة المشتركة (عشان ماتتكررش)
 function system(def) {
-  const common = commonFaq(def);
+  const common = def.ownFaq ? { ar: [], en: [] } : commonFaq(def);
   return {
     ...def,
     productName: { ar: def.ar.name, en: def.en.name },
@@ -78,6 +83,9 @@ function system(def) {
     audience: { ar: def.ar.audience, en: def.en.audience },
     features: { ar: def.ar.features, en: def.en.features },
     proof: { ar: def.ar.proof ?? null, en: def.en.proof ?? null },
+    pricing: { ar: def.ar.pricing ?? null, en: def.en.pricing ?? null },
+    keywords: { ar: def.ar.keywords ?? [], en: def.en.keywords ?? [] },
+    guides: def.guides ?? [],
     howItWorks: howItWorks(def),
     faq: { ar: [...def.ar.faq, ...common.ar], en: [...def.en.faq, ...common.en] },
     demoUrl: def.demo,
@@ -256,76 +264,184 @@ export const systems = [
     demo: "https://demo.barber.tamyaz.online/login",
     branches: 8,
     related: ["clinic-management-system", "retail-pos-system", "cafe-pos-system"],
-    article: "best-barbershop-booking-system-egypt",
+    article: "barber-salon-management-system-egypt-price",
+    guides: ["best-barbershop-booking-system-egypt"],
     portfolio: "/portfolio/category/memo-group",
+    ownFaq: true,
+    // أسعار معلنة للفرع الواحد (جنيه) — بتروح للـschema كـOffers
+    plans: [
+      { months: 1, price: 3000 },
+      { months: 3, price: 7650 },
+      { months: 6, price: 14400 },
+      { months: 12, price: 27000 },
+    ],
     ar: {
       name: "تميز باربر",
-      category: "سيستم حجز وإدارة باربر شوب وصالونات",
-      h1: "سيستم حجز وإدارة باربر شوب وصالونات في مصر",
-      title: "سيستم حجز باربر في مصر — إدارة صالونات وباربر شوب | تميز باربر",
+      category: "سيستم إدارة صالونات الحلاقة والباربر شوب",
+      h1: "سيستم إدارة صالون حلاقة وباربر شوب في مصر",
+      title: "سيستم إدارة صالون حلاقة في مصر — كاشير وحجز وحساب الحلاقين | تميز باربر",
       description:
-        "تميز باربر: سيستم حجز وإدارة باربر شوب وصالونات في مصر — حجوزات ومواعيد الكباتن، عمولات وشيفتات، خدمات وأسعار، خزنة ومصاريف، وتقارير بالساعة. شغال في أكتر من 8 فروع.",
+        "تميز باربر: برنامج إدارة صالون حلاقة وباربر شوب في مصر — كاشير وفواتير، عمولة أو مرتب كل حلاق، الخزنة وتقفيل اليوم، المصروفات وصافي الربح، حجز أونلاين للزباين، والمخزون. شغال في أكتر من 8 فروع، وبـ 3000 جنيه شهريًا للفرع (وفيه باقات 3 و6 شهور وسنة بخصم لحد 25%).",
+      keywords: [
+        "سيستم إدارة صالون حلاقة",
+        "برنامج إدارة صالون حلاقة",
+        "سيستم صالون حلاقة في مصر",
+        "سيستم كاشير للحلاق",
+        "برنامج حجز مواعيد صالون رجالي",
+        "سيستم باربر شوب",
+        "سيستم محل حلاقة",
+        "برنامج كوافير رجالي",
+        "حساب عمولة الحلاقين",
+      ],
       answer:
-        "تميز باربر سيستم حجز وإدارة للباربر شوب والصالونات في مصر: بيدير الحجوزات ومواعيد الكباتن، والعمولات والشيفتات، والخدمات والأسعار، والخزنة والمصاريف، مع تقارير يومية بالساعة. السيستم شغال حاليًا في أكتر من 8 فروع، بالعربي وعلى الموبايل والكمبيوتر، والديمو متاح من غير تسجيل.",
+        "تميز باربر سيستم إدارة كامل لصالون الحلاقة والباربر شوب في مصر — سواء محل حلاقة فيه كرسي واحد أو سلسلة فروع. بيحسب عمولة كل حلاق (أو مرتبه الثابت) من فواتيره أوتوماتيك، وبيقفل الخزنة كل يوم مقسّمة على طرق الدفع، وبيطلعلك المصروفات وصافي الربح، وبيدير الحجوزات ومواعيد الحلاقين، ومعاه رابط حجز أونلاين للزباين، والعملاء، والمخزون. شغال حاليًا في أكتر من 8 فروع، بالعربي على الموبايل والتابلت والكمبيوتر، وبـ 3000 جنيه شهريًا للفرع (وفيه باقات 3 و6 شهور وسنة بخصم لحد 25%). جرّب الديمو دلوقتي من غير تسجيل.",
+      pricing:
+        "تميز باربر بـ 3000 جنيه شهريًا للفرع، أو وفّر مع الباقات: 3 شهور بـ 7650 جنيه (وفّر 15%)، 6 شهور بـ 14400 جنيه (وفّر 20%)، وسنة بـ 27000 جنيه (وفّر 25%). لأكتر من فرع كلمنا ونبعتلك عرض سعر. كلمنا على واتساب أو اطلب عرض سعر.",
       audience: [
-        "الباربر شوب والصالونات الرجالي",
-        "سلاسل الحلاقة اللي عندها أكتر من فرع",
-        "أصحاب المحلات اللي بيحسبوا عمولات الكباتن ويتابعوا الخزنة",
+        "صالونات الحلاقة والباربر شوب والكوافير الرجالي — من محل بحلاق واحد لصالون فيه كذا حلاق",
+        "سلاسل محلات الحلاقة اللي عندها أكتر من فرع وعايزة تتابعهم من مكان واحد",
+        "أصحاب المحلات اللي عايزين يعرفوا حساب كل حلاق وصافي الربح من غير ما يكونوا موجودين",
       ],
       features: [
-        { title: "الحجوزات ومواعيد الكباتن", text: "كل حجز مربوط بالكابتن وميعاده." },
-        { title: "الكباتن والعمولات والشيفتات", text: "عمولة كل كابتن وشيفتاته محسوبة في السيستم." },
-        { title: "الخدمات والأسعار", text: "قايمة خدمات وأسعار بتتعدل من الشاشة." },
-        { title: "الخزنة والمصاريف", text: "تتابع الداخل والخارج من الخزنة أول بأول." },
-        { title: "تقارير يومية بالساعة", text: "تعرف الشغل بيزيد إمتى خلال اليوم." },
+        { title: "حساب كل حلاق: عمولته أو مرتبه", text: "كل فاتورة بتتسجل على الحلاق (الكابتن) اللي عملها، والعمولة بتتحسب أوتوماتيك بنسبته — أو بمرتب ثابت لو محلك شغال كده. وكل حلاق يشوف حسابه بس." },
+        { title: "كاشير وفواتير للحلاق", text: "كل خدمة ليها فاتورة باسم الحلاق، وكل فاتورة على درج مفتوح باسم المسؤول عنه." },
+        { title: "الخزنة وتقفيل اليوم", text: "الدرج بيتفتح ويتقفل كل يوم أو شيفت، والتقفيل بيطلع مقسّم على طرق الدفع." },
+        { title: "المصروفات وصافي الربح", text: "بتسجّل مصروفات الفرع، والسيستم يطلعلك صافي الربح: الإيراد ناقص عمولات الحلاقين والمصروفات والمرتجعات." },
+        { title: "الحجوزات ومواعيد الحلاقين", text: "كل حجز مربوط بالحلاق وميعاده، ولوحة دور لحظية بتوضّح مين عليه الدور." },
+        { title: "رابط حجز أونلاين للزباين", text: "رابط حجز خاص بمحلك، الزبون يحجز منه من الموبايل وتحطه على صفحتك أو واتساب." },
+        { title: "العملاء ومتابعتهم", text: "تعرف الزبون اللي بقاله فترة ماجاش عشان تكلمه، وأعياد ميلاد العملاء، وتقييمهم لكل حلاق." },
+        { title: "المخزون (المخزن)", text: "الخامات والأدوات اللي الحلاقين بيستخدموها: الوارد، والصرف لكل حلاق، والجرد، وتنبيه لما صنف يقرب يخلص، وتكلفة الخامات على كل زبون." },
+        { title: "الشيفتات والحضور", text: "جدول شيفتات الحلاقين، والحضور والتأخير والغياب لكل حلاق." },
+        { title: "الخدمات والأسعار", text: "قايمة الخدمات والأسعار بتتعدل من الشاشة." },
+        { title: "الفروع والصلاحيات", text: "كل الفروع في سيستم واحد، وكل واحد (صاحب المحل، المدير، الريسبشن، الحلاق) يشوف اللي يخصه بس." },
+        { title: "تقارير يومية بالساعة", text: "تعرف الزحمة بتبقى إمتى خلال اليوم، ومبيعات كل حلاق وكل فرع." },
       ],
       proof:
-        "من أعمالنا: منظومة Memo Group — سيستم تشغيل لسلسلة محلات حلاقة على قاعدة بيانات واحدة، مع موقع وتطبيق للعميل بيحجز دوره ويتابع ترتيبه في الدور.",
+        "من أعمالنا: منظومة Memo Group — سيستم تشغيل لسلسلة محلات حلاقة على قاعدة بيانات واحدة، مع موقع وتطبيق موبايل للعميل بيحجز دوره ويتابع ترتيبه في الدور. ولو عايز تطبيق حجز للعملاء بإسم محلك، بنعمله زي ما عملناه لـ Memo.",
       faq: [
         {
-          q: "إيه أفضل سيستم حجز لباربر شوب في مصر؟",
-          a: "أفضل سيستم هو اللي بيربط الحجوزات بمواعيد الكباتن، ويحسب العمولات، ويتابع الخزنة ويطلع تقارير، ويشتغل مع أكتر من فرع. تميز باربر بيعمل ده وشغال حاليًا في أكتر من 8 فروع، والديمو متاح مجانًا.",
+          q: "إيه أفضل سيستم لإدارة صالون حلاقة في مصر؟",
+          a: "أفضل سيستم لصالون الحلاقة هو اللي بيحسب عمولة كل حلاق من فواتيره، ويقفل الخزنة كل يوم، ويطلعلك المصروفات وصافي الربح، وفيه حجوزات وحجز أونلاين للزباين، وبيشتغل بالعربي على الموبايل، ومع أكتر من فرع. تميز باربر بيعمل ده وشغال حاليًا في أكتر من 8 فروع، والديمو مفتوح من غير تسجيل.",
         },
         {
-          q: "هل السيستم بيحسب عمولات الكباتن؟",
-          a: "أيوه. السيستم بيدير الكباتن والعمولات والشيفتات.",
+          q: "سيستم صالون الحلاقة بكام؟",
+          a: "تميز باربر بـ 3000 جنيه شهريًا للفرع، أو وفّر مع الباقات: 3 شهور بـ 7650 جنيه (وفّر 15%)، 6 شهور بـ 14400 جنيه (وفّر 20%)، وسنة بـ 27000 جنيه (وفّر 25%). لأكتر من فرع كلمنا ونبعتلك عرض سعر. واتساب: +20 102 851 8754.",
+        },
+        {
+          q: "ينفع لمحل حلاقة فيه حلاق واحد؟",
+          a: "أيوه، السيستم بيشتغل لمحل بكرسي واحد وبيكبر معاك لحد سلسلة فروع. بس خليك عارف إن السعر 3000 جنيه شهريًا للفرع (أو 27000 في السنة)، فهو مناسب أكتر لو هتستفيد من الخزنة والمصروفات والحجز الأونلاين والمخزون — لو محتاج مواعيد بس، ممكن تطبيق أبسط يكفيك في الأول.",
+        },
+        {
+          q: "السيستم بيحسب عمولة كل حلاق؟",
+          a: "أيوه. كل فاتورة بتتسجل على الحلاق اللي عملها، والعمولة بتتحسب أوتوماتيك بالنسبة المتسجلة له. ولو محلك شغال بمرتب ثابت بدل النسبة، السيستم بيدعم ده كمان. وكل حلاق بيشوف حسابه هو بس.",
+        },
+        {
+          q: "فيه حجز أونلاين للزباين؟",
+          a: "أيوه. كل محل ليه رابط حجز أونلاين، الزبون بيفتحه من الموبايل ويحجز، والحجز بيوصل للسيستم مربوط بالحلاق والميعاد. ولو عايز تطبيق حجز بإسم محلك بنعملهولك.",
+        },
+        {
+          q: "فيه سيستم كاشير للحلاق؟",
+          a: "أيوه. تميز باربر فيه كاشير وفواتير: كل خدمة بفاتورة باسم الحلاق، والدرج بيتفتح ويتقفل باسم المسؤول عنه، والتقفيل بيطلع مقسّم على طرق الدفع.",
+        },
+        {
+          q: "السيستم بيشتغل على الموبايل؟",
+          a: "أيوه. السيستم بالعربي وبيفتح من المتصفح على الموبايل والتابلت والكمبيوتر، وبيتنزل كتطبيق على الجهاز، فتتابع محلك من أي مكان.",
+        },
+        {
+          q: "ينفع أجربه قبل ما أدفع؟",
+          a: "أيوه. الديمو مفتوح دلوقتي من غير تسجيل على demo.barber.tamyaz.online وفيه داتا حقيقية بتتجدد كل يوم، فتشوف السيستم بنفسك قبل أي قرار.",
         },
         {
           q: "كام فرع شغال على تميز باربر؟",
-          a: "تميز باربر شغال حاليًا في أكتر من 8 فروع.",
+          a: "تميز باربر شغال حاليًا في أكتر من 8 فروع، وبيدير كل الفروع من سيستم واحد.",
+        },
+        {
+          q: "ينفع تعدّلوا السيستم على طريقة شغل محلي؟",
+          a: "أيوه، بنعدّل السيستم على مقاس شغلك. ولو محتاج حاجة مختلفة خالص بنعملهالك كاستم من الفكرة لحد التشغيل.",
         },
       ],
     },
     en: {
       name: "Tamyaz Barber",
-      category: "Barbershop & salon booking system",
-      h1: "Barbershop & Salon Booking and Management System in Egypt",
-      title: "Barbershop Booking System in Egypt — Salon Management | Tamyaz Barber",
+      category: "Barbershop & men's salon management system",
+      h1: "Barbershop & Men's Salon Management System in Egypt",
+      title: "Barbershop & Men's Salon Management System in Egypt | Tamyaz Barber",
       description:
-        "Tamyaz Barber: a booking and management system for barbershops and salons in Egypt — bookings and barber schedules, commissions and shifts, services and prices, cash drawer and expenses, hourly reports. Running in 8+ branches.",
+        "Tamyaz Barber: barbershop and men's salon management software in Egypt — POS and invoices, each barber's commission or salary, daily cash closing, expenses and net profit, online booking for customers, and inventory. Running in 8+ branches, EGP 3,000/month per branch (3-, 6- and 12-month plans save up to 25%).",
+      keywords: [
+        "barbershop management system Egypt",
+        "men's salon management software",
+        "barber POS system",
+        "barbershop booking system",
+        "barber commission calculation",
+        "salon software Egypt",
+      ],
       answer:
-        "Tamyaz Barber is a booking and management system for barbershops and salons in Egypt: it handles bookings and barber schedules, commissions and shifts, services and prices, the cash drawer and expenses, with hourly daily reports. It currently runs in 8+ branches, in Arabic on mobile and desktop, and the demo is open with no sign-up.",
+        "Tamyaz Barber is a complete management system for barbershops and men's salons in Egypt — from a one-chair shop to a multi-branch chain. It calculates each barber's commission (or fixed salary) from their invoices automatically, closes the cash drawer every day split by payment method, shows expenses and net profit, manages bookings and barber schedules, and comes with an online booking link for customers, customer follow-up and inventory. It currently runs in 8+ branches, in Arabic on mobile, tablet and desktop, starting EGP 3,000/month per branch (3-, 6- and 12-month plans save up to 25%). Try the demo now with no sign-up.",
+      pricing:
+        "Tamyaz Barber is EGP 3,000/month per branch, or save with longer plans: 3 months EGP 7,650 (save 15%), 6 months EGP 14,400 (save 20%), 1 year EGP 27,000 (save 25%). For multiple branches, contact us for a quote.",
       audience: [
-        "Barbershops and men's salons",
-        "Barber chains with more than one branch",
-        "Owners who calculate barber commissions and follow the cash drawer",
+        "Barbershops, men's salons and grooming shops — from a single barber to a salon with several",
+        "Barbershop chains with more than one branch that want one view of all of them",
+        "Owners who want each barber's pay and the net profit without being on site",
       ],
       features: [
-        { title: "Bookings and barber schedules", text: "Every booking is tied to a barber and a time slot." },
-        { title: "Barbers, commissions and shifts", text: "Each barber's commission and shifts are tracked in the system." },
+        { title: "Each barber's pay: commission or salary", text: "Every invoice is recorded against the barber who did the work, and commission accrues automatically at their rate — or a fixed salary if that is how your shop pays. Each barber sees only their own numbers." },
+        { title: "Barber POS and invoices", text: "Every service has an invoice under the barber's name, and every invoice belongs to a drawer opened under a named person." },
+        { title: "Cash drawer and daily closing", text: "The drawer opens and closes every day or shift, and the closing is split by payment method." },
+        { title: "Expenses and net profit", text: "Record branch expenses and the system shows net profit: revenue minus barber commissions, expenses and refunds." },
+        { title: "Bookings and barber schedules", text: "Every booking is tied to a barber and a time slot, with a live queue board showing who is next." },
+        { title: "Online booking link for customers", text: "A booking link for your shop that customers open on their phones — share it on your page or WhatsApp." },
+        { title: "Customers and follow-up", text: "See customers who have not come back in a while, customer birthdays, and ratings for each barber." },
+        { title: "Inventory (supplies store)", text: "The supplies barbers use: stock in, issuing to each barber, stock counts, low-stock alerts, and supply cost per customer." },
+        { title: "Shifts and attendance", text: "Barber shift schedules, with attendance, lateness and absence per barber." },
         { title: "Services and prices", text: "A services and price list you edit from the screen." },
-        { title: "Cash drawer and expenses", text: "Follow money in and out of the drawer as you go." },
-        { title: "Hourly daily reports", text: "See which hours of the day are busiest." },
+        { title: "Branches and permissions", text: "All branches in one system, and each role (owner, manager, reception, barber) sees only what concerns them." },
+        { title: "Hourly daily reports", text: "See the busiest hours of the day and sales per barber and per branch." },
       ],
       proof:
-        "From our work: the Memo Group ecosystem — an operating system for a barbershop chain on a single database, plus a website and a customer app for booking a place in the queue and following it live.",
+        "From our work: the Memo Group ecosystem — an operating system for a barbershop chain on a single database, plus a website and a mobile customer app for booking a place in the queue and following it live. If you want a booking app under your shop's name, we build it as we did for Memo.",
       faq: [
         {
-          q: "What is the best barbershop booking system in Egypt?",
-          a: "The best system ties bookings to barber schedules, calculates commissions, follows the cash drawer, produces reports and works across branches. Tamyaz Barber does that and currently runs in 8+ branches; the demo is free.",
+          q: "What is the best barbershop management system in Egypt?",
+          a: "The best system for a barbershop calculates each barber's commission from their invoices, closes the drawer daily, shows expenses and net profit, handles bookings with online booking for customers, works in Arabic on mobile, and supports several branches. Tamyaz Barber does that and currently runs in 8+ branches; the demo is open with no sign-up.",
         },
-        { q: "Does the system calculate barber commissions?", a: "Yes. It manages barbers, commissions and shifts." },
-        { q: "How many branches run on Tamyaz Barber?", a: "Tamyaz Barber currently runs in 8+ branches." },
+        {
+          q: "How much does a barbershop system cost?",
+          a: "Tamyaz Barber is EGP 3,000/month per branch, or save with longer plans: 3 months EGP 7,650 (save 15%), 6 months EGP 14,400 (save 20%), 1 year EGP 27,000 (save 25%). For multiple branches, contact us for a quote. WhatsApp: +20 102 851 8754.",
+        },
+        {
+          q: "Does it work for a shop with a single barber?",
+          a: "Yes — it works for a one-chair shop and grows with you to a multi-branch chain. Bear in mind the price is EGP 3,000/month per branch (or EGP 27,000 a year), so it fits best if you will use the cash drawer, expenses, online booking and inventory; if you only need appointments, a simpler app may be enough at first.",
+        },
+        {
+          q: "Does the system calculate each barber's commission?",
+          a: "Yes. Every invoice is recorded against the barber who did the work, and commission accrues automatically at their recorded rate. If your shop pays a fixed salary instead, the system supports that too. Each barber sees only their own numbers.",
+        },
+        {
+          q: "Can customers book online?",
+          a: "Yes. Every shop has an online booking link customers open on their phones, and the booking reaches the system tied to a barber and a time slot. If you want a booking app under your shop's name, we build it.",
+        },
+        {
+          q: "Is there a POS for barbers?",
+          a: "Yes. Tamyaz Barber includes a POS and invoices: every service has an invoice under the barber's name, the drawer opens and closes under a named person, and the closing is split by payment method.",
+        },
+        {
+          q: "Does it work on mobile?",
+          a: "Yes. The system is in Arabic, runs in the browser on mobile, tablet and desktop, and installs as an app, so you can follow your shop from anywhere.",
+        },
+        {
+          q: "Can I try it before I pay?",
+          a: "Yes. The demo is open now with no sign-up at demo.barber.tamyaz.online, running on real data that refreshes every day.",
+        },
+        {
+          q: "How many branches run on Tamyaz Barber?",
+          a: "Tamyaz Barber currently runs in 8+ branches, all managed from one system.",
+        },
+        {
+          q: "Can you customize the system for how my shop works?",
+          a: "Yes — we tailor the system to how you work, and if you need something completely different we build it custom, from idea to launch.",
+        },
       ],
     },
   }),

@@ -15,7 +15,7 @@ function buildLlmsTxt() {
   push(`> ${siteConfig.tagline.ar}`, "");
   push(`> ${siteConfig.tagline.en}`, "");
   push(
-    "Tamyaz is based in Egypt and serves businesses across Egypt. Every system is in Arabic, opens on mobile and desktop, installs as an app, and has a live demo with no sign-up. Branches running on Tamyaz systems today: Cafe 12+, Resto 4+, Barber 8+, Clinic 16+, Dental 9+, Pharma 6+, Gym Bar 11+, Store 5+ (70+ in total). Pricing: every system starts from EGP 1,500 per month and scales with the number of branches; exact quote on request. الأسعار: كل الأنظمة تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع.",
+    "Tamyaz is based in Egypt and serves businesses across Egypt. Every system is in Arabic, opens on mobile and desktop, installs as an app, and has a live demo with no sign-up. Branches running on Tamyaz systems today: Cafe 12+, Resto 4+, Barber 8+, Clinic 16+, Dental 9+, Pharma 6+, Gym Bar 11+, Store 5+ (70+ in total). Pricing: systems are EGP 2,000/month per branch, down to EGP 1,500/month on the yearly plan (3 months EGP 5,400, 6 months EGP 9,900, 1 year EGP 18,000); exact quote on request. Tamyaz Barber: EGP 3,000/month per branch, 3 months EGP 7,650, 6 months EGP 14,400, 1 year EGP 27,000. الأسعار: الاشتراك 2000 جنيه شهرياً للفرع، وبينزل لحد 1500 في الشهر مع الباقة السنوية (3 شهور 5400، 6 شهور 9900، سنة 18000). تميز باربر: 3000 جنيه شهرياً للفرع، 3 شهور 7650، 6 شهور 14400، سنة 27000.",
     ""
   );
 

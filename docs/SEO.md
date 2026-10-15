@@ -64,6 +64,11 @@
 4. الصفحة، الـsitemap، الـRSS، llms.txt، llms-full.txt، والـschema بيلقطوه لوحدهم.
 5. بعد الـdeploy: `npm run indexnow -- /ar/blog/<slug> /en/blog/<slug>`.
 
+## حقول اختيارية (2026-10-14)
+
+- **سيستم** (`src/content/systems.js`): `ar/en.pricing` (نص تسعير خاص — بيظهر في الصفحة والـCTA والماركداون و llms-full ووصف الـOffer)، `ar/en.keywords` (كلمات البحث الفعلية → `<meta keywords>` و`SoftwareApplication.keywords` و llms-full)، `guides: [slug]` (مقالات إضافية بتظهر كروت «اقرا» تحت الأسئلة وفي الماركداون)، `ownFaq: true` (الأسئلة كلها من السيستم نفسه من غير الأسئلة المشتركة). أول سيستم بيستخدمهم: تميز باربر.
+- **مقال** (`src/content/articles.js`): `sections.{ar,en}` بيغيّر عناوين القالب وجداوله لمقال بعينه: `whyTitle, howTitle, howIntro, head, typesTitle, typesIntro, typesHead, typeRows, optionTitle`، و`fit {title, goodTitle, good[], otherTitle, other[]}` (مناسب لمين / مين يكفيه حاجة أرخص)، و`readMore[]` (فقرات فيها روابط داخلية). مثال: `barber-salon-management-system-egypt-price`.
+
 ## إضافة / تعديل سيستم
 
 عدّل `src/content/systems.js` (والكارت في `messages/*.json` → `systemsDetails.items` لو اتغيّر الوصف أو الديمو). لو سيستم جديد: ضيفه كمان في `src/content/system-links.js` و`SECTOR` في `src/lib/articles.js`.

@@ -1,6 +1,6 @@
 // الأسئلة الشائعة على مستوى الشركة — بتغذّي /[locale]/faq ونسختها الماركداون و llms-full.txt.
 // كل إجابة لازم تكون مدعومة بمحتوى الموقع (messages/*.json, src/content/systems.js, src/data/projects.js).
-// السعر: يبدأ من 1500 جنيه شهرياً (قرار عمرو) وبيزيد حسب عدد الفروع، والنهائي بعرض سعر.
+// السعر (قرار عمرو): 2000 شهرياً للفرع، 3 شهور 5400، 6 شهور 9900، سنة 18000 — والباربر 3000/7650/14400/27000.
 
 const faqs = {
   ar: [
@@ -12,7 +12,7 @@ const faqs = {
     {
       id: "which-systems",
       q: "إيه الأنظمة اللي تميز بتقدمها؟",
-      a: "8 أنظمة: سيستم كاشير وإدارة كافيهات، سيستم إدارة مطاعم (صالة ومطبخ ودليفري ومنيو QR)، سيستم حجز وإدارة باربر شوب وصالونات، برنامج إدارة عيادات ومراكز طبية، برنامج إدارة عيادات أسنان بخطط العلاج والتقسيط، برنامج إدارة صيدليات بالمخزون وتواريخ الصلاحية، سيستم كاشير بار الجيم، وسيستم كاشير محل مع متجر أونلاين على نفس المخزون. كل سيستم ليه صفحة وديمو على tamyaz.online/ar/systems.",
+      a: "8 أنظمة: سيستم كاشير وإدارة كافيهات، سيستم إدارة مطاعم (صالة ومطبخ ودليفري ومنيو QR)، سيستم إدارة صالون حلاقة وباربر شوب بالحجوزات وحساب الحلاقين، برنامج إدارة عيادات ومراكز طبية، برنامج إدارة عيادات أسنان بخطط العلاج والتقسيط، برنامج إدارة صيدليات بالمخزون وتواريخ الصلاحية، سيستم كاشير بار الجيم، وسيستم كاشير محل مع متجر أونلاين على نفس المخزون. كل سيستم ليه صفحة وديمو على tamyaz.online/ar/systems.",
     },
     {
       id: "demo",
@@ -42,7 +42,7 @@ const faqs = {
     {
       id: "pricing",
       q: "الأسعار بكام؟",
-      a: "الباقات تبدأ من 1500 جنيه شهرياً وبتزيد حسب عدد الفروع واحتياج شغلك. كلمنا على واتساب (+20 102 851 8754) أو سجّل طلبك على tamyaz.online/ar/form ونبعتلك عرض سعر.",
+      a: "الاشتراك 2000 جنيه شهرياً للفرع، وبينزل لحد 1500 في الشهر مع الباقة السنوية (3 شهور 5400، 6 شهور 9900، سنة 18000) واحتياج شغلك (تميز باربر 3000 جنيه شهرياً للفرع، وفيه باقات 3 و6 شهور وسنة بخصم لحد 25%). كلمنا على واتساب (+20 102 851 8754) أو سجّل طلبك على tamyaz.online/ar/form ونبعتلك عرض سعر.",
     },
     {
       id: "how-to-start",
@@ -74,7 +74,7 @@ const faqs = {
     {
       id: "which-systems",
       q: "Which systems does Tamyaz offer?",
-      a: "Eight: a café POS and management system, a restaurant management system (dining room, kitchen, delivery and QR menu), a barbershop and salon booking system, clinic management software, dental clinic software with treatment plans and installments, a pharmacy management system with stock and expiry dates, a gym-bar POS, and a retail POS with an online store on the same inventory. Each system has its own page and demo at tamyaz.online/en/systems.",
+      a: "Eight: a café POS and management system, a restaurant management system (dining room, kitchen, delivery and QR menu), a barbershop and men's salon management system with bookings and barber pay, clinic management software, dental clinic software with treatment plans and installments, a pharmacy management system with stock and expiry dates, a gym-bar POS, and a retail POS with an online store on the same inventory. Each system has its own page and demo at tamyaz.online/en/systems.",
     },
     {
       id: "demo",
@@ -100,7 +100,7 @@ const faqs = {
     {
       id: "pricing",
       q: "How much does it cost?",
-      a: "Plans start from EGP 1,500/month and scale with the number of branches and what your business needs. Message us on WhatsApp (+20 102 851 8754) or submit a request at tamyaz.online/en/form and we will send you a quote.",
+      a: "Plans are EGP 2,000/month per branch, down to EGP 1,500/month on the yearly plan (3 months EGP 5,400, 6 months EGP 9,900, 1 year EGP 18,000) and what your business needs (Tamyaz Barber is EGP 3,000/month per branch, with 3-, 6- and 12-month plans saving up to 25%). Message us on WhatsApp (+20 102 851 8754) or submit a request at tamyaz.online/en/form and we will send you a quote.",
     },
     {
       id: "how-to-start",

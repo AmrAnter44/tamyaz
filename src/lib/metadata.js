@@ -14,6 +14,7 @@ export function buildPageMetadata({
   modifiedTime,
   absoluteTitle = false,
   markdown = true, // false للصفحات اللي مالهاش نسخة .md (الباقات/التواصل)
+  keywords, // اختياري: [string] — كلمات البحث الأساسية للصفحة
 }) {
   const url = `${SITE_URL}/${locale}${path}`;
   const langs = languages ?? {
@@ -25,6 +26,7 @@ export function buildPageMetadata({
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
+    ...(keywords?.length ? { keywords } : {}),
     alternates: {
       canonical: url,
       languages: { ...langs, "x-default": langs.en ?? langs.ar },
