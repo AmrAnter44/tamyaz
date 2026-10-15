@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import PageShell from "@/components/geo/PageShell";
 import Breadcrumbs from "@/components/geo/Breadcrumbs";
 import CtaBox from "@/components/geo/CtaBox";
+import PricingCards from "@/components/geo/PricingCards";
 import FaqList from "@/components/geo/FaqList";
 import SystemIcon from "@/components/geo/SystemIcon";
 import JsonLd from "@/components/JsonLd";
@@ -215,7 +216,7 @@ export default async function SystemPage({ params }) {
       </Section>
 
       {/* ديمو + تعديل + تسعير */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="t-card p-5 sm:p-6 flex flex-col gap-3">
           <h2 className="text-lg font-extrabold text-ink">{t.demoTitle}</h2>
           <p className="text-[15px] leading-relaxed text-ink-2">{t.demoText}</p>
@@ -228,11 +229,12 @@ export default async function SystemPage({ params }) {
           <h2 className="text-lg font-extrabold text-ink">{t.customTitle}</h2>
           <p className="text-[15px] leading-relaxed text-ink-2">{t.customText}</p>
         </div>
-        <div className="t-card p-5 sm:p-6 flex flex-col gap-3">
-          <h2 className="text-lg font-extrabold text-ink">{t.pricingTitle}</h2>
-          <p className="text-[15px] leading-relaxed text-ink-2">{pricingText}</p>
-        </div>
       </div>
+
+      <Section id="pricing" title={t.pricingTitle}>
+        <p className="text-[15px] leading-relaxed text-ink-2">{pricingText}</p>
+        <PricingCards system={system} systemName={system.productName[locale]} locale={locale} />
+      </Section>
 
       <Section id="faq" title={t.faq}>
         <FaqList items={system.faq[locale]} />

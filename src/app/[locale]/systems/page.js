@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import PageShell from "@/components/geo/PageShell";
 import Breadcrumbs from "@/components/geo/Breadcrumbs";
 import CtaBox from "@/components/geo/CtaBox";
+import PricingCards from "@/components/geo/PricingCards";
 import SystemIcon from "@/components/geo/SystemIcon";
 import JsonLd from "@/components/JsonLd";
 import { systems } from "@/content/systems";
@@ -127,6 +128,26 @@ export default async function SystemsIndexPage({ params }) {
           </li>
         ))}
       </ul>
+
+      <section id="pricing" className="flex flex-col gap-6 scroll-mt-28">
+        <h2 className="text-2xl sm:text-[28px] font-extrabold leading-snug text-ink">
+          {locale === "ar" ? "الباقات والأسعار" : "Plans and pricing"}
+        </h2>
+        <div className="flex flex-col gap-3">
+          <h3 className="text-lg font-bold text-ink-2">
+            {locale === "ar" ? "كافيه · مطاعم · عيادات · أسنان · صيدليات · بار الجيم · متاجر" : "Cafe · Restaurant · Clinic · Dental · Pharmacy · Gym bar · Store"}
+          </h3>
+          <PricingCards system={null} systemName={locale === "ar" ? "أنظمة تميز" : "Tamyaz systems"} locale={locale} />
+        </div>
+        <div className="flex flex-col gap-3">
+          <h3 className="text-lg font-bold text-ink-2">{locale === "ar" ? "تميز باربر — صالونات الحلاقة" : "Tamyaz Barber — barbershops"}</h3>
+          <PricingCards
+            system={systems.find((s) => s.key === "barber")}
+            systemName={locale === "ar" ? "تميز باربر" : "Tamyaz Barber"}
+            locale={locale}
+          />
+        </div>
+      </section>
 
       <CtaBox locale={locale} title={c.ctaTitle} text={c.ctaText} formQuery="?system=custom" />
     </PageShell>

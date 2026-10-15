@@ -1,3 +1,4 @@
+import { plansFor } from "@/lib/pricing";
 import { SITE_URL, siteConfig } from "./site";
 
 // كل دوال الـJSON-LD (schema.org) في مكان واحد.
@@ -73,14 +74,6 @@ export function websiteSchema(locale = "ar") {
   };
 }
 
-// الأسعار المعلنة للفرع الواحد (جنيه) لكل الأنظمة — تميز باربر ليه أسعاره في content/systems.js (plans)
-const DEFAULT_PLANS = [
-  { months: 1, price: 2000 },
-  { months: 3, price: 5400 },
-  { months: 6, price: 9900 },
-  { months: 12, price: 18000 },
-];
-
 // صفحة كل سيستم: المنتج نفسه كـSoftwareApplication + Offers بالأسعار (من غير تقييمات)
 export function softwareApplicationSchema(system, locale = "ar") {
   const url = `${SITE_URL}/${locale}/systems/${system.slug}`;
@@ -100,8 +93,8 @@ export function softwareApplicationSchema(system, locale = "ar") {
     ...(pick(system.keywords, locale)?.length ? { keywords: pick(system.keywords, locale).join(", ") } : {}),
     author: { "@id": ORG_ID },
     publisher: { "@id": ORG_ID },
-    offers: (system.plans?.length ? system.plans : DEFAULT_PLANS).length
-      ? (system.plans?.length ? system.plans : DEFAULT_PLANS).map((pl) => ({
+    offers: plansFor(system).length
+      ? plansFor(system).map((pl) => ({
           "@type": "Offer",
           name:
             locale === "ar"
